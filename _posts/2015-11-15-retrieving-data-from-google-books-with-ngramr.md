@@ -12,7 +12,7 @@ tags: [R, ngramr, how-to, ]
 
 <!--more-->
 
-![]({{ site.url }}img/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/GoogleNgram.png)
+![center]({{ site.url }}/img/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/GoogleNgram.png)
 
 <hr/>
 
