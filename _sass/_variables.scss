@@ -1,16 +1,27 @@
-// Variables
 
-$primary: #00cdff;
-$dark: #000;
-$light: #fff;
+//
+// VARIABLES
+//
 
-$navbar-text-shadow: true;
-$header-text-shadow: true;
-$header-background-color: $dark;
-$intro-text-color: $light;
-$navbar-color: $light;
-$navbar-lg-collapse-background-color: $header-background-color;
-$navbar-lg-background: transparent;
-$navbar-sm-background-color: $navbar-lg-collapse-background-color;
+// Colors
+$blue: #4183C4;
 
-$social-buttons-color: $primary;
+// Grays
+$black: #000;
+$darkerGray: #222;
+$darkGray: #333;
+$gray: #666;
+$lightGray: #eee;
+$white: #fff;
+
+// Font stacks
+$helvetica: Helvetica, Arial, sans-serif;
+$helveticaNeue: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$georgia: Georgia, serif;
+
+// Mobile breakpoints
+@mixin mobile {
+  @media screen and (max-width: 640px) {
+    @content;
+  }
+}
