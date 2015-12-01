@@ -12,7 +12,7 @@ tags: [R, ngramr, how-to, ]
 
 <!--more-->
 
-![]({{ site.url }}/img/2015/GoogleNgram.png)
+![]({{ site.url }}img/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/GoogleNgram.png)
 
 <hr/>
 
@@ -44,7 +44,7 @@ ggram(ng, year_start = 1800,
     theme_538(legend.position = "bottom")
 {% endhighlight %}
 
-![center]({{ site.url }}/figs/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/sociologists-1.png) 
+![center]({{ site.url }}/img/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/sociologists-1.png) 
 
 
 ## Complex Queries
@@ -80,7 +80,7 @@ multiplot(cap, soc, com, ncols=1)
 ggfootnote(size = .5)
 {% endhighlight %}
 
-![center]({{ site.url }}/figs/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/Capitalism Popularity-1.png) 
+![center]({{ site.url }}/img/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/Capitalism Popularity-1.png) 
 
 In the following, I retrieve the frequency for the unigram "Capitalism" in the Russian *corpus*, French, and British English. Note that the results can be case-insensitive variants.
 
@@ -116,7 +116,7 @@ multiplot(rus, fre, eng, ncols=1)
 ggfootnote(size = .5)
 {% endhighlight %}
 
-![center]({{ site.url }}/figs/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/capitalism-1.png) 
+![center]({{ site.url }}/img/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/capitalism-1.png) 
 
     
     
