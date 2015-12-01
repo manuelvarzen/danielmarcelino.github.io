@@ -11,7 +11,7 @@ Sometimes we want to use charts that can speak for themselves  than boring OLS r
 
 <!--more-->
 
-![The campaign finance impact](/images/blog/2011/senado06.png)
+![The campaign finance impact](/img/senado06.png)
 
 
 I usually prefer drawing maps to present electoral results or when showing whatever bivariate association. In this post, however, I will use regression coefficients to plot a cartogram  using R – a free statistical package.
@@ -61,13 +61,13 @@ sen6<- rbind(ac, al, am, ap, ba, ce, df, es, go, ma, mg, ms, mt, pa, pb, pe, pi,
 
 sen6$Estimate <- format(round(sen6$Estimate, 2))
 
-colnames(sen6) <-c(“sen06″, “Std.Error”, “tvalue”, “Pr(>|t|)”)
+colnames(sen6) <-c("sen06", "Std.Error”, "tvalue”, "Pr(>|t|)”)
 
 ###
 
 coefmap <- as.data.frame (cbind(UF, sen6$sen06, sen6$Std.Error))
 
-colnames (coefmap) <- c(“UF”,”sen02″, “Erro02″,”sen06″, “Erro06″)
+colnames (coefmap) <- c("UF”,”sen02", "Erro02",”sen06", "Erro06")
 
 Calling the shape file
 
@@ -87,17 +87,17 @@ require(RColorBrewer)
 
 brasil <- readShapeSpatial(file.choose(),
 
-proj4string=CRS(“+proj=longlat”))
+proj4string=CRS("+proj=longlat"))
 
 summary(brasil)
 
-coefmap <- read.csv(“/Users/Daniel/D1/coefmap.csv”, sep = “,”, header=TRUE)
+coefmap <- read.csv("/Users/Daniel/D1/coefmap.csv", sep = ",", header=TRUE)
 
 data <- subset(coefmap, T, select = c(
 
-“UF”, “sen02″, “sen06″))
+"UF", "sen02", "sen06"))
 
-data.br <- attr(brasil, “data”)#getting names from shape
+data.br <- attr(brasil, "data”)#getting names from shape
 
 data.br $indice <- 1:dim(data.br)[1]
 
@@ -111,7 +111,7 @@ data.br <- merge(data.br, data)
 
 data.br <- data.br[order(data.br$indice),]
 
-attr(brasil, “data”) <- data.br #attributing data to shape
+attr(brasil, "data") <- data.br #attributing data to shape
 
 # Finally, I have the map of money effects across states for the senatorial elections in Brazil
 
@@ -121,11 +121,11 @@ var2plot <- as.numeric(brasil@data$sen06)
 
 nclr <- 12
 
-clr2plot <- palette(c(“#FFFF99″, “#FFFF66″,”#FFEB5C”,
+clr2plot <- palette(c("#FFFF99", "#FFFF66","#FFEB5C",
 
-“#FFD652″, “#FFC247″, “#FFAD3D”,”#FF9933″, “#FF8529″,
+"#FFD652", "#FFC247", "#FFAD3D”,”#FF9933", "#FF8529",
 
-“#FF701F”, “#FF5C14″, “#FF470A”, “#FF3300″))
+"#FF701F”, "#FF5C14", "#FF470A”, "#FF3300"))
 
 class <- classIntervals(var2plot, nclr, style=”fisher”,
 
@@ -141,23 +141,23 @@ ylim=c(-33.77086,5.38289))
 
 plot(brasil, border = gray (.9), col=colors, add=T)
 
-title(paste(“Senado Federal, 2006″))
+title(paste("Senado Federal, 2006"))
 
-legend(“bottom left”, border=”white”,
+legend("bottom left”, border=”white”,
 
 xjust = 0, yjust = 0, x.intersp = 1, y.intersp = .8,
 
-legend=names(attr(colors, “table”)),
+legend=names(attr(colors, "table”)),
 
-fill=attr(colors, “palette”), cex=0.8, bty=”n”,
+fill=attr(colors, "palette”), cex=0.8, bty=”n”,
 
 title=”%Gastos sobre %Votos”)
 
 ##======> Labels <========
 
-br.polgns <- attr(brasil, “polygons”)
+br.polgns <- attr(brasil, "polygons”)
 
-br.cntrd <- lapply(br.polgns, slot, “labpt”)
+br.cntrd <- lapply(br.polgns, slot, "labpt”)
 
 text(as.character(data$UF), cex = 0.6)
 
@@ -175,11 +175,11 @@ var2plot <- as.numeric(brasil@data$sen06)
 
 nclr <- 12
 
-clr2plot <- palette(c(“#FFFF99″, “#FFFF66″,”#FFEB5C”,
+clr2plot <- palette(c("#FFFF99", "#FFFF66",”#FFEB5C”,
 
-“#FFD652″, “#FFC247″, “#FFAD3D”,”#FF9933″, “#FF8529″,
+"#FFD652", "#FFC247", "#FFAD3D”,”#FF9933", "#FF8529",
 
-“#FF701F”, “#FF5C14″, “#FF470A”, “#FF3300″))
+"#FF701F”, "#FF5C14", "#FF470A”, "#FF3300"))
 
 class <- classIntervals(var2plot, nclr, style=”fisher”,
 
@@ -195,23 +195,23 @@ ylim=c(-33.77086,5.38289))
 
 plot(brasil, border = gray (.9), col=colors, add=T)
 
-title(paste(“Senado Federal, 2006″))
+title(paste("Senado Federal, 2006"))
 
-legend(“bottom left”, border=”white”,
+legend("bottom left”, border=”white”,
 
 xjust = 0, yjust = 0, x.intersp = 1, y.intersp = .8,
 
-legend=names(attr(colors, “table”)),
+legend=names(attr(colors, "table”)),
 
-fill=attr(colors, “palette”), cex=0.8, bty=”n”,
+fill=attr(colors, "palette”), cex=0.8, bty=”n”,
 
 title=”%Gastos sobre %Votos”)
 
 ##======> Labels <========
 
-br.polgns <- attr(brasil, “polygons”)
+br.polgns <- attr(brasil, "polygons”)
 
-br.cntrd <- lapply(br.polgns, slot, “labpt”)
+br.cntrd <- lapply(br.polgns, slot, "labpt”)
 
 text(as.character(data$UF), cex = 0.6)
 

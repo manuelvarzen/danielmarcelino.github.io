@@ -10,7 +10,7 @@ In this post I will show one way to display explained variance using a line char
 Basically, this chart shows the declining variance for each level when each independent parameter is included in the model. You can find the full script below of the chart.
 
 
-![Explained Variance]({{ site.url }}/images/blog/2011/ResultadoVariancia.png)
+![Explained Variance]({{ site.url }}/img/2011/ResultadoVariancia.png)
 
 ### Graph for explained variance
 
