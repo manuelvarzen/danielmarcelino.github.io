@@ -9,8 +9,9 @@ name: EnfoRced Data Analysis
 description: Blog and Website of Daniel Marcelino
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
-avatar: https://40.media.tumblr.com/6ba69eee146d6fd3f7863ffb63d343e9/tumblr_nuqwxdsI3G1qaxxauo1_1280.jpg
+avatar: /img/daniel_rio.jpg
 #
+favicon: /img/favicon.ico
 # Flags below are optional
 #
 
