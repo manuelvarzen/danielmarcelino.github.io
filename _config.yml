@@ -74,8 +74,6 @@ exclude:
     - Gemfile.lock
     - LICENSE
     - README.md
-	- _drafts
-	- _site
 	- Rmd
 	- .DS_Store
 	- .gitignore	
