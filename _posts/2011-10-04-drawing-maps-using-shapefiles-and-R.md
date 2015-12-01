@@ -7,16 +7,16 @@ tags: [R, maps]
 ---
 
 
-Sometimes we want to use charts that can speak for themselves  than boring OLS regression tables in a research paper. Graphs are efficient at showing the broad picture of an issue. Actually, they seem to be gaining a momentum in political science; you can getting into this topic by reading [Kastellec and Leoni (2007)](http://eduardoleoni.com/published/graphs.pdf), for instance.
+Sometimes, the only thing we want is a chart that speaks for itself rather than boring regression tables in our research paper. Graphs are efficient at showing the broad picture of an issue. In fact, graphs in research papers seem to be gaining a momentum in political science. If you want a more in-depth discussion about this, you may want reading [Kastellec and Leoni (2007)](http://eduardoleoni.com/published/graphs.pdf), for instance.
 
 <!--more-->
 
-![The campaign finance impact](/img/senado06.png)
+![The campaign finance impact]({{ site.url }}(/img/2011/senado06.png)
 
 
-I usually prefer drawing maps to present electoral results or when showing whatever bivariate association. In this post, however, I will use regression coefficients to plot a cartogram  using R – a free statistical package.
+I do prefer to draw maps to present many thing like electoral results or to show simple bivariate associations. In this post, I will use regression coefficients to plot a cartogram using R--a free statistical package.
 
-To plot a chart with OLS coefficients, we need to get them first, so, we can repeat the following command for each of those 27 Brazilian states:
+To plot a chart with OLS coefficients, we need to get the OLS results first. There are many possible approach to this, but I'll make it very simple. As I want to plot the relationship for each of the Brazilian state, I'll repeat the following command for each of those 27 units. In next posts I may show how to automate a bit more this tedious process.
 
 
 ### Graph for explained variance
