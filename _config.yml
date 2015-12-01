@@ -3,7 +3,7 @@
 #
 
 # Name of your site (displayed in the header)
-name: Jonathan Robinson
+name: Daniel Marcelino
 
 # Short bio or description (displayed in the header)
 description: You are reading my thoughts?
@@ -17,15 +17,15 @@ avatar: https://40.media.tumblr.com/6ba69eee146d6fd3f7863ffb63d343e9/tumblr_nuqw
 # Includes an icon in the footer for each username you enter
 footer-links:
   dribbble:
-  email: jonathanmrobinson2@gmail.com
+  email: dmarcelino@live.com
   facebook:
   flickr:
-  github: jonrobinson2/
+  github: danielmarcelino/
   instagram:
-  linkedin: jonathanmrobinson2
+  linkedin: danielmarcelino
   pinterest:
   rss: # just type anything here for a working RSS icon, make sure you set the "url" above!
-  twitter: jon_m_rob
+  twitter: dmarcelinobr
   stackoverflow: # your stackoverflow profile, e.g. "users/50476/bart-kiers"
   youtube: # channel/<your_long_string> or user/<user-name>
 
