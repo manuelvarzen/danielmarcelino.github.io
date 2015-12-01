@@ -11,7 +11,7 @@ Sometimes, the only thing we want is a chart that speaks for itself rather than 
 
 <!--more-->
 
-![The campaign finance impact]({{ site.url }}(/img/2011/senado06.png)
+![The campaign finance impact]({{ site.url }}/img/2011/senado06.png)
 
 
 I do prefer to draw maps to present many thing like electoral results or to show simple bivariate associations. In this post, I will use regression coefficients to plot a cartogram using R--a free statistical package.
