@@ -1,0 +1,480 @@
+---
+title: Lecture 13 - Some SQL, Shiny, and Data Mining in R
+author: 94-842
+date: December 4, 2014
+output: html_document
+---
+
+### Agenda
+
+- `RSQLite`, `RMySQL` packages for interacting with databases
+- `shiny` package for interactive web apps
+- Data mining in R (regularized regression, decision trees, clustering, classification)
+
+### RSQLite, RMySQL
+
+The SQL packages in R all operate on essentially the same principle:
+
+1. Use  `dbConnect()` to connect to a database (going through appropriate authorization procedures as necessary)
+
+2. Use `dbSendQuery()` to issue SQL queries against your database
+
+3. Use `dbGetQuery()` to issue SQL queries that return an R data frame
+
+4. Use `dbWriteTable()` to write data frames to tables in your database
+
+5. Use `dbDisconnect()` to close the connection
+
+#### Short example (a single flat table)
+
+1.  We'll use `dbConnect()` to create a new SQLite database
+
+```{r}
+library(RSQLite)
+
+# This opens a connection to a new SQLite database
+db <- dbConnect(SQLite(), dbname = "Test.sqlite")
+
+# Observe that it is empty
+dbListTables(db)
+```
+
+2. To populate the database, we'll just add a table containing the `Cars93` data from the `MASS` library.
+
+```{r}
+library(MASS)
+
+# Get rid of periods in variable names
+cars <- Cars93
+colnames(cars) <- gsub("\\.", "_", colnames(cars))
+
+# Write table to database
+dbWriteTable(db, name = "Cars", value = cars, row.names = FALSE)
+
+# See what we have now
+dbListTables(db)
+```
+
+3. Let's retrieve some information...
+
+```{r}
+dbListFields(db, "Cars")
+
+cars.df <- dbGetQuery(db, "select Manufacturer, Model, Price, MPG_highway from Cars where MPG_highway > 30")
+cars.df
+```
+
+This gives us a subset of values to work with in memory.  When we're done, we just...
+
+4. Close the connection
+
+```{r}
+dbDisconnect(db)
+```
+
+Note that the data frame we pulled in Step 3 still exists and we can operate on it however we want.
+
+
+### Shiny
+
+Shiny is a web application framework that provides a simple way of creating interactive web apps in R.  You don't need to know anything about web app development --- you just need to know how to program in R.
+
+We'll look at an example using Shiny to create an interactive way of exploring the `diamonds` dataset from the `ggplot2` package.
+
+If you want to know more, here's a [great tutorial on the RStudio page](http://shiny.rstudio.com/tutorial/).
+
+### Data mining in R
+
+In what follows we'll take a brief look at some useful data mining tools that you might want to use in your analytics work.
+
+#### Regularized regression (lasso)
+
+We're all familiar with linear regression.  Given a response vector $y$ and an $n \times p$ design matrix $X$, linear regression estimates a coefficient vector $\beta$ and an intercept $\beta_0$ by minimizing the residual sum of squares:
+
+$$ \hat \beta_0, \hat\beta = \mathrm{argmin}_{\beta_0, \beta}
+   \sum_{i = 1}^n (y_i - \beta_0 - x_i \beta)^2$$
+
+Here we're thinking of $x_i$ as being rows of design matrix (the matrix of covariates).
+
+The lasso does something similar, except that it **penalizes** the coefficient vector in a way that the resulting $\hat \beta$ winds up sparse (many of the coefficients get set exactly to $0$).  That is, the lasso automatically performs a form of model selection.  The lasso estimates are given by:
+
+$$ \hat \beta_0, \hat\beta_\lambda = \mathrm{argmin}_{\beta_0, \beta}
+   \sum_{i = 1}^n (y_i - \beta_0 - x_i \beta)^2 + \lambda \sum_{j = 1}^p |\beta_j|$$
+   
+The model fit is guided by a *tuning parameter* called $\lambda$.  If $\lambda = 0$, we just get the standard linear regression fit.  As $\lambda$ gets larger, our coefficient estimates get sparser.  
+   
+The lasso is very useful in cases where we believe that many of the variables we collected aren't actually associated with the response.  Unlike standard regression, it can be applied even when $p > n$ (i.e., even when the number of variables is larger than the sample size).  Provided that the set of truly informative variables is small (much smaller than the sample size), we can still get good results from the lasso.
+
+This type of regression is implemented in the `glmnet` package, which also has support for (penalized) logistic regression, multinomial regression, survival models, and others.  `glmnet` provides coefficient estimates across an entire **sequence of** $\lambda$ **values**.
+
+We'll now show an example of analysing an HIV drug resistance data set using the lasso.
+
+##### Loading data
+
+```{r, warning=FALSE}
+# True indexes (identified from the literature)
+true.indexes <- c(41, 44, 62, 65, 67, 69, 70, 74, 75, 77, 115,
+116, 118, 151, 184, 210, 215, 219)
+true.predictors <- paste(rep("p", length(true.indexes)), true.indexes, sep = "")
+
+# Read in data
+nrti <- scan("NRTI_DATA.txt", sep="\t", what="")
+nrti.matrix <- matrix(nrti, ncol=275, byrow=TRUE)
+col.labs <- nrti.matrix[1,]
+
+# Define design matrix
+x.matrix <- matrix(nrti.matrix[-1,], ncol=275)
+dimnames(x.matrix) <- list(NULL, col.labs)
+
+# Define response matrix
+resp.matrix <- matrix(as.numeric(nrti.matrix[,6:29]), nrow=nrow(nrti.matrix), byrow=FALSE)
+resp.matrix <- resp.matrix[-1,] # First row is garbage
+dimnames(resp.matrix) <- list(NULL, col.labs[6:29])
+
+# Format x matrix to be 0/1
+junk <- x.matrix[, 36:ncol(x.matrix)]
+x.all <- 1 * (junk != "-")
+
+# Response variables
+y.all <- resp.matrix[, "foldLog10_ABC"]
+```
+
+We've just loaded an HIV drug resistance data set.  This produces a matrix of covariates `x.all`, and a numeric response variable `y.all`.  `x.all` is a binary matrix which indicates presence or absence of a particular mutation.  The rows are individuals, and the columns are different mutations.  Our response is a measure of the subject's resistance to a particular drug.
+
+```{r}
+dim(x.all)
+```
+
+##### Cleaning up our data
+
+First, we'll need to get rid of missing values (some of the responses are missing).
+
+```{r}
+# remove rows that have missing response
+rows.missing <- which(is.na(y.all))
+x.present <- x.all[-rows.missing,]
+y.present <- y.all[-rows.missing]
+```
+
+A few of the columns of `x.all` have 0 variance, which means that the given mutation was either present for all individuals in the sample or absent for all individuals.  We'll delete these columns.
+
+```{r}
+EPS <- 1e-5  # Threshold for removing an x variable (no true predictors will be removed)
+indexes.low.var <- which(apply(x.present, 2, var) < EPS)
+x.new <- x.present[, -indexes.low.var]
+```
+
+It also turns out that a few of the columns of X are exact duplicates.  Let's remove those...
+
+```{r}
+# Identify duplicated variables
+indexes.dups <- which(duplicated(x.new, MARGIN = 2))
+# Remove them
+x.clean <- x.new[, -indexes.dups]
+```
+
+##### Fitting the lasso
+
+Now we're ready to fit our model.
+
+```{r}
+library(glmnet)  # Load the glmnet library
+lasso.fit <- glmnet(x = x.clean, y = y.present, family = "gaussian")
+# See what the fit object contains
+names(lasso.fit)
+```
+
+Here's a **regularization plot**, which shows the values of the coefficients as they vary across the sequence of $\lambda$ values.
+
+```{r, fig.height = 8, fig.width = 8}
+plot(lasso.fit, label = TRUE)
+```
+
+This can be confusing to look at.  Typically we want to just select the model with the lowest cross-validation error.  We can do this by using the `cv.glmnet()` function.  
+
+```{r, fig.height = 6, fig.width = 8}
+lasso.cv <- cv.glmnet(x = x.clean, y = y.present)
+plot(lasso.cv)
+```
+
+The numbers along the top tell us the number of variables in the given model.  There are two vertical dashed lines:  The one around `log(Lambda)` = -5, which is the CV-minimizing model, and the one around `log(Lambda)` = 3.8, which gives a smaller model that doesn't have significantly different CV-error than the CV-minimizing model.
+
+Generally you want to go for the smaller model.  Let's see what this model gives us.
+
+```{r}
+lasso.cv$lambda.min # minimizing value of lambda
+lasso.cv$lambda.1se # lambda value of smaller model 
+# Print out coefficient of smaller model
+coef.estimates <- coef(lasso.cv, s = "lambda.1se")
+coef.estimates
+# Print out the names of the variables with non-zero coefficient
+covariate.names <- rownames(coef.estimates)
+# Print out the names of the non-zero ones
+selected.vars <- covariate.names[which(coef.estimates != 0)]
+selected.vars
+```
+
+How does the selected model match up with the experimentally-validated mutation sites?  
+
+```{r}
+true.predictors
+length(true.predictors) # Number of true predictors
+# Number of predictors selected by CV with lasso
+length(selected.vars) - 1  
+# Number of selected variables that are in the true predictors list
+sum(selected.vars %in% true.predictors)  
+```
+
+That's pretty cool!  Using the lasso we've been able to identify a small subset of just `r length(selected.vars) - 1` mutations that we think are predictive of HIV drug resistance, of which `r sum(selected.vars %in% true.predictors)` are actually experimentally verified.  
+
+
+If you want to learn more, Trevor Hastie gives a nice overview in [http://web.stanford.edu/~hastie/glmnet/glmnet_alpha.html](the tutorial on his site).
+
+
+#### Hierarchical clustering
+
+Hierarchical clustering is an "unsupervised learning" approach that groups together similar observations.  We'll use the `hclust` function on the `gapminder` data set to illustrate a simple example.
+
+```{r}
+gapminder <- read.delim("http://www.andrew.cmu.edu/user/achoulde/94842/data/gapminder_five_year.txt") # Load the data
+```
+
+```{r}
+# First, we'll reshape our data frame into 'wide' format
+gapminder.wide <- reshape(gapminder, 
+                    timevar = "year", 
+                    idvar = c("country", "continent"), 
+                    direction = "wide")
+head(gapminder.wide)
+# Pull just the clustering variables
+gapminder.vars <- gapminder.wide[, 3:ncol(gapminder.wide)]
+rownames(gapminder.vars) <- gapminder.wide[["country"]]
+```
+
+Now we'll run hierarchical clustering to group the countries based on their `lifeExp`, `pop`, and `gdpPerCap` over time.
+
+**Step 1.** Construct a distance matrix that contains information on how similar the observations are. In our case, we'll just take the standard (Euclidean) distance between the (logs of) the observations.
+
+```{r}
+dist.matrix <- dist(log(gapminder.vars))
+# Print out first few distances
+
+```
+
+**Step 2.** Run hierarchical clustering by inputting `dist.matrix` into the `hclust` function, and plot the resulting dendrogram.
+
+```{r, fig.width = 18, fig.height = 10}
+gapminder.hclust <- hclust(dist.matrix)
+plot(gapminder.hclust, cex = 0.9)
+
+# Load sparcl package just to be able to colour our dendrogram
+library(sparcl)
+# plot with labels
+ColorDendrogram(gapminder.hclust, y = gapminder.wide$continent, 
+                labels = rownames(gapminder.vars),
+                branchlength = 8)
+# plot without labels
+ColorDendrogram(gapminder.hclust, y = gapminder.wide$continent, 
+                branchlength = 8)
+```
+
+Above we have dendrogram where the branches have been colour coded by continent.  This gives us some sense of how much of the similarity is driven by being on the same continent.
+
+
+#### Decision trees (classification method)
+
+Decision trees provide nice ways of conducting classification.  We'll learn a bit about them using the Housing Type data set, where the goal is to predict the the person's house type based on some demographic information.
+
+Here's the data information file:
+
+```    
+A) Title: Housetype Data
+
+B) Relevant Information:
+
+This dataset comes from the same marketing database that was 
+used for problem 1.
+
+From the original pool of 9409 questionnaires, the questionnaires with
+non-missing answers to the question "What is your type of home?" were 
+selected.
+
+C) The goal is to predict the type of home from the other 13
+demographics  attributes.
+
+D) Attribute Information 
+
+ 1   TYPE OF HOME
+             1. House
+             2. Condominium
+             3. Apartment
+             4. Mobile Home
+             5. Other
+
+ 2    SEX
+             1. Male
+             2. Female
+ 
+ 3    MARITAL STATUS
+             1. Married
+             2. Living together, not married
+             3. Divorced or separated
+             4. Widowed
+             5. Single, never married
+ 
+ 4    AGE
+             1. 14 thru 17
+             2. 18 thru 24
+             3. 25 thru 34
+             4. 35 thru 44
+             5. 45 thru 54
+             6. 55 thru 64
+             7. 65 and Over
+ 
+ 5    EDUCATION
+
+             1. Grade 8 or less
+             2. Grades 9 to 11
+             3. Graduated high school
+             4. 1 to 3 years of college
+             5. College graduate
+             6. Grad Study
+ 
+ 6    OCCUPATION
+
+             1. Professional/Managerial
+             2. Sales Worker
+             3. Factory Worker/Laborer/Driver
+             4. Clerical/Service Worker
+             5. Homemaker
+             6. Student, HS or College
+             7. Military
+             8. Retired
+             9. Unemployed
+ 
+ 7   ANNUAL INCOME OF HOUSEHOLD (PERSONAL INCOME IF SINGLE)
+
+             1. Less than $10,000
+             2. $10,000 to $14,999
+             3. $15,000 to $19,999
+             4. $20,000 to $24,999
+             5. $25,000 to $29,999
+             6. $30,000 to $39,999
+             7. $40,000 to $49,999
+             8. $50,000 to $74,999
+             9. $75,000 or more
+
+ 8    HOW LONG HAVE YOU LIVED IN THE SAN FRAN./OAKLAND/SAN JOSE AREA?
+             1. Less than one year
+             2. One to three years
+             3. Four to six years
+             4. Seven to ten years
+             5. More than ten years
+ 
+ 9   DUAL INCOMES (IF MARRIED)
+
+             1. Not Married
+             2. Yes
+             3. No
+ 
+ 10    PERSONS IN YOUR HOUSEHOLD
+
+             1. One
+             2. Two
+             3. Three
+             4. Four
+             5. Five
+             6. Six
+             7. Seven
+             8. Eight
+             9. Nine or more
+ 
+ 11    PERSONS IN HOUSEHOLD UNDER 18
+
+             0. None
+             1. One
+             2. Two
+             3. Three
+             4. Four
+             5. Five
+             6. Six
+             7. Seven
+             8. Eight
+             9. Nine or more
+ 
+ 12    HOUSEHOLDER STATUS
+
+             1. Own
+             2. Rent
+             3. Live with Parents/Family
+ 
+ 
+ 
+ 13   ETHNIC CLASSIFICATION
+
+             1. American Indian
+             2. Asian
+             3. Black
+             4. East Indian
+             5. Hispanic
+             6. Pacific Islander
+             7. White
+             8. Other
+ 
+ 14    WHAT LANGUAGE IS SPOKEN MOST OFTEN IN YOUR HOME?
+
+             1. English
+             2. Spanish
+             3. Other
+ 
+
+E) Number of instances: 9013
+
+   These are obtained from the original dataset with 9409 instances,
+by removing those observations with the response (type of home)
+missing.
+
+F)  The missing value flag is NA.
+```
+
+We'll start by importing the data 
+
+```{r}
+# Read in the data set
+col.classes <- rep("numeric", 14)
+col.classes[c(1,2,3,6,9,12,13,14)] <- "factor"
+
+# Import the data with column types as specified by colClasses
+housing <- read.csv("Housetype_Data.txt", sep=",", header = FALSE,
+                    colClasses = col.classes)
+
+# Rename the columns
+names(housing) = c("housetype","sex","marital","age","education","occupation","income","longlived","dualincome","household","household18","housestatus","ethnic","language")
+
+library(plyr)
+# Label a couple of the factors
+housing <- transform(housing, marital = mapvalues(marital, 1:5, 
+                     c("married", "cohab.notmarried", "divorced", "widowed", "single")),
+                     housetype = mapvalues(housetype, 1:5,
+                     c("house", "condo", "apt", "mobile", "other")))
+# Quick look at the data
+summary(housing)
+```
+
+Now we'll use the `rpart` function from the `rpart` package to fit a "classification tree" to the data.
+
+```{r, fig.width = 8, fig.height = 7}
+library(rpart)  # Load library
+
+tree.out = rpart(housetype ~ sex + marital + age + education + occupation + income + dualincome + household + ethnic + language, data=housing, method="class")
+
+# Fix up plot margins
+par(mar = c(3,3,3,3), xpd = TRUE)
+
+# Print text summary of the tree
+print(tree.out)
+
+# Plot decision tree
+plot(tree.out, compress = TRUE)
+text(tree.out, use.n = TRUE)
+```

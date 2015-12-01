@@ -1,0 +1,308 @@
+
+---
+title: Lecture 10 - plyr and split-apply-combine
+author: 94-842
+date: November 20, 2014
+output: html_document
+---
+
+### Agenda
+
+
+- plyr
+    - Similar functionality to apply/tapply/lapply
+    - Provides consistent syntax
+    - Streamlines split-apply-combine tasks
+  
+```{r}
+library(plyr)
+library(ggplot2)
+options(scipen = 4)
+```
+
+### plyr Basics
+
+#### split-apply-combine
+
+
+- We've already seen numerous examples of split-apply-combine in action
+
+- The basic principle to keep in mind is as follows:
+
+1. **Split** a data set into piece (e.g., according to some factor)
+
+2. **Apply** a function to each piece (e.g., mean)
+
+3. **Combine** all the pieces into a single output (e.g., a table or data frame)
+
+What does plyr do?
+
+
+- plyr introduces a family of functions of the form `XYply`, where `X` specifies the input type and `Y` specifies the output type
+
+<center>
+
+|  X/Y option  |  Sepal.Width|  
+|:------------:|:------------|
+|       `a`    | array (e.g., vector or matrix) |
+|       `d`    | data.frame |
+|       `l`    | list       |
+|       `_`    | no output (valid only for `Y`, useful when plotting) |
+
+
+</center>
+
+> **Usage:** `XYply(.data, .variables, .fun)`
+
+> **Effect:** Take input of type `X`, and apply `.fun` to `.data` split up according to `.variables`, combining the answer into output of type `Y`
+
+
+#### Gapminder life expectancy data
+
+
+```{r}
+gapminder <- read.delim("http://www.andrew.cmu.edu/user/achoulde/94842/data/gapminder_five_year.txt") # Load data
+str(gapminder) # Get variable information
+```
+#### Example: GDP by continent
+
+```{r}
+#dlply
+ddply(gapminder, ~ continent, summarize, mean.gdp = mean(gdpPercap))
+#daply
+daply(gapminder, ~ continent, summarize, mean.gdp = mean(gdpPercap))
+#dlply
+dlply(gapminder, ~ continent, summarize, mean.gdp = mean(gdpPercap))
+```
+
+- `summarize()` tells plyr to create a new data.frame containing the output
+- `transform()` works like the function you already know, appending the results to the existing data frame
+
+Here's what happens if we use transform instead (only first 6 rows are printed).
+
+When using `transform`, a new column is created.  This column gives the average GDP per capita for corresponding continent.  All countries on the same continent get the same value for the new column.  
+
+```{r}
+transform.gdp.continent <- ddply(gapminder, ~ continent, transform, mean.gdp = mean(gdpPercap))
+
+# First few rows
+head(transform.gdp.continent)
+
+# Output subsetted to 4 countries and one year
+subset(transform.gdp.continent, subset = country %in% c("United Kingdom", "Ireland", "United States", "Mexico") & year == 2007)
+```
+
+#### Example: calculate correlation between gdpPercap and population for each country
+
+```{r}
+ddply(gapminder, ~ country, summarize, cor.pop.gdp = cor(pop, gdpPercap))
+```
+
+#### Example: plot gdpPercap and population for each country
+
+```{r, cache=TRUE, fig.height = 3}
+# Set things up so that there are 3 columns of plots
+par(mfrow = c(1,3)) 
+
+# Use d_ply to generate plots
+d_ply(gapminder, ~ country, summarize, plot(pop, gdpPercap, pch=16, main = unique(country)))
+```
+
+**Note**:  When specifying the title (`main`) in `plot()`, we needed to write `unique(country)` instead of `country`.  If we didn't put `unique(country)`, then the title would have the country repeated as many times as the country appears in the data set.
+
+#### Example: Maximum life expectancy for each continent
+
+You can return more than one thing, and you're not limited to summarizing one variable at a time.
+
+Here's a `ddply` call that outputs a summary table showing the maximum life expectancy for each continent and year, along with the country with the maximum life expectancy.
+
+```{r, cache = TRUE}
+ddply(gapminder, ~ continent + year, summarize, max.life.exp = max(lifeExp), max.life.exp.country = country[which.max(lifeExp)])
+```
+
+#### Example (more involved): Fitting a linear model for each country
+
+We're now going to go through an example where we get a slope and intercept for regressing `lifeExp` on year.
+
+##### (1) Build a function
+
+Let's start by building our function for a single country.
+
+```{r, fig.align='center', fig.height=4, fig.width=5}
+country.name <- "Ireland"  # Pick a country
+gapminder.sub <- subset(gapminder, country == country.name)  # Pull data for this country
+gapminder.sub
+
+# Scatterplot of life exp vs year
+qplot(year, lifeExp, data = gapminder.sub, main = paste("Life expectancy in", country.name)) 
+```
+
+Now let's fit a regression.
+
+```{r}
+life.exp.lm <- lm(lifeExp ~ year, data = gapminder.sub) # Fit model
+summary(life.exp.lm) # Get summary print-out for model
+```
+
+The intercept in this case corresponds to the expected life expectancy in the year 0 A.D.  This number makes no sense, because we're essentially taking data from 1952 - 2007 and linearly extrapolating it back nearly 2000 years.  
+
+A better thing to do is to shift the year variable to measure number of years since 1952.  Here's how we do this.
+
+```{r}
+year.min <- min(gapminder$year)  # Earliest year in the data set
+# Fit a linear model with year replaced by year - year.min
+life.exp.lm <- lm(lifeExp ~ I(year - year.min), data = gapminder.sub)
+
+summary(life.exp.lm)
+```
+
+This is much better!  The slope hasn't changed (it shouldn't), but the intercept is now the life expectancy predicted by the linear fit for 1952.  This is within our range of observations, and so the prediction is not absurd.
+
+Now we can pull the coefficients vector:
+
+```{r}
+life.exp.lm$coef
+```
+
+Let's put this all together into a function
+
+```{r}
+# Function returns slope and intercept from regressing lifeExp on year - year.min
+getCoef <- function(df) {
+  coefs <- lm(lifeExp ~ I(year - year.min), data = df)$coef
+  names(coefs) <- c("intercept", "slope")
+  coefs
+}
+
+getCoef(gapminder.sub)
+```
+
+##### (2) ddply the function
+
+```{r}
+ddply(gapminder, ~ country, getCoef)
+```
+
+#### Another approach: dlply + ldply = ddply
+
+Another approach you might want to take is to store each lm fit in an intermediate list that you can use later.  
+
+##### Step (1): Get a list of lm fits, one for each country
+
+To do this, we use the `dlply` function, which takes a data frame and outputs a list (in this case, a list of `lm` fits).
+
+```{r}
+lm.list <- dlply(gapminder, ~ country, function(df) lm(lifeExp ~ I(year - year.min), data = df))
+```
+
+```{r}
+# First element is the linear model fit for the first country
+names(lm.list)[1]
+lm.list[[1]]
+summary(lm.list[[1]])
+```
+
+#### Step (2): Apply appropriate function to each lm fit
+
+Now we have a list of linear models that we can call `ldply()` on.  How do we get coefficients out of a linear model?  Here's one approach
+
+```{r}
+coefs <- coef(lm.list[[1]])  # Use the coef() function, same effect as lm.fit$coef
+coefs
+names(coefs) <- c("intercept", "slope")
+coefs
+```
+
+Turning this into a function:
+
+```{r}
+getCoefsLM <- function(x) {
+  coefs <- coef(x)
+  names(coefs) <- c("intercept", "slope")
+  coefs
+}
+
+# Confirm that it does the same thing as our code above
+getCoefsLM(lm.list[[1]])
+```
+
+Here's the `ldply` call that takes the list of lm fits and outputs a table giving the intercept and slope for each country.
+
+```{r}
+ldply(lm.list, getCoefsLM)
+```
+
+#### What can we learn from this output?
+
+Let's summarize our findings by creating a bar chart for the intercept and slope, with the bars colored by continent.  We'll do this in ggplot.
+
+```{r}
+# Coefficients summary data frame
+summary.coef <- ddply(gapminder, ~ country, getCoef)
+# data frame showing continent of each country
+summary.continent <- ddply(gapminder, ~ country, summarize, continent = unique(continent))
+# Merge data together
+summary.merge <- merge(summary.coef, summary.continent, by = "country")
+# Here are the first few lines
+head(summary.merge)
+```
+
+#### Plotting intercepts coloured by continent
+
+This code is analogous to that presented at the end of Lecture 6
+
+```{r, fig.width = 18, warning = FALSE}
+# Reorder the countries according to intercept
+summary.intercept <- transform(summary.merge, country = reorder(country, intercept))
+# Construct ggplot object, will fill color determined by continent
+intercept.fig <- ggplot(data = summary.intercept, mapping = aes(x = country, y = intercept, fill = continent))
+# Construct bar chart
+intercept.fig + geom_bar(stat = "identity") +
+               theme(axis.text.x = element_text(angle = 60, vjust = 1, hjust = 1)) 
+```
+
+#### Plotting slopes coloured by continent
+
+```{r, fig.width = 18, warning = FALSE}
+# Reorder the countries according to intercept
+summary.slope <- transform(summary.merge, country = reorder(country, slope))
+# Construct ggplot object, will fill color determined by continent
+slope.fig <- ggplot(data = summary.slope, mapping = aes(x = country, y = slope, fill = continent))
+# Construct bar chart
+slope.fig + geom_bar(stat = "identity") +
+               theme(axis.text.x = element_text(angle = 60, vjust = 1, hjust = 1)) 
+```
+
+
+These are very interesting plots.  What can you tell from looking at them?
+
+#### Looking at per capita GDP by year
+
+Let's start by looking at some plots of how GDP per capita varied by year 
+
+```{r, fig.height = 20, fig.width = 15, cache = TRUE}
+# Use qplot from ggplot2 to generate plots
+qplot(year, gdpPercap, facets = ~ country, data = gapminder, colour = continent) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+What if we want to rearrange the plots by continent?   This can be done by changing the order of the `country` level.  
+
+```{r, fig.height = 20, fig.width = 15, cache = TRUE}
+# First step: reorder the countries by continent
+# Produce a data frame of just country and continent
+country.df <- ddply(gapminder, ~ country, 
+                    function(x){
+                      data.frame(continent.id = x$continent[1])
+                      })
+# Use arrange() to sort table by continent
+country.ordered <- arrange(country.df, continent.id)
+# Reorder levels of country:
+gapminder.ordered <- transform(gapminder, country = factor(country, levels = country.ordered$country))
+# Let's make sure that things are now ordered correctly...
+levels(gapminder.ordered$country)
+
+# Use qplot from ggplot2 to generate plots
+qplot(year, gdpPercap, facets = ~ country, data = gapminder.ordered, colour = continent) + 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) + stat_smooth(method = "lm") 
+```

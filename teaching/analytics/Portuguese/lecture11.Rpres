@@ -1,0 +1,295 @@
+<style>
+  .reveal pre {
+    font-size: 13pt;
+  }
+  .reveal section p {
+    font-size: 32pt;
+  }
+  .reveal div {
+    font-size: 30pt;
+  }
+  .reveal h3 {
+    color: #484848;
+    font-weight: 150%;
+  }
+</style>
+
+Lecture 11: Text data
+====
+author: 94-842
+date: November 25, 2014
+font-family: Garamond
+autosize: false
+width:1440
+height:900
+
+Agenda
+====
+
+- Simple string functions
+- Search functions
+- Regular expressions
+
+Why text data?
+====
+
+We want to be able to manipulate strings for a number of reasons
+
+1. Cleaning up text fields (E.g., capitalization and typos in manually entered data)
+2. Extracting information from a text field or document (E.g., Determine whether document contains key words/phrases, phone numbers, etc.)
+3. Parsing messy but structured files (E.g., HTML, XML, reports, etc.)
+
+> Basic idea: Start by learning to **manipulate** and **search** strings, and then learn **regular expressions** for describing complex patterns (substrings) of interest.
+
+
+Simple string functions
+====
+
+Command | Description
+--------|-------------
+`paste(..., sep)` | pastes things into a character vector, separated by `sep`
+`strsplit(x, split)` | splits `x` into substrings determined by `split`
+`nchar(x, type = "char")` | returns size of `x` (default: number of characters)
+`substr(x, start, stop)` | extracts or replaces substring 
+`tolower(x)`, `toupper(x)` | convert string to lower (or upper) case
+`as.character(x)` | converts `x` into a character
+
+Simple string functions: Common use cases
+====
+Command | Typical use case
+--------|-------------
+`paste(..., sep)` | Formatting output for printing or tabulating
+`strsplit(x, split)` | Splitting up an input string 
+`nchar(x, type = "char")` | Counting number of letters
+`substr(x, start, stop)` | Extracting or replacing particular character blocks
+`tolower(x)`, `toupper(x)` | Standardizing text data prior to analysis
+`as.character(x)` | Converting other types (e.g., factors) to strings for further manipulation
+
+Example: paste
+====
+```{r}
+x <- c("Michael", "Tiger", "Sidney")
+y <- c("Jordan", "Woods", "Crosby")
+
+paste(x, y) # default
+paste(x, y, sep = "SPORTS") # Paste, separating by `sep` argument
+paste(x, collapse = "_") # collapse x, separating by `collapse` argument
+paste("AAA", x, y, "BBB", sep="_", collapse = " ")
+```
+
+Example: strsplit
+====
+```{r}
+pasted1 <- c(paste(x, y), "R Programming for Analytics")
+pasted1
+strsplit(pasted1, split = " ")
+```
+
+Example: nchar
+====
+```{r}
+my.name <- "Alexandra Chouldechova"
+nchar(my.name) # Number of characters in my name (including the space!)
+strsplit(my.name, split = " ") # Split my name into first and last
+nchar(strsplit(my.name, split = " ")[[1]]) # Count letters in each part of name
+```
+
+Example: substr / substring
+====
+```{r}
+substr(my.name, start=1, stop=9)  # Characters 1 through 9
+substring(my.name, 1) <- "ABCD" # Change first 4 letters to ABCD
+my.name
+x <- c("12345", "abcde", "QWERT")  
+substring(x, 2) <- c("!", ">", "?")  # Change 2nd letters to !, >, ?
+x
+```
+
+Example: tolower/toupper
+====
+```{r}
+prog.names <- c("ppm", "pPM", "hcp", "PPm", "MISM", "PPM", "HCP", "ppm")
+table(prog.names) 
+toupper(prog.names) # convert all to upper case
+tolower(prog.names) # convert all to lower case
+
+```
+
+Search functions
+====
+
+- Now that we have equipped ourselves with some string manipulation tools, we can move on to the next step: **Searching** for strings that contain a given substring or pattern
+
+- Each of these functions accepts a `pattern` and a character vector `x`
+
+Command | Description
+--------|-------------
+`grep(pattern, x)` | Returns indexes of `x` that contain `pattern`
+`grepl(pattern, x)` | Returns logical vector (`TRUE` means element of `x` contains `pattern`)
+`sub(pattern, replacement, x)` | Replaces first instance of `pattern` in each element of `x` with `replacement` 
+`gsub(pattern, replacement, x)` | Replaces all instances of `pattern` with `replacement`
+
+Search functions: Common use cases:
+====
+Command | Description
+--------|-------------
+`grep(pattern, x)` | Figure out which data points contain a given substring
+`grepl(pattern, x)` | Figure out whether data points contain a given substring
+`sub(pattern, replacement, x)` | Replace first instance of `pattern` in structured text
+`gsub(pattern, replacement, x)` | Replace all instances of `pattern` in structured text
+
+Example: grep(pattern, x), grepl
+====
+```{r}
+phone.nums <- c("412-412-1412", "704-814-2314", "724-120-1240", "(412)-912.9012")
+grep("412", phone.nums) # Phone numbers containing 412 
+grepl("412", phone.nums) # Does the phone number contain 412?
+grep(".", phone.nums) # Does the phone number contain .? (WRONG!)
+grep("\\.", phone.nums) # '.' has a special meaning, so we need to write `\\.`
+```
+
+Example: sub(pattern, replacement, x), gsub
+====
+```{r}
+phone.nums
+sub("412", "555", phone.nums)  # Replace first occurrence of '412' with '555'
+gsub("412", "555", phone.nums) # Replace all occurrences of '412' with '555'
+```
+
+- Note that `sub()` had the effect of changing 412 area codes to 555, while `gsub()` also changed occurrences of `412` after the area code.
+
+- What if the first instance is not an area code?  E.g., `724-412-8117`.
+
+Regular expressions
+====
+
+- The various string manipulation and search functions are only mildly interesting on their own
+
+- **Regular expressions** turn the functions into powerful and versatile tools for handling text data
+
+- A regular expression is a **string** that specifies a particular a **search pattern**
+
+- They allow you to specify patterns like "all numbers with a 412 or 724 area code", or "all contents of \<price\>...\</price\> XML tags"
+
+Regular expressions: OR
+====
+
+- The regexp symbol for **or** is `|` 
+
+```{r}
+phone.nums
+grep("412|724", phone.nums) # Phone numbers containing 412 OR 724
+```
+
+Regular expression: Character ranges
+====
+
+- To specify a range of characters, use braces **[ ]**
+- `[f-p]` specifies letters f through p
+- `[0-9]` specified digits
+- `[[:punct:]]`, `[[:alnum:]]`, `[[:alpha:]]`, `[[:space:]]`, `[[:digit:]]` are are built-in ranges
+- `\w`: word characters (alpha numeric and underscore).  `\W` is everything but
+
+```{r}
+messy.text <- "He??1!991llo!! m1492(!!!==1y n1a03me is 190A14-lex"
+messy.text
+gsub("[0-9]|[[:punct:]]", "", messy.text) # remove all digits and punctuation
+```
+
+Regular expression: Another gsub example
+====
+
+- **`^`** specifies "everything but".  
+
+- Here's an example of sanitizing a messy string
+
+```{r} 
+messy.text <- "Abrah!@!am   Lincoln< was born        February 12,         1809, the second child of Thomas   Lincoln              and Na''ncy. Lincoln (n%ée !        Hanks), in a one-room //log cabin   on  the  Sinking   Sp--ring   F--arm in Hardin County, Kentucky[6] (now La    R!ue   County)."
+
+# Strip away everything except alpha numeric characters and spaces
+cleaner.text <- gsub("[^[:alnum:]|[:space:]]", "", messy.text) 
+cleaner.text
+```
+
+
+Regular expression: Repeated characters
+====
+- **`?`** preceding item is optional, will be matched at most once
+- **`*`** preceding item to be matched zero or more times
+- **`+`** preceding item to be matched one or more times
+- `{n}` preceding item to be matched exactly `n` times
+- `{n}` preceding item to be matched `n` or more times
+- `{n, m}` preceding item to be matched at least `n` times, but  less than `m` times
+
+
+Regular expression: Repeated characters
+====
+
+- **`?`** preceding item is optional, will be matched at most once
+- **`*`** preceding item to be matched zero or more times
+- **`+`** preceding item to be matched one or more times
+
+```{r}
+cleaner.text
+clean.text <- gsub("[ ]+", " ", cleaner.text) # Match replace all instances of 1 or more space with 1 space
+clean.text 
+```
+
+Example: Phone number area code
+====
+- `{n}` preceding item to be matched exactly `n` times
+- **`$`** match end of strings
+```{r}
+phone.nums
+gsub("[).-][0-9]{3}[)-.][0-9]{4}$", "", phone.nums)
+```
+Example: Phone number area code continued
+====
+- The regular expression reads: Match ends of strings that are any of `).-`, followed by exactly 3 digits, followed by one of `).-`, followed by exactly 4 digits
+
+```{r}
+number.strings <- c("617.902-1924", "601-45-134", "91048-1124", "111-111-2222-111")
+gsub("[).-][0-9]{3}[)-.][0-9]{4}$", "", number.strings)
+```
+
+- The regular expression leaves everything in tact except for phone numbers, for which it removed everything after the area code
+
+Removing short words
+====
+- `\b` matches word boundaries 
+
+```{r}
+clean.text
+gsub("(\\b[a-zA-Z]{1,4}\\b)|[0-9]", "", clean.text)
+```
+
+- This expression matches all alpha strings of length 1 to 3 characters, and all digits
+
+Splitting up a string
+====
+
+```{r}
+long.words <- gsub("(\\b[a-zA-Z]{1,4}\\b)|[0-9]", "", clean.text)
+
+# Split up the long.words string along occurrences of 1 or more space
+long.words
+strsplit(long.words, "[ ]+")
+```
+
+
+Example: Extracting info from XML tags
+====
+
+- For this, we'll use the `str_match(string, pattern)` fucntion from the `stringr` library.
+
+- `str_match` finds `pattern` in `string` and returns contents of groups, defined by`( )`
+
+```{r}
+library(stringr)
+xml.string <- "<item>Rolex watch</item><price>$19,512.76</price>"
+
+str_match(xml.string, "<item>(.*)</item>")  # Extract everything between <item> tag
+str_match(xml.string, "<price>\\$([0-9,.]*)</price>")
+```
+
+

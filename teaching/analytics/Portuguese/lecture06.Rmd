@@ -1,0 +1,274 @@
+<style>
+  .reveal pre {
+    font-size: 13pt;
+  }
+  .reveal section p {
+    font-size: 32pt;
+  }
+  .reveal div {
+    font-size: 30pt;
+  }
+  .reveal h3 {
+    color: #484848;
+    font-weight: 150%;
+  }
+</style>
+
+---
+title: Lecture 6: lattice and ggplot2
+author: 94-842
+date: November 4, 2014
+output: 
+  html_document:
+    fig_width: 5
+    fig_height: 5
+---
+
+###Agenda
+
+In this lecture we'll discuss plotting basics in two useful R packages.
+
+- `lattice` package
+- `ggplot2` package
+
+Let's begin by loading the packages
+```{r}
+library(lattice)
+library(ggplot2)
+```
+
+### lattice 
+
+The `lattice` package provides a simple formula-based syntax for generating plots that help the user visualize data across different categories.  It's a good package to know about when displaying multivariate relationships.  The main advantage of using lattice over standard graphics is that it simplifies the process of generating *trellis* graphs, which display variable summaries (or relationships between variables) conditioned on the value of a set of factors.
+
+The standard syntax is to call
+```{r, eval=FALSE}
+graph_type(formula, data)
+```
+
+The `formula` specifies which variables to display, and which variables to condition on.  There are several graph types available; we tabulate some of these below.
+
+
+
+graph_type | graph type | formula 
+-----------| ---------- | --------
+`barchart`   | bar chart  |	`x~A` or `A~x`
+`bwplot` |	boxplot	 | `x~A` or `A~x`
+`cloud` |	3D scatterplot |	`z~x*y|A`
+`densityplot` |	kernel density plot |	`~x|A*B`
+`dotplot`	| dotplot |	`~x|A`
+`histogram` |	histogram |	`~x`
+`splom`	| scatterplot matrix |	data frame
+`xyplot` |	scatterplot |	`y~x|A`
+
+
+The syntax `y ~ x | g1 + g2 + ... ` indicates that plots of `y` versus `x` should be produced conditional on the variables `g1`, `g2`, ...
+
+#### Examples of using lattice on the Cars93 data
+
+Let's go back to the Cars93 dataset from the MASS library.
+
+```{r}
+library(MASS)
+str(Cars93)
+summary(Cars93)
+```
+
+Instead of using `attach()` or `with()`, we're going to take advantage of the `data=` argument of all the lattice plotting functions. 
+
+##### Density plots of MPG.highway across DriveTrain
+
+```{r, fig.align='center', fig.height=5, fig.width=6}
+densityplot(~MPG.highway | DriveTrain, data = Cars93)
+```
+
+##### Box plots of MPG.city against Cylinders, viewed across Origin
+
+```{r, fig.align='center', fig.height=4, fig.width=6}
+bwplot(MPG.city ~ Cylinders | Origin, data = Cars93)
+```
+
+##### Scatterplots of Price against EngineSize conditioned on Origin
+
+```{r, fig.align='center', fig.height=4, fig.width=6}
+xyplot(Price ~ EngineSize | Origin, data = Cars93)
+```
+
+Here's another attempt, with some modification in plotting parameters.
+
+```{r, fig.align='center', fig.height=4, fig.width=6}
+xyplot(Price ~ EngineSize | Origin, data = Cars93,
+       xlab = "Engine size (litres)",
+       pch = 16)
+```
+
+#### ggplot2
+
+ggplot2 has a steeper learning curve than the base graphics functions and lattice, but it also generally produces better and more easily customizable graphics.  
+
+There are two basic calls in ggplot: 
+
+- `qplot(x, y, ..., data)`: a "quick-plot" routine, which essentially replaces the base `plot()`
+- `ggplot(data, aes(x, y, ...), ...)`: defines a graphics object from which plots can be generated, along with *aesthetic mappings* that specify how variables are mapped to visual properties.  
+
+##### plot vs qplot
+
+Here's how the default scatterplots look in ggplot compared to the base graphics.
+
+```{r, fig.align='center', fig.height=3, fig.width=4}
+with(Cars93, plot(EngineSize, MPG.city))  # Base graphcs 
+qplot(x=EngineSize, y=MPG.city, data=Cars93)  # using qplot from ggplot2
+```
+
+Remember how it took us some effort last time to add color coding, use different plotting characters, and add a legend?  Here's the `qplot` call that does it all in one simple line.
+
+```{r, fig.align='center', fig.height=4, fig.width=5}
+qplot(x=EngineSize, y=MPG.city, data=Cars93, 
+      colour=Cylinders, 
+      shape=Cylinders) 
+```
+
+This way you won't run into problems of accidentally producing the wrong legend.  The legend is produced based on the `colour` and `shape` argument that you pass in.  (Note: `color` and `colour` have the same effect.  )
+
+
+##### ggplot function
+
+The `ggplot2` library comes with a dataset called `diamonds`. Let's look at it
+```{r}
+dim(diamonds)
+head(diamonds)
+```
+It is a data frame of 53,940 diamonds, recording their attributes such as carat, cut, color, clarity, and price.
+
+We will make a scatterplot showing the price as a function of the carat (size). (The data set is large so the plot may take a few moments to generate.)
+
+```{r fig.width=10, fig.height=4, dpi=70, cache=TRUE}
+diamond.plot <- ggplot(data=diamonds, aes(x=carat, y=price))
+diamond.plot + geom_point()
+```
+
+The data set looks a little weird because a lot of diamonds are concentrated on the 1, 1.5 and 2 carat mark.  
+
+Let's take a step back and try to understand the ggplot syntax.  
+
+1) The first thing we did was to define a graphics object, `diamond.plot`.  This definition told R that we're using the `diamonds` data, and that we want to display `carat` on the x-axis, and `price` on the y-axis.  
+
+2) We then called `diamond.plot + geom_point()` to get a scatterplot.
+
+The arguments passed to `aes()` are called **mappings**.  Mappings specify what variables are used for what purpose.  When you use `geom_point()` in the second line, it pulls `x`, `y`, `colour`, `size`, etc., from the **mappings** specified in the `ggplot()` command.  
+
+You can also specify some arguments to `geom_point` directly if you want to specify them for each plot separately instead of pre-specifying a default.
+
+Here we shrink the points to a smaller size, and use the `alpha` argument to make the points transparent.
+
+```{r fig.width=10, fig.height=4, dpi=70, cache=TRUE}
+diamond.plot + geom_point(size = 0.7, alpha = 0.3)
+```
+
+If we wanted to let point color depend on the color indicator of the diamond, we could do so in the following way.
+
+```{r fig.width=10, fig.height=6, dpi=70, cache=TRUE}
+diamond.plot <- ggplot(data=diamonds, aes(x=carat, y=price, colour = color))
+diamond.plot + geom_point()
+```
+
+If we didn't know anything about diamonds going in, this plot would indicate to us that **D** is likely the highest diamond grade, while **J** is the lowest grade.
+
+We can change colors by specifying a different color palette.  Here's how we can switch to the `cbPalette` we saw last class.
+
+```{r fig.width=10, fig.height=6, dpi=70, cache=TRUE}
+cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+diamond.plot <- ggplot(data=diamonds, aes(x=carat, y=price, colour = color))
+diamond.plot + geom_point() + scale_colour_manual(values=cbPalette)
+```
+
+Just like in lattice, we can create plots showing the relationship between variables across different values of a factor.  For instance, here's a scatterplot showing how diamond price varies with carat size, conditioned on color.  It's created using the `facet_wrap(factor)` command.
+
+```{r fig.width=12, fig.height=6, dpi=70, cache=TRUE}
+diamond.plot <- ggplot(data=diamonds, aes(x=carat, y=price, colour = color))
+diamond.plot + geom_point() + facet_wrap("color")
+```
+
+`ggplot` can create a lot of different kinds of plots, just like lattice.  Here are some examples.
+
+Function | Description
+---------|------------
+`geom_point(...)` | Points, i.e., scatterplot
+`geom_bar(...)` | Bar chart
+`geom_line(...)` | Line chart
+`geom_boxplot(...)` | Boxplot
+`geom_violin(...)` | Violin plot
+`geom_density(...)` | Density plot with one variable
+`geom_density2d(...)` | Density plot with two variables
+`geom_histogram(...)` | Histogram
+
+##### Statistical overlays in ggplot
+
+One of the main advantages of `ggplot` is that it makes it really easy to overlay model fits, confidence bars, etc.  We'll get more practice with this next week, when we talk more about how to do statistical inference in R.
+
+For the time being, let's just display a scatterplot smoother.  
+
+```{r fig.width=12, fig.height=6, dpi=70, cache=TRUE}
+diamond.plot + stat_smooth()
+```
+
+This shows curves modelling the relationship between diamond size in carats and price for the different diamond colours.  We could use the `geom_point()` command to also display the underlying points, but that would make the curves difficult to see.
+
+##### A dot plot/bar chart example.
+
+For this example we're going to use some data based on the 2011 Consumer Expenditure (CE) Survey.  This data is stored in a tab-delimited file called `mtbi.txt`.  
+
+```{r}
+expenses <- read.table("http://www.andrew.cmu.edu/user/achoulde/94842/data/mtbi.txt", sep="\t", header=TRUE)
+dim(expenses)
+head(expenses, 20)
+```
+
+The data is ordered from highest to lowest count (the count is then number of times that an item in the given ucc category was purchased).  From `head()` we can see that the 20 most common expenses are things like food/drink, gas, cell phone bills, mortgage payments, etc.  This is what we'd expect.
+
+Now, let's create a dot plot showing the counts for each of the top 20 expenses.
+
+```{r fig.width=8, fig.height=8, dpi=70, cache=TRUE}
+expense.plot <- ggplot(data = expenses[1:20, ], mapping = aes(y = descr, x = count))
+expense.plot + geom_point()
+```
+
+This doesn't look very good...  What happened?
+
+Well, `R` doesn't know that the `count` variable is important for the purpose of ordering.  The default behaviour is to show the plot with factor levels ordered alphabetically.  This makes sense in many cases, but not in ours.  
+
+To re-order the levels of a factor, we use the `reorder()` function.  Here's how we re-order the levels of `descr` based on the value of `count`.  
+
+```{r}
+expenses <- transform(expenses, descr = reorder(descr, count))
+```
+
+Now let's try that plotting function again...
+```{r fig.width=8, fig.height=8, dpi=70, cache=TRUE}
+expense.plot <- ggplot(data = expenses[1:20, ], mapping = aes(y = descr, x = count))
+expense.plot + geom_point()
+```
+
+This kind of data is typically represented with bar charts instead of dot plots. Let's create a bar chart to capture the same information.
+
+```{r fig.width=8, fig.height=5, dpi=70, cache=TRUE}
+barchart.fig = ggplot(data = expenses[1:20, ], mapping = aes(x = descr, y = count))
+barchart.fig + geom_bar(stat = "identity", fill = cbPalette[3])
+```
+
+There's an issue with this plot: the labels along the x-axis have all blended together and are incomprehensible.
+
+To adjust the text, we can use the `theme` command.
+
+```{r fig.width=8, fig.height=8, dpi=70, cache=TRUE}
+barchart.fig + geom_bar(stat = "identity", fill = cbPalette[3]) +
+               theme(axis.text.x = element_text(angle = 60, vjust = 1, hjust = 1)) 
+```
+
+We should probably also change the axis labels and title to something more meaningful
+
+```{r fig.width=8, fig.height=8, dpi=70, cache=TRUE}
+barchart.fig + geom_bar(stat = "identity", fill = cbPalette[3]) +
+               theme(axis.text.x = element_text(angle = 60, vjust = 1, hjust = 1)) + 
+               labs(x = "", y = "Times reported", title = "Most Commonly Reported Purchases")
+```

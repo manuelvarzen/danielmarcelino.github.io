@@ -1,0 +1,50 @@
+\documentclass{beamer}
+
+% load sty file
+\usepackage{slides2dm}
+
+
+% Title Slide
+\title[Markov Models]{\LARGE Markov Models}
+\subtitle[Subtitle]{\large Hidden Markov Models}
+\author[danielmarcelino.com]{
+ \textcolor{gray}{Daniel Marcelino}
+}
+\institute[]{\scriptsize \textcolor{lightgray}{Month year}}
+\date[CC BY-SA-NC 4.0]{
+ \textcolor{lightgray}{\tiny{Content licensed under
+ \href{http://creativecommons.org/licenses/by-nc-sa/4.0/}{CC BY-NC-SA 4.0}}}
+}
+
+% to remove empty brackets of \institution
+\makeatletter
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor%~~\beamer@ifempty{\insertshortinstitute}{}{(\insertshortinstitute)}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+
+
+\usepackage{Sweave}
+\begin{document}
+\input{MarkovModels-concordance}
+
+%--- knitr options -------------------------%
+\begin{Schunk}
+\begin{Sinput}
+> # smaller font size for chunks
+> library(knitr)
+> opts_chunk$set(size = 'tiny')
+> thm <- knit_theme$get("bclear")

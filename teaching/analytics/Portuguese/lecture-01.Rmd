@@ -1,0 +1,455 @@
+---
+title: '1) Introdução: utilizando o R' 
+author: Daniel Marcelino
+date: 'Novembro 21, 2014' 
+output:
+  html_document:
+    highlight: pygments
+fonttheme: structurebold
+font-family: "Helvetica"
+class: illustration
+mathjax: "http://example.com/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+
+---
+
+---
+
+## Conteúdo da aula           
+  
+- Visão Geral do Curso 
+- Introdução ao R, RStudio e documentos dinâmicos em RMarkdown
+- Programação básica
+
+
+## 
+
+```{r}
+#y <- c()
+#x <- c("",)
+#plot(y,x)
+#labels
+```
+
+## Funcionamento do curso 
+- Nenhum conhecimento em programação presumido
+- Pouco conhecimento de estatística 
+- O curso será _muito_ cumulativo
+
+## Mecânica das aulas
+              
+- Cada sessão terá aproximadamente 80 minutos: 
+    - Primeiros 50-60 minutos: conceitos, métodos, exemplos.
+	  - Últimos 20-30 minutos: laboratório
+
+## Recursos para o curso
+
+ - Nenhum material é requerido, mas alguns livros são __recomendáveis__ para quem quer ir adiante do que será tratado aqui:
+  **Português:**
+	  - Jackson Aquino, _R Para Cientistas Sociais_ 
+	  - Paulo Justiniano, _Introdução ao Ambiente Estatístico R_  [(online)](http://www.leg.ufpr.br/~paulojus/embrapa/Rembrapa/)
+	
+	**Inglês:**
+    - Phil Spector, _Data Manipulation with R_
+    - Paul Teetor, _The R Cookbook_
+    - Winston Chang, _The R Graphics Cookbook_
+    - Norman Matloff, _The Art of R Programming: A Tour of Statistical Software Design_
+      
+- Websites especializados para todo o resto.
+
+
+## Objetivos desta aula 
+
+Esta aula vai ensinar você a usar R para: 
+- Gerar gráficos e tabelas a partir de dados.
+- Conduzir análises estatísticas simples (ex, teste de hipóteses, modelagem de regressão)
+- Produzir relatórios de pesquisa _reproduzíveis_ usando R Markdown
+- Integrar R com outras ferramentas (databases, C/C++, web)
+
+
+## Por que R?
+
+- Grátis (open-source)
+- Linguagem de programação (não é "point-and-click")
+- Excelentes recursos para produção de gráficos 
+- Oferece a maior cobertura de ferramentas estatísticas 
+- Fácil de gerar e reproduzir relatórios
+- Fácil de integrar com outras ferramentas
+
+
+## R via Console
+- A interação básica com o R é via **console**, **terminal** ou **linha de comando**
+
+- Isso significa que você digita comandos, R devolve respostas (ou erros). 
+
+- Menus e interfaces gráficas são **extras** geralmente criados para rodar sobre o console básico. 
+
+- Nós iremos usar o **RStudio** neste curso. 
+
+1. Baixe o R: http://cran-r.c3sl.ufpr.br
+
+2. Depois baixe o RStudio: http://www.rstudio.com/
+
+## O Painel do RStudio
+  
+![rstudio panes](./figures/rstudio_panes.png)
+
+## RStudio: Painel
+O Rstudio tem 4 janelas principais ('painéis'):
+
+1. The __Source__ pane: cria um arquivo que você pode salvar e executar depois. 
+2. The __Console__ pane: Lugar onde se pode digitar ou colar comandos para gerar resultados.
+3. The __Workspace/History__ pane: Mostra uma lista de variáveis e comandos executados anteriormente.
+4. The __Files/Plots/Packages/Help__ pane: Nesta janela são mostrados os gráficos, páginas de ajuda, e outros itens. 
+
+## RStudio: Source and Console panes
+
+![rstudio console](./figures/rstudio.png)
+
+## RStudio: Console
+                  
+![rstudio console](./figures/variables.png)
+
+## RStudio: Toolbar
+  
+![alt text](./figures/menus.png)
+
+## R Markdown
+
+- R Markdown permite ao usuário integrar scripts à um relatório.
+
+- Assim, quando os dados mudam ou os comandos mudam, o relatório também muda.
+
+- Não é necessário ficar copiando e colando gráficos, tabelas ou resultados numéricos. 
+
+- Cria relatórios __reproduzíveis__.
+  - Qualquer um que tiver o seu arquivo R Markdown (.Rmd) e a base de dados usada poderá refazer suas análises e obter exatamente os mesmos resultados (tabelas, figuras, sumários).
+  
+- Você poderá ainda produzir resultados em HTML (padrão), Microsoft Word, ou gerar um PDF.
+
+## R Markdown
+
+![markdown1](./figures/rmarkdown1.png)
+
+## R Markdown
+
+![markdown2](./figures/rmarkdown2.png)
+
+
+## Básico: a classe  class in a nutshell
+
+- Everything we'll do comes down to applying **functions** to **data**
+
+- **Data**:  things like 7, "seven", $7.000$, the matrix $\left[ \begin{array}{ccc} 7 & 7 & 7 \\ 7 & 7 & 7\end{array}\right]$
+
+- **Functions**: things like $\log{}$, $+$ (two arguments), $<$ (two), $\mod{}$ (two), `mean` (one)
+
+### 
+A function is a machine which turns input objects (**arguments**) into an output object (**return value**), possibly with **side effects**, according to a definite rule
+
+## Data building blocks
+
+You'll encounter different kinds of data types
+
+- **Booleans** Direct binary values: `TRUE` or `FALSE` in R
+- **Integers**: whole numbers (positive, negative or zero)
+- **Characters** fixed-length blocks of bits, with special coding;
+**strings** = sequences of characters
+- **Floating point numbers**: a fraction (with a finite number of bits) times an exponent, like $1.87 \times {10}^{6}$
+- **Missing or ill-defined values**: `NA`, `NaN`, etc.
+
+
+## Operadores (funções básicas)
+Você pode usar o R como uma poderesa calculadora
+
+Comando | Descrição
+--------|-------------
+`+,-,*,\` | adição, subtração, multiplicação, divisão
+`^` | multiplicar pela potência de
+`%%` | remanescente depois da divisão  (ex: `8 %% 3 = 2`)
+`( )` | mudar a ordem de operações
+`log(), exp()` | logarítmo e exponentes (ex: `log(10) = 2.302`)
+`sqrt()` | raíz quadrada
+`round()` | arredonda para número inteiro mais próximo (ex: `round(2.3) = 2`)
+`floor(), ceiling()` | arredonda para baixo ou para cima 
+`abs()` | obter o valor absoluto
+
+
+## Simple arithmetic
+```{r}
+5+5 # Adicão
+5-5 # Subtração
+5*5 # Multiplicação
+5^2 # Exponenciação
+```
+
+## Division in R
+```{r}
+5/5 # Divisão
+5 %% 5 # Modulus
+5 %/% 5 # divisão de números inteiros 
+```
+- Note: que em algumas linguagens, `5/5` seria interpretado como divisão de números inteiros. 
+
+## Operadores continuação 
+
+  **Comparações** são também operadores binários que aceitam dois objetos, como números, e uma verificação booleana.
+  
+```{r}
+5 > 4
+5 < 4
+5 >= 5
+5 <= 4
+```
+
+## Mais operadores 
+```{r}
+5 == 4
+5 != 4
+```
+Note o duplo `==` para comparação de igualdade 
+
+## Operadores booleanos (AND, OR, AND NOT).
+
+Operadores booleanos (George Boole) são palavras ou grupos de palavras que podem ser combinados de diferentes formas para modificar o resultado de uma operação. As formas mais comuns são basicamente "E" e "OU":
+  
+```{r}
+(5 > 7) & (6*7 == 42)
+(5 > 7) | (6*7 == 42)
+```
+
+
+## Operadores booleanos cont.
+  + **&** restringe a pesquisa, equivalendo a expressão: "com todas as palavras".
+  + **|** amplia a pesquisa, equivalendo a "com qualquer uma das palavras".
+  + **!** exclui um dos termos da pesquisa, equivalendo a expressão  "sem a(s) palavra(s)".
+  
+<small>(você encontrará mais tarde formas especiais: `&&` e `||`)</small>
+
+
+## Mais tipos
+ 
+- `typeof()` função para retornar o tipo
+
+- `is.`_foo_`()` função para retornar um valor booleano se o argumento for do tipo _foo_
+
+- `as.`_foo_`()` (tente) "alocar" o argumento para o tipo _foo_ --- tente converter de uma forma razoável para um tipo _foo_ de valor.
+
+- **Caso especial**: `as.factor()` será importante no futuro para dizer ao R quando alguns números na verdade representam uma convenção (variável categórica) ao invés de números propriamente dito. 
+<small> (Ex, 1 = Ensino Básico; 2 = Superior; 3 = Pos-graduação) </small>
+
+## Exemplos
+```{r}
+typeof(5)
+is.numeric(5)
+is.na(5)
+```
+  
+## Mais exemplos
+```{r}
+is.character(5)
+is.character("5")
+is.character("cinco")
+is.na("cinco")
+```
+  
+## Variáveis
+  Nós podemos atribuir nomes para os objetos (dados), o que nos dá **variáveis**
+  
+  Algumas variáveis básicas já estão presentes:
+```{r}
+pi
+```
+
+Variáveis podem servir de argumentos para funções ou operadores, assim como __constantes__ ou escalares:
+```{r}
+pi*10
+cos(pi)
+```
+
+## Assignment operator
+  
+  Most variables are created with the **assignment operator**, `<-` or `=`  
+```{r}
+approx.pi <- 22/7
+approx.pi
+diameter.in.cubits = 10
+approx.pi*diameter.in.cubits
+```
+
+## The assignment operator also changes values:
+```{r}
+circumference.in.cubits <- approx.pi*diameter.in.cubits
+circumference.in.cubits
+circumference.in.cubits <- 30
+circumference.in.cubits
+```
+
+## Variáveis 
+
+- Usando nomes e variáveis tornam o código (programa) mais fácil de executar e debugar, menos propenso a erros, além de ser mais fácil para outros lerem.
+
+- Evite "constantes mágicas"; habitue-se a usar variáveis.
+
+- Use nomes que tenham significado claro:
+    - Bom: `num.estudantes <- 25`
+    - Não bom: `n <- 25 `
+
+  
+  
+## A área de trabalho (workspace)
+ 
+  Quais nomes você já tem definido em seu espaço de trabalho?
+  
+```{r}
+ls()
+```
+
+Removendo variáveis:
+```{r}
+rm("circumference.in.cubits")
+ls()
+```
+
+## First data structure: vectors
+ 
+  
+- Group related data values into one object, a **data structure**
+  
+- A **vector** is a sequence of values, all of the same type
+
+- `c()` function returns a vector containing all its arguments in order
+```{r}
+students <- c("Sean", "Louisa", "Frank", "Farhad", "Qian")
+midterm <- c(80, 90, 93, 82, 95)
+```
+
+- Typing the variable name at the prompt causes it to display
+
+```{r}
+students
+```
+
+## Indexing
+
+- `vec[1]` is the first element, `vec[4]` is the 4th element of `vec`
+```{r}
+students
+students[4]
+```
+- `vec[-4]` is a vector containing all but the fourth element
+```{r}
+students[-4]
+```
+
+
+## Vector arithmetic
+ 
+  
+Operators apply to vectors "pairwise" or "elementwise":
+```{r}
+final <- c(78, 84, 95, 82, 91) # Final exam scores
+midterm # Midterm exam scores
+midterm + final # Sum of midterm and final scores
+(midterm + final)/2 # Average exam score
+course.grades <- 0.4*midterm + 0.6*final # Final course grade
+course.grades
+```
+
+## Comparações do tipo pairwise (em pares)
+ 
+Is the final score higher than the midterm score?
+```{r}
+midterm 
+final
+final > midterm
+```
+
+Operadores booleanos podem ser aplicados `elementwise`:
+```{r}
+(final < midterm) & (midterm > 80)
+```
+
+## Functions on vectors
+ 
+Comando | Descrição
+--------|------------
+`sum(vec)` | sums up all the elements of `vec`
+`mean(vec)` | mean of `vec`
+`median(vec)` | median of `vec`
+`min(vec), max(vec)` | the largest or smallest element of `vec`
+`sd(vec), var(vec)` | the standard deviation and variance of `vec`
+`length(vec)` | the number of elements in `vec`
+`pmax(vec1, vec2), pmin(vec1, vec2)` | example: `pmax(quiz1, quiz2)` returns the higher of quiz 1 and quiz 2 for each student
+`sort(vec)` | returns the `vec` in sorted order
+`order(vec)` | returns the index that sorts the vector `vec`
+`unique(vec)` | lists the unique elements of `vec`
+`summary(vec)` | gives a five-number summary  
+`any(vec), all(vec)` | useful on Boolean vectors
+
+## Functions on vectors
+ 
+```{r}
+course.grades
+mean(course.grades) # mean grade
+median(course.grades)
+sd(course.grades) # grade standard deviation
+sort(course.grades)
+max(course.grades) # highest course grade
+```
+
+## Addressing vectors
+ 
+```{r}  
+students
+```
+  
+  Vector of indices:
+```{r}
+students[c(2,4)]
+```
+
+Vector of negative indices
+```{r}
+students[c(-1,-3)]
+```
+
+##Addressing vectors
+
+`which()` retorna o índex `TRUE` Booleano de um vetor:
+```{r}
+course.grades
+a.threshold <- 90 # A grade = 90% or higher
+a.students <- which(course.grades >= a.threshold) 
+a.students
+students[a.students] # Names of A students
+```
+
+## Nomeando componentes 
+ 
+Você pode dar nomes para elementos ou componentes de vetores.
+```{r}
+students
+names(course.grades) <- students # Assign names to the grades
+names(course.grades)
+course.grades[c("Sean", "Frank","Qian")] # Get final grades for 3 students
+```
+Note the labels in what R prints; these are not actually part of the value
+
+## Dicas sobre o RStudio
+
+Keystroke | Descrição
+----------|-------------
+`<tab>` | autocompletes commands and filenames, and lists arguments for functions. Highly useful!
+`<up>` | cycle through previous commands in the console prompt
+`<ctrl-up>` | lists history of previous commands matching an unfinished one
+`<ctrl-enter>` | paste current line from source window to console. Good for trying things out ideas from a source file.
+`<ESC>` | as mentioned, abort an unfinished command and get out of the + prompt
+
+
+**Lab 1**: http://www.andrew.cmu.edu/~achoulde/94842/ 
+
+- Look under Tenatative Schedule Tue 10/21 or on Blackboard
+- Submit modified .Rmd file on Blackboard 
+
+
+

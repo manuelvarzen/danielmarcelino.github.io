@@ -1,0 +1,187 @@
+
+---
+title: Lecture 9 - Logistic Regression
+author: 94-842
+date: November 18, 2014
+output: html_document
+---
+
+###Agenda
+
+- Another `pairs()` plot example
+
+- Logistic regression (binary outcomes)
+
+- Final Project
+
+- Homework 4 **extension**: Due **4:30PM Friday, November 21**
+
+###  pairs() plot example
+
+Let's load the crime data from last time.
+
+```{r}
+# Import data set
+crime <- read.table("http://www.andrew.cmu.edu/user/achoulde/94842/data/crime_simple.txt", sep = "\t", header = TRUE)
+
+# Assign more meaningful variable names
+colnames(crime) <- c("crime.per.million", "young.males", "is.south", "average.ed",
+                     "exp.per.cap.1960", "exp.per.cap.1959", "labour.part",
+                     "male.per.fem", "population", "nonwhite",
+                     "unemp.youth", "unemp.adult", "median.assets", "num.low.salary")
+
+# Convert is.south to a factor
+# Divide average.ed by 10 so that the variable is actually average education
+# Convert median assets to 1000's of dollars instead of 10's
+crime <- transform(crime, is.south = as.factor(is.south),
+                          average.ed = average.ed / 10,
+                          median.assets = median.assets / 100)
+```
+
+Last time we used the `pairs()` function to produce the following plot
+
+```{r}
+economic.var.names <- c("exp.per.cap.1959", "exp.per.cap.1960", "unemp.adult", "unemp.youth", "labour.part", "median.assets")
+pairs(crime[,economic.var.names])
+```
+
+Here's how we can get half of the plots to display the correlations instead
+
+```{r}
+# Define a 'panel' function
+panel.cor <- function(x, y, digits=2, prefix="", cex.cor) {
+  usr <- par("usr"); on.exit(par(usr))
+  par(usr = c(0, 1, 0, 1))
+  r = (cor(x, y))
+  txt <- format(c(r, 0.123456789), digits=digits)[1]
+  txt <- paste(prefix, txt, sep="")
+  if(missing(cex.cor)) cex <- 0.8/strwidth(txt)
+  text(0.5, 0.5, txt, cex = pmax(cex * abs(r), 1))
+}
+
+# Specify lower.panel to be panel.cor
+
+pairs(crime[,economic.var.names], lower.panel=panel.cor, upper.panel=panel.smooth)
+```
+
+You don't need to worry about writing your own panel functions.  Many of the ones you might think to use are already floating around somewhere online.  
+
+### Logistic regression
+
+The usual set of packages:
+```{r}
+library(MASS)
+library(plyr) 
+library(ggplot2)
+```
+
+You probably saw linear regression at some point in your statistics education.  You may not have seen **logistic regression**, which is used when the outcome is binary.  
+
+For this example we'll use an Income data set where the goal is to predict whether an individual's income is under 50k or over 50k.
+
+```{r, cache=TRUE}
+# Import data file
+income <- read.csv("http://www.andrew.cmu.edu/user/achoulde/94842/data/income_data.txt", header=FALSE)
+
+# Give variables names
+colnames(income) <- c("age", "workclass", "fnlwgt", "education", "education.years", "marital.status", "occupation", "relationship", "race", "sex", "capital.gain", "capital.loss", "hours.per.week", "native.country", "income.bracket")
+
+# Create a 0-1 indicator of whether income is higher than 50K
+income <- transform(income, high.income = as.numeric(income.bracket == ">50K"))
+# Data dimensions
+dim(income)
+# Data summary
+summary(income)
+```
+
+To make the problem more interesting, we'll focus only on the US data.
+
+```{r}
+income.us <- subset(income, subset = native.country == "United-States")
+dim(income.us)
+```
+
+We have some categorical predictors in the data, and the default in R is to output coefficients that compare to the level that's coded 1. We'll want to use `relevel` to set a reasonable base level as the reference.  We'll relevel all the factors so that the comparison is being made to the most frequently occurring category.
+
+```{r}
+# If x is a factor, this function sets the first level to be the most frequent category
+# If x is not a factor, this function returns x unchanged
+relevelToMostFrequent <- function(x) {
+  if (is.factor(x)) {
+    # Determine most frequent category
+    most.freq.level <- levels(x)[which.max(table(x))]
+    # Relevel to set most frequent category as the baseline
+    relevel(x, ref = most.freq.level)
+  } else {
+    x
+  }
+}
+# Re-level the data
+income.us.releveled <- lapply(income.us, FUN = relevelToMostFrequent)
+```
+
+#### Running a logistic regression.
+
+To run a logistic regression, you need to use the `glm()` function (Generalized Linear Model), and specify `family = binomial()`.
+
+```{r}
+income.glm <- glm(high.income ~ age + workclass + education.years + marital.status + race + sex + hours.per.week, family = binomial(), data = income.us.releveled)
+```
+
+Let's see what we get
+
+```{r}
+summary(income.glm)
+coef.table <- summary(income.glm)$coef
+```
+
+That's not very fun to try to read... let's output to a nicer table format so that we can look at that instead.
+
+```{r, results = 'asis'}
+library(knitr)  # Will use to display output more nicely
+kable(coef.table, digits=3, format = "markdown")
+```
+
+For interpreting the coefficients, we should remind ourselves what the baselines are.
+
+```{r}
+sapply(income.us.releveled, FUN = function(x) { levels(x)[which.max(table(x))] })
+```
+
+
+#### Interpreting coefficients of logistic regression
+
+Last class we talked a bit about odds ratios.  The coefficients in a logistic regression model are all log-odds-ratios.  
+
+For example, the coefficient of education is `r income.glm$coef["education.years"]`.  This means that, in the data, for every 1 year increase in education level, the log-odds of having an income higher than 50k increase by `r income.glm$coef["education.years"]`.  
+
+This may be hard to interpret, so we can exponentiate the coefficient to get something nicer.  Exponentiating gives: `r exp(income.glm$coef["education.years"])`. 
+
+**Interpretation:** For every year of additional education, the odds of having an income over 50k increase by a factor of `r exp(income.glm$coef["education.years"])`.
+
+
+For categorical variables, the interpretation is relative to the given baseline.  Let's look at the effect of marital status on the chances of having a high income.
+
+```{r}
+divorced.coef <- income.glm$coef["marital.statusDivorced"]
+divorced.coef
+```
+
+The coefficient is `r divorced.coef`, and the baseline category is "married and living with spouse".  This means that the log-odds of having an income >50K are `r abs(divorced.coef)` lower for divorced people than for married people.  (Exponentiating). Equivalently, the odds of earning >50K when divorced are `r exp(divorced.coef)` times the odds of earning >50K per year when married.
+
+#### Assessing significance of factors in regression
+
+When dealing with multi-level factors, significance is assessed by considering dropping the entire factor from the regression.  You can therefore wind up in a situation where a factor is significant even when none of the individual estimated coefficients are on their own significant.  
+
+Comparing models is the same for linear models as logistic models.  You so by using the `anova()` function and specifying two models, one of which is nested in the other.
+
+Here's how we can test whether `race` is a significant predictor of high income.
+
+```{r}
+# Check if including the race variable significantly increases model fit
+anova(update(income.glm, . ~ . - race), income.glm, test = "Chisq")
+```
+
+This returns a p-value based on a Chi-square variable with degrees of freedom = (# levels in factor - 1)
+
+The test is highly significant, so race is indeed a significant predictor of high income.
