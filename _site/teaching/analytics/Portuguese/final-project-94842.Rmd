@@ -1,0 +1,145 @@
+
+---
+title: "Lecture 9: Final Project Demo"
+author: "Alexandra Chouldechova"
+date: 'Assigned: November 18, 2014'
+output: html_document
+---
+
+#### Importing the data
+
+```{r}
+# Import starting data
+nlsy <- read.csv("nlsy79_base.csv", header=TRUE)
+
+colnames(nlsy)
+```
+
+#### Variables present in the base data set
+
+Here are the contents of the `nlsy79_base.sdf.txt` file posted on the course website
+
+
+
+Reference Number   |  Year | Variable Description  |  Question Name        
+:------------------|:-----:|:----------------------|:--------------
+H00018.00 | XRND | AGE AT DEATH - BIOLOGICAL FATHER                                             |  H40-BPAR-3           
+H00026.00 | XRND | AGE AT DEATH - BIOLOGICAL MOTHER                                             |  H40-BPAR-8           
+R00001.00 | 1979 | IDENTIFICATION CODE                                                          |  CASEID               
+R02147.00 | 1979 | R'S RACIAL/ETHNIC COHORT FROM SCREENER                                       |  SAMPLE_RACE          
+R02148.00 | 1979 | SEX OF R                                                                     |  SAMPLE_SEX           
+R02179.10 | 1979 | FAMILY POVERTY STATUS IN 1978                                                |  POVSTATUS            
+R03070.00 | 1980 | AGE OF R 1ST TIME "STOPPED" BY POLICE                                        |  POLIC-1C             
+R03071.00 | 1980 | EVER CHARGED WITH ILLEGAL ACTIVITY? 80 INT (EXC MINOR TRAFFIC OFFENSE)       |  POLICE-2             
+R03072.00 | 1980 | TIMES CHARGED WITH ILLEGAL ACTIVITY 80 INT (EXC MINOR TRAFFIC OFFENSE)       |  POLICE-2A            
+R03076.00 | 1980 | AGE AT TIME OF 1ST ILLEGAL ACTIVITY CHARGE 80 INT (EXC MINOR TRAFFIC OFFENSE)|  POLICE-2D            
+R03077.00 | 1980 | EVER CHARGED WITH ANY ILLEGAL ACTIVITY IN ADULT COURT?                       |  POLICE-2E            
+R09454.00 | 1983 | CLASS OF WORKER AT CURRENT JOB/MOST RECENT JOB CPS ITEM                      |  Q6-56                
+R28704.00 | 1988 | FAMILY POVERTY STATUS IN 1987                                                |  POVSTATUS            
+R29248.00 | 1989 | CLASS OF WORKER AT CURRENT JOB/MOST RECENT JOB CPS ITEM                      |  Q6-56                
+R29829.01 | 1989 | FAMILY NET WORTH (TRUNC) *KEY*                                               |  NET_WORTH_89         
+R41823.00 | 1993 | CLASS OF WORKER AT CURRENT JOB/MOST RECENT JOB CPS ITEM                      |  R4182300             
+R64308.00 | 1998 | DRUG USE - # OF TIMES USED COCAINE IN LIFETIME                               |  DS-12                
+R64312.00 | 1998 | DRUG USE - # OF TIMES USED CRACK COCAINE IN LIFETIME                         |  DS-16                
+R69097.01 | 2000 | TOTAL INCOME FROM WAGES AND SALARY IN PAST CALENDAR YEAR (TRUNC) (REVISED)   |  Q13-5_TRUNC_REVISED  
+R70065.00 | 2000 | TOTAL NET FAMILY INCOME IN PAST CALENDAR YEAR *KEY* (TRUNCATED)              |  TNFI_TRUNC           
+R72101.00 | 2002 | CLASS OF WORKER (ALL) JOB #01                                                |  COWALL-EMP.01        
+R83163.00 | 2004 | TOTAL INCOME FROM WAGES AND SALARY IN PAST CALENDAR YEAR (TRUNC)             |  Q13-5_TRUNC          
+R83787.01 | 2004 | FAMILY NET WORTH (TRUNC) *KEY*                                               |  NET_WORTH_04         
+R84961.00 | 2004 | TOTAL NET FAMILY INCOME IN PAST CALENDAR YEAR *KEY* (TRUNCATED)              |  TNFI_TRUNC           
+R85230.01 | XRND | NUMBER OF SPOUSE/PARTNERS REPORTED, 2004                                     |  NUMSPPTR04           
+R99086.00 | XRND | AGE BEGAN 1ST MARRIAGE                                                       |  AGE1M                
+R99109.00 | XRND | NUMBER OF SPOUSE/PARTNERS REPORTED, 2010                                     |  NUMSPPTR10           
+T21427.00 | 2008 | FAMILY NET WORTH (TRUNC) *KEY*                                               |  NET_WORTH_08         
+T33082.00 | 2012 | TYPE OF BUSINESS OR INDUSTRY (CENSUS 3 DIGIT, 00 CODES) (ALL) JOB #01        |  INDALL-EMP.01        
+T33092.00 | 2012 | CLASS OF WORKER (ALL) JOB #01                                                |  COWALL-EMP.01        
+T39425.00 | 2012 | NUMBER OF BIOLOGICAL CHILDREN REPORTED                                       |  Q10-2                
+T39774.00 | 2012 | TOTAL INCOME FROM WAGES AND SALARY IN PAST CALENDAR YEAR  (TRUNC)            |  Q13-5_TRUNC          
+T41123.00 | 2012 | TOTAL NET FAMILY INCOME IN PAST CALENDAR YEAR *KEY* (TRUNCATED)              |  TNFI_TRUNC           
+T41128.00 | 2012 | MARITAL STATUS (COLLAPSED)                                                   |  MARSTAT-COL          
+T41149.00 | 2012 | NUMBER OF DIFFERENT JOBS EVER REPORTED AS OF INTERVIEW DATE                  |  JOBSNUM              
+
+
+Here's how to rename all the variables to the Question Name abbreviation.  You may want to change the names to be even more descriptive, but this is a start.
+
+```{r}
+# Change column names to question name abbreviations (you may want to change these further)
+colnames(nlsy) <- c("H40_BPAR_3", "H40_BPAR_8", "CASEID", "SAMPLE_RACE", "SAMPLE_SEX", "POVSTATUS", "POLIC_1C", "POLICE_2", "POLICE_2A", "POLICE_2D", "POLICE_2E", "Q6_56", "POVSTATUS", "Q6_56", "NET_WORTH_89", "R4182300", "DS_12", "DS_16", "Q13_5_TRUNC_REVISED", "TNFI_TRUNC", "COWALL_EMP.01", "Q13_5_TRUNC", "NET_WORTH_04", "TNFI_TRUNC", "NUMSPPTR04", "AGE1M", "NUMSPPTR10", "NET_WORTH_08", "INDALL_EMP.01", "COWALL_EMP.01", "Q10_2", "Q13_5_TRUNC", "TNFI_TRUNC", "MARSTAT_COL", "JOBSNUM")
+```
+
+#### A note on missing values
+
+Here's an example of what the variable description files look like
+
+```
+T39425.00    [Q10-2]                                        Survey Year: 2012
+  PRIMARY VARIABLE
+ 
+             NUMBER OF BIOLOGICAL CHILDREN REPORTED
+ 
+RECCOUNT([Final biological child roster])
+ 
+COMMENT: Is there a child to check
+ 
+     587           0
+     604           1
+    1289           2
+     792           3
+     325           4
+     109           5
+      41           6
+      16           7
+       7           8
+       4           9
+       4          10 TO 999: 10+
+  -------
+    3778
+ 
+Refusal(-1)            0
+Don't Know(-2)         0
+TOTAL =========>    3778   VALID SKIP(-4)    3523     NON-INTERVIEW(-5)    5385
+ 
+Min:              0        Max:             11        Mean:                2.09
+ 
+Lead In: T39410.00[Default]  T39399.00[1:1] T39410.00[1:1]
+Default Next Question: T39426.00
+```
+
+This description says that the numbers -1, -2, -4 and -5 all have a special meaning for this variable.  They denote different types of missingness.  You can recode all of these to `NA`, or you can think about whether the different missigness indicators are in some way informative.  (i.e., if someone refuses to disclose their net worth during a particular year, might this indicate whether their net worth is high or low?) 
+
+#### Getting to know our two main variables.
+
+In the current coding, gender is `SAMPLE_SEX` and 2012 gross income is `Q13_5_TRUNC`.  Let's have a quick look at what we're working with.
+
+```{r}
+table(nlsy$SAMPLE_SEX)
+```
+
+The default coding is Male = 1, Female = 2.  You'll want to do some data manipulations to change the numeric values to something more interpretable.  **Note:** `SAMPLE_SEX` starts out as a numeric variable.  You'll want to fix this.
+
+```{r}
+summary(nlsy$Q13_5_TRUNC)
+
+# Histogram
+hist(nlsy$Q13_5_TRUNC)
+```
+
+The income distributing is right-skewed like one might expect.  However, as indicated in the question description, the income variable is *truncated*.  More precisely,
+
+```{r}
+with(nlsy, sum(Q13_5_TRUNC == max(Q13_5_TRUNC)))
+```
+
+`r with(nlsy, sum(Q13_5_TRUNC == max(Q13_5_TRUNC)))` of the incomes are truncated at the maximum value of `max(Q13_5_TRUNC))`.    You might want to think about how  to deal with this truncation in your analysis.
+
+
+Let's do one simple plot
+
+```{r}
+library(ggplot2)
+
+# Box plot of log(2012 income)
+qplot(x = as.factor(SAMPLE_SEX), y = log(Q13_5_TRUNC), geom = "boxplot", data = nlsy)
+```
+
+We got a bunch of NaN warnings (NaN = Not a Number)... this probably has to do with some of the incomes being missing, and `log()` not being defined for negative numbers.  Be careful with these kinds of things!

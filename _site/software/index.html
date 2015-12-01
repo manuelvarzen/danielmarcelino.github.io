@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <title>Software - Daniel Marcelino | Daniel Marcelino</title>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta name="keywords" content="methods, data analysis, R programming" />
+        <meta name="author" content="Daniel Marcelino" />
+        <meta name="description" content="Website of Daniel Marcelino" />
+        <meta name="viewport" content="width=640px, initial-scale=1.0, maximum-scale=1.0">	
+        <!-- favicon -->
+        <link rel="shortcut icon" href="/images/favicon.ico">
+        <!-- Google Fonts -->
+		<link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,300,400,600" rel="stylesheet" type="text/css">
+		<link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css" type="text/css" media="screen, projection" />
+		<link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis" href="/feed.xml">
+	<link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis" href="/feed.r.xml">
+		<link rel="alternate" type="application/atom+xml" title="EnfoRced Data Analysis" href="/atom.xml" />
+		
+	
+</head>
+
+	<body>
+
+
+		<script type="text/javascript"
+    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<div class="header-page">
+
+<h1><a href="/"><span style='font-weight: bold;'>Daniel Marcelino</span></a></h1></span>
+<div id="nav">
+	<ul>
+	   <li><a href="/blog" class=""><strong>Blog</strong></a></li>
+		<li><a href="/about" class=""><strong>About</strong></a></li>
+	<li><a href="/research" class=""><strong>Research</strong></a></li>
+		<li><a href="/teaching" class=""><strong>Teaching</strong></a></li>
+		<li><a href="/software" class="current"><strong>Software</strong></a></li>		
+	<li><a href="/randomwalks" class=""><strong>Random Walks</strong></a></li>		
+	</ul>
+</div>
+
+</div>
+
+
+<div class="clear"></div>
+
+<div id="block">
+	<div class="prose"> 
+	<h2 id="r-packages">R Packages</h2>
+
+<p>Here are a few of the R packages I’ve been developing on my own.</p>
+
+<p><strong>SciencesPo: A Tool Set for Analyzing Political Behavior Data</strong><br />
+The <a href="http://cran.r-project.org/web/packages/SciencesPo/index.html">SciencesPo project</a> is an effort to put some of the most common analysis involving political behavior data in to R. The first functions were bundled and uploaded to <a href="https://cran.r-project.org">CRAN</a> in 2013. Although it’s far from completed, several algorithms are quite mature. See the <a href="https://github.com/danielmarcelino/SciencesPo">SciencesPo development repository</a> for more details.</p>
+
+<p><strong>SoundexBR: Phonetic-Coding for Portuguese</strong><br />
+The aim of rio is to make data file I/O in R as easy as possible by implementing data import and export for R that relies on file extensions to make a (reasonable) assumption about how to read a file into a data.frame or, conversely, save a data.frame to disk. It greatly simplifies data import and export and offers a function for easily converting between file formats (possibly from the command line). <br /> <a href="https://github.com/leeper/rio">GitHub</a></p>
+
+<p>The SoundexBR package provides an algorithm for decoding names into phonetic codes, as pronounced in Portuguese. The goal is for homophones to be encoded to the same representation so that they can be matched despite minor differences in spelling. The algorithm mainly encodes consonants; a vowel will not be encoded unless it is the first letter. The soundex code resultant consists of a four digits long string composed by one letter followed by three numerical digits: the letter is the first letter of the name, and the digits encode the remaining consonants.</p>
+
+<p>**Genderize: **<br />
+The <a href="">Genderize</a> package implements Bayesian classifier to help decision on the gender of a name. The probability is based on a huge amount of first names data. The user can set language and country parameter to refine calculations. <br /> <a href="https://github.com/danielmarcelino/Genderize">GitHub</a></p>
+
+<p>masculinity and femininity. “intersex”</p>
+
+<p><strong>FPTP2AV: Simulate Election Outcomes for AV Given FPTP Votes.</strong><br /></p>
+
+<p>As the name indicates, the aim of this package is to simulate election outcomes for the Alternative Voting System (AV) given FPTP votes. The package only resides in the <a href="https://github.com/danielmarcelino/FPTP2AV">GitHub</a> platform. A related paper discussing the two systems and some results can be found <a href="">here</a>.</p>
+
+<hr />
+<p>## Some other assorted materials ##</p>
+
+<ul>
+  <li>R: <a href="https://gist.github.com/leeper/9021068">Identify gender of first names, by country, using the Gender API</a></li>
+</ul>
+
+	</div>
+</div>
+
+
+<div id="footer">
+
+<div id="footer">
+The contents of this blog is syndicated to <a href="http://www.r-bloggers.com">R-Bloggers</a> and <a href="http://www.statsblogs.com">Statsblogs</a> via <a href="http://danielmarcelino.com/atom.xml"> Atom/RSS feeds.</a> <br/><br/>
+	&copy; <a href="/">Daniel Marcelino</a>. All contents under 
+	<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">(CC) BY-NC-SA license</a>, 
+	unless otherwise noted.
+	<br/><br/>
+	Did you find this site useful? If yes, consider helping me with my  
+	<a href="http://amzn.com/w/2CCCV54KPGIA2" target="_blank">wishlist</a>.
+</div>
+
+
+</div>
+
+
+
+
+		<!-- Google Analytics -->
+		<script>
+  		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  		  })(window, document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  	  ga('create', 'UA-24186657-1', 'danielmarcelino.com');
+  		  ga('send', 'pageview');
+
+		</script>
+		<!-- Google Analytics end -->
+
+	</body>
+</html>

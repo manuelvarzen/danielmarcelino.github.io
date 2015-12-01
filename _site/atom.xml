@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+<link rel="hub" href="https://pubsubhubbub.appspot.com"/>
+
+  <title type="text" xml:lang="en">EnfoRced Data Analysis</title>
+    <link type="application/atom+xml" href="/atom.xml" rel="self"/>
+    <link href="/"/>
+  <updated>2015-12-01T16:09:22Z</updated>
+  <id>/</id>
+  <author>
+    <name></name>
+    <email></email>
+  </author>
+  <rights type="text">Copyright © 2015 Daniel Marcelino. All rights reserved.</rights>
+  
+  <entry>
+    <title>Retrieving Data from Google Books with `ngramr`</title>
+    <link rel="alternate" type="text/html" href="/blog/r/2015/11/15/retrieving-data-from-google-books-with-ngramr.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=RetrievingDatafromGoogleBookswith`ngramr`" />
+    <published>2015-11-15T00:00:00Z</published>
+    <updated>2015-11-15T00:00:00-02:00</updated>
+    <id>/blog/r/2015/11/15/retrieving-data-from-google-books-with-ngramr</id>
+    <content type="html"><![CDATA[ <p><a href="https://en.wikipedia.org/wiki/Karl_Marx">Karl Marx</a> is the most famous founding fathers of modern sociology with a popularity peak in 1975-6, but declining ever since.</p>
+
+<!--more-->
+
+<p><img src="/img/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/GoogleNgram.png" alt="center" /></p>
+
+<hr />
+
+<h2 id="introduction">Introduction</h2>
+<p>Google has a tool for tracking the frequency of words or phrases across its vast collection of scanned texts, the Google Books. The <a href="https://books.google.com/ngrams">Google Ngram Viewer</a> reports data and graphs the frequency of words encountered in one or across several <em>corpus</em> over time. For instance, the chart above campares the appearance in the English corpus of following bigrams names: “Karl Marx”, “Max Weber”, “Emile Durkheim”. </p>
+
+<p>The y-axis shows of all the bigrams contained in the sample of books written in English, what percentage of them are “Karl Marx” or “Max Weber” or “Emile Durkheim”? From the chart above, we can conclude that Marx is the most famous sociologist among the others founding fathers, with a peak in popularity about 1975-6, but his influence has been declining ever since. These thinkers are considered the founding fathers of sociology because they set out to develop practical and scientifically sound methods of research to examine theories of the social world rooted in a specific historical and cultural context. </p>
+
+<h2 id="using-r-with-google-ngram-viewer">Using R with Google Ngram Viewer</h2>
+
+<p>There is a package to query the Google Ngram called <a href="https://cran.r-project.org/web/packages/ngramr/index.html">ngramr</a> written by Sean Carmody. With this package, one can retrieve data from Ngram pages in the form of data frame.  </p>
+
+<h2 id="getting-started">Getting Started</h2>
+<p>The first thing to do is to load the <code>ggplot2</code> and <code>ngramr</code> packages. In case you don’t have them installed, an installation is required.</p>
+
+<h2 id="write-a-query-and-do-the-plots">Write a Query and Do the Plots</h2>
+
+<p>The following is equivalent to the chart above for the three sociologists bigrams, except that I’m applying a smoothed line–or moving average of 5 years, so trends become more apparent. For instance, the data shown for 2000 is an average of the raw count for 2000 plus 5 values on either side: (“count for 1995” + “count for 2000” + “count for 2005”), divided by 3. So a smoothing of 5 means that 11 values will be averaged: 5 on either side, plus the target value in the center of them.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">ng <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;(Karl Marx)&quot;</span><span class="p">,</span> <span class="s">&quot;(Max Weber)&quot;</span><span class="p">,</span> <span class="s">&quot;(Emile Durkheim)&quot;</span><span class="p">)</span> 
+ggram<span class="p">(</span>ng<span class="p">,</span> year_start <span class="o">=</span> <span class="m">1800</span><span class="p">,</span> 
+      year_end <span class="o">=</span> <span class="m">2012</span><span class="p">,</span>  
+      smoothing <span class="o">=</span> <span class="m">5</span><span class="p">,</span>
+      google_theme <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span> <span class="o">+</span>
+  ggtitle<span class="p">(</span><span class="s">&quot;Marx, Weber, Durkheim&quot;</span><span class="p">)</span><span class="o">+</span>
+    theme_538<span class="p">(</span>legend.position <span class="o">=</span> <span class="s">&quot;bottom&quot;</span><span class="p">)</span></code></pre></div>
+
+<p><img src="/img/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/sociologists-1.png" alt="center" /> </p>
+
+<h2 id="complex-queries">Complex Queries</h2>
+
+<p>I test the trend in popularity of the unigran “Capitalism” vis-à-vis other two unigrans (“Socialism”, “Communism”) from 1850 to 2012. Here’s how we might combine + and / to show how the unigram “Capitalism” has blossomed at the expense of “Socialism” and “Communism” terms in the literature published in English.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">ng <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;Capitalism /(Capitalism + Socialism + Communism)&quot;</span><span class="p">)</span>
+cap <span class="o">&lt;-</span> ggram<span class="p">(</span>ng<span class="p">,</span> year_start <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
+      year_end <span class="o">=</span> <span class="m">2012</span><span class="p">,</span>  
+      smoothing <span class="o">=</span> <span class="m">3</span><span class="p">,</span>
+      google_theme <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span> <span class="o">+</span>
+  ggtitle<span class="p">(</span><span class="s">&quot;Capitalism over (Capitalism + Socialism + Communism)&quot;</span><span class="p">)</span><span class="o">+</span>
+    theme_538<span class="p">()</span>
+
+ng <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;Socialism /(Capitalism + Socialism + Communism)&quot;</span><span class="p">)</span>
+soc <span class="o">&lt;-</span> ggram<span class="p">(</span>ng<span class="p">,</span> year_start <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
+      year_end <span class="o">=</span> <span class="m">2012</span><span class="p">,</span>  
+      smoothing <span class="o">=</span> <span class="m">3</span><span class="p">,</span>
+      google_theme <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span> <span class="o">+</span>
+  ggtitle<span class="p">(</span><span class="s">&quot;Socialism over (Capitalism + Socialism + Communism)&quot;</span><span class="p">)</span><span class="o">+</span>
+    theme_538<span class="p">()</span>
+
+ng <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;Communism /(Capitalism + Socialism + Communism)&quot;</span><span class="p">)</span>
+com <span class="o">&lt;-</span> ggram<span class="p">(</span>ng<span class="p">,</span> year_start <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
+      year_end <span class="o">=</span> <span class="m">2012</span><span class="p">,</span>  
+      smoothing <span class="o">=</span> <span class="m">3</span><span class="p">,</span>
+      google_theme <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span> <span class="o">+</span>
+  ggtitle<span class="p">(</span><span class="s">&quot;Communism over (Capitalism + Socialism + Communism)&quot;</span><span class="p">)</span><span class="o">+</span>
+    theme_538<span class="p">()</span>
+multiplot<span class="p">(</span>cap<span class="p">,</span> soc<span class="p">,</span> com<span class="p">,</span> ncols<span class="o">=</span><span class="m">1</span><span class="p">)</span>
+ggfootnote<span class="p">(</span>size <span class="o">=</span> <span class="m">.5</span><span class="p">)</span></code></pre></div>
+
+<p><img src="/img/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/Capitalism Popularity-1.png" alt="center" /> </p>
+
+<p>In the following, I retrieve the frequency for the unigram “Capitalism” in the Russian <em>corpus</em>, French, and British English. Note that the results can be case-insensitive variants.</p>
+
+<p>Below is a plot of the unigram “Capitalism” (“капитализм”) in the Russian language <em>corpus</em>.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">ng <span class="o">&lt;-</span> <span class="s">&quot;капитализм&quot;</span>
+rus<span class="o">=</span>ggram<span class="p">(</span>ng<span class="p">,</span> year_start <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
+      corpus <span class="o">=</span> <span class="s">&quot;rus_2012&quot;</span><span class="p">,</span>
+      ignore_case <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> 
+      google_theme <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span> <span class="o">+</span>
+    ggtitle<span class="p">(</span><span class="s">&quot;Russian: капитализм&quot;</span><span class="p">)</span><span class="o">+</span>
+     theme_538<span class="p">()</span>
+
+ng <span class="o">&lt;-</span> <span class="s">&quot;capitalisme&quot;</span>
+fre<span class="o">=</span>ggram<span class="p">(</span>ng<span class="p">,</span> year_start <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
+      corpus <span class="o">=</span> <span class="s">&quot;fre_2012&quot;</span><span class="p">,</span>
+      ignore_case <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> 
+      google_theme <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span> <span class="o">+</span>
+    ggtitle<span class="p">(</span><span class="s">&quot;French: Capitalisme&quot;</span><span class="p">)</span><span class="o">+</span>
+     theme_538<span class="p">()</span>
+
+ng <span class="o">&lt;-</span> <span class="s">&quot;capitalism&quot;</span>
+eng<span class="o">=</span>ggram<span class="p">(</span>ng<span class="p">,</span> year_start <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
+      corpus <span class="o">=</span> <span class="s">&quot;eng_gb_2012&quot;</span><span class="p">,</span>
+      ignore_case <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> 
+      google_theme <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span> <span class="o">+</span>
+    ggtitle<span class="p">(</span><span class="s">&quot;English: Capitalism&quot;</span><span class="p">)</span><span class="o">+</span>
+     theme_538<span class="p">()</span>
+
+multiplot<span class="p">(</span>rus<span class="p">,</span> fre<span class="p">,</span> eng<span class="p">,</span> ncols<span class="o">=</span><span class="m">1</span><span class="p">)</span>
+ggfootnote<span class="p">(</span>size <span class="o">=</span> <span class="m">.5</span><span class="p">)</span></code></pre></div>
+
+<p><img src="/img/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/capitalism-1.png" alt="center" /> </p>
+
+ ]]></content>
+  </entry>
+  
+  <entry>
+    <title>House Effects in Argentinian polling</title>
+    <link rel="alternate" type="text/html" href="/blog/r/2015/10/25/argentine-house-effects.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=HouseEffectsinArgentinianpolling" />
+    <published>2015-10-25T00:00:00Z</published>
+    <updated>2015-10-25T00:00:00-02:00</updated>
+    <id>/blog/r/2015/10/25/argentine-house-effects</id>
+    <content type="html"><![CDATA[ <p>I’ve already posted on ‘house effects’, the tendency of polling organizations to systematically vary in their results from one another</p>
+
+<!--more-->
+
+<p><img src="/img/2015/3d-house-effects_argentine.png" alt="House Effects" /></p>
+
+<p>I’ve already <a href="http://danielmarcelino.com/r/08-2015/Argentine-general-election-2015/">posted</a> on “house effects”, the tendency of polling organizations to systematically vary in their results from one another. In this post, I look specifically at these house effects, and show which polling organizations over or under-estimate support for each candidate–compared to the average–in this presidential election in Argentina.</p>
+
+<p>The graph above plots the house effects for the main presidential candidates considering more than 115 polls that I’ve collected since 2014.</p>
+
+<p>In essence, the house effects measure how far polls by a pollster are from what would be expected based on trends over time for the average polling house. In other words, the average house effect toward each candidate/party is expected to be zero by design. Then, a poll that is systematically 2% below what would be predicted for the date the poll was conducted will have a house effect of -2.0%.</p>
+
+<p>The dots in “red” in the plot represent the pollster whose house effects were negative toward Mauricio Macri, while dots in “blue” represent positive effects toward him. </p>
+
+<p>The electoral result tonight was a bit of surprise as several pollsters didn’t seem to have pick out a crescendo preference for the opposition candidate, Mauricio Macri, among undecided voters over the last week. <a href="http://us3.campaign-archive1.com/?u=6b1e9fcb4df3eaee1cd635f50&amp;id=0e702eecac&amp;e=c2780c4e4b">This blog</a> has more details. </p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kn">library</span><span class="p">(</span>scatterplot3d<span class="p">)</span>
+houseEffects<span class="o">$</span>pcolor<span class="p">[</span>houseEffects<span class="o">$</span>Macri<span class="o">&lt;</span> <span class="m">0</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s">&quot;red&quot;</span>
+houseEffects<span class="o">$</span>pcolor<span class="p">[</span>houseEffects<span class="o">$</span>Macri<span class="o">&gt;=</span><span class="m">0</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s">&quot;blue&quot;</span>
+
+<span class="kp">with</span><span class="p">(</span>houseEffects<span class="p">,</span> <span class="p">{</span>
+  s3d <span class="o">&lt;-</span> scatterplot3d<span class="p">(</span>Scioli<span class="p">,</span> Massa<span class="p">,</span> Macri<span class="p">,</span> <span class="c1"># x y and z axis</span>
+                       angle<span class="o">=</span><span class="m">30</span><span class="p">,</span> <span class="c1"># angle of the plot </span>
+                       color<span class="o">=</span>pcolor<span class="p">,</span> pch<span class="o">=</span><span class="m">19</span><span class="p">,</span> <span class="c1"># filled blue circles</span>
+                       type<span class="o">=</span><span class="s">&quot;h&quot;</span><span class="p">,</span> <span class="c1"># vertical lines to the x-y plane</span>
+                       main<span class="o">=</span><span class="s">&quot;House Effects&quot;</span><span class="p">,</span>
+                       xlab<span class="o">=</span><span class="s">&quot;Daniel Scioli&quot;</span><span class="p">,</span>
+                       ylab<span class="o">=</span><span class="s">&quot;Sergio Massa&quot;</span><span class="p">,</span>
+                       zlab<span class="o">=</span><span class="s">&quot;Mauricio Macri&quot;</span><span class="p">)</span>
+
+  s3d.coords <span class="o">&lt;-</span> s3d<span class="o">$</span>xyz.convert<span class="p">(</span>Scioli<span class="p">,</span> Massa<span class="p">,</span> Macri<span class="p">)</span> <span class="c1"># convert 3D coords to 2D projection</span>
+  text<span class="p">(</span>s3d.coords<span class="o">$</span>x<span class="p">,</span> s3d.coords<span class="o">$</span>y<span class="p">,</span>  <span class="c1"># x and y coordinates</span>
+       labels<span class="o">=</span>Pollster<span class="p">,</span>  <span class="c1"># text to plot</span>
+       cex<span class="o">=</span><span class="m">.5</span><span class="p">,</span> pos<span class="o">=</span><span class="m">4</span><span class="p">)</span> <span class="c1"># shrink text 50% and place to right of points)</span>
+  legend<span class="p">(</span><span class="s">&quot;topleft&quot;</span><span class="p">,</span> inset<span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="c1"># location and inset</span>
+         bty<span class="o">=</span><span class="s">&quot;n&quot;</span><span class="p">,</span> cex<span class="o">=</span><span class="m">.7</span><span class="p">,</span>  <span class="c1"># suppress legend box, shrink text 70%</span>
+         title<span class="o">=</span><span class="s">&quot;House effects toward\nDaniel Scioli&quot;</span><span class="p">,</span>
+         <span class="kt">c</span><span class="p">(</span><span class="s">&quot;-&quot;</span><span class="p">,</span> <span class="s">&quot;+&quot;</span><span class="p">),</span> fill<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;blue&quot;</span><span class="p">))</span>
+<span class="p">})</span></code></pre></div>
+
+ ]]></content>
+  </entry>
+  
+  <entry>
+    <title>Argentina&#39;s 2015 Presidential Election Forecasts</title>
+    <link rel="alternate" type="text/html" href="/blog/r/2015/10/21/argentine-presidential-election-predictions.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=Argentina&#39;s2015PresidentialElectionForecasts" />
+    <published>2015-10-21T00:00:00Z</published>
+    <updated>2015-10-21T00:00:00-02:00</updated>
+    <id>/blog/r/2015/10/21/argentine-presidential-election-predictions</id>
+    <content type="html"><![CDATA[ <p>The model indicates the official candidate have chance of making it right way this Sunday, but the odds are short.</p>
+
+<!--more-->
+
+<h3 id="predictions">Predictions</h3>
+<p>The model I’m using indicates the official candidate have some chance of making it right way this Sunday, avoiding a runoff with Mauricio Macri in late November. The electoral preference distributions are quite apart from each other, with the distribution of Daniel Scioli about 40% of the positive vote, while Macri’s about 30%. </p>
+
+<p><img src="/img/2015/probs_argentine.png" alt="Preference Distributions" /></p>
+
+<p>The model built on more than 115 polls by 24 pollsters suggests he has 86% of probability of finishing above 40% of the positive votes. To avoid a runoff, he must obtain more than 45% of the valid votes, or more than 40% with a difference greater than 10% from the second candidate. The typical  difference the model predicts is about 12%; not too loose, but a double digit difference.</p>
+
+<p><img src="/img/2015/FPV_PRO_differences.png" alt="Simulated differences" /></p>
+
+<p><a href="http://danielmarcelino.com/r/08-2015/Argentine-general-election-2015/">The models I posted for the primaries</a>, predicted quite well the proportion of votes each major candidate eventually received. If fact, the model with a Dirichlet trendline did appreciate slightly the frontrunner candidate while the simple loess model just made it to the point. </p>
+
+<h3 id="when-did-the-presidential-election-approach-its-tipping-point">When did the presidential election approach its tipping point?</h3>
+
+<p>The first poll I’ve in my database dates back to March 2014. From this period, the only significant movement in the preference distribution happened before the primaries, in August, and this was true for both Scioli and Macri. Though for Macri, the upward movement was imperceptible. Because nothing change since then, it’s hard to say the candidate gained momentum,as his numbers have neither risen nor fallen ever since.</p>
+
+<p><img src="/img/2015/Kalman_Argentine_21_oct.png" alt="Full Filter" /></p>
+
+<h3 id="the-model">The model</h3>
+<p>The polls were modeled using a Kalman Filter, then the probabilities were computed using a Dirichlet Multinomial Distribution. Details on the model can be found within <a href="https://gist.github.com/danielmarcelino">my gists</a>.</p>
+ ]]></content>
+  </entry>
+  
+  <entry>
+    <title>Paranormal Distribution</title>
+    <link rel="alternate" type="text/html" href="/blog/r/2015/10/20/paranormal-distribution.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=ParanormalDistribution" />
+    <published>2015-10-20T00:00:00Z</published>
+    <updated>2015-10-20T00:00:00-02:00</updated>
+    <id>/blog/r/2015/10/20/paranormal-distribution</id>
+    <content type="html"><![CDATA[ <p>What if, instead of a normal, you got a paranormal distribution?</p>
+
+<!--more-->
+
+<p>What if, instead of a normal, you got a paranormal distribution?</p>
+
+<p><img src="/images/blog/2015/paranormal.png" alt="Paranormal Distribution" /></p>
+
+<p>In case you want to read an influential paper on this matter, you can find it <a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2465539/">here</a>.</p>
+
+<h4 id="load-packages-and-set-up-the-theme">Load packages and set up the theme</h4>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kn">library</span><span class="p">(</span>ggplot2<span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>gridExtra<span class="p">)</span>
+
+theme_old <span class="o">&lt;-</span> theme<span class="p">(</span>panel.grid.minor <span class="o">=</span> element_blank<span class="p">(),</span>
+                   panel.grid.major <span class="o">=</span> element_blank<span class="p">(),</span>
+                   panel.background <span class="o">=</span> element_blank<span class="p">(),</span>
+                   plot.background <span class="o">=</span> element_rect<span class="p">(</span>fill<span class="o">=</span><span class="s">&quot;#F9F0Ea&quot;</span><span class="p">),</span>
+                   panel.border <span class="o">=</span>  element_blank<span class="p">(),</span>
+                   axis.line <span class="o">=</span> element_blank<span class="p">(),</span>
+                   axis.text.x <span class="o">=</span> element_blank<span class="p">(),</span>
+                   axis.text.y <span class="o">=</span> element_text<span class="p">(</span>colour<span class="o">=</span><span class="kc">NA</span><span class="p">),</span>
+                   <span class="c1"># axis.text.y = element_blank(),</span>
+                   axis.ticks <span class="o">=</span> element_blank<span class="p">(),</span>
+                   axis.title.x <span class="o">=</span> element_blank<span class="p">(),</span>
+                   axis.title.y <span class="o">=</span> element_blank<span class="p">(),</span>
+<span class="c1"># I&#39;m using xkcd fonts, replace or install if you don&#39;t have it.</span>
+                   text <span class="o">=</span> element_text<span class="p">(</span>size<span class="o">=</span><span class="m">14</span><span class="p">,</span> family<span class="o">=</span><span class="s">&quot;xkcd&quot;</span><span class="p">),</span>
+                   axis.line <span class="o">=</span> element_line<span class="p">(</span>colour <span class="o">=</span> <span class="s">&quot;black&quot;</span><span class="p">,</span> linetype <span class="o">=</span> <span class="s">&quot;solid&quot;</span><span class="p">,</span> size <span class="o">=</span> <span class="m">1</span><span class="p">),</span>
+                   axis.line.y <span class="o">=</span> element_blank<span class="p">(),</span>
+                   plot.title <span class="o">=</span> element_text<span class="p">(</span>size<span class="o">=</span><span class="m">22</span><span class="p">))</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1">#### Make a &quot;normal&quot; normal distribution </span>
+gplot1 <span class="o">&lt;-</span> ggplot<span class="p">(</span><span class="kt">data.frame</span><span class="p">(</span>x <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span> <span class="m">3</span><span class="p">)),</span> aes<span class="p">(</span>x<span class="p">))</span> <span class="o">+</span> stat_function<span class="p">(</span>fun <span class="o">=</span> dnorm<span class="p">)</span> <span class="o">+</span> labs<span class="p">(</span>title <span class="o">=</span> <span class="s">&quot;Normal Distribution&quot;</span><span class="p">)</span> <span class="o">+</span> theme_old</code></pre></div>
+
+<h4 id="make-a-floating-dress-for-the-paranormal-distribution">Make a floating dress for the paranormal distribution</h4>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">a <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span> <span class="m">-1.5</span><span class="p">,</span> <span class="m">-0.9</span><span class="p">,</span> <span class="m">-0.3</span><span class="p">,</span> <span class="m">0.6</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1.5</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">)</span>
+b <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">0.004431848</span><span class="p">,</span> <span class="m">0.03</span><span class="p">,</span> <span class="m">0.0044</span><span class="p">,</span> <span class="m">0.03</span><span class="p">,</span> <span class="m">0.01</span><span class="p">,</span> <span class="m">0.030</span><span class="p">,</span> <span class="m">0.0044</span><span class="p">,</span> <span class="m">0.015</span><span class="p">,</span> <span class="m">0.004431848</span><span class="p">)</span>
+
+data <span class="o">&lt;-</span> <span class="kt">data.frame</span><span class="p">(</span>a <span class="o">=</span> a<span class="p">,</span> b <span class="o">=</span> b<span class="p">)</span>
+<span class="kt">c</span> <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">-0.40</span><span class="p">,</span> <span class="m">0.04</span><span class="p">)</span>
+d <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">0.27</span><span class="p">,</span> <span class="m">0.27</span><span class="p">)</span>
+data2 <span class="o">&lt;-</span> <span class="kt">data.frame</span><span class="p">(</span><span class="kt">c</span> <span class="o">=</span> <span class="kt">c</span><span class="p">,</span> d <span class="o">=</span> d<span class="p">)</span></code></pre></div>
+
+<h4 id="plot-paranormal-distribution">Plot paranormal distribution</h4>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">gplot2 <span class="o">&lt;-</span> ggplot<span class="p">(</span>data<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>a<span class="p">,</span> y<span class="o">=</span>b<span class="p">))</span> <span class="o">+</span> geom_line<span class="p">()</span>
+gplot2 <span class="o">&lt;-</span> gplot2 <span class="o">+</span> stat_function<span class="p">(</span>fun <span class="o">=</span> dnorm<span class="p">)</span> <span class="o">+</span>
+  geom_point<span class="p">(</span>data <span class="o">=</span> data2<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span><span class="kt">c</span><span class="p">,</span> y<span class="o">=</span>d<span class="p">),</span> pch<span class="o">=</span><span class="mh">0x30</span><span class="p">,</span> size<span class="o">=</span><span class="m">6</span><span class="p">)</span> <span class="o">+</span>
+  geom_point<span class="p">(</span>data <span class="o">=</span> data2<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span><span class="kt">c</span><span class="m">-0.008</span><span class="p">,</span> y<span class="o">=</span>d<span class="m">-0.006</span><span class="p">),</span> pch<span class="o">=</span><span class="m">19</span><span class="p">,</span> size<span class="o">=</span><span class="m">1</span><span class="p">)</span> <span class="o">+</span>
+  labs<span class="p">(</span>title <span class="o">=</span> <span class="s">&quot;Paranormal Distribution&quot;</span><span class="p">)</span> <span class="o">+</span> theme_old</code></pre></div>
+
+<h4 id="put-them-together">Put them together</h4>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">grid.arrange<span class="p">(</span>gplot1<span class="p">,</span> gplot2<span class="p">)</span></code></pre></div>
+ ]]></content>
+  </entry>
+  
+  <entry>
+    <title>Competing views on Argentina&#39;s Frontrunner</title>
+    <link rel="alternate" type="text/html" href="/blog/r/2015/10/19/competing-views-in-argentina.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=CompetingviewsonArgentina&#39;sFrontrunner" />
+    <published>2015-10-19T00:00:00Z</published>
+    <updated>2015-10-19T00:00:00-02:00</updated>
+    <id>/blog/r/2015/10/19/competing-views-in-argentina</id>
+    <content type="html"><![CDATA[ <p>The last poll published today by Polldata put Scioli below 40%, with about 5% reporting being undecided.</p>
+
+<!--more-->
+
+<p><img src="/img/2015/Daniel_Scioli_Gross_lm.png" alt="" /></p>
+
+<p>It might be too early to state anything solid, but the few polls prospecting the runoff election in Argentina seem to be telling two distinct histories. Hugo Haime and IPSOS suggest Daniel Scioli is going up while Elypsis  and Polldata say he’s sinking as weeks go by. The last poll published today by Polldata put Scioli below 40%, with about 5% reporting being undecided.</p>
+
+ ]]></content>
+  </entry>
+  
+  <entry>
+    <title>A Talk About Campaign Finance in Brazil</title>
+    <link rel="alternate" type="text/html" href="/blog/r/2015/10/17/talk-about-campaign-finance.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=ATalkAboutCampaignFinanceinBrazil" />
+    <published>2015-10-17T00:00:00Z</published>
+    <updated>2015-10-17T00:00:00-03:00</updated>
+    <id>/blog/r/2015/10/17/talk-about-campaign-finance</id>
+    <content type="html"><![CDATA[ <p>Comments on campaign finance in brazil.</p>
+
+<!--more-->
+
+<p>Last week, I delivered a talk at <a href="http://www.unb.br">University of Brasilia</a> about my past research on the topic of campaign finance. I didn’t know in advance about the existence of this seminar. Indeed, it was a big surprise receiving the invitation from Prof. Marcelo Pimentel, who is teaching on Fridays afternoon a class on this topic with more than 50 registered students. I became his fan after seeing his syllabus. He did managed to assemble a handful studies covering why, what, how, and when money affects politics and elections in Brazil.</p>
+
+<p>Though I covered a lot of factors in my talk, I think, I had the wrong pictures to show for a heterogeneous crowd. Instead of wasting time showing regression tables, and trying to solve understanding issues after showing them, I should have shown simple yet powerful pictures like the following ones, so to give the intuition about the relationship between money and votes, generally debated in the literature and media.</p>
+
+<p><img src="images/blog/2015/linearSS.png" alt="Linear Relationship with SS" /></p>
+
+<p><img src="/images/blog/2015/u-shape.png" alt="U-Shape Relationship" /></p>
+
+<p>Of course, the biggest challenge of this scholarship is how to disentangle any existing confounders in this rather seemingly relationship: votes ~ money.</p>
+
+<p>Overall, we know the recipe, preparing the dishy is different  thing. Studies being conducted on this area try to find the “treatment effect” of money on votes: What would have happened if the candidate had spent only a fraction of his budget, or What would have happened if the candidate who spent only a fraction could spend more? </p>
+
+<p>The problem arises because we can see one condition, but never both at the same time. The suboptimal solution is to measure the average effect <code>(Y_1i - Y_0i)</code>, or the average of groups of candidates, such as incumbents vs non-incumbents. It turns out that comparisons of who spend more or less in elections are likely to be a poor measure of the causal effect of campaign spending simply because selection bias should be extremely high (Morton and Williams, 2010). It’s not trivial to argue that those who has more money to spend would have earned more votes anyway. </p>
+
+<p>As Angrist and Pischke point out in their 2009’s book, if selection bias is positive, the naïve comparison <code>E(Y_1i | c_i=1) - E(Y_0i | c_i=0)</code> can be a real problem, since the benefits of spending extra money is exaggerated. </p>
+
+<p><img src="images/blog/2015/Angrist_Pischke_bias.png" alt="U-Shape Relationship" /></p>
+
+<p>It could be “easier” to provide causal inference on this if we run a randomized experiment. If the treatment of campaign spending levels is randomly assigned, selection bias would be zero. The experiment don’t need to be that large, if treated units are random selection from the population of candidates, then the impact on treated also applies to the population. Isn’t cool?</p>
+
+ ]]></content>
+  </entry>
+  
+  <entry>
+    <title>Understanding Margin of Error for Small Populations</title>
+    <link rel="alternate" type="text/html" href="/blog/r/2015/10/13/understanding-margin-of-error.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=UnderstandingMarginofErrorforSmallPopulations" />
+    <published>2015-10-13T00:00:00Z</published>
+    <updated>2015-10-13T00:00:00-03:00</updated>
+    <id>/blog/r/2015/10/13/understanding-margin-of-error</id>
+    <content type="html"><![CDATA[ <p>A comment on why does a pollster reported a narrow margin of error despite the small sample.</p>
+
+<!--more-->
+
+<p>I got an email today inquiring if the margin of error reported in the newest poll by Datafolha would possibly be misleading. The polling firm often report surveys with regular sizes (1000/2400), so the margin of error calculated is in the range of +/-2% to +/-3%. </p>
+
+<p>However, in its <a href="http://www1.folha.uol.com.br/poder/2015/10/1693217-parlamentares-sao-mais-liberais-do-que-o-eleitorado.shtml">latest poll</a>, the pollster sampled only 340 congressmen, reporting a margin of error of 3%. This, apparently did puzzle the attentive reader, who knows the margin of error is an inverse square root function of the sample size. She asks: “Is the reported margin of error correct? Given such a small sample, shouldn’t it be something around 5.3% or so?</p>
+
+<p>My answer to the question was “sort of”. Firstly, given the fact the population of congressmen is a finite population (594 = 513 deputies + 81 senators), we must apply a Correction Factor for Finite Populations (FPCF), which will reduce the standard error of the mean. Essentially, the correction adjusts for the fact that although the number of elements is small, it comes from a small population too. </p>
+
+<p>Adjusted by the FPCF, the margin of error is close to what reported by the Datafolha, however, by omitting decimal digits, the pollster arbitrarily narrows the confidence interval (2 * the margin of error) in about 1%. It’s not that usual to round margins of error when reporting them, as a decimal digit may imply in substantial differences in the sample size as illustrated in the graph from Marcelino and Angel’s paper.</p>
+
+<p><img src="/images/blog/2015/sample_size.jpg" alt="Sample size vs Confidence Interval" /></p>
+
+<p>For pedagogical reasons, I won’t go through the simplified formula. So, let do it step-by-step.</p>
+
+<h3 id="margin-of-error-for-large-infinite-populations">Margin of Error for Large (Infinite) Populations</h3>
+<p>The derivation of the maximum margin of error formula is given by:</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">e = zs/sqrt(n)
+where:
+z = 
+2.576 for 99% level of confidence
+1.96 for 95% level of confidence
+1.645 for 90% level of confidence
+
+s = sqrt(p(1-p))      
+p = proportion
+
+n = sample size
+
+
+e = zs/sqrt(n)
+	= (1.96*0.5)/sqrt(340)
+	= 0.05314796</code></pre></div>
+
+<p>Thus, if we sample n = 340, we get a margin of error of = 5.31%.</p>
+
+<h3 id="margin-of-error-for-finite-populations">Margin of Error for Finite Populations</h3>
+
+<p>When the population is small (say less than 1 million), or the sample size represents more than 5% of the population, the pollster should multiply the margin of error by the Corrector Factor (FPCF), given the formula: </p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">e = zs/sqrt(nadj)
+
+where:
+z = 
+2.576 for 99% level of confidence
+1.96 for 95% level of confidence
+1.645 for 90% level of confidence
+
+s = sqrt(p(1-p))     
+p = proportion 
+
+nadj = (N-1)n/(N-n)   
+n = sample size 
+N = population size
+
+e = zs/sqrt(nadj)
+  = (1.96*0.5)/sqrt((594-1)*340/(594-340))
+	= (1.96*0.5)/sqrt(793.7795)
+	= 0.03478373</code></pre></div>
+
+<p>By adjusting for finite populations, we get a margin of error of = 3.48%. </p>
+
+<h3 id="stretching-the-concept">Stretching the concept</h3>
+<p>Now, take an instant. I’ve calculated the maximum margin of error–or the global margin because in several situations we don’t know for sure where how the population falls apart on a particular issue. So, by estimating the population is 50/50 divided on the issue, we maximize the margin of error.</p>
+
+<p>However, if we discover that 74% of the congressmen gave the same answer, as they did on the topic of criminality, then the margin of error of the two means for that particular question would be  smaller: 3%.</p>
+
+<p>We compute <em>s</em> and plug it in the previous estimation, as:</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">s = sqrt(p(1-p)) 
+  = sqrt(0.74*(1-0.74)) 
+  = 0.4386342
+
+e = zs/sqrt(nadj)
+  = (1.96*0.44)/sqrt((594-1)*340/(594-340))
+	= (1.96*0.44)/sqrt(793.7795)
+	= 0.0306097</code></pre></div>
+
+<p>I found this poll very interesting, Datafolha should conduct polls like that more often. So, we can get to know more about the  average position of our representatives. </p>
+ ]]></content>
+  </entry>
+  
+  <entry>
+    <title>The butterfly curve</title>
+    <link rel="alternate" type="text/html" href="/blog/r/2015/10/07/the-butterfly-curve.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=Thebutterflycurve" />
+    <published>2015-10-07T00:00:00Z</published>
+    <updated>2015-10-07T00:00:00-03:00</updated>
+    <id>/blog/r/2015/10/07/the-butterfly-curve</id>
+    <content type="html"><![CDATA[ <p>Have you ever thought drawing your own butterfly?</p>
+
+<!--more-->
+
+<p><img src="/images/blog/2015/butterfly.png" alt="Linear Relationship" /></p>
+
+<p>I came across the <a href="https://en.wikipedia.org/wiki/Butterfly_curve_%28transcendental%29">butterfly curve</a>, which was discovered by Temple Fay. The butterfly curve is produced by a parametric equation where:</p>
+<mark>x = sin(t) * (e^cos(t)-2cos(λt)-sin(t/12)^5)</mark>
+<p>and</p>
+<mark>y = cos(t) * (e^cos(t)-2cos(λt)-sin(t/12)^5)</mark>
+<p>.
+Where t stands for time and <code>λ</code> for a user input variable.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kn">library</span><span class="p">(</span>ggplot2<span class="p">)</span>
+
+<span class="kn">source</span><span class="p">(</span><span class="s">&quot;https://raw.githubusercontent.com/danielmarcelino/SciencesPo/master/R/butterfly.R&quot;</span><span class="p">)</span>
+
+p4 <span class="o">=</span> butterfly<span class="p">(</span><span class="m">100</span><span class="p">,</span> <span class="m">1000</span><span class="p">,</span> title<span class="o">=</span><span class="s">&quot;100 x 1000&quot;</span><span class="p">)</span>
+
+Date of Analysis<span class="o">:</span> Wed Oct <span class="m">07</span> <span class="m">2015</span>
+Computation time<span class="o">:</span> <span class="m">0.01444697</span>
+—————————————————</code></pre></div>
+
+ ]]></content>
+  </entry>
+  
+  <entry>
+    <title>Isn&#39;t sad that all that matters in an election is the candidate&#39;s height?</title>
+    <link rel="alternate" type="text/html" href="/blog/r/2015/09/15/Isn't-sad-that-all-that-matters-in-an-election-is-the-candidate's-height.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=Isn&#39;tsadthatallthatmattersinanelectionisthecandidate&#39;sheight?" />
+    <published>2015-09-15T00:00:00Z</published>
+    <updated>2015-09-15T00:00:00-03:00</updated>
+    <id>/blog/r/2015/09/15/Isn't-sad-that-all-that-matters-in-an-election-is-the-candidate's-height</id>
+    <content type="html"><![CDATA[ <p>The candidate’s height may be very important in elections.</p>
+
+<!--more-->
+
+<p><img src="/images/blog/2015/Presidentsheight.png" alt="Linear Regression" /></p>
+
+<p>I came across the claim in the US <a href="http://www.usnews.com/news/articles/2015/07/08/how-tall-are-the-2016-presidential-candidates">press</a> suggesting that the taller the candidate, the better his/her chances for success in presidential elections. After a little search, I found this <a href="https://en.wikipedia.org/wiki/Heights_of_presidents_and_presidential_candidates_of_the_United_States">Wikipedia</a> entry, and even some academic research on the issue, mainly relating this phenomenon to some sort of evolutionary instinctual preference. At least in the US, it does make sense to ask how tall is your favorite 2016 presidential candidate.</p>
+
+<p>I gathered some data on the presidential candidates’ height and popular vote support to test the strength of such claim with a regression analysis. The observations consist of the height of president divided by height of most successful opponent. The association is significant, indeed (F**ing love science!), though the relationship may lose power if other factors are included. The graph above presents the relationship found in the data. Data and scripts are <a href="https://gist.github.com/danielmarcelino/b2cc9f3964d7608f29b5">here</a>.</p>
+
+<p><strong>UPDATE:</strong> After have seen this post on the R-Bloggers aggregator, I realized that the engineer indexed a related postage by <a href="http://www.r-bloggers.com/who-will-be-the-next-president-of-the-us/">Arthur Charpentier</a>, published a few years before.</p>
+ ]]></content>
+  </entry>
+  
+  <entry>
+    <title>Argentine general election, 2015</title>
+    <link rel="alternate" type="text/html" href="/blog/r/2015/08/07/Argentine-general-election-2015.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=Argentinegeneralelection2015" />
+    <published>2015-08-07T00:00:00Z</published>
+    <updated>2015-08-07T00:00:00-03:00</updated>
+    <id>/blog/r/2015/08/07/Argentine-general-election-2015</id>
+    <content type="html"><![CDATA[ <p>The Argentina’s 2015 presidential election to be held next October 25th is approaching and the dispute is now more stable  as the major parties announced their candidates last June.</p>
+
+<!--more-->
+
+<p>In the next Sunday, political parties are holding their primaries for the upcoming presidential election. Like in the US, in Argentine  primaries are important for the parties to solve internal disputes, so the winning candidate can run more comfortable with a united party.</p>
+
+<p>I set up a forecasting model to track down the vote intentions in my neighboring country–the land of tango. I’m still consolidating opinion polls data while trying to get some clues about past pollster’s performance, so I can account for the likely house effect.</p>
+
+<p>The following graph was adjusted using simple loess techniques. As I already have a reasonable population of polls, I could also adjust a Dirichlet regression, which produces a more robust picture of the dispute (the second graph below). At this stage, however, the model is an oversimplification as some pollsters are more reliable than others. So, I hope next time to posting a more robust forecast.</p>
+
+<p><img src="/images/blog/2015/loess.png" alt="Loess Regression" /></p>
+
+<p><img src="/images/blog/2015/dirichletreg.png" alt="Dirichlet Regression" /></p>
+
+<p>From the figures above, we can see that some polls have quite weird sinusoidal artifacts. Considering those are wrong compared to the others, they can influence the trend line estimates if on a particular day the deviating poll is the only measurement we have.</p>
+
+<h4 id="house-effects">House Effects</h4>
+<p>I want to improve the estimates over the next weeks by using better priors for the house effects of each polling firm. For example, in the picture below, pollster “OPSM” polled favorably for Mauricio Macri (blue line/dots) while worst for the official candidate, Daniel Scioli. On the other hand, house “Hugo Haime &amp; Asc.” underestimated the principal opposition candidate (M. Macri) while overestimating Daniel Scioli and the PJ’s dissident, Sergio Massa.</p>
+
+<p><img src="/images/blog/2015/dirichletreg-pollsters.png" alt="House Effects" /></p>
+
+<p>Let’s think about the implications of this for a moment. Some institutes published polls in which the one or the other candidate over a period of several months is predicted on average two percents below/above the median of all the polls published in that period; this is really hard to believe given that the polling organizations are all claiming to interview a representative group of the population. Even if we acknowledge that the polls are producing some noisy measurements, there would not be this kind of hex. Unless there is a systematic error in the polls that occurs over and over.</p>
+
+ ]]></content>
+  </entry>
+  
+
+</feed>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <title>Retrieving Data from Google Books with `ngramr` | Daniel Marcelino</title>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta name="keywords" content="methods, data analysis, R programming" />
+        <meta name="author" content="Daniel Marcelino" />
+        <meta name="description" content="Website of Daniel Marcelino" />
+        <meta name="viewport" content="width=640px, initial-scale=1.0, maximum-scale=1.0">	
+        <!-- favicon -->
+        <link rel="shortcut icon" href="/images/favicon.ico">
+        <!-- Google Fonts -->
+		<link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,300,400,600" rel="stylesheet" type="text/css">
+		<link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css" type="text/css" media="screen, projection" />
+		<link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis" href="/feed.xml">
+	<link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis" href="/feed.r.xml">
+		<link rel="alternate" type="application/atom+xml" title="EnfoRced Data Analysis" href="/atom.xml" />
+		
+	
+</head>
+
+	<body>
+
+
+		<script type="text/javascript"
+    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<div class="header-page">
+
+<h1><a href="/"><span style='font-weight: bold;'>Daniel Marcelino</span></a></h1></span>
+<div id="nav">
+	<ul>
+	   <li><a href="/blog" class="current"><strong>Blog</strong></a></li>
+		<li><a href="/about" class=""><strong>About</strong></a></li>
+	<li><a href="/research" class=""><strong>Research</strong></a></li>
+		<li><a href="/teaching" class=""><strong>Teaching</strong></a></li>
+		<li><a href="/software" class=""><strong>Software</strong></a></li>		
+	<li><a href="/randomwalks" class=""><strong>Random Walks</strong></a></li>		
+	</ul>
+</div>
+
+</div>
+
+
+<div class="clear"></div>
+
+<div id="block">
+	<div class="prose"> 
+	<div class="post">
+	<h1> Retrieving Data from Google Books with `ngramr` </h1>
+	<!-- <span class="date">Posted on 15 Nov 2015</span> -->
+	<h5>Posted on November 15, 2015</h5>
+	
+	<p><a href="https://en.wikipedia.org/wiki/Karl_Marx">Karl Marx</a> is the most famous founding fathers of modern sociology with a popularity peak in 1975-6, but declining ever since.</p>
+
+<!--more-->
+
+<p><img src="/img/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/GoogleNgram.png" alt="center" /></p>
+
+<hr />
+
+<h2 id="introduction">Introduction</h2>
+<p>Google has a tool for tracking the frequency of words or phrases across its vast collection of scanned texts, the Google Books. The <a href="https://books.google.com/ngrams">Google Ngram Viewer</a> reports data and graphs the frequency of words encountered in one or across several <em>corpus</em> over time. For instance, the chart above campares the appearance in the English corpus of following bigrams names: “Karl Marx”, “Max Weber”, “Emile Durkheim”. </p>
+
+<p>The y-axis shows of all the bigrams contained in the sample of books written in English, what percentage of them are “Karl Marx” or “Max Weber” or “Emile Durkheim”? From the chart above, we can conclude that Marx is the most famous sociologist among the others founding fathers, with a peak in popularity about 1975-6, but his influence has been declining ever since. These thinkers are considered the founding fathers of sociology because they set out to develop practical and scientifically sound methods of research to examine theories of the social world rooted in a specific historical and cultural context. </p>
+
+<h2 id="using-r-with-google-ngram-viewer">Using R with Google Ngram Viewer</h2>
+
+<p>There is a package to query the Google Ngram called <a href="https://cran.r-project.org/web/packages/ngramr/index.html">ngramr</a> written by Sean Carmody. With this package, one can retrieve data from Ngram pages in the form of data frame.  </p>
+
+<h2 id="getting-started">Getting Started</h2>
+<p>The first thing to do is to load the <code>ggplot2</code> and <code>ngramr</code> packages. In case you don’t have them installed, an installation is required.</p>
+
+<h2 id="write-a-query-and-do-the-plots">Write a Query and Do the Plots</h2>
+
+<p>The following is equivalent to the chart above for the three sociologists bigrams, except that I’m applying a smoothed line–or moving average of 5 years, so trends become more apparent. For instance, the data shown for 2000 is an average of the raw count for 2000 plus 5 values on either side: (“count for 1995” + “count for 2000” + “count for 2005”), divided by 3. So a smoothing of 5 means that 11 values will be averaged: 5 on either side, plus the target value in the center of them.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">ng <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;(Karl Marx)&quot;</span><span class="p">,</span> <span class="s">&quot;(Max Weber)&quot;</span><span class="p">,</span> <span class="s">&quot;(Emile Durkheim)&quot;</span><span class="p">)</span> 
+ggram<span class="p">(</span>ng<span class="p">,</span> year_start <span class="o">=</span> <span class="m">1800</span><span class="p">,</span> 
+      year_end <span class="o">=</span> <span class="m">2012</span><span class="p">,</span>  
+      smoothing <span class="o">=</span> <span class="m">5</span><span class="p">,</span>
+      google_theme <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span> <span class="o">+</span>
+  ggtitle<span class="p">(</span><span class="s">&quot;Marx, Weber, Durkheim&quot;</span><span class="p">)</span><span class="o">+</span>
+    theme_538<span class="p">(</span>legend.position <span class="o">=</span> <span class="s">&quot;bottom&quot;</span><span class="p">)</span></code></pre></div>
+
+<p><img src="/img/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/sociologists-1.png" alt="center" /> </p>
+
+<h2 id="complex-queries">Complex Queries</h2>
+
+<p>I test the trend in popularity of the unigran “Capitalism” vis-à-vis other two unigrans (“Socialism”, “Communism”) from 1850 to 2012. Here’s how we might combine + and / to show how the unigram “Capitalism” has blossomed at the expense of “Socialism” and “Communism” terms in the literature published in English.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">ng <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;Capitalism /(Capitalism + Socialism + Communism)&quot;</span><span class="p">)</span>
+cap <span class="o">&lt;-</span> ggram<span class="p">(</span>ng<span class="p">,</span> year_start <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
+      year_end <span class="o">=</span> <span class="m">2012</span><span class="p">,</span>  
+      smoothing <span class="o">=</span> <span class="m">3</span><span class="p">,</span>
+      google_theme <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span> <span class="o">+</span>
+  ggtitle<span class="p">(</span><span class="s">&quot;Capitalism over (Capitalism + Socialism + Communism)&quot;</span><span class="p">)</span><span class="o">+</span>
+    theme_538<span class="p">()</span>
+
+ng <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;Socialism /(Capitalism + Socialism + Communism)&quot;</span><span class="p">)</span>
+soc <span class="o">&lt;-</span> ggram<span class="p">(</span>ng<span class="p">,</span> year_start <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
+      year_end <span class="o">=</span> <span class="m">2012</span><span class="p">,</span>  
+      smoothing <span class="o">=</span> <span class="m">3</span><span class="p">,</span>
+      google_theme <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span> <span class="o">+</span>
+  ggtitle<span class="p">(</span><span class="s">&quot;Socialism over (Capitalism + Socialism + Communism)&quot;</span><span class="p">)</span><span class="o">+</span>
+    theme_538<span class="p">()</span>
+
+ng <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;Communism /(Capitalism + Socialism + Communism)&quot;</span><span class="p">)</span>
+com <span class="o">&lt;-</span> ggram<span class="p">(</span>ng<span class="p">,</span> year_start <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
+      year_end <span class="o">=</span> <span class="m">2012</span><span class="p">,</span>  
+      smoothing <span class="o">=</span> <span class="m">3</span><span class="p">,</span>
+      google_theme <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span> <span class="o">+</span>
+  ggtitle<span class="p">(</span><span class="s">&quot;Communism over (Capitalism + Socialism + Communism)&quot;</span><span class="p">)</span><span class="o">+</span>
+    theme_538<span class="p">()</span>
+multiplot<span class="p">(</span>cap<span class="p">,</span> soc<span class="p">,</span> com<span class="p">,</span> ncols<span class="o">=</span><span class="m">1</span><span class="p">)</span>
+ggfootnote<span class="p">(</span>size <span class="o">=</span> <span class="m">.5</span><span class="p">)</span></code></pre></div>
+
+<p><img src="/img/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/Capitalism Popularity-1.png" alt="center" /> </p>
+
+<p>In the following, I retrieve the frequency for the unigram “Capitalism” in the Russian <em>corpus</em>, French, and British English. Note that the results can be case-insensitive variants.</p>
+
+<p>Below is a plot of the unigram “Capitalism” (“капитализм”) in the Russian language <em>corpus</em>.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">ng <span class="o">&lt;-</span> <span class="s">&quot;капитализм&quot;</span>
+rus<span class="o">=</span>ggram<span class="p">(</span>ng<span class="p">,</span> year_start <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
+      corpus <span class="o">=</span> <span class="s">&quot;rus_2012&quot;</span><span class="p">,</span>
+      ignore_case <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> 
+      google_theme <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span> <span class="o">+</span>
+    ggtitle<span class="p">(</span><span class="s">&quot;Russian: капитализм&quot;</span><span class="p">)</span><span class="o">+</span>
+     theme_538<span class="p">()</span>
+
+ng <span class="o">&lt;-</span> <span class="s">&quot;capitalisme&quot;</span>
+fre<span class="o">=</span>ggram<span class="p">(</span>ng<span class="p">,</span> year_start <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
+      corpus <span class="o">=</span> <span class="s">&quot;fre_2012&quot;</span><span class="p">,</span>
+      ignore_case <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> 
+      google_theme <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span> <span class="o">+</span>
+    ggtitle<span class="p">(</span><span class="s">&quot;French: Capitalisme&quot;</span><span class="p">)</span><span class="o">+</span>
+     theme_538<span class="p">()</span>
+
+ng <span class="o">&lt;-</span> <span class="s">&quot;capitalism&quot;</span>
+eng<span class="o">=</span>ggram<span class="p">(</span>ng<span class="p">,</span> year_start <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
+      corpus <span class="o">=</span> <span class="s">&quot;eng_gb_2012&quot;</span><span class="p">,</span>
+      ignore_case <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> 
+      google_theme <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span> <span class="o">+</span>
+    ggtitle<span class="p">(</span><span class="s">&quot;English: Capitalism&quot;</span><span class="p">)</span><span class="o">+</span>
+     theme_538<span class="p">()</span>
+
+multiplot<span class="p">(</span>rus<span class="p">,</span> fre<span class="p">,</span> eng<span class="p">,</span> ncols<span class="o">=</span><span class="m">1</span><span class="p">)</span>
+ggfootnote<span class="p">(</span>size <span class="o">=</span> <span class="m">.5</span><span class="p">)</span></code></pre></div>
+
+<p><img src="/img/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/capitalism-1.png" alt="center" /> </p>
+
+
+
+</div>
+
+<hr>
+<p></p>
+
+<div class="meta">
+	
+	
+	<span class="categories">
+		Published in categories
+		
+		<a href="/blog/categories/#r" title="r">r</a>&nbsp;
+		
+	</span>
+	
+	
+	
+	<span class="tags">
+		Tagged with 
+		
+		<a href="/blog/tags/#R" title="R">R</a>&nbsp;
+		
+		<a href="/blog/tags/#ngramr" title="ngramr">ngramr</a>&nbsp;
+		
+		<a href="/blog/tags/#how-to" title="how-to">how-to</a>&nbsp;
+		
+	</span>
+	
+</div>
+
+
+<div class="previous_next">
+	
+	  <a href="/blog/r/2015/10/25/argentine-house-effects.html" title="Previous post">&larr; previous</a>
+	
+	&nbsp;&nbsp;
+	
+	<br>
+	<p>
+	<a class="greenbutton" href="/blog/archive/" title="an archive of all posts">See all posts &rarr;</a>
+	</p>
+</div>
+
+
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'daniel-marcelino'; // required: replace example with your forum short name
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+	</div>
+</div>
+
+
+<div id="footer">
+
+<div id="footer">
+The contents of this blog is syndicated to <a href="http://www.r-bloggers.com">R-Bloggers</a> and <a href="http://www.statsblogs.com">Statsblogs</a> via <a href="http://danielmarcelino.com/atom.xml"> Atom/RSS feeds.</a> <br/><br/>
+	&copy; <a href="/">Daniel Marcelino</a>. All contents under 
+	<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">(CC) BY-NC-SA license</a>, 
+	unless otherwise noted.
+	<br/><br/>
+	Did you find this site useful? If yes, consider helping me with my  
+	<a href="http://amzn.com/w/2CCCV54KPGIA2" target="_blank">wishlist</a>.
+</div>
+
+
+</div>
+
+
+
+
+		<!-- Google Analytics -->
+		<script>
+  		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  		  })(window, document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  	  ga('create', 'UA-24186657-1', 'danielmarcelino.com');
+  		  ga('send', 'pageview');
+
+		</script>
+		<!-- Google Analytics end -->
+
+	</body>
+</html>

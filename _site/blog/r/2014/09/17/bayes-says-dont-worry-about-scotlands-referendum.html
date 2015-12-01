@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <title>Bayes says `don't worry` about Scotland's Referendum | Daniel Marcelino</title>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta name="keywords" content="methods, data analysis, R programming" />
+        <meta name="author" content="Daniel Marcelino" />
+        <meta name="description" content="Website of Daniel Marcelino" />
+        <meta name="viewport" content="width=640px, initial-scale=1.0, maximum-scale=1.0">	
+        <!-- favicon -->
+        <link rel="shortcut icon" href="/images/favicon.ico">
+        <!-- Google Fonts -->
+		<link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,300,400,600" rel="stylesheet" type="text/css">
+		<link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css" type="text/css" media="screen, projection" />
+		<link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis" href="/feed.xml">
+	<link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis" href="/feed.r.xml">
+		<link rel="alternate" type="application/atom+xml" title="EnfoRced Data Analysis" href="/atom.xml" />
+		
+	
+</head>
+
+	<body>
+
+
+		<script type="text/javascript"
+    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+<div class="header-page">
+
+<h1><a href="/"><span style='font-weight: bold;'>Daniel Marcelino</span></a></h1></span>
+<div id="nav">
+	<ul>
+	   <li><a href="/blog" class="current"><strong>Blog</strong></a></li>
+		<li><a href="/about" class="current"><strong>About</strong></a></li>
+	<li><a href="/research" class="current"><strong>Research</strong></a></li>
+		<li><a href="/teaching" class=""><strong>Teaching</strong></a></li>
+		<li><a href="/software" class=""><strong>Software</strong></a></li>		
+	<li><a href="/randomwalks" class=""><strong>Random Walks</strong></a></li>		
+	</ul>
+</div>
+
+</div>
+
+
+<div class="clear"></div>
+
+<div id="block">
+	<div class="prose"> 
+	<div class="post">
+	<h1> Bayes says `don't worry` about Scotland's Referendum </h1>
+	<!-- <span class="date">Posted on 17 Sep 2014</span> -->
+	<h5>Posted on September 17, 2014</h5>
+	
+	<p>Just few hours before Scots head to the polls, there is not an overwhelming advantage of the anti-independence vote. Actually, the margin is shorter than last time <a href="http://danielmarcelino.com/what-are-the-odds-of-an-independent-scotland/">I looked at it</a>, but despite such a growing trend in favor of the “Yes” campaign in the last weeks, the “NO” side has an edge still. To frame this in terms of probabilities that \( \theta<em>{No} \) exceeds \( \theta</em>{Yes} \), I write a short function (replicated <a href="https://gist.github.com/danielmarcelino/9cab589e474dd09dadbc">here</a>) that will use simulation from the Dirichlet distributions to compute the posterior probability that “No” exceeds “Yes” shown in the lovely chart below.</p>
+
+<p><img src="/images/blog/2014/referendum.jpeg" alt="Loess" /></p>
+
+<p>The data used here to draw the distributions were gathered from a series of polls and available at the wikipedia. The polls employ different methodologies and phrase questions differently. For instance, some surveys ask respondents how they would vote if this referendum were held today, others ask them how they intend to vote on 18th September. By aggregating them, any swing could be the by-product of the random variation to which all polls are subject.</p>
+
+
+
+</div>
+
+<hr>
+<p></p>
+
+<div class="meta">
+	
+	
+	<span class="categories">
+		Published in categories
+		
+		<a href="/blog/categories/#r" title="r">r</a>&nbsp;
+		
+	</span>
+	
+	
+	
+	<span class="tags">
+		Tagged with 
+		
+		<a href="/blog/tags/#R" title="R">R</a>&nbsp;
+		
+		<a href="/blog/tags/#referendum" title="referendum">referendum</a>&nbsp;
+		
+		<a href="/blog/tags/#Scotland" title="Scotland">Scotland</a>&nbsp;
+		
+	</span>
+	
+</div>
+
+
+<div class="previous_next">
+	
+	  <a href="/blog/r/2014/07/01/Parallel-computing-in-R.html" title="Previous post">&larr; previous</a>
+	
+	&nbsp;&nbsp;
+	
+	  <a href="/blog/r/2014/09/19/yep-he-made-it-country-voted-no.html" title="Next post">next &rarr;</a>
+	
+	<br>
+	<p>
+	<a class="greenbutton" href="/blog/archive/" title="an archive of all posts">See all posts &rarr;</a>
+	</p>
+</div>
+
+
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'daniel-marcelino'; // required: replace example with your forum short name
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+	</div>
+</div>
+
+
+<div id="footer">
+
+<div id="footer">
+The contents of this blog is syndicated to <a href="http://www.r-bloggers.com">R-Bloggers</a> and <a href="http://www.statsblogs.com">Statsblogs</a> via <a href="http://danielmarcelino.com/atom.xml"> Atom/RSS feeds.</a> <br/><br/>
+	&copy; <a href="/">Daniel Marcelino</a>. All contents under 
+	<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">(CC) BY-NC-SA license</a>, 
+	unless otherwise noted.
+	<br/><br/>
+	Did you find this site useful? If yes, consider helping me with my  
+	<a href="http://amzn.com/w/2CCCV54KPGIA2" target="_blank">wishlist</a>.
+</div>
+
+
+</div>
+
+
+
+
+		<!-- Google Analytics -->
+		<script>
+  		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  		  })(window, document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  	  ga('create', 'UA-24186657-1', 'danielmarcelino.com');
+  		  ga('send', 'pageview');
+
+		</script>
+		<!-- Google Analytics end -->
+
+	</body>
+</html>

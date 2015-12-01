@@ -1,0 +1,301 @@
+<style>
+  .reveal pre {
+    font-size: 13pt;
+  }
+  .reveal section p {
+    font-size: 32pt;
+  }
+  .reveal div {
+    font-size: 30pt;
+  }
+  .reveal h3 {
+    color: #484848;
+    font-weight: 150%;
+  }
+</style>
+
+Lecture 12 - Interfacing R with other tools Part I
+====
+author: 94-842
+date: December 2, 2014
+font-family: Garamond
+autosize: false
+width:1440
+height:900
+
+Agenda
+====
+
+- Discussion of final project
+
+- Common import/export tasks
+  - Importing data from other common statistics software 
+  - Exporting data from R
+  - Exporting graphics from R
+  
+- R with SQL
+  - SQL queries on data frames using the `sqldf` package
+
+Final project: missing data
+====
+
+There is a fair bit of missingness in the data set.  There are several approaches to dealing with missing data:
+
+1. **Exclude**
+  - You can omit observations with missing values (e.g., remove any rows that contain missing data)
+  
+2. **Impute**
+  - R has various packages (Amelia, mice, mi, `impute()` function from Hmisc, etc.) that can help with imputing missing values.  
+  
+3. Think carefully about whether certain kinds of missingness are **informative**
+
+Final project: missing data
+====
+
+The downsides of the **Impute** approach:
+
+  - Imputation methods often rely on fairly **strong assumptions** concerning the process governing the appearance of missing values (assumptions such as MAR, missing at random; or MCAR, missing completely at random).  
+  
+  - This is **a lot of hassle** to go through unless you want practice imputing values
+  
+Final project: missing data
+====
+
+Why the **think carefully** approach can be a good one:
+
+  - For factor variables, you can treat missing values as just another factor level. Sometimes **missingness can be informative (predictive)**, leading to a significant coefficient for the missing level. 
+  
+  - Some of the variables in the NLSY data have very **interesting missingness patterns** that you should think about carefully (e.g., the **number of children** variable has about **half** of the values missing... what's *special* about that half?)
+  
+Final project: missing data 
+====
+
+**My recommendation**
+
+1. Start by **thinking carefully** about missing values
+
+2. If nothing interesting turns up, go ahead and **exclude** them 
+
+- **Warning**: Trying to impute can consume a lot of time 
+    - Not guaranteed to produce better results than what you'd have if you just excluded all observations with missing values.
+    
+    
+Final project: truncated outcome variable
+====
+
+- The income variable that you have available is **truncated from above**.
+
+- Instead of observing INCOME, you observe **min(INCOME, T)**
+
+- For reported incomes that are higher than $T$, all you're told is that the income was at least as high as $T$.  
+
+- Standard regression applied to data with a censored (truncated) outcome gives  **inconsistent**.  
+    - i.e., even if you had infinite data, your coefficient estimates won't converge to the "true" coefficients.  
+
+Final project: truncated outcome variable
+====
+
+1. **Tobit regression** (censored regression).  
+    - We didn't talk about this method in class
+    - It's not difficult to understand if you already understand linear regression.  
+    - [A tutorial can be found here](http://www.ats.ucla.edu/stat/r/dae/tobit.htm). 
+
+2. Try fitting the regression models / running hypothesis tests two ways
+    - **First way**: include the censored observations
+    - **Second way**: exclude all observations with censored outcomes
+    - If your estimates change a lot, then you probably don't want to use the censored observations 
+    
+**My recommendation**: Take approach (2), unless you want practice with censored regression.
+
+Common import/export tasks
+====
+
+In the next set of slides we'll discuss the following tasks
+
+- Import/export from Excel spreadsheets (xlsx files)
+
+- Import/export from other common statistical analysis software
+
+- Saving data from your R workspace
+
+- Saving images and tables
+
+Excel import/export: xlsx package
+====
+
+- `xlsx` package contains useful functions for export/import/modification of xlsx files
+
+- One approach: export your xlsx file to csv then using `read.csv()`
+    - Exporting to csv generally fails if your spreadsheet has formulas or special formatting
+    
+- Better approach: use the `read.xlsx()` function from the `xlsx` package
+
+Excel import/export: xlsx package
+====
+      read.xlsx(file, sheetIndex, sheetName=NULL, rowIndex=NULL,
+      startRow=NULL, endRow=NULL, colIndex=NULL,
+      as.data.frame=TRUE, header=TRUE, colClasses=NA,
+      keepFormulas=FALSE, encoding="unknown", ...)
+
+- A basic import call for a 1-sheet xlsx file with headers called `spreadsheet.xlsx` would simply look like
+
+```{r, eval = FALSE}
+library(xlsx)
+my.df <- read.xlsx("spreadsheet.xlsx", header = TRUE)
+```
+
+- To output your data frame to an xlsx file, you can use
+```{r, eval = FALSE} 
+write.xlsx(x = my.df, file = "spreadsheet.xlsx", sheetName="Sheet1", ...) 
+```  
+
+- useful if you've put a lot of effort into cleaning your data in R, and you want to save your work in an Excel spreadsheet.
+
+foreign package
+====
+
+- The `foreign` package allows you to import data from various other kinds of statistical software.  
+
+Function name       |  Description
+-------------|-----------------
+`read.dta`     |   Read Stata binary files
+`read.mtp`     | Read a Minitab Portable Worksheet
+`read.spss`    |   Read an SPSS data file
+`read.ssd`     |   Obtain a Data Frame from a SAS Permanent Dataset, via read.xport
+`read.xport`   |  Read a SAS XPORT Format Library
+`write.dta`    |  Write Files in Stata Binary Format
+`write.foreign` | Write text files and code to read them
+
+- These functions are particularly useful for going back and forth between R and another language (e.g., analyze panel data in Stata, produce graphics in R)
+
+
+Saving variables from your workspace
+====
+
+- Fitting models to large data sets can take a lot of computation time
+
+- Instead of re-running all of your code every time you re-open R, you can save variables from your workspace (e.g., save that list of linear models that took `plyr` 30 minutes to produce)
+
+- To save your **entire workspace**, use 
+
+```{r, eval = FALSE}
+save.image(file = "myworkspace.RData")
+```
+
+- To save a particular **set of variables**, use 
+
+```{r, eval = FALSE}
+save(..., file = "myvariables.RData")
+```
+
+- (Replace ... with variable names)
+
+Saving variables from your workspace
+====
+
+- E.g., if you have a data frame `df` and a linear model list `lm.list` that you want to store for later use, you can save by writing
+
+```{r, eval = FALSE}
+save(df, lm.list, file = "myvariables.RData")
+```
+
+- To **load** saved variables, just use the `load()` function
+
+```{r, eval = FALSE}
+load(file = "myvariables.RData")
+```
+
+Exporting tables 
+====
+
+- Suppose you have a data frame or matrix that contains variable summaries (e.g., you have some output from your `generateDataSummary()` function from Homework 4)
+
+- To save the table, you can use `write.table()` or `write.csv()`
+
+```{r, eval = FALSE}
+data.summary <- generateDataSummary(df, var.names, group.name)
+
+# write.table approach, output as tab-delimited 
+write.table(data.summary, file = "mytable.txt", sep = "\t")
+
+# write.csv approach, output as csv file
+write.table(data.summary, file = "mytable.csv")
+```
+
+Exporting graphics
+====
+
+- By default, plots are output to your graphics window (Plots tab in RStudio)
+
+- You can save plots manually from the Plots tab by clicking  `Export > Save as PDF`
+
+- To save them automatically you can use `bmp()`, `jpeg()`, `png()`, `tiff()` or `pdf()`.  
+
+- `pdf()` gives nice vectorized graphics, so it's often the best one to use
+
+Exporting graphics: pdf()
+====
+
+- The basic structure is as follows
+
+```{r, eval = FALSE}
+pdf(file = "myplot.pdf", width = 6, height = 6) # Start a pdf graphics device
+    # Code 
+    # to
+    # generate
+    # plot
+dev.off()  # Close the pdf graphics device
+```
+
+Exporting graphics: pdf()
+====
+
+Here's an example that saves plots in a loop
+
+```{r}
+library(ggplot2)
+```
+```{r, cache = TRUE}
+# Generate and save a scatterplot of price vs carat for every level of cut
+for(cut.level in levels(diamonds[["cut"]])) {
+  file.name <- paste("./figures/", cut.level, ".pdf", sep = "") # Define file name based on cut
+  pdf(file = file.name, width = 6, height = 5)  # Open pdf graphics device
+  print(qplot(carat, price, colour = color, data = subset(diamonds, subset = cut == cut.level)))
+  dev.off() # Close pdf graphics device
+}
+```
+
+R with SQL
+====
+- Most businesses use some kind of database for storing their data (commonly SQL)
+
+- We'll discuss two topics:
+  - Using `sqldf` package to interact with R data frames with SQL queries
+  - Using `RSQLite` and `RMySQL` to interact with SQL databases (on **Thursday**)
+  
+- Why bother with databases?
+  - R data frames exist in **memory**, not on your hard disk
+  - If you're only using a small fraction of your data, this is wasteful
+  - Databases store data on your disk, and let you load into memory only the parts you need
+
+sqldf package
+====
+
+- If you already know some SQL, you might find R's data manipulation functions somewhat unnatural 
+
+- `sqldf` allows you to use SQL queries on your data frames
+
+- The data frame is still stored in memory!  (You can just query it in a different way)
+
+sqldf
+==== 
+```{r}
+# Note, if you don't have X11 on your Mac, loading sqldf will crash your machine
+library(sqldf)
+```
+
+- Let's go back to our diamonds data set and see how we can interact with it using `sqldf()`
+
+- This is easier to do in a demo than with slides...
+
+
