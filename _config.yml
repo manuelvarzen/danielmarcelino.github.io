@@ -1,8 +1,8 @@
 name: EnfoRced Data Analysis
 author: Daniel Marcelino
 description: "Website of Daniel Marcelino"
-#baseurl: http://danielmarcelino.com
-url: http://danielmarcelino.github.io
+baseurl: ""
+#url: http://danielmarcelino.github.io
 highlighter: pygments
 permalink: /blog/:categories/:year/:month/:day/:title.html
 markdown: kramdown
