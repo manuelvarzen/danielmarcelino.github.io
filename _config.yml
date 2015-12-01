@@ -1,76 +1,178 @@
-#
-# This file contains configuration flags to customize your site
-#
+# Site settings
 
-# Name of your site (displayed in the header)
-name: Jonathan Robinson
+# NB! Set your site's url, otherwise stuff will break :)
 
-# Short bio or description (displayed in the header)
-description: You are reading my thoughts?
-
-# URL of your avatar or profile pic (you could use your GitHub profile pic)
-avatar: https://40.media.tumblr.com/6ba69eee146d6fd3f7863ffb63d343e9/tumblr_nuqwxdsI3G1qaxxauo1_1280.jpg
-#
-# Flags below are optional
-#
-
-# Includes an icon in the footer for each username you enter
-footer-links:
-  dribbble:
-  email: jonathanmrobinson2@gmail.com
-  facebook:
-  flickr:
-  github: jonrobinson2/
-  instagram:
-  linkedin: jonathanmrobinson2
-  pinterest:
-  rss: # just type anything here for a working RSS icon, make sure you set the "url" above!
-  twitter: jon_m_rob
-  stackoverflow: # your stackoverflow profile, e.g. "users/50476/bart-kiers"
-  youtube: # channel/<your_long_string> or user/<user-name>
-
-# Enter your Disqus shortname (not your username) to enable commenting on posts
-# You can find your shortname on the Settings page of your Disqus account
-disqus:
-
-# Enter your Google Analytics web tracking code (e.g. UA-2110908-2) to activate tracking
-google_analytics:
-
-# Your website URL (e.g. http://barryclark.github.io or http://www.barryclark.co)
-# Used for Sitemap.xml and your RSS feed
-url:
+#url: "https://danielmarcelino.github.io"
 
 # If you're hosting your site at a Project repository on GitHub pages
-# (http://yourusername.github.io/repository-name)
-# and NOT your User repository (http://yourusername.github.io)
+# (https://yourusername.github.io/repository-name)
+# and NOT your user repository (https://yourusername.github.io)
 # then add in the baseurl here, like this: "/repository-name"
-baseurl: ""
-
 #
-# !! You don't need to change any of the configuration flags below !!
-#
+# NB! Without this *nothing* will work, because it's used in every path :)
 
-markdown: redcarpet
+baseurl: /danielmarcelino
+
+# Google tracking id to track your visitors
+
+google-tracking-id: "UA-24186657-1"
+
+# Forces https everywhere in your website, except when you serve it locally
+# If you are not hosted on Github Pages, and your host doesn't support https
+# then you should disable it
+
+force-https: True
+
+#############
+# HTML Head #
+#############
+
+lang: "en"
+author: "Daniel Marcelino"
+title: "{ EnfoRced Data Analysis }"
+description: "Blog and Website of Daniel Marcelino"
+keywords: "marcelino, daniel, personal, R, data analysis"
+favicon: "/img/favicon.ico"
+404-img: "/img/labtocat.png"
+
+################
+# Header layout #
+################
+
+black-favicon: "/img/black-lab-glass.ico"
+
+background-img: "../img/header-bg.jpg"
+
+##############################
+# Dynamic Text on the Header #
+##############################
+
+dynamic-typing: True
+shuffle: True # Shuffle the lines.
+loop: True
+loop-count: False # Set False for infinite loop, or set any number for finite loop.
+type-speed: 10
+start-delay: 200
+delete-delay: 5000
+lines: # You can add HTML Tags in the Text
+  - text: "The lower you fall, the higher you'll fly."
+  - text: "Where’s your will to be weird?"
+
+me-img: "/img/jetpacktocat.png"
+
+################
+# Web app mode #
+################
+
+web-app-mode: True
+
+# Icons for Web App mode
+
+icon-36p: "/img/web-app/icon-36p.png"
+icon-48p: "/img/web-app/icon-48p.png"
+icon-72p: "/img/web-app/icon-72p.png"
+icon-96p: "/img/web-app/icon-96p.png"
+icon-144p: "/img/web-app/icon-144p.png"
+icon-192p: "/img/web-app/icon-192p.png"
+
+########
+# Blog #
+########
+
+post-preview-words: 96
+
+paginate: 5
+
+email-share: True
+fb-share: True
+twitter-share: True
+linkedin-share: True
+reddit-share: True
+google-plus-share: True
+tumblr-share: True
+pinterest-share: True
+pocket-share: True
+vkontakte-share: True
+
+disqus-shortname: "daniel-marcelino"
+
+syntax-highlight: True
+
 highlighter: pygments
-permalink: /:title/
+############
+# Timeline #
+############
 
-redcarpet:
-  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data"]
+events:
+  - image: "/img/timeline/spidertocat.png"
+    date: "September 2013 - Today"
+    description: "Saving the neighborhood!"
+  - image: "/img/timeline/baracktocat.jpg"
+    date: "September 2007 - August 2013"
+    description: "Started coding"
 
-# The release of Jekyll Now that you're using
-version: v1.1.0
+# First image of the Timeline
 
-# Set the Sass partials directory, as we're using @imports
+timeline-img: "/img/timeline/default.png"
+
+###########
+# Contact #
+###########
+
+email: "dmarcelino@live.com"
+
+##################
+# Social Buttons #
+##################
+
+social:
+  - title: "facebook"
+    url: "https://facebook.com/"
+  - title: "twitter"
+    url: "https://twitter.com/"
+  - title: "github"
+    url: "https://github.com/danielmarcelino"
+  - title: "bitcoin"
+    url: "https://blockchain.info/address/1LHuKC9Em3KA5yoZaf7nngnNdf9K7s2gSi"
+  - title: "rss"
+    url: "/feed.xml"
+
+############
+# 404 page #
+############
+
+404-img: "/img/labtocat.png"
+
+################################################################################
+
+# NB! Tread carefully if you want to change the variables below this point!
+
+# Sections shown in the index page
+
+pages_list:
+  About: 'about'
+  Blog: 'latest-post'
+  Timeline: 'timeline'
+  Contact: 'contact'
+
+# Exclusion list from the generated _site
+
+exclude: ["LICENSE", "README.md", "CONTRIBUTING", "CONTRIBUTORS", "scripts", ".gitignore", "_drafts", "Rmd"]
+
+# Pagination path
+
+paginate_path: "/blog/:categories/:year/:month/:day/:title.html"
+
+# Enable minification SASS
+
 sass:
-  style: :expanded # You might prefer to minify using :compressed
+  style: compressed
 
-# Use the following plug-ins
-gems: 
-  [jekyll-twitter-plugin,jekyll-sitemapgems]
-  
-# Exclude these files from your production _site
-exclude:
-    - Gemfile
-    - Gemfile.lock
-    - LICENSE
-    - README.md
+gems:
+  - jekyll-paginate
+  - jemoji
+
+excerpt_separator: <!--more-->
+google_author:             "https://plus.google.com/u/0/117070227044076697188/"
+google_site_verification:  "Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ"
+bing_webmastertools_id:    "97837256955BD270FD688E2B50F89FDB"
