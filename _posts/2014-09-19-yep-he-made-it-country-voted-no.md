@@ -3,7 +3,8 @@ layout: post
 title: "Yep. He made it; country voted No" 
 date: 2014-09-19
 category: R
-tags: [R, elections, Scotland]
+tags: [elections, Scotland]
+comments: true
 ---
 
 ![Keep Calm]({{ site.url }}/img/website/keep-calm-and-carry-on.jpg)

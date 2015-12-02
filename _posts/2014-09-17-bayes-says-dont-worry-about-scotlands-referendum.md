@@ -3,7 +3,8 @@ layout: post
 title: "Bayes says `don't worry` about Scotland's Referendum" 
 date: 2014-09-17
 category: R
-tags: [R, referendum, Scotland]
+tags: [referendum, Scotland]
+comments: true
 ---
 
 
