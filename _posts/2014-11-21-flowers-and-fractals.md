@@ -4,18 +4,19 @@ title: "Flowers/Fractals"
 date: 2014-11-21
 category: R
 tags: [R, fractals]
+comments: true
 ---
 
 Last week, I attended a "Flower Festival" where I had the opportunity to admire several of the most beautiful and awarded flowers, orchids, and decoration plants. Surprisingly, though, I never had thought of flowers like fractals the way I did this time.
 
 <!--more-->
 
-![Flower](/images/blog/2014/flower_joinville1.jpeg)
+![Flower](/img/2014/flower_joinville1.jpeg)
 
 ## Introduction
 Fractals attract lots of interest, especially from mathematicians who actually spend some time/research trying to learn about their structures. But what makes something a fractal? A fractal is defined as an object that displays self-similarity on all scales. But the object doesn’t need to have exactly the same structure at all scales only the same sort of structure must be visible or recognizable any how. 
 
-![Flower](/images/blog/2014/flower_joinville.jpeg)
+![Flower](/img/2014/flower_joinville.jpeg)
 
 The structure or the equation that defines a fractal is most of the time very simple. For instance, the formula for the famous [Mandelbrot](https://en.wikipedia.org/wiki/Mandelbrot_set) is \\[ z_{n+1}=z_n^2+c \\].
 
@@ -38,7 +39,7 @@ Graphing these results against *n* would create an upward parabolic curve becaus
 
 And this movement back and forth will continue forever as we can imagine. I figured out, that the Mandelbrot set is made up of all the values for $z$ that stay finite, thus a solution such as the first example for $c = 1$ is not valid and will be thrown out because $z$ in those cases goes to infinity and Mandelbrot lives in a finite world. The following is an example of such set.
 
-![Mandelbroat](/images/blog/2014/Mandelbrot.gif)
+![Mandelbroat](/img/2014/Mandelbrot.gif)
 
 
 The script for this set:
