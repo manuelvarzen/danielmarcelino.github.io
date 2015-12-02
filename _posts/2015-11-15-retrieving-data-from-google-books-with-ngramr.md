@@ -17,9 +17,9 @@ tags: [ngramr, how-to]
 <hr/>
 
 ## Introduction 
-Google has a tool for tracking the frequency of words or phrases across its vast collection of scanned texts, the Google Books. The [Google Ngram Viewer](https://books.google.com/ngrams) reports data and graphs the frequency of words encountered in one or across several *corpus* over time. For instance, the chart above campares the appearance in the English corpus of following bigrams names: "Karl Marx", "Max Weber", "Emile Durkheim". 
+Google has a tool for tracking the frequency of words or phrases across its vast collection of scanned texts, the Google Books. The [Google Ngram Viewer](https://books.google.com/ngrams) reports data and graphs the frequency of words encountered in one or across several *corpus* over time. For instance, the chart above campares the appearance ==in the English== *corpus* of following bigrams names: "Karl Marx", "Max Weber", "Emile Durkheim". 
 
-The y-axis shows of all the ==bigrams== contained in the sample of books written in English, what percentage of them are "Karl Marx" or "Max Weber" or "Emile Durkheim"? From the chart above, we can conclude that Marx is the most famous sociologist among the others founding fathers, with a peak in popularity about 1975-6, but his influence has been declining ever since. These thinkers are considered the founding fathers of sociology because they set out to develop practical and scientifically sound methods of research to examine theories of the social world rooted in a specific historical and cultural context. 
+The y-axis shows of all the bigrams contained in the sample of books written in English, what percentage of them are "Karl Marx" or "Max Weber" or "Emile Durkheim"? From the chart above, we can conclude that Marx is the most famous sociologist among the others founding fathers, with a peak in popularity about 1975-6, but his influence has been declining ever since. These thinkers are considered the founding fathers of sociology because they set out to develop practical and scientifically sound methods of research to examine theories of the social world rooted in a specific historical and cultural context. 
 
 ## Using R with Google Ngram Viewer
 
