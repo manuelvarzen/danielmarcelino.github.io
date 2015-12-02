@@ -15,18 +15,18 @@ The election gave rise to an even more fragmented lower chamber in Brazil.
 <hr/>
 
 #### The 2014 legislative election
-This year, the election gave rise to an even more fragmented House. The way political scientists measure how fragmented is political system or a legislative body is by applying a formula for calculating the Effective Number of Parties. It's a measure that helps researchers to go beyond the simple (absolute) number of parties. A widely accepted formula was proposed by M. Laakso and R. Taagepera: 
+ The election this year gave rise to an even more fragmented lower house. The way political scientists measure how fragmented a political system is or a legislative body is by applying one of the several formulas for calculating the *Effective Number of Parties*. The *Effective Number of Parties* is a statistic that helps researchers to go beyond the simple (absolute) count of the number of parties. A widely accepted formula was proposed by M. [Laakso and R. Taagepera (1979)](http://cps.sagepub.com/content/12/1/3.extract): 
 
-\\[ N =\frac{1}{sum_{i=1}^{n}p_{i}^{2}} \\]
+\\[ N =\frac{1}{\sum_{i=1}^{n}p_{i}^{2}} \\]
 
  where N denotes the effective number of parties and p_i denotes the $i^{th}$ party’s fraction of the seats. The problem with this method is that it produces distortions, particularly for small parties.
 
-Some years ago, Grigorii Golosov proposed a new method for computing the effective number of parties in which both larger and smaller parties are not attributed unrealistic scores as those believed with the Laakso—Taagepera index.
+Some years ago, [Grigorii Golosov (2010)](http://ppq.sagepub.com/content/16/2/171.abstract) proposed a new method for computing the effective number of parties, in which both larger and smaller parties are not attributed unrealistic scores as those believed with the Laakso—Taagepera index above. The formula can be expressed as:
 
-\\[ N = sum_{i=1}^{n}\frac{p_{i}}{p_{i}+p{i}^{2}-p_{i}^{2}} \\]
+\\[ N = \sum_{i=1}^{n}\frac{p_{i}}{p_{i}+p{i}^{2}-p_{i}^{2}} \\]
  
-To compare the evolution of the effective number of parties in the Brazilian lower chamber between 2002 to 2014 elections, I wrote a small function that computes some political diversity measures including the new proposed method of counting parties by [Golosov (2010)](http://ppq.sagepub.com/content/16/2/171.abstract). 
-The results suggest we had a big jump between 2010 to 2014, from 10.5 to 14.5 in the Golosov scale. The results using the standard method by Laakso and Taagepera were also computed.
+To compare the evolution in the effective number of parties in the Brazilian lower chamber between 2002 to 2014 elections, I programed a small function that computes some of the political diversity measures, including the method by [Golosov (2010)](http://ppq.sagepub.com/content/16/2/171.abstract). 
+The results suggest we had a big jump between 2010 to 2014, from 10.5 to 14.5 in the Golosov's scale. The results using the standard method by Laakso and Taagepera are also computed for comparison.
 
 {% highlight r %}
 library(SciencesPo)
