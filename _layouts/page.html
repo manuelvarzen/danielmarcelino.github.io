@@ -10,11 +10,12 @@ layout: default
 
   <h1>{{ page.title }}</h1>
 
-<div class="clear"></div>
-
-<div id="block">
-	<div class="prose"> 
-	{{content}}
-	</div>
-</div>
+  <div class="entry">
+    {{ content }}
+  </div>
 </article>
+
+
+<div id="footer">
+{% include footer.html %}
+</div>
