@@ -11,7 +11,7 @@ Parallel computing is incredibly useful, but not every thing worths distribute a
 
 <!--more-->
 
-![Experiment Result](/images/blog/2014/parallel.png)
+![Experiment Result]({{ site.url }}/img/2014/parallel.png)
 
 Roughly a year ago I published an article about parallel computing in R [here](http://danielmarcelino.com/r/05-2013/parallel-processing-when-does-it-worth/), in which I compared computation performance among 4 packages that provide R with parallel features once R is essentially a single-thread task package.
 
@@ -28,4 +28,4 @@ Overall, every function is doing a better job now than one year ago, but the **m
 
 Now, comparing the older graph with the following one suggests that a “microrevolution” is taking place; the figures changed a big deal upon parallelizing small data vectors < 10k; distributing across CPUs seems to be less time consuming now than let it go serialized. Single-core computing (lapply function) is still an alternative when datasets are very small 1k to 10k. Nonetheless, if your data is greater than 10k rows, lapply will be your last desirable performance function.
 
-![Linear Relationship](/images/blog/2014/parallelfinal.png)
+![Linear Relationship]({{ site.url }}/img/2014/parallelfinal.png)

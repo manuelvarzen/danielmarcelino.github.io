@@ -10,7 +10,7 @@ Today, I was chatting to a friend who is working on his Ph.D thesis which coinci
 
 <!--more-->
 
-![Looping](/images/blog/2012/looping.png)
+![Looping]({{ site.url }}/img/2012/looping.png)
 
 We discussed about analyzing probabilities of a particular group to grasp more money than the others, particularly, between male and female candidates given the district. 
 I thought that a preliminary approach might consider identifying  whether a candidate received less or more money than the district average. In doing so, should be valuable to coding those case as "0 or 1" accordingly, so you can perform a logistic regression to  test for gender effects. 
