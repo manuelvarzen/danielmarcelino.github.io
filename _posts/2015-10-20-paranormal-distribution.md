@@ -13,7 +13,7 @@ What if, instead of a normal, you got a paranormal distribution?
 
 What if, instead of a normal, you got a paranormal distribution?
 
-![Paranormal Distribution](/images/blog/2015/paranormal.png)
+![Paranormal Distribution]({{ site.url }}/img/2015/paranormal.png)
 
 In case you want to read an influential paper on this matter, you can find it [here](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2465539/).
  

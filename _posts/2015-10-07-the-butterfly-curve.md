@@ -3,7 +3,8 @@ layout: post
 title: "The butterfly curve"
 date: 2015-10-07
 category: R
-tags: [R, Butterfly curve]
+tags: [Butterfly curve]
+comments: true
 ---
 
 Have you ever thought drawing your own butterfly?
@@ -11,7 +12,7 @@ Have you ever thought drawing your own butterfly?
 <!--more-->
 
 
-![Linear Relationship](/images/blog/2015/butterfly.png)
+![Linear Relationship]({{ site.url }}/img/2015/butterfly.png)
 
 
 

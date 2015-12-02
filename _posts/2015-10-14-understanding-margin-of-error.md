@@ -3,14 +3,15 @@ layout: post
 title: "Understanding Margin of Error for Small Populations"
 date: 2015-10-13
 category: R
-tags: [R, Survey, Margin of error]
+tags: [Survey, Margin of error]
+comments: true
 ---
 
 A comment on why does a pollster reported a narrow margin of error despite the small sample.
 
 <!--more-->
 
-I got an email today inquiring if the margin of error reported in the newest poll by Datafolha would possibly be misleading. The polling firm often report surveys with regular sizes (1000/2400), so the margin of error calculated is in the range of +/-2% to +/-3%. 
+I got an email today inquiring if the margin of sampling error reported in the newest poll by Datafolha would possibly be misleading. The polling firm often report surveys with regular sizes (1000/2400), so the margin of error calculated is in the range of +/-2% to +/-3%. 
 
 However, in its [latest poll](http://www1.folha.uol.com.br/poder/2015/10/1693217-parlamentares-sao-mais-liberais-do-que-o-eleitorado.shtml), the pollster sampled only 340 congressmen, reporting a margin of error of 3%. This, apparently did puzzle the attentive reader, who knows the margin of error is an inverse square root function of the sample size. She asks: "Is the reported margin of error correct? Given such a small sample, shouldn't it be something around 5.3% or so?
   
@@ -18,7 +19,7 @@ My answer to the question was "sort of". Firstly, given the fact the population 
 
 Adjusted by the FPCF, the margin of error is close to what reported by the Datafolha, however, by omitting decimal digits, the pollster arbitrarily narrows the confidence interval (2 * the margin of error) in about 1%. It's not that usual to round margins of error when reporting them, as a decimal digit may imply in substantial differences in the sample size as illustrated in the graph from Marcelino and Angel's paper.
 
-![Sample size vs Confidence Interval](/images/blog/2015/sample_size.jpg)
+![Sample size vs Confidence Interval]({{ site.url }}/img/2015/sample_size.jpg)
 
 For pedagogical reasons, I won't go through the simplified formula. So, let do it step-by-step.
 

@@ -4,14 +4,13 @@ title: "A bit more fragmented"
 date: 2014-10-06
 category: R
 tags: [R, Brazil, Golosov, Effective number of parties]
-image: crocodile-zebra.png
 ---
 
 The election gave rise to an even more fragmented lower chamber in Brazil.
 
 <!--more-->
 
-![The Golosov effective number of parties](/images/blog/2015/EffectiveNumberParties.png)
+![The Golosov effective number of parties]({{ site.url }}/img/2015/EffectiveNumberParties.png)
 
 <hr/>
 

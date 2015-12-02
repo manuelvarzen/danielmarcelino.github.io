@@ -13,7 +13,7 @@ I've already posted on 'house effects', the tendency of polling organizations to
 <!--more-->
 
 
-![House Effects](/img/2015/3d-house-effects_argentine.png)
+![House Effects]({{ site.url }}/img/2015/3d-house-effects_argentine.png)
 
 
 I've already [posted](http://danielmarcelino.com/r/08-2015/Argentine-general-election-2015/) on "house effects", the tendency of polling organizations to systematically vary in their results from one another. In this post, I look specifically at these house effects, and show which polling organizations over or under-estimate support for each candidate--compared to the average--in this presidential election in Argentina.

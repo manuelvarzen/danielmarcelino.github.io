@@ -3,8 +3,8 @@ layout: post
 title: "A Talk About Campaign Finance in Brazil"
 date: 2015-10-17
 category: R
-tags: [R, Brazil, campaign finance
-]
+tags: [Brazil, campaign finance]
+comments: true
 ---
 
 Comments on campaign finance in brazil.
@@ -15,9 +15,9 @@ Last week, I delivered a talk at [University of Brasilia](http://www.unb.br) abo
 
 Though I covered a lot of factors in my talk, I think, I had the wrong pictures to show for a heterogeneous crowd. Instead of wasting time showing regression tables, and trying to solve understanding issues after showing them, I should have shown simple yet powerful pictures like the following ones, so to give the intuition about the relationship between money and votes, generally debated in the literature and media.
 
-![Linear Relationship with SS](images/blog/2015/linearSS.png)
+![Linear Relationship with SS]({{ site.url }}/img/2015/linearSS.png)
 
-![U-Shape Relationship](/images/blog/2015/u-shape.png)
+![U-Shape Relationship]({{ site.url }}/img/2015/u-shape.png)
 
 Of course, the biggest challenge of this scholarship is how to disentangle any existing confounders in this rather seemingly relationship: votes ~ money.
 
@@ -27,7 +27,7 @@ The problem arises because we can see one condition, but never both at the same 
 
 As Angrist and Pischke point out in their 2009's book, if selection bias is positive, the naïve comparison `E(Y_1i | c_i=1) - E(Y_0i | c_i=0)` can be a real problem, since the benefits of spending extra money is exaggerated. 
 
-![U-Shape Relationship](images/blog/2015/Angrist_Pischke_bias.png)
+![U-Shape Relationship]({{ site.url }}/img/2015/Angrist_Pischke_bias.png)
 
 It could be "easier" to provide causal inference on this if we run a randomized experiment. If the treatment of campaign spending levels is randomly assigned, selection bias would be zero. The experiment don't need to be that large, if treated units are random selection from the population of candidates, then the impact on treated also applies to the population. Isn't cool?
 

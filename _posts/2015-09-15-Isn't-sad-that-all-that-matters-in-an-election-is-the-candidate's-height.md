@@ -3,7 +3,8 @@ layout: post
 title: "Isn't sad that all that matters in an election is the candidate's height?"
 date: 2015-09-15
 category: [R]
-tags: [R, candidates' height, elections]
+tags: [candidates' height, elections]
+comments: true
 ---
 
 The candidate's height may be very important in elections.
@@ -11,7 +12,7 @@ The candidate's height may be very important in elections.
 <!--more-->
 
 
-![Linear Regression](/images/blog/2015/Presidentsheight.png)
+![Linear Regression]({{ site.url }}/img/2015/Presidentsheight.png)
 
 
 I came across the claim in the US [press](http://www.usnews.com/news/articles/2015/07/08/how-tall-are-the-2016-presidential-candidates) suggesting that the taller the candidate, the better his/her chances for success in presidential elections. After a little search, I found this [Wikipedia](https://en.wikipedia.org/wiki/Heights_of_presidents_and_presidential_candidates_of_the_United_States) entry, and even some academic research on the issue, mainly relating this phenomenon to some sort of evolutionary instinctual preference. At least in the US, it does make sense to ask how tall is your favorite 2016 presidential candidate.
