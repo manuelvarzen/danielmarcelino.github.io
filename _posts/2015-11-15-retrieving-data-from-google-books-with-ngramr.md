@@ -34,7 +34,7 @@ The first thing to do is to load the `ggplot2` and `ngramr` packages. In case yo
 The following is equivalent to the chart above for the three sociologists bigrams, except that I'm applying a smoothed line--or moving average of 5 years, so trends become more apparent. For instance, the data shown for 2000 is an average of the raw count for 2000 plus 5 values on either side: ("count for 1995" + "count for 2000" + "count for 2005"), divided by 3. So a smoothing of 5 means that 11 values will be averaged: 5 on either side, plus the target value in the center of them.
 
 
-{% highlight r %}
+{% highlight c %}
 ng <- c("(Karl Marx)", "(Max Weber)", "(Emile Durkheim)") 
 ggram(ng, year_start = 1800, 
       year_end = 2012,  
