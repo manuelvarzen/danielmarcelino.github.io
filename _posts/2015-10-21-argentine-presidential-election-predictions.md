@@ -13,9 +13,9 @@ The model indicates the official candidate has some chance of making it right wa
 
 
 ### Predictions
-The model I'm using indicates the official candidate has some chance of making it right way this Sunday, avoiding a runoff with Mauricio Macri in late November. The electoral preference distributions are quite apart from each other, with the distribution of Daniel Scioli about 40% of the positive vote, while Macri's about 30%. 
+The model I'm using indicates the official candidate has some chance of making it right way this Sunday, avoiding a runoff with Mauricio Macri in late November. The electoral preference distributions are quite apart from each other, with the distribution of Daniel Scioli about 40% [37-43] of the positive vote, while Macri's about 30% [27-33]. 
 
-![Preference Distributions]({{ site.url }}/img/2015/probs_argentine.png)
+![Preference Distributions]({{ site.url }}/img/blog/2015/probs_argentine.png)
 
 The model built on more than 115 polls by 24 pollsters suggests Scioli has 86% of probability of finishing above 40% of the positive votes. But to avoid a runoff, he must obtain more than 45% of the valid votes, or more than 40% with a difference greater than 10% from the second candidate, so he's just around this threshold. 
 
