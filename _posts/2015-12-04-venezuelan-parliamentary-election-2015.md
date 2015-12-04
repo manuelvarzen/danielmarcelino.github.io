@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Venezuela's 2015 Parliamentary Elections
-date: 2015-12-03
+date: 2015-12-04
 category: R
 tags: [polls, Venezuela, elections]
 comments: true
@@ -9,8 +9,8 @@ comments: true
 
 Next Sunday Venezuelans are heading to the polls once again with  international concerns about the clearness of the balloting. To get an idea about the political climate over there, I collected some polls made available on the internet. The surprising thing from those surveys is a tremendous variability from pollster to pollster; you may find national polls fielded in the same period with estimates varying as much as 20%, is it dramatic? If you always wanted to see house bias operating in practice, the Venezuelan elections may provide you a good case then.   
 
-![center]({{ site.url }}/img/2015/venezuela1.png)
 
+![center]({{ site.url }}/img/2015/venezuela1.png)
 
 
 {% highlight r %}
@@ -19,7 +19,7 @@ library(ggplot2)
 library(dplyr)
 library(SciencesPo) 
 
-source = "https://github.com/danielmarcelino/Polling/raw/master/Venezuela/polls.txt"
+source = "https://github.com/danielmarcelino/Polling/raw/master/Venezuela/data/polls.txt"
 
 data <- getdata(source)
 

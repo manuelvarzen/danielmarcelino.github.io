@@ -6,7 +6,7 @@
 name: EnfoRced Data Analysis
 
 # Short bio or description (displayed in the header)
-description: Blog and Website of Daniel Marcelino
+description: Blog of Daniel Marcelino
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
 avatar: https://41.media.tumblr.com/05546119a35e7acb34a47344bc7de012/tumblr_nypg9aPsBy1v0aqj1o1_500.jpg
@@ -75,3 +75,4 @@ exclude:
     - Gemfile.lock
     - LICENSE
     - README.md
+	- drafts
