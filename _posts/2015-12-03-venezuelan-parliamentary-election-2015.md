@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Venezuela's 2015 Parliamentary Election Forecast
+title: Venezuela's 2015 Parliamentary Elections
 date: 2015-12-03
 category: R
 tags: [polls, Venezuela, elections]
