@@ -1,26 +1,27 @@
 ---
 layout: post
-title: "Flowers/Fractals" 
+title: "Flowers Fractals, or Fractal Flowers" 
 date: 2014-11-21
 category: R
-tags: [R, fractals]
+tags: [fractals]
 comments: true
 ---
 
-Last week, I attended a "Flower Festival" where I had the opportunity to admire several of the most beautiful and awarded flowers, orchids, and decoration plants. Surprisingly, though, I never had thought of flowers like fractals the way I did this time.
+Last week I attended a "Flower Festival" in Joinville, where I had opportunity to admire several of among the most beautiful and awarded flowers, orchids, and decoration plants. Surprisingly, though, I never had thought on flowers like  fractals the way I did this time.
 
 <!--more-->
 
-![Flower](/img/2014/flower_joinville1.jpeg)
+![Flower]({{ site.url }}/img/2014/flower_joinville1.jpeg)
 
 ## Introduction
-Fractals attract lots of interest, especially from mathematicians who actually spend some time/research trying to learn about their structures. But what makes something a fractal? A fractal is defined as an object that displays self-similarity on all scales. But the object doesn’t need to have exactly the same structure at all scales only the same sort of structure must be visible or recognizable any how. 
+Fractals attract lots of interest, especially from mathematicians who actually spend time studying about their structures and combinations. But what makes something a fractal? A fractal is defined as an object that displays self-similarity on all scales. But the object doesn’t need to have exactly the same structure at all scales only the same sort of structure must be visible or recognizable any how. 
 
-![Flower](/img/2014/flower_joinville.jpeg)
+![Flower]({{ site.url }}/img/2014/flower_joinville.jpeg)
 
 The structure or the equation that defines a fractal is most of the time very simple. For instance, the formula for the famous [Mandelbrot](https://en.wikipedia.org/wiki/Mandelbrot_set) is \\[ z_{n+1}=z_n^2+c \\].
 
 
+## How can we start?
 We start by plugging in a constant value for $c$, $z$ can start at zero. After one iteration, the equation gives us a new value for $z$; then we plug this back into the equation at old $z$ and iterate it again, it can proceed infinitely.
 
 As a very simple example, let’s start this with c = 1.
@@ -39,10 +40,10 @@ Graphing these results against *n* would create an upward parabolic curve becaus
 
 And this movement back and forth will continue forever as we can imagine. I figured out, that the Mandelbrot set is made up of all the values for $z$ that stay finite, thus a solution such as the first example for $c = 1$ is not valid and will be thrown out because $z$ in those cases goes to infinity and Mandelbrot lives in a finite world. The following is an example of such set.
 
-![Mandelbroat](/img/2014/Mandelbrot.gif)
+![Mandelbroat]({{ site.url }}/img/2014/Mandelbrot.gif)
 
 
-The script for this set:
+#### The script for this set:
 
 {% highlight r %}
 library(caTools) 
