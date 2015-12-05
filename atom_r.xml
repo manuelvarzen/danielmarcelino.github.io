@@ -1,13 +1,13 @@
 ---
 layout: null
-permalink: /blog/category/r/rss/
+permalink: /r/rss/
 ---
 
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
- <title>{{ site.title }} - R category </title>
- <link href="http://{{ site.url }}/blog/category/r/rss/" rel="self"/>
+ <title>Daniel</title>
+ <link href="http://{{ site.url }}/r/rss/" rel="self"/>
  <link href="http://{{ site.url }}/"/>
  <updated>{{ site.time | date_to_xmlschema }}</updated>
  <id>{{ site.url }}</id>
