@@ -15,11 +15,9 @@
   
   data = [
     "Hello!",
-    "I'm Joshua Kunst",
-    "I'm a data lover",
+    "I'm Daniel Marcelino",
     "I'm a data wrangler",
     "I'm a data explorer",
-    "I'm a data asdf... :B",
     "I <3 code",
     "I <3 visualizations",
     "I <3 R",
