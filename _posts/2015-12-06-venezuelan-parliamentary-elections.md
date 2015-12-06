@@ -1,11 +1,13 @@
 ---
 layout: post
-title: "Venezuelan Parliamentary Election: What do the Polls Say?"
+title: Venezuelan Parliamentary Election: What do the Polls Say?
 date: 2015-12-06
 category: [R]
 tags: [Venezuela, election, polls]
  comments: true
 ---
+
+
 
 There is not a huge population of opinion polls covering this parliamentary election in Venezuela, but all I've can be used to gauge the public opinion by the local polling houses. This posting begs an obvious question: how has the mood in Venezuela varied over time with respect to voting intentions for the two political blocs? Next, can we detect any biases among those publishing polls?
 
