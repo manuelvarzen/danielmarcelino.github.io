@@ -1,7 +1,12 @@
 ---
 layout: post
 title: Venezuela's 2015 Parliamentary Elections
+author: Daniel Marcelino
 date: 2015-12-04
+output:
+ html_document: 
+   keep_md: yes
+   toc: yes
 category: R
 tags: [polls, Venezuela, elections]
 comments: true
