@@ -1,12 +1,12 @@
 ## About
 
-Scripts and data to recreate analyses published on my [personal site](http://danielmarcelino.com)) and/or [http://danielmarcelino.github.io](http://danielmarcelino.github.io). My site uses [Jekyll](http://github.com/mojombo/jekyll)
+Scripts and data to recreate analyses published on my [personal site](http://danielmarcelino.com) and/or [http://danielmarcelino.github.io](http://danielmarcelino.github.io).
 
 </hr>
 ## Blog
 There's a TODO list of rough ideas (of varying quality) that I might try to do some day, but by all means beat me to them and share the result!
 
-Some of the scripts make use of *SciencesPo* which can be installed with: install.packages("SciencesPo"). Calls to theme_pub() or theme_538() can just be deleted or replaced with theme_bw() for avoiding error message.
+Some of the scripts make use of *SciencesPo* which can be installed with: install.packages("SciencesPo"). Calls to theme_pub() or theme_538() can just be deleted or replaced with theme_bw() to avoid error message.
 
 </hr>
 
