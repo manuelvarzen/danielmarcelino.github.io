@@ -36,7 +36,11 @@ Nonetheless, if we accept the above models as a sound estimate of the expected p
 
 The graph below shows the distributions per polling house for those who polled more than a single poll in this dataset.
 
-![House Effects]({{ site.url }}/img/code-2015-12-06-venezuelan-parliamentary-elections/biases-3.png)
+
+<a href="{{ site.baseurl }}/img/code-2015-12-06-venezuelan-parliamentary-elections/biases-3.png">
+<img class="imgfull" src="{{ site.baseurl }}/img/code-2015-12-06-venezuelan-parliamentary-elections/biases-3.png" />
+</a>
+
 
 We've to keep in mind that there are important caveats which we're not addressing here, as that different polls have used different question sets, methods etc, so this isn't evidence for anything underhanded per se. It seems reasonable to expect that while parties might have good reasons to publish polls in their favor, pollsters conducting the polls should generally be more or less indifferent.
 
