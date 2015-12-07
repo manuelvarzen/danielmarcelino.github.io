@@ -35,8 +35,6 @@ The graph below shows the distributions per polling house for those who polled m
 
 We've to keep in mind that there are important caveats which we're not addressing here, as that different polls have used different question sets, methods etc, so this isn't evidence for anything underhanded per se. It seems reasonable to expect that while parties might have good reasons to publish polls in their favor, pollsters conducting the polls should generally be more or less indifferent.
 
-The results again are hampered by a small number of data points per pollster, but the pollster Panelbase emerges as one providing significantly yes-skewed poll results (p < 6 × 10-6). Interestingly they may be the only pollster here to have a rewards system inlace. The only other significantly non-zero biased results come again from TNS BMRB, who published most of their own polls in the above graph.
-
 The results are hampered by a small number of data points per pollster, and that to claim they are polling significantly above or below expectation, save for the *Hercón*, which is significantly more pro opposition (MUD) than expected, given the probability laws, although the p-value is just above the 5% thumb/convention. With a little research, I figure out that *Datanálisis* performed fine in the previous elections, and here it appears just around the center of the distribution leaning toward the Socialists (PSUV).
 
 
