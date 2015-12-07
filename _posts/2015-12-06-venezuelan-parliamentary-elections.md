@@ -38,7 +38,8 @@ We've to keep in mind that there are important caveats which we're not addressin
 The results are hampered by a small number of data points per pollster, and that to claim they are polling significantly above or below expectation, save for the *Hercón*, which is significantly more pro opposition (MUD) than expected, given the probability laws, although the p-value is just above the 5% thumb/convention. With a little research, I figure out that *Datanálisis* performed fine in the previous elections, and here it appears just around the center of the distribution leaning toward the Socialists (PSUV).
 
 
-|pollster           |         p|
+
+|**pollster**       |     **p**|
 |:------------------|---------:|
 |Meganalisis        | 0.1875000|
 |Venebarómetro      | 0.2500000|
@@ -51,6 +52,7 @@ The results are hampered by a small number of data points per pollster, and that
 |DatinCorp          | 0.5625000|
 |Keller y Asociados | 0.2500000|
 |Hercón             | 0.0625000|
+
 
 
 # Conclusion
