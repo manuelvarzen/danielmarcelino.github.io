@@ -180,6 +180,7 @@ DEPENDENCIES
   jekyll-feed
   jekyll-sitemap
   jekyll-twitter-plugin
+  redcarpet (~> 3.3.3)
 
 BUNDLED WITH
    1.10.6

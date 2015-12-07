@@ -9,3 +9,5 @@ gem 'font-awesome-less'
 gem 'jekyll-sitemap'
 
 gem 'jekyll-twitter-plugin'
+
+gem 'redcarpet', '~> 3.3.3'
