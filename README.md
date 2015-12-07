@@ -11,11 +11,12 @@ Some of the scripts make use of *SciencesPo* which can be installed with: instal
 </hr>
 
 ## Contents
-1. Showing explained variance from multilevel models [Post ](http://danielmarcelino.github.io/r/2011/10/03/explaining-variance-in-a-multilevel-model/)
+1. Showing explained variance from multilevel models [Post](http://danielmarcelino.github.io/r/2011/10/03/explaining-variance-in-a-multilevel-model/)
 
 2. ...
 
-3. Venezuela's 2015 Parliamentary Elections [Post ](http://danielmarcelino.github.io/r/2015/12/04/venezuelan-parliamentary-election-2015/)
+3. Venezuela's 2015 Parliamentary Elections [Post](http://danielmarcelino.github.io/r/2015/12/04/venezuelan-parliamentary-election-2015/)
+4. Venezuelan Parliamentary Election: What do the Polls Say? [Post](https://danielmarcelino.github.io/r/2015/12/06/venezuelan-parliamentary-elections/)
 
 </hr>
 
