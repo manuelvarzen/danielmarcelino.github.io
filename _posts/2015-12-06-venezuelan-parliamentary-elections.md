@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Venezuelan Parliamentary Election: What do the Polls Say?
-author: Daniel Marcelino
+title: "Venezuelan Parliamentary Election: What do the Polls Say?"
+author: "Daniel Marcelino"
 date: 2015-12-06
 output:
  html_document: 
