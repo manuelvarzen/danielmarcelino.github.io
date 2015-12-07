@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+		
+<title>&middot; Daniel &middot; Looping through factor variables</title>
+        <!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+
+        <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' chrome=1>
+	<meta name="google-site-verification" content="Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ" />
+	<meta name="bing_webmastertools_id" content="97837256955BD270FD688E2B50F89FDB" />
+    <meta name="description" content="Code and data"/>
+    <meta name="viewport" content="width=device-width">
+    <meta name="author" content="Daniel Marcelino"/>
+    <meta name="viewport" content="width=640px, initial-scale=1.0, maximum-scale=1.5">	
+    <meta name="keywords" content="Daniel Marcelino, SciencesPo, SoundexBr, r-project, r-cran, r, statistics, methods, programming, data mining, data visualization, datascience, data"/>	
+    
+    <meta name="description" content="Today, I was chatting to a friend who is working on his Ph.D thesis which coincidently is about my favorite topic: campaign contributions. 
+" />
+    <meta property="og:description" content="Today, I was chatting to a friend who is working on his Ph.D thesis which coincidently is about my favorite topic: campaign contributions. 
+" />
+    
+    <meta name="author" content="EnfoRced Data Analysis" />
+    
+    <meta property="og:title" content="Looping through factor variables" />
+    <meta property="twitter:title" content="Looping through factor variables" />
+    
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="alternate" type="application/atom+xml" title="EnfoRced Data Analysis - Blog of Daniel Marcelino" href="/atom.xml" />
+	 <link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis - Blog of Daniel Marcelino" href="/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis - Blog of Daniel Marcelino" href="/feed.r.xml" />
+	
+        <!-- Google Fonts -->
+		<link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,300,400,600" rel="stylesheet" type="text/css">
+		<link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
+        <!-- Custom CSS -->
+		  <!-- Jquery & D3js -->
+	   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+		
+		
+    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"><img src="https://41.media.tumblr.com/05546119a35e7acb34a47344bc7de012/tumblr_nypg9aPsBy1v0aqj1o1_500.jpg" /></a>
+
+          <div class="site-info">
+            <h1 class="site-name"><a href="/">EnfoRced Data Analysis</a></h1>
+            <p class="site-description">Blog of Daniel Marcelino</p>
+          </div>
+
+          <nav>
+            <a href="/">Blog</a>
+            <a href="/about">About</a>
+			<a href="/research">Research</a>
+			<a href="/randomwalks">Random Walks</a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main" class="container">
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [ ['$', '$'], ["\(", "\)"] ],
+        displayMath: [ ['$$', '$$'], ["\[", "\]"] ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+      //,
+      //displayAlign: "left",
+      //displayIndent: "2em"
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+
+
+	
+<article class="post">
+  <h1>Looping through factor variables</h1>
+
+  <div class="entry">
+    <p>Today, I was chatting to a friend who is working on his Ph.D thesis which coincidently is about my favorite topic: campaign contributions. </p>
+
+<!--more-->
+
+<p><img src="http://danielmarcelino.github.io/img/2012/looping.png" alt="Looping"></p>
+
+<p>We discussed about analyzing probabilities of a particular group to grasp more money than the others, particularly, between male and female candidates given the district. 
+I thought that a preliminary approach might consider identifying  whether a candidate received less or more money than the district average. In doing so, should be valuable to coding those case as &quot;0 or 1&quot; accordingly, so you can perform a logistic regression to  test for gender effects. 
+This task can be performed pretty easy in all statistical packages, Excel included. </p>
+
+<p>In Stata, for instance, it is enough to type: </p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">even stat emu = mean(revenue), by(state gender)</code></pre></div>
+
+<p>while in R:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">mean <span class="o">&lt;-</span> <span class="kp">with</span><span class="p">(</span>data<span class="p">,</span> aggregate<span class="p">(</span>revenue<span class="p">,</span> by<span class="o">=</span><span class="kt">list</span><span class="p">(</span>state<span class="o">=</span>state<span class="p">,</span> gender<span class="o">=</span>gender<span class="p">),</span> FUN<span class="o">=</span><span class="kp">mean</span><span class="p">,</span> na.rm<span class="o">=</span><span class="kc">TRUE</span><span class="p">))</span><span class="m">.</span></code></pre></div>
+
+<p>Problem solved clean and fast.</p>
+
+<p>Despite I’m not a “gaúcho” I’d say: if we can complicate, why simplify? Joke aside, in general I favor to use the most simple solution ever. Thus, why bother with loops across observations and variables? What’s more, create loops, special the nested ones in large-N (i.e. large number of cases) data set, might be a suboptimal choice since loops decrease the computing efficiency. But, suppose that we’re faced to a data bank with wide number of factor variables, which have many categories: ordered or not. So, perhaps a nested loop across those factors could help us much better. That said, let’s go back to the case of my friend to try a different approach to visualize the average differences using a loop.</p>
+
+<p>Below, I scratch a loop to find the average of contributions revenues to female and male for each state. Despite the following example is quite simple as I’m only looping through 2 factor variables, we can add as many factors we want to compute. Also, the outcome values doesn’t necessary should be average, but you can chose among standard error, percentiles et cetera.</p>
+
+<p>After running the loop below, the averages for males and females will be displayed on your Stata screen as the picture shows.</p>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">/* Drawing loop across the groups: electoral districts and gender */
+/* Note that the command line levels of is necessary for store the levels contained
+in the variable &quot;state&quot; and &quot;gender&quot; otherwise I need to provide them by hand */
+quietly levels of state, local(states)
+foreach s of local states {
+quietly levels of gender if state == &quot;`s&#39;&quot;, local(genders)
+foreach g of local genders {
+quietly summarize revenue if gender ==&quot;`g&#39;&quot; &amp; state == &quot;`s&#39;&quot;, mean only
+local mu = r(mean)
+display &quot;Meam of Contributions for `g&#39; in `s&#39; = `mu&#39;&quot;
+}
+}</code></pre></div>
+
+<p>For example, regardless my data set is pooled altogether candidates for a variety of offices, in Acre (AC) the first state shown in the picture above, the average of contributions for female is 45,983.57 while for male is around 51,116.96. For miner the outcome we might introduce other factors like office, incumbency, et cetera.</p>
+
+  </div>
+
+  <div class="date">
+    Written on January 10, 2012
+  </div>
+
+  
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+
+	    var disqus_shortname = 'daniel-marcelino';
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+</article>
+
+
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+           <footer>
+      <div class="row">
+          <div class="col-md-4 text-left">
+            Daniel Marcelino 2015 <span class="fa fa-creative-commons"></span>
+          </div>
+           <div class="col-md-4 text-center">
+            <span class="fa fa-pencil"></span> with <span class="red pulse fa fa-heart"></span> &
+            <span class="fa fa-coffee"></span>.
+              <span class="fa fa-code"></span> in <span class="fa fa-github-alt"></span>
+            </a>
+          </div>
+        <div class="col-md-4 text-right">
+          <a
+            href ="https://twitter.com/dmarcelinobr"
+            title="My twitter account">
+              <span class="thunder fa fa-twitter"></span>
+          </a>
+          <a
+            href ="https://facebook.com/dmarcelinobr"
+            title="My facebook account">
+              <span class="thunder fa fa-facebook-official"></span>
+          </a>
+          <a
+            href ="https://cl.linkedin.com/in/daniel-marcelino-80968656"
+            title="My linkedin profile">
+              <span class="thunder fa fa-linkedin"></span>
+          </a>
+          <a
+            href ="https://plus.google.com/+dmsilva.br/posts"
+            title="My google profile">
+              <span class="thunder fa fa-google-plus"></span>
+          </a>
+          <a
+            href ="https://github.com/danielmarcelino/"
+            title="My github repos!">
+              <span class="thunder fa fa-github"></span>
+          </a>
+          <a
+            href ="https://github.com/danielmarcelino/"
+            title="My github repos!">
+              <span class="thunder fa fa-rss"></span>
+          </a>
+        </div>
+        
+      </div>
+	 
+  </footer>
+        </footer>
+      </div>
+    </div>
+
+    
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-24186657-1', 'auto');
+		ga('send', 'pageview', {
+		  'page': '/r/2012/01/10/looping-through-factor-variables/',
+		  'title': 'Looping through factor variables'
+		});
+	</script>
+	<!-- End Google Analytics -->
+
+
+  </body>
+</html>

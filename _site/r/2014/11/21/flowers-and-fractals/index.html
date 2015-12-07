@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+		
+<title>&middot; Daniel &middot; Flowers Fractals, or Fractal Flowers</title>
+        <!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+
+        <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' chrome=1>
+	<meta name="google-site-verification" content="Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ" />
+	<meta name="bing_webmastertools_id" content="97837256955BD270FD688E2B50F89FDB" />
+    <meta name="description" content="Code and data"/>
+    <meta name="viewport" content="width=device-width">
+    <meta name="author" content="Daniel Marcelino"/>
+    <meta name="viewport" content="width=640px, initial-scale=1.0, maximum-scale=1.5">	
+    <meta name="keywords" content="Daniel Marcelino, SciencesPo, SoundexBr, r-project, r-cran, r, statistics, methods, programming, data mining, data visualization, datascience, data"/>	
+    
+    <meta name="description" content="Last week I attended a &quot;Flower Festival&quot; in Joinville, where I had opportunity to admire several of among the most beautiful and awarded flowers, orchids, and decoration plants. Surprisingly, though, I never had thought on flowers like  fractals the way I did this time.
+" />
+    <meta property="og:description" content="Last week I attended a &quot;Flower Festival&quot; in Joinville, where I had opportunity to admire several of among the most beautiful and awarded flowers, orchids, and decoration plants. Surprisingly, though, I never had thought on flowers like  fractals the way I did this time.
+" />
+    
+    <meta name="author" content="EnfoRced Data Analysis" />
+    
+    <meta property="og:title" content="Flowers Fractals, or Fractal Flowers" />
+    <meta property="twitter:title" content="Flowers Fractals, or Fractal Flowers" />
+    
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="alternate" type="application/atom+xml" title="EnfoRced Data Analysis - Blog of Daniel Marcelino" href="/atom.xml" />
+	 <link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis - Blog of Daniel Marcelino" href="/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis - Blog of Daniel Marcelino" href="/feed.r.xml" />
+	
+        <!-- Google Fonts -->
+		<link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,300,400,600" rel="stylesheet" type="text/css">
+		<link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
+        <!-- Custom CSS -->
+		  <!-- Jquery & D3js -->
+	   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+		
+		
+    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"><img src="https://41.media.tumblr.com/05546119a35e7acb34a47344bc7de012/tumblr_nypg9aPsBy1v0aqj1o1_500.jpg" /></a>
+
+          <div class="site-info">
+            <h1 class="site-name"><a href="/">EnfoRced Data Analysis</a></h1>
+            <p class="site-description">Blog of Daniel Marcelino</p>
+          </div>
+
+          <nav>
+            <a href="/">Blog</a>
+            <a href="/about">About</a>
+			<a href="/research">Research</a>
+			<a href="/randomwalks">Random Walks</a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main" class="container">
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [ ['$', '$'], ["\(", "\)"] ],
+        displayMath: [ ['$$', '$$'], ["\[", "\]"] ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+      //,
+      //displayAlign: "left",
+      //displayIndent: "2em"
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+
+
+	
+<article class="post">
+  <h1>Flowers Fractals, or Fractal Flowers</h1>
+
+  <div class="entry">
+    <p>Last week I attended a &quot;Flower Festival&quot; in Joinville, where I had opportunity to admire several of among the most beautiful and awarded flowers, orchids, and decoration plants. Surprisingly, though, I never had thought on flowers like  fractals the way I did this time.</p>
+
+<!--more-->
+
+<p><img src="http://danielmarcelino.github.io/img/2014/flower_joinville1.jpeg" alt="Flower"></p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Fractals attract lots of interest, especially from mathematicians who actually spend time studying about their structures and combinations. But what makes something a fractal? A fractal is defined as an object that displays self-similarity on all scales. But the object doesn’t need to have exactly the same structure at all scales only the same sort of structure must be visible or recognizable any how. </p>
+
+<p><img src="http://danielmarcelino.github.io/img/2014/flower_joinville.jpeg" alt="Flower"></p>
+
+<p>The structure or the equation that defines a fractal is most of the time very simple. For instance, the formula for the famous <a href="https://en.wikipedia.org/wiki/Mandelbrot_set">Mandelbrot</a> is \[ z_{n+1}=z_n<sup>2+c</sup> \].</p>
+
+<h2 id="how-can-we-start">How can we start?</h2>
+
+<p>We start by plugging in a constant value for $c$, $z$ can start at zero. After one iteration, the equation gives us a new value for $z$; then we plug this back into the equation at old $z$ and iterate it again, it can proceed infinitely.</p>
+
+<p>As a very simple example, let’s start this with c = 1.</p>
+
+<p>\[ z_{1} = z_{02} + c= 0 + 1 = 1 \]
+\[ z_{2} = z_{12} + c = 1 + 1 = 2 \]
+\[ z_{3} = z_{22} + c = 4 + 1 = 5 \]</p>
+
+<p>Graphing these results against <em>n</em> would create an upward parabolic curve because the numbers increase exponentially (to infinity). But if we start with c = -1 for instance, $z$ will behave completely different. That is, it will oscillate between two fixed points as:</p>
+
+<p>\[ z_{1} = z_{02} + c= 0 + -1 = -1 \]
+\[ z_{2} = z_{12} + c = 1 + (-1) = 0 \]
+\[ z_{3} = z_{22} + c = 0 + (- 1) = -1 \]
+\[ z_{4} = z_{32} + c = 1 + (- 1) = 0 \]</p>
+
+<p>And this movement back and forth will continue forever as we can imagine. I figured out, that the Mandelbrot set is made up of all the values for $z$ that stay finite, thus a solution such as the first example for $c = 1$ is not valid and will be thrown out because $z$ in those cases goes to infinity and Mandelbrot lives in a finite world. The following is an example of such set.</p>
+
+<p><img src="http://danielmarcelino.github.io/img/2014/Mandelbrot.gif" alt="Mandelbroat"></p>
+
+<h4 id="the-script-for-this-set">The script for this set:</h4>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kn">library</span><span class="p">(</span>caTools<span class="p">)</span> 
+<span class="c1"># caTools is handy because it provides write.gif function</span>
+
+cols <span class="o">&lt;-</span> colorRampPalette<span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;#00007F&quot;</span><span class="p">,</span> <span class="s">&quot;brown&quot;</span><span class="p">,</span> <span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="s">&quot;#007FFF&quot;</span><span class="p">,</span> <span class="s">&quot;green&quot;</span><span class="p">,</span> <span class="s">&quot;#7FFF7F&quot;</span><span class="p">,</span> <span class="s">&quot;yellow&quot;</span><span class="p">,</span> <span class="s">&quot;#FF7F00&quot;</span><span class="p">,</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;#7F0000&quot;</span><span class="p">,</span> <span class="s">&quot;magenta&quot;</span><span class="p">))</span>
+m <span class="o">&lt;-</span> <span class="m">1200</span> <span class="c1"># define size</span>
+C <span class="o">&lt;-</span> <span class="kt">complex</span><span class="p">(</span> real<span class="o">=</span><span class="kp">rep</span><span class="p">(</span><span class="kp">seq</span><span class="p">(</span><span class="m">-1.8</span><span class="p">,</span><span class="m">0.6</span><span class="p">,</span> length.out<span class="o">=</span>m<span class="p">),</span> each<span class="o">=</span>m <span class="p">),</span>
+              imag<span class="o">=</span><span class="kp">rep</span><span class="p">(</span><span class="kp">seq</span><span class="p">(</span><span class="m">-1.2</span><span class="p">,</span><span class="m">1.2</span><span class="p">,</span> length.out<span class="o">=</span>m<span class="p">),</span> m <span class="p">)</span> <span class="p">)</span>
+C <span class="o">&lt;-</span> <span class="kt">matrix</span><span class="p">(</span>C<span class="p">,</span>m<span class="p">,</span>m<span class="p">)</span> <span class="c1"># reshape as square matrix</span>
+Z <span class="o">&lt;-</span> <span class="m">0</span> <span class="c1"># initialize Z to zero</span>
+X <span class="o">&lt;-</span> <span class="kt">array</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="kt">c</span><span class="p">(</span>m<span class="p">,</span>m<span class="p">,</span><span class="m">20</span><span class="p">))</span> <span class="c1"># initialize output 3D array</span>
+<span class="kr">for</span> <span class="p">(</span>k <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="m">20</span><span class="p">)</span> <span class="p">{</span> <span class="c1"># loop with 20 iterations</span>
+    Z <span class="o">&lt;-</span> Z<span class="o">^</span><span class="m">2</span><span class="o">+</span>C <span class="c1"># The equation</span>
+    X<span class="p">[,,</span>k<span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">exp</span><span class="p">(</span><span class="o">-</span><span class="kp">abs</span><span class="p">(</span>Z<span class="p">))</span> <span class="c1"># capture results</span>
+<span class="p">}</span>
+write.gif<span class="p">(</span>X<span class="p">,</span> <span class="s">&quot;Mandelbrot.gif&quot;</span><span class="p">,</span> col<span class="o">=</span>cols<span class="p">,</span> delay<span class="o">=</span><span class="m">1000</span><span class="p">)</span></code></pre></div>
+
+  </div>
+
+  <div class="date">
+    Written on November 21, 2014
+  </div>
+
+  
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+
+	    var disqus_shortname = 'daniel-marcelino';
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+</article>
+
+
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+           <footer>
+      <div class="row">
+          <div class="col-md-4 text-left">
+            Daniel Marcelino 2015 <span class="fa fa-creative-commons"></span>
+          </div>
+           <div class="col-md-4 text-center">
+            <span class="fa fa-pencil"></span> with <span class="red pulse fa fa-heart"></span> &
+            <span class="fa fa-coffee"></span>.
+              <span class="fa fa-code"></span> in <span class="fa fa-github-alt"></span>
+            </a>
+          </div>
+        <div class="col-md-4 text-right">
+          <a
+            href ="https://twitter.com/dmarcelinobr"
+            title="My twitter account">
+              <span class="thunder fa fa-twitter"></span>
+          </a>
+          <a
+            href ="https://facebook.com/dmarcelinobr"
+            title="My facebook account">
+              <span class="thunder fa fa-facebook-official"></span>
+          </a>
+          <a
+            href ="https://cl.linkedin.com/in/daniel-marcelino-80968656"
+            title="My linkedin profile">
+              <span class="thunder fa fa-linkedin"></span>
+          </a>
+          <a
+            href ="https://plus.google.com/+dmsilva.br/posts"
+            title="My google profile">
+              <span class="thunder fa fa-google-plus"></span>
+          </a>
+          <a
+            href ="https://github.com/danielmarcelino/"
+            title="My github repos!">
+              <span class="thunder fa fa-github"></span>
+          </a>
+          <a
+            href ="https://github.com/danielmarcelino/"
+            title="My github repos!">
+              <span class="thunder fa fa-rss"></span>
+          </a>
+        </div>
+        
+      </div>
+	 
+  </footer>
+        </footer>
+      </div>
+    </div>
+
+    
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-24186657-1', 'auto');
+		ga('send', 'pageview', {
+		  'page': '/r/2014/11/21/flowers-and-fractals/',
+		  'title': 'Flowers Fractals, or Fractal Flowers'
+		});
+	</script>
+	<!-- End Google Analytics -->
+
+
+  </body>
+</html>

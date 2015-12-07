@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+		
+<title>&middot; Daniel &middot; Study of a Plot: The Manhattan Plot</title>
+        <!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+
+        <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' chrome=1>
+	<meta name="google-site-verification" content="Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ" />
+	<meta name="bing_webmastertools_id" content="97837256955BD270FD688E2B50F89FDB" />
+    <meta name="description" content="Code and data"/>
+    <meta name="viewport" content="width=device-width">
+    <meta name="author" content="Daniel Marcelino"/>
+    <meta name="viewport" content="width=640px, initial-scale=1.0, maximum-scale=1.5">	
+    <meta name="keywords" content="Daniel Marcelino, SciencesPo, SoundexBr, r-project, r-cran, r, statistics, methods, programming, data mining, data visualization, datascience, data"/>	
+    
+    <meta name="description" content="I was thinking on a nice way of plotting campaign expenditures in a paper I’m working on. I thought this would be something like the following, simple, but meaningful even in the context of lots of outliers in both tails.
+" />
+    <meta property="og:description" content="I was thinking on a nice way of plotting campaign expenditures in a paper I’m working on. I thought this would be something like the following, simple, but meaningful even in the context of lots of outliers in both tails.
+" />
+    
+    <meta name="author" content="EnfoRced Data Analysis" />
+    
+    <meta property="og:title" content="Study of a Plot: The Manhattan Plot" />
+    <meta property="twitter:title" content="Study of a Plot: The Manhattan Plot" />
+    
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="alternate" type="application/atom+xml" title="EnfoRced Data Analysis - Blog of Daniel Marcelino" href="/atom.xml" />
+	 <link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis - Blog of Daniel Marcelino" href="/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis - Blog of Daniel Marcelino" href="/feed.r.xml" />
+	
+        <!-- Google Fonts -->
+		<link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,300,400,600" rel="stylesheet" type="text/css">
+		<link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
+        <!-- Custom CSS -->
+		  <!-- Jquery & D3js -->
+	   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+		
+		
+    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"><img src="https://41.media.tumblr.com/05546119a35e7acb34a47344bc7de012/tumblr_nypg9aPsBy1v0aqj1o1_500.jpg" /></a>
+
+          <div class="site-info">
+            <h1 class="site-name"><a href="/">EnfoRced Data Analysis</a></h1>
+            <p class="site-description">Blog of Daniel Marcelino</p>
+          </div>
+
+          <nav>
+            <a href="/">Blog</a>
+            <a href="/about">About</a>
+			<a href="/research">Research</a>
+			<a href="/randomwalks">Random Walks</a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main" class="container">
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [ ['$', '$'], ["\(", "\)"] ],
+        displayMath: [ ['$$', '$$'], ["\[", "\]"] ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+      //,
+      //displayAlign: "left",
+      //displayIndent: "2em"
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+
+
+	
+<article class="post">
+  <h1>Study of a Plot: The Manhattan Plot</h1>
+
+  <div class="entry">
+    <p>I was thinking on a nice way of plotting campaign expenditures in a paper I’m working on. I thought this would be something like the following, simple, but meaningful even in the context of lots of outliers in both tails.</p>
+
+<!--more-->
+
+<p><img src="/images/blog/2014/manhattan.jpeg" alt="Manhattan Plot"></p>
+
+<p>Although I like the seniors Tukey’s boxplot and scatter plots, I had already used them, so I want to oxygenate my figures. The  <a href="http://en.wikipedia.org/wiki/Manhattan_plot">Manhattan plot</a> is a potential replacement candidate.</p>
+
+<p>The very idea is to have types of elections, districts or parties along the X-axis, with the negative logarithm of the association (p-value) between a candidate’s spending and votes displayed on the Y-axis. Hence, each dot on the plot indicates a candidate’s position on this metric. </p>
+
+<p>Because stronger associations have the smallest p-values (a log of 0.05 = -1.30103), their negative logarithms will be positive and higher (e.g., 1.3), while those with p-values not <a href="http://www.nature.com/news/scientific-method-statistical-errors-1.14700">statistically significant</a> (whatever that means these days, maybe nothing ) will stay below this line.</p>
+
+<p>The positive thing of this version is that it draws our attention to the upper outliers instead to the average association, which tends to be left-skewed because Brazilian elections attract many sacrificial lamb candidates who expend nearly nothing in their campaigns.</p>
+
+  </div>
+
+  <div class="date">
+    Written on December  3, 2014
+  </div>
+
+  
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+
+	    var disqus_shortname = 'daniel-marcelino';
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+</article>
+
+
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+           <footer>
+      <div class="row">
+          <div class="col-md-4 text-left">
+            Daniel Marcelino 2015 <span class="fa fa-creative-commons"></span>
+          </div>
+           <div class="col-md-4 text-center">
+            <span class="fa fa-pencil"></span> with <span class="red pulse fa fa-heart"></span> &
+            <span class="fa fa-coffee"></span>.
+              <span class="fa fa-code"></span> in <span class="fa fa-github-alt"></span>
+            </a>
+          </div>
+        <div class="col-md-4 text-right">
+          <a
+            href ="https://twitter.com/dmarcelinobr"
+            title="My twitter account">
+              <span class="thunder fa fa-twitter"></span>
+          </a>
+          <a
+            href ="https://facebook.com/dmarcelinobr"
+            title="My facebook account">
+              <span class="thunder fa fa-facebook-official"></span>
+          </a>
+          <a
+            href ="https://cl.linkedin.com/in/daniel-marcelino-80968656"
+            title="My linkedin profile">
+              <span class="thunder fa fa-linkedin"></span>
+          </a>
+          <a
+            href ="https://plus.google.com/+dmsilva.br/posts"
+            title="My google profile">
+              <span class="thunder fa fa-google-plus"></span>
+          </a>
+          <a
+            href ="https://github.com/danielmarcelino/"
+            title="My github repos!">
+              <span class="thunder fa fa-github"></span>
+          </a>
+          <a
+            href ="https://github.com/danielmarcelino/"
+            title="My github repos!">
+              <span class="thunder fa fa-rss"></span>
+          </a>
+        </div>
+        
+      </div>
+	 
+  </footer>
+        </footer>
+      </div>
+    </div>
+
+    
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-24186657-1', 'auto');
+		ga('send', 'pageview', {
+		  'page': '/r/2014/12/03/study-of-a-plot/',
+		  'title': 'Study of a Plot: The Manhattan Plot'
+		});
+	</script>
+	<!-- End Google Analytics -->
+
+
+  </body>
+</html>

@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+  	<title>Daniel</title>
+		<description>Posts categorized as 'r'</description>
+		<link>http://danielmarcelino.github.io</link>
+		<atom:link href="http://danielmarcelino.github.io/feed.r.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>Venezuelan Parliamentary Election: What do the Polls Say?</title>
+        <description>&lt;p&gt;There is not a huge population of opinion polls covering this parliamentary election in Venezuela, but all I&amp;#39;ve can be used to gauge the public opinion by the local polling houses. This posting begs an obvious question: how has the mood in Venezuela varied over time with respect to voting intentions for the two political blocs? Next, can we detect any biases among those publishing polls?&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h1 id=&quot;the-data&quot;&gt;The data&lt;/h1&gt;
+
+&lt;p&gt;I&amp;#39;ve collected some polls available on the internet dating back to January 2014, which I made available &lt;a href=&quot;https://github.com/danielmarcelino/Polling/raw/master/Venezuela/data/polls.txt&quot;&gt;here&lt;/a&gt; after some &lt;a href=&quot;http://www.nytimes.com/2014/08/18/technology/for-big-data-scientists-hurdle-to-insights-is-janitor-work.html?_r=0&quot;&gt;data janitor work&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;polls-over-time&quot;&gt;Polls over time&lt;/h1&gt;
+
+&lt;p&gt;After a bit filling-in-the-blanks working with missing date values, we can visualize the poll trends over time. Given the sample size, sampling error and other sources of noise, a loess model can pretty much pick out the signals of long-term trends.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/img/code-2015-12-06-venezuelan-parliamentary-elections/loess-1.png&quot; target=&quot;_blank&quot;&gt;
+&lt;img class=&quot;imgfull&quot; src=&quot;/img/code-2015-12-06-venezuelan-parliamentary-elections/loess-1.png&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;pollster-biases&quot;&gt;Pollster biases&lt;/h1&gt;
+
+&lt;p&gt;Let&amp;#39;s pretend we can trust on all those polls despite the huge variability among them as already mentioned &lt;a href=&quot;https://danielmarcelino.github.io/r/2015/12/04/venezuelan-parliamentary-election-2015/&quot;&gt;here&lt;/a&gt;. In fact, the problem is not the variability as such, but my lack of knowledge about who are the pollsters and their past performance, so I can&amp;#39;t judge them at first, let&amp;#39;s say it clearly.
+Nonetheless, if we accept the above models as a sound estimate of the expected poll response at a given time, we can analyze the residuals of actual poll results and look for systematic biases. In theory, with a decent sample size (all have ~ 1300) and a reasonably stratified sampling method (I&amp;#39;m not even assuming  random samples here), we might expect polls results to be roughly normally distributed around the expected polls result, regardless of who performed or commissioned the poll, right?&lt;/p&gt;
+
+&lt;p&gt;The graph below shows the distributions per polling house for those who polled more than a single poll in this dataset.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/img/code-2015-12-06-venezuelan-parliamentary-elections/biases-3.png&quot;&gt;
+&lt;img class=&quot;imgfull&quot; src=&quot;/img/code-2015-12-06-venezuelan-parliamentary-elections/biases-3.png&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;We&amp;#39;ve to keep in mind that there are important caveats which we&amp;#39;re not addressing here, as that different polls have used different question sets, methods etc, so this isn&amp;#39;t evidence for anything underhanded per se. It seems reasonable to expect that while parties might have good reasons to publish polls in their favor, pollsters conducting the polls should generally be more or less indifferent.&lt;/p&gt;
+
+&lt;p&gt;The results are hampered by a small number of data points per pollster, and that to claim they are polling significantly above or below expectation, save for the &lt;em&gt;Hercón&lt;/em&gt;, which is significantly more pro opposition (MUD) than expected, given the probability laws, although the p-value is just above the 5% thumb/convention. With a little research, I figure out that &lt;em&gt;Datanálisis&lt;/em&gt; performed fine in the previous elections, and here it appears just around the center of the distribution leaning toward the Socialists (PSUV).&lt;/p&gt;
+
+&lt;table&gt;&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&quot;text-align: left&quot;&gt;&lt;strong&gt;pollster&lt;/strong&gt;&lt;/th&gt;
+&lt;th style=&quot;text-align: right&quot;&gt;&lt;strong&gt;p&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align: left&quot;&gt;Meganalisis&lt;/td&gt;
+&lt;td style=&quot;text-align: right&quot;&gt;0.1875000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align: left&quot;&gt;Venebarómetro&lt;/td&gt;
+&lt;td style=&quot;text-align: right&quot;&gt;0.2500000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align: left&quot;&gt;IVAD&lt;/td&gt;
+&lt;td style=&quot;text-align: right&quot;&gt;0.4375000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align: left&quot;&gt;ICS&lt;/td&gt;
+&lt;td style=&quot;text-align: right&quot;&gt;0.5000000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align: left&quot;&gt;Delphos&lt;/td&gt;
+&lt;td style=&quot;text-align: right&quot;&gt;1.0000000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align: left&quot;&gt;Datanálisis&lt;/td&gt;
+&lt;td style=&quot;text-align: right&quot;&gt;0.7646484&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align: left&quot;&gt;VARIANZAS&lt;/td&gt;
+&lt;td style=&quot;text-align: right&quot;&gt;1.0000000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align: left&quot;&gt;Consultores&lt;/td&gt;
+&lt;td style=&quot;text-align: right&quot;&gt;0.2500000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align: left&quot;&gt;DatinCorp&lt;/td&gt;
+&lt;td style=&quot;text-align: right&quot;&gt;0.5625000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align: left&quot;&gt;Keller y Asociados&lt;/td&gt;
+&lt;td style=&quot;text-align: right&quot;&gt;0.2500000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align: left&quot;&gt;Hercón&lt;/td&gt;
+&lt;td style=&quot;text-align: right&quot;&gt;0.0625000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
+
+&lt;p&gt;What do the polls say? Well, the majority of Venezuelans are favoring opposition candidates and this has been the trend for at least the latter two years, however polls appear to have been more variable in recent months. This election is expected to bring the opposition to control the National Assembly after 16 years loosing the elections in the country. 
+The Venezuela&amp;#39;s Socialists seem to be at risk, but predicting the final number of seats is a tough task that I&amp;#39;m not considering in this post. 
+In fact, it might be really difficult to set forth a range of winning seats as the government recently enacted some redistricting seats in order to weaken an eventual absolute majority by the opposition. Somehow, the polls show this will be a significant symbolic defeat for the government that shows it lost despite all the advantages in state power and control over the media.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;kn&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;dplyr&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;ggplot2&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;grid&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;reshape2&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;lubridate&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;scales&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;SciencesPo&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;https://github.com/danielmarcelino/Polling/raw/master/Venezuela/data/polls.txt&amp;quot;&lt;/span&gt;
+
+data &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; read.csv&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; sep&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;\t&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; encoding &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;UTF-8&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Correcting for empty date values&lt;/span&gt;
+&lt;span class=&quot;kp&quot;&gt;head&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;data&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+data&lt;span class=&quot;p&quot;&gt;[,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;lapply&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;data&lt;span class=&quot;p&quot;&gt;[,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;as.Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; format &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;%d-%m-%Y&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+times &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+data&lt;span class=&quot;p&quot;&gt;[,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;lapply&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;data&lt;span class=&quot;p&quot;&gt;[,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;times&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+days &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;round&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;mean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;data&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;end&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;data&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;begin&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; na.rm&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+mask &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;is.na&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;data&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;end&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+data&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;end&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;mask&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; data&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;begin&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;mask&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;days
+
+&lt;span class=&quot;c1&quot;&gt;# Find middle time point&lt;/span&gt;
+DaysInField &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;round&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;mean&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;data&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;end&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;data&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;begin&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; na.rm&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+data&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;date &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; data&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;begin&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;DaysInField&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;polls &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; melt&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;data&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; id.vars&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;house&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;date&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; 
+     measure.var&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;MUD&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;PSUV&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Others&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Undecided&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;kp&quot;&gt;colnames&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;polls&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;response&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;kp&quot;&gt;levels&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;polls&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;response&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;MUD&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;PSUV&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Others&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Swing&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+
+ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;polls&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;value&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;response&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;response&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; 
+  geom_point&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; geom_smooth&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;method&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;loess&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; alpha&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;I&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+  theme_538&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; 
+ theme&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;legend.position&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.95&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; legend.direction&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;horizontal&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+  scale_color_manual&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;values &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;blue&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;red&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;orange&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;grey40&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+  scale_fill_manual&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;values &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;blue&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;red&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;orange&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;grey40&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+  scale_x_date&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;labels &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; date_format&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;%b &amp;#39;%y&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+  scale_y_continuous&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;breaks&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;seq&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;70&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; limits&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;70&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+  geom_hline&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;yintercept&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;#535353&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+  ggtitle&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Vote Intention Among Venezuelans&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+  labs&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;%&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Poll response:&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Poll response:&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# credits&lt;/span&gt;
+ plotFootnote&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;danielmarcelino.github.io&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;c1&quot;&gt;## Residual analysis per pollster&lt;/span&gt;
+l.MUD &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; loess&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;value &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;as.numeric&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; data&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;subset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;polls&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; response&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;MUD&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+l.PSUV &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; loess&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;value &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;as.numeric&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; data&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;subset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;polls&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; response&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;PSUV&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+l.Others &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; loess&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;value &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;as.numeric&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; data&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;subset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;polls&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; response&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Others&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+l.Swing &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; loess&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;value &lt;span class=&quot;o&quot;&gt;~&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;as.numeric&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; data&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;subset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;polls&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; response&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Swing&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+&lt;span class=&quot;kp&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;polls&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; plot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;as.numeric&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; value&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+lines&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;as.numeric&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;polls&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;polls&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;response &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;MUD&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+      predict&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;l.MUD&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;as.numeric&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;polls&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;polls&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;response &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;MUD&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Calculate predicted values per row, &lt;/span&gt;
+polls&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;predicted &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;NA&lt;/span&gt;
+
+loessPrediction &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;resp&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; model&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+  rows &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; polls&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;response &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; resp
+  curr &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; polls&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;rows&lt;span class=&quot;p&quot;&gt;,]&lt;/span&gt;
+  preds &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;curr&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; predict&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;model&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;as.numeric&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+  polls&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;rows&lt;span class=&quot;p&quot;&gt;,]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;predicted &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;-&lt;/span&gt; preds
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+loessPrediction&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;MUD&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; l.MUD&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+loessPrediction&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;PSUV&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; l.PSUV&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+loessPrediction&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Others&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; l.Others&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+loessPrediction&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Swing&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; l.Swing&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+polls&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;residual &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; polls&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;value &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; polls&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;predicted
+hist&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;polls&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;residual&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;## Order pollster by median residual:&lt;/span&gt;
+ordering &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; group_by&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;polls&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; pollster&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;
+  filter&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;response &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;MUD&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;
+  summarize&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;med &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; median&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;residual&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; na.rm&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; count&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;n&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;
+  arrange&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;med&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+
+polls&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;pollster &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;factor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;polls&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;pollster&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; levels&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ordering&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;pollster&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;## Testing for biases by a given pollster &lt;/span&gt;
+ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;subset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;polls&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; response &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;MUD&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; 
+       aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pollster&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;residual&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+  geom_hline&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;yintercept&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+  geom_violin&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;scale&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;width&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;I&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;grey50&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; col&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;I&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;grey50&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; 
+  geom_jitter&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;position&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;position_jitter&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;width&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.05&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; 
+  stat_summary&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;geom &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;crossbar&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; width&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.75&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; fatten&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+               color&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;grey20&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; fun.y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;median&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; fun.ymin&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;median&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; fun.ymax&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;median&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+  coord_flip&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; theme_538&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; ggtitle&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Relative MUD voting intentions&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+  labs&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Polling house&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+       y&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Comparison with other polls at the time&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+  ylim&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;-12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;c1&quot;&gt;## Stats significance, is it any?&lt;/span&gt;
+&lt;span class=&quot;kp&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;scipen&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+sigTable &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; polls &lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt; filter&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;response &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;MUD&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;
+  group_by&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; pollster&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;
+  summarise&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;p&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;wilcox.test&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;residual&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; mu&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;p.value&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+kable&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;sigTable&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+        <pubDate>Sun, 06 Dec 2015 00:00:00 -0200</pubDate>
+        <link>http://danielmarcelino.github.io/r/2015/12/06/venezuelan-parliamentary-elections/</link>
+        <guid isPermaLink="true">http://danielmarcelino.github.io/r/2015/12/06/venezuelan-parliamentary-elections/</guid>
+      </item>
+    
+      <item>
+        <title>Venezuela&#39;s 2015 Parliamentary Elections</title>
+        <description>&lt;p&gt;Next Sunday Venezuelans are heading to the polls once again with  international concerns about the clearness of the balloting. To get an idea about the political climate over there, I&amp;#39;ve collected some polls available on the internet. The surprising thing from those surveys is a tremendous variability from pollster to pollster about the single topic of voting intention. You may find national polls fielded in the same period with estimates varying as much as 20%, isn&amp;#39;t it dramatic? If you always wanted to see house bias operating in practice, the Venezuelan elections may provide you a good case then.   &lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/img/2015/venezuela1.png&quot;&gt;
+&lt;img class=&quot;imgfull&quot; src=&quot;/img/2015/venezuela1.png&quot; /&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;c1&quot;&gt;### The data&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;ggplot2&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;dplyr&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;SciencesPo&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+
+&lt;span class=&quot;kn&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;https://github.com/danielmarcelino/Polling/raw/master/Venezuela/data/polls.txt&amp;quot;&lt;/span&gt;
+
+data &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; getdata&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kn&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+data&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;begin &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;as.Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;data&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;begin&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; format &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;%d-%m-%Y&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# just interested in some period&lt;/span&gt;
+data &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; data &lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt; 
+  filter&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;begin&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;as.Date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;01-07-2014&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; format &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;%d-%m-%Y&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;c1&quot;&gt;### The plot&lt;/span&gt;
+ggplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;data&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+  geom_point&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; begin&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; MUD&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;color&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;gray25&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+  geom_point&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;aes&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;x &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; begin&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; y &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; PSUV&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; color&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;tomato&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+  geom_hline&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;yintercept&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;size&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;colour&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;#535353&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+  plotTitleSubtitle&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;title&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Vote Intentions for the Gop (MUD) and Gov&amp;#39;t (PSUV)&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; subtitle&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Black = MUD, Red = PSUV&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+  theme_538&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# credits&lt;/span&gt;
+  plotFootnote&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;danielmarcelino.github.io&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+        <pubDate>Fri, 04 Dec 2015 00:00:00 -0200</pubDate>
+        <link>http://danielmarcelino.github.io/r/2015/12/04/venezuelan-parliamentary-election-2015/</link>
+        <guid isPermaLink="true">http://danielmarcelino.github.io/r/2015/12/04/venezuelan-parliamentary-election-2015/</guid>
+      </item>
+    
+      <item>
+        <title>Retrieving Data from Google Books with `ngramr`</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Karl_Marx&quot;&gt;Karl Marx&lt;/a&gt; is the most famous founding fathers of modern sociology with a popularity peak in 1975-6, but declining ever since.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://danielmarcelino.github.io/img/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/GoogleNgram.png&quot; alt=&quot;center&quot;&gt;&lt;/p&gt;
+
+&lt;hr/&gt;
+
+&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;Google has a tool for tracking the frequency of words or phrases across its vast collection of scanned texts, the Google Books. The &lt;a href=&quot;https://books.google.com/ngrams&quot;&gt;Google Ngram Viewer&lt;/a&gt; reports data and graphs the frequency of words encountered in one or across several &lt;em&gt;corpus&lt;/em&gt; over time. For instance, the chart above campares the appearance &lt;mark&gt;in the English&lt;/mark&gt; &lt;em&gt;corpus&lt;/em&gt; of following bigrams names: &amp;quot;Karl Marx&amp;quot;, &amp;quot;Max Weber&amp;quot;, &amp;quot;Emile Durkheim&amp;quot;. &lt;/p&gt;
+
+&lt;p&gt;The y-axis shows of all the bigrams contained in the sample of books written in English, what percentage of them are &amp;quot;Karl Marx&amp;quot; or &amp;quot;Max Weber&amp;quot; or &amp;quot;Emile Durkheim&amp;quot;? From the chart above, we can conclude that Marx is the most famous sociologist among the others founding fathers, with a peak in popularity about 1975-6, but his influence has been declining ever since. These thinkers are considered the founding fathers of sociology because they set out to develop practical and scientifically sound methods of research to examine theories of the social world rooted in a specific historical and cultural context. &lt;/p&gt;
+
+&lt;h2 id=&quot;using-r-with-google-ngram-viewer&quot;&gt;Using R with Google Ngram Viewer&lt;/h2&gt;
+
+&lt;p&gt;There is a package to query the Google Ngram called &lt;a href=&quot;https://cran.r-project.org/web/packages/ngramr/index.html&quot;&gt;ngramr&lt;/a&gt; written by Sean Carmody. With this package, one can retrieve data from Ngram pages in the form of data frame.  &lt;/p&gt;
+
+&lt;h2 id=&quot;getting-started&quot;&gt;Getting Started&lt;/h2&gt;
+
+&lt;p&gt;The first thing to do is to load the &lt;code&gt;ggplot2&lt;/code&gt; and &lt;code&gt;ngramr&lt;/code&gt; packages. In case you don&amp;#39;t have them installed, an installation is required.&lt;/p&gt;
+
+&lt;h2 id=&quot;write-a-query-and-do-the-plots&quot;&gt;Write a Query and Do the Plots&lt;/h2&gt;
+
+&lt;p&gt;The following is equivalent to the chart above for the three sociologists bigrams, except that I&amp;#39;m applying a smoothed line--or moving average of 5 years, so trends become more apparent. For instance, the data shown for 2000 is an average of the raw count for 2000 plus 5 values on either side: (&amp;quot;count for 1995&amp;quot; + &amp;quot;count for 2000&amp;quot; + &amp;quot;count for 2005&amp;quot;), divided by 3. So a smoothing of 5 means that 11 values will be averaged: 5 on either side, plus the target value in the center of them.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;ng &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;(Karl Marx)&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;(Max Weber)&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;(Emile Durkheim)&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+ggram&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;ng&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; year_start &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1800&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+      year_end &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2012&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  
+      smoothing &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      google_theme &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+  ggtitle&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Marx, Weber, Durkheim&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+    theme_538&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;legend.position &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;bottom&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://danielmarcelino.github.io/img/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/sociologists-1.png&quot; alt=&quot;center&quot;&gt; &lt;/p&gt;
+
+&lt;h2 id=&quot;complex-queries&quot;&gt;Complex Queries&lt;/h2&gt;
+
+&lt;p&gt;I test the trend in popularity of the unigran &amp;quot;Capitalism&amp;quot; vis-à-vis other two unigrans (&amp;quot;Socialism&amp;quot;, &amp;quot;Communism&amp;quot;) from 1850 to 2012. Here&amp;#39;s how we might combine + and / to show how the unigram &amp;quot;Capitalism&amp;quot; has blossomed at the expense of &amp;quot;Socialism&amp;quot; and &amp;quot;Communism&amp;quot; terms in the literature published in English.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;ng &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Capitalism /(Capitalism + Socialism + Communism)&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+cap &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; ggram&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;ng&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; year_start &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1850&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+      year_end &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2012&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  
+      smoothing &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      google_theme &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+  ggtitle&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Capitalism over (Capitalism + Socialism + Communism)&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+    theme_538&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+ng &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Socialism /(Capitalism + Socialism + Communism)&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+soc &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; ggram&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;ng&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; year_start &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1850&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+      year_end &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2012&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  
+      smoothing &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      google_theme &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+  ggtitle&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Socialism over (Capitalism + Socialism + Communism)&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+    theme_538&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+ng &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Communism /(Capitalism + Socialism + Communism)&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+com &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; ggram&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;ng&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; year_start &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1850&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+      year_end &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2012&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  
+      smoothing &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      google_theme &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+  ggtitle&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Communism over (Capitalism + Socialism + Communism)&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+    theme_538&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+multiplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;cap&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; soc&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; com&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; ncols&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ggfootnote&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;size &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://danielmarcelino.github.io/img/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/Capitalism%20Popularity-1.png&quot; alt=&quot;center&quot;&gt; &lt;/p&gt;
+
+&lt;p&gt;In the following, I retrieve the frequency for the unigram &amp;quot;Capitalism&amp;quot; in the Russian &lt;em&gt;corpus&lt;/em&gt;, French, and British English. Note that the results can be case-insensitive variants.&lt;/p&gt;
+
+&lt;p&gt;Below is a plot of the unigram &amp;quot;Capitalism&amp;quot; (&amp;quot;капитализм&amp;quot;) in the Russian language &lt;em&gt;corpus&lt;/em&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;ng &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;капитализм&amp;quot;&lt;/span&gt;
+rus&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ggram&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;ng&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; year_start &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1850&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+      corpus &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;rus_2012&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      ignore_case &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+      google_theme &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+    ggtitle&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Russian: капитализм&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+     theme_538&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+ng &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;capitalisme&amp;quot;&lt;/span&gt;
+fre&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ggram&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;ng&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; year_start &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1850&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+      corpus &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;fre_2012&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      ignore_case &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+      google_theme &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+    ggtitle&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;French: Capitalisme&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+     theme_538&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+ng &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;capitalism&amp;quot;&lt;/span&gt;
+eng&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ggram&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;ng&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; year_start &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1850&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+      corpus &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;eng_gb_2012&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      ignore_case &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+      google_theme &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+    ggtitle&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;English: Capitalism&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+     theme_538&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+multiplot&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;rus&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; fre&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; eng&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; ncols&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ggfootnote&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;size &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://danielmarcelino.github.io/img/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/capitalism-1.png&quot; alt=&quot;center&quot;&gt; &lt;/p&gt;
+</description>
+        <pubDate>Sun, 15 Nov 2015 00:00:00 -0200</pubDate>
+        <link>http://danielmarcelino.github.io/r/2015/11/15/retrieving-data-from-google-books-with-ngramr/</link>
+        <guid isPermaLink="true">http://danielmarcelino.github.io/r/2015/11/15/retrieving-data-from-google-books-with-ngramr/</guid>
+      </item>
+    
+      <item>
+        <title>Competing views on Argentina&#39;s Frontrunner</title>
+        <description>&lt;p&gt;The last poll published today by &lt;em&gt;Polldata&lt;/em&gt; put Scioli below 40%, with about 5% reporting being undecided.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://danielmarcelino.github.io/img/2015/Daniel_Scioli_Gross_lm.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;It might be too early to state anything solid, but the few polls prospecting the runoff election in Argentina seem to be telling two distinct histories. Polling houses &lt;em&gt;Hugo Haime&lt;/em&gt; and &lt;em&gt;IPSOS&lt;/em&gt; suggest that Daniel Scioli is going up while &lt;em&gt;Elypsis&lt;/em&gt;  and &lt;em&gt;Polldata&lt;/em&gt; say he&amp;#39;s actually sinking as the weeks go by. The last poll published today by &lt;em&gt;Polldata&lt;/em&gt; puts Scioli below 40%, with about 5% reporting being undecided. My experience following  multiparty elections suggests that polls perform much better in the runoff than in primaries, meaning that the average out now is much more likely to give the real picture than before.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 30 Oct 2015 00:00:00 -0200</pubDate>
+        <link>http://danielmarcelino.github.io/r/2015/10/30/competing-views-in-argentina/</link>
+        <guid isPermaLink="true">http://danielmarcelino.github.io/r/2015/10/30/competing-views-in-argentina/</guid>
+      </item>
+    
+      <item>
+        <title>House Effects in Argentinian polling</title>
+        <description>&lt;p&gt;I&amp;#39;ve already posted on &amp;#39;house effects&amp;#39;, the tendency of polling organizations to systematically vary in their results from one another&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://danielmarcelino.github.io/img/2015/3d-house-effects_argentine.png&quot; alt=&quot;House Effects&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;I&amp;#39;ve already &lt;a href=&quot;http://danielmarcelino.com/r/08-2015/Argentine-general-election-2015/&quot;&gt;posted&lt;/a&gt; on &amp;quot;house effects&amp;quot;, the tendency of polling organizations to systematically vary in their results from one another. In this post, I look specifically at these house effects, and show which polling organizations over or under-estimate support for each candidate--compared to the average--in this presidential election in Argentina.&lt;/p&gt;
+
+&lt;p&gt;The graph above plots the house effects for the main presidential candidates considering more than 115 polls that I&amp;#39;ve collected since 2014.&lt;/p&gt;
+
+&lt;p&gt;In essence, the house effects measure how far polls by a pollster are from what would be expected based on trends over time for the average polling house. In other words, the average house effect toward each candidate/party is expected to be zero by design. Then, a poll that is systematically 2% below what would be predicted for the date the poll was conducted will have a house effect of -2.0%.&lt;/p&gt;
+
+&lt;p&gt;The dots in &amp;quot;red&amp;quot; in the plot represent the pollster whose house effects were negative toward Mauricio Macri, while dots in &amp;quot;blue&amp;quot; represent positive effects toward him. &lt;/p&gt;
+
+&lt;p&gt;The electoral result tonight was a bit of surprise as several pollsters didn&amp;#39;t seem to have pick out a crescendo preference for the opposition candidate, Mauricio Macri, among undecided voters over the last week. &lt;a href=&quot;http://us3.campaign-archive1.com/?u=6b1e9fcb4df3eaee1cd635f50&amp;amp;id=0e702eecac&amp;amp;e=c2780c4e4b&quot;&gt;This blog&lt;/a&gt; has more details. &lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;kn&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;scatterplot3d&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+houseEffects&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;pcolor&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;houseEffects&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;Macri&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;red&amp;quot;&lt;/span&gt;
+houseEffects&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;pcolor&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;houseEffects&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;Macri&lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;blue&amp;quot;&lt;/span&gt;
+
+&lt;span class=&quot;kp&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;houseEffects&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  s3d &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; scatterplot3d&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;Scioli&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; Massa&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; Macri&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# x y and z axis&lt;/span&gt;
+                       angle&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# angle of the plot &lt;/span&gt;
+                       color&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;pcolor&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; pch&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;19&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# filled blue circles&lt;/span&gt;
+                       type&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;h&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# vertical lines to the x-y plane&lt;/span&gt;
+                       main&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;House Effects&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                       xlab&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Daniel Scioli&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                       ylab&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Sergio Massa&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                       zlab&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Mauricio Macri&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+  s3d.coords &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; s3d&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;xyz.convert&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;Scioli&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; Massa&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; Macri&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# convert 3D coords to 2D projection&lt;/span&gt;
+  text&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;s3d.coords&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;x&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; s3d.coords&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;y&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# x and y coordinates&lt;/span&gt;
+       labels&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;Pollster&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# text to plot&lt;/span&gt;
+       cex&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; pos&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# shrink text 50% and place to right of points)&lt;/span&gt;
+  legend&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;topleft&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; inset&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# location and inset&lt;/span&gt;
+         bty&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;n&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; cex&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;.7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# suppress legend box, shrink text 70%&lt;/span&gt;
+         title&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;House effects toward\nDaniel Scioli&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+         &lt;span class=&quot;kt&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;-&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;+&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; fill&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;red&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;blue&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+        <pubDate>Sun, 25 Oct 2015 00:00:00 -0200</pubDate>
+        <link>http://danielmarcelino.github.io/r/2015/10/25/argentine-house-effects/</link>
+        <guid isPermaLink="true">http://danielmarcelino.github.io/r/2015/10/25/argentine-house-effects/</guid>
+      </item>
+    
+	</channel>
+</rss>

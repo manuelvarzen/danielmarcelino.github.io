@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+		
+<title>&middot; Daniel &middot; Drawing maps using shape files and R</title>
+        <!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+
+        <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' chrome=1>
+	<meta name="google-site-verification" content="Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ" />
+	<meta name="bing_webmastertools_id" content="97837256955BD270FD688E2B50F89FDB" />
+    <meta name="description" content="Code and data"/>
+    <meta name="viewport" content="width=device-width">
+    <meta name="author" content="Daniel Marcelino"/>
+    <meta name="viewport" content="width=640px, initial-scale=1.0, maximum-scale=1.5">	
+    <meta name="keywords" content="Daniel Marcelino, SciencesPo, SoundexBr, r-project, r-cran, r, statistics, methods, programming, data mining, data visualization, datascience, data"/>	
+    
+    <meta name="description" content="Sometimes, the only thing we want is a chart that speaks for itself rather than boring regression tables in our research paper. Graphs are efficient at showing the broad picture of an issue. In fact, graphs in research papers seem to be gaining a momentum in political science. If you want a more in-depth discussion about this, you may want reading Kastellec and Leoni (2007), for instance.
+" />
+    <meta property="og:description" content="Sometimes, the only thing we want is a chart that speaks for itself rather than boring regression tables in our research paper. Graphs are efficient at showing the broad picture of an issue. In fact, graphs in research papers seem to be gaining a momentum in political science. If you want a more in-depth discussion about this, you may want reading Kastellec and Leoni (2007), for instance.
+" />
+    
+    <meta name="author" content="EnfoRced Data Analysis" />
+    
+    <meta property="og:title" content="Drawing maps using shape files and R" />
+    <meta property="twitter:title" content="Drawing maps using shape files and R" />
+    
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="alternate" type="application/atom+xml" title="EnfoRced Data Analysis - Blog of Daniel Marcelino" href="/atom.xml" />
+	 <link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis - Blog of Daniel Marcelino" href="/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis - Blog of Daniel Marcelino" href="/feed.r.xml" />
+	
+        <!-- Google Fonts -->
+		<link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,300,400,600" rel="stylesheet" type="text/css">
+		<link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
+        <!-- Custom CSS -->
+		  <!-- Jquery & D3js -->
+	   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+		
+		
+    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"><img src="https://41.media.tumblr.com/05546119a35e7acb34a47344bc7de012/tumblr_nypg9aPsBy1v0aqj1o1_500.jpg" /></a>
+
+          <div class="site-info">
+            <h1 class="site-name"><a href="/">EnfoRced Data Analysis</a></h1>
+            <p class="site-description">Blog of Daniel Marcelino</p>
+          </div>
+
+          <nav>
+            <a href="/">Blog</a>
+            <a href="/about">About</a>
+			<a href="/research">Research</a>
+			<a href="/randomwalks">Random Walks</a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main" class="container">
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [ ['$', '$'], ["\(", "\)"] ],
+        displayMath: [ ['$$', '$$'], ["\[", "\]"] ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+      //,
+      //displayAlign: "left",
+      //displayIndent: "2em"
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+
+
+	
+<article class="post">
+  <h1>Drawing maps using shape files and R</h1>
+
+  <div class="entry">
+    <p>Sometimes, the only thing we want is a chart that speaks for itself rather than boring regression tables in our research paper. Graphs are efficient at showing the broad picture of an issue. In fact, graphs in research papers seem to be gaining a momentum in political science. If you want a more in-depth discussion about this, you may want reading <a href="http://eduardoleoni.com/published/graphs.pdf">Kastellec and Leoni (2007)</a>, for instance.</p>
+
+<!--more-->
+
+<p><img src="http://danielmarcelino.github.io/img/2011/senado06.png" alt="The campaign finance impact"></p>
+
+<p>I do prefer to draw maps to present many thing like electoral results or to show simple bivariate associations. In this post, I will use regression coefficients to plot a cartogram using R--a free statistical package.</p>
+
+<p>To plot a chart with OLS coefficients, we need to get the OLS results first. There are many possible approach to this, but I&#39;ll make it very simple. As I want to plot the relationship for each of the Brazilian state, I&#39;ll repeat the following command for each of those 27 units. In next posts I may show how to automate a bit more this tedious process.</p>
+
+<h3 id="graph-for-explained-variance">Graph for explained variance</h3>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">AC <span class="o">&lt;-</span> lm<span class="p">(</span>PVOTOS<span class="o">~</span>PGASTOS<span class="o">+</span><span class="kp">I</span><span class="p">(</span>PGASTOSc<span class="o">^</span><span class="m">2</span><span class="p">),</span>
+
+<span class="kp">subset</span><span class="p">(</span>dados<span class="p">,</span> p<span class="o">==</span><span class="m">5</span> <span class="o">&amp;</span> t<span class="o">==</span><span class="m">2006</span> <span class="o">&amp;</span> j<span class="o">==</span><span class="s">&#39;AC&#39;</span><span class="p">),</span>
+
+na.action<span class="o">=</span>na.omit<span class="p">)</span>
+
+ac <span class="o">&lt;-</span> <span class="kp">as.data.frame</span><span class="p">(</span><span class="kp">summary</span><span class="p">(</span>AC<span class="p">)</span><span class="o">$</span>coef<span class="p">)</span>
+
+ac <span class="o">&lt;-</span> ac<span class="p">[</span><span class="o">-</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">3</span><span class="p">),]</span>
+
+<span class="c1"># repeat for all states</span>
+
+SP <span class="o">&lt;-</span> lm<span class="p">(</span>PVOTOS<span class="o">~</span>PGASTOS<span class="o">+</span><span class="kp">I</span><span class="p">(</span>PGASTOSc<span class="o">^</span><span class="m">2</span><span class="p">),</span>
+
+<span class="kp">subset</span><span class="p">(</span>dados<span class="p">,</span> p<span class="o">==</span><span class="m">5</span> <span class="o">&amp;</span> t<span class="o">==</span><span class="m">2006</span> <span class="o">&amp;</span> j<span class="o">==</span>”SP”<span class="p">),</span>
+
+na.action<span class="o">=</span>na.omit<span class="p">)</span>
+
+sp <span class="o">&lt;-</span> <span class="kp">as.data.frame</span><span class="p">(</span><span class="kp">summary</span><span class="p">(</span>SP<span class="p">)</span><span class="o">$</span>coef<span class="p">)</span>
+
+sp <span class="o">&lt;-</span> sp<span class="p">[</span><span class="o">-</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">3</span><span class="p">),]</span>
+
+TO <span class="o">&lt;-</span> lm<span class="p">(</span>PVOTOS<span class="o">~</span>PGASTOS<span class="o">+</span><span class="kp">I</span><span class="p">(</span>PGASTOSc<span class="o">^</span><span class="m">2</span><span class="p">),</span>
+
+<span class="kp">subset</span><span class="p">(</span>dados<span class="p">,</span> p<span class="o">==</span><span class="m">5</span> <span class="o">&amp;</span> t<span class="o">==</span><span class="m">2006</span> <span class="o">&amp;</span> j<span class="o">==</span>”TO”<span class="p">),</span>
+
+na.action<span class="o">=</span>na.omit<span class="p">)</span>
+
+to <span class="o">&lt;-</span> <span class="kp">as.data.frame</span><span class="p">(</span><span class="kp">summary</span><span class="p">(</span>TO<span class="p">)</span><span class="o">$</span>coef<span class="p">)</span>
+
+to <span class="o">&lt;-</span> to<span class="p">[</span><span class="o">-</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">3</span><span class="p">),]</span>
+
+
+<span class="c1"># Then I merge the results into a matrix:</span>
+
+sen6<span class="o">&lt;-</span> <span class="kp">rbind</span><span class="p">(</span>ac<span class="p">,</span> al<span class="p">,</span> am<span class="p">,</span> ap<span class="p">,</span> ba<span class="p">,</span> ce<span class="p">,</span> df<span class="p">,</span> es<span class="p">,</span> go<span class="p">,</span> ma<span class="p">,</span> mg<span class="p">,</span> ms<span class="p">,</span> mt<span class="p">,</span> pa<span class="p">,</span> pb<span class="p">,</span> pe<span class="p">,</span> <span class="kc">pi</span><span class="p">,</span> pr<span class="p">,</span> rj<span class="p">,</span> rn<span class="p">,</span> ro<span class="p">,</span> rr<span class="p">,</span> rs<span class="p">,</span> sc<span class="p">,</span> se<span class="p">,</span> sp<span class="p">,</span> to<span class="p">)</span>
+
+sen6<span class="o">$</span>Estimate <span class="o">&lt;-</span> <span class="kp">format</span><span class="p">(</span><span class="kp">round</span><span class="p">(</span>sen6<span class="o">$</span>Estimate<span class="p">,</span> <span class="m">2</span><span class="p">))</span>
+
+<span class="kp">colnames</span><span class="p">(</span>sen6<span class="p">)</span> <span class="o">&lt;-</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;sen06&quot;</span><span class="p">,</span> <span class="s">&quot;Std.Error”, &quot;</span>tvalue”<span class="p">,</span> <span class="s">&quot;Pr(&gt;|t|)”)</span>
+
+<span class="s">###</span>
+
+<span class="s">coefmap &lt;- as.data.frame (cbind(UF, sen6$sen06, sen6$Std.Error))</span>
+
+<span class="s">colnames (coefmap) &lt;- c(&quot;</span>UF”<span class="p">,</span>”sen02<span class="s">&quot;, &quot;</span>Erro02<span class="s">&quot;,”sen06&quot;</span><span class="p">,</span> <span class="s">&quot;Erro06&quot;</span><span class="p">)</span>
+
+Calling the shape <span class="kp">file</span>
+
+<span class="c1">## ======&gt; Maps &lt;=======</span>
+
+<span class="c1"># loads sp library for maps and for nice color schemes</span>
+
+<span class="kn">require</span><span class="p">(</span>map tools<span class="p">)</span>
+
+gpclibPermit<span class="p">()</span>
+
+<span class="kn">require</span><span class="p">(</span>classInt<span class="p">)</span>
+
+<span class="kn">require</span><span class="p">(</span>RColorBrewer<span class="p">)</span>
+
+<span class="c1"># ===&gt; Shapefile Ivocation &lt;==</span>
+
+brasil <span class="o">&lt;-</span> readShapeSpatial<span class="p">(</span><span class="kp">file.choose</span><span class="p">(),</span>
+
+proj4string<span class="o">=</span>CRS<span class="p">(</span><span class="s">&quot;+proj=longlat&quot;</span><span class="p">))</span>
+
+<span class="kp">summary</span><span class="p">(</span>brasil<span class="p">)</span>
+
+coefmap <span class="o">&lt;-</span> read.csv<span class="p">(</span><span class="s">&quot;/Users/Daniel/D1/coefmap.csv&quot;</span><span class="p">,</span> sep <span class="o">=</span> <span class="s">&quot;,&quot;</span><span class="p">,</span> header<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+
+data <span class="o">&lt;-</span> <span class="kp">subset</span><span class="p">(</span>coefmap<span class="p">,</span> <span class="bp">T</span><span class="p">,</span> select <span class="o">=</span> <span class="kt">c</span><span class="p">(</span>
+
+<span class="s">&quot;UF&quot;</span><span class="p">,</span> <span class="s">&quot;sen02&quot;</span><span class="p">,</span> <span class="s">&quot;sen06&quot;</span><span class="p">))</span>
+
+data.br <span class="o">&lt;-</span> <span class="kp">attr</span><span class="p">(</span>brasil<span class="p">,</span> <span class="s">&quot;data”)#getting names from shape</span>
+
+<span class="s">data.br $indice &lt;- 1:dim(data.br)[1]</span>
+
+<span class="s">data$UF &lt;- as.character(data$UF)</span>
+
+<span class="s">data.br$UF &lt;- as.character(data.br$UF)</span>
+
+<span class="s">data$cam02 &lt;- as.numeric(as.character(data$cam02))</span>
+
+<span class="s">data.br &lt;- merge(data.br, data)</span>
+
+<span class="s">data.br &lt;- data.br[order(data.br$indice),]</span>
+
+<span class="s">attr(brasil, &quot;</span>data<span class="s">&quot;) &lt;- data.br #attributing data to shape</span>
+
+<span class="s"># Finally, I have the map of money effects across states for the senatorial elections in Brazil</span>
+
+<span class="s">## Variables</span>
+
+<span class="s">var2plot &lt;- as.numeric(brasil@data$sen06)</span>
+
+<span class="s">nclr &lt;- 12</span>
+
+<span class="s">clr2plot &lt;- palette(c(&quot;</span><span class="c1">#FFFF99&quot;, &quot;#FFFF66&quot;,&quot;#FFEB5C&quot;,</span>
+
+<span class="s">&quot;#FFD652&quot;</span><span class="p">,</span> <span class="s">&quot;#FFC247&quot;</span><span class="p">,</span> <span class="s">&quot;#FFAD3D”,”#FF9933&quot;</span><span class="p">,</span> <span class="s">&quot;#FF8529&quot;</span><span class="p">,</span>
+
+<span class="s">&quot;#FF701F”, &quot;</span><span class="c1">#FF5C14&quot;, &quot;#FF470A”, &quot;#FF3300&quot;))</span>
+
+class <span class="o">&lt;-</span> classIntervals<span class="p">(</span>var2plot<span class="p">,</span> nclr<span class="p">,</span> style<span class="o">=</span>”fisher”<span class="p">,</span>
+
+dataPrecision <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
+
+colors <span class="o">&lt;-</span> findColours<span class="p">(</span><span class="kp">class</span><span class="p">,</span> clr2plot<span class="p">)</span>
+
+<span class="c1">#Plot Map &lt;===========</span>
+
+plot<span class="p">(</span>brasil<span class="p">,</span> xlim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">-73.83943</span><span class="p">,</span><span class="m">-34.85810</span><span class="p">),</span>
+
+ylim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">-33.77086</span><span class="p">,</span><span class="m">5.38289</span><span class="p">))</span>
+
+plot<span class="p">(</span>brasil<span class="p">,</span> border <span class="o">=</span> gray <span class="p">(</span><span class="m">.9</span><span class="p">),</span> col<span class="o">=</span>colors<span class="p">,</span> add<span class="o">=</span><span class="bp">T</span><span class="p">)</span>
+
+title<span class="p">(</span><span class="kp">paste</span><span class="p">(</span><span class="s">&quot;Senado Federal, 2006&quot;</span><span class="p">))</span>
+
+legend<span class="p">(</span><span class="s">&quot;bottom left”, border=”white”,</span>
+
+<span class="s">xjust = 0, yjust = 0, x.intersp = 1, y.intersp = .8,</span>
+
+<span class="s">legend=names(attr(colors, &quot;</span><span class="kp">table</span>”<span class="p">)),</span>
+
+fill<span class="o">=</span><span class="kp">attr</span><span class="p">(</span>colors<span class="p">,</span> <span class="s">&quot;palette”), cex=0.8, bty=”n”,</span>
+
+<span class="s">title=”%Gastos sobre %Votos”)</span>
+
+<span class="s">##======&gt; Labels &lt;========</span>
+
+<span class="s">br.polgns &lt;- attr(brasil, &quot;</span>polygons”<span class="p">)</span>
+
+br.cntrd <span class="o">&lt;-</span> <span class="kp">lapply</span><span class="p">(</span>br.polgns<span class="p">,</span> slot<span class="p">,</span> <span class="s">&quot;labpt”)</span>
+
+<span class="s">text(as.character(data$UF), cex = 0.6)</span>
+
+<span class="s">br.x &lt;- sapply(br.cntrd, function(x) x[1])</span>
+
+<span class="s">br.y &lt;- sapply(br.cntrd, function(x) x[2])</span>
+
+<span class="s">text(br.x, br.y, as.character(</span>
+
+<span class="s">brasil$sen06), cex = 0.6)#=====&gt; Senado 2006 &lt;===========</span>
+
+<span class="s">#Variables</span>
+
+<span class="s">var2plot &lt;- as.numeric(brasil@data$sen06)</span>
+
+<span class="s">nclr &lt;- 12</span>
+
+<span class="s">clr2plot &lt;- palette(c(&quot;</span><span class="c1">#FFFF99&quot;, &quot;#FFFF66&quot;,”#FFEB5C”,</span>
+
+<span class="s">&quot;#FFD652&quot;</span><span class="p">,</span> <span class="s">&quot;#FFC247&quot;</span><span class="p">,</span> <span class="s">&quot;#FFAD3D”,”#FF9933&quot;</span><span class="p">,</span> <span class="s">&quot;#FF8529&quot;</span><span class="p">,</span>
+
+<span class="s">&quot;#FF701F”, &quot;</span><span class="c1">#FF5C14&quot;, &quot;#FF470A”, &quot;#FF3300&quot;))</span>
+
+class <span class="o">&lt;-</span> classIntervals<span class="p">(</span>var2plot<span class="p">,</span> nclr<span class="p">,</span> style<span class="o">=</span>”fisher”<span class="p">,</span>
+
+dataPrecision <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
+
+colors <span class="o">&lt;-</span> findColours<span class="p">(</span><span class="kp">class</span><span class="p">,</span> clr2plot<span class="p">)</span>
+
+<span class="c1">#Plot Map &lt;===========</span>
+
+plot<span class="p">(</span>brasil<span class="p">,</span> xlim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">-73.83943</span><span class="p">,</span><span class="m">-34.85810</span><span class="p">),</span>
+
+ylim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">-33.77086</span><span class="p">,</span><span class="m">5.38289</span><span class="p">))</span>
+
+plot<span class="p">(</span>brasil<span class="p">,</span> border <span class="o">=</span> gray <span class="p">(</span><span class="m">.9</span><span class="p">),</span> col<span class="o">=</span>colors<span class="p">,</span> add<span class="o">=</span><span class="bp">T</span><span class="p">)</span>
+
+title<span class="p">(</span><span class="kp">paste</span><span class="p">(</span><span class="s">&quot;Senado Federal, 2006&quot;</span><span class="p">))</span>
+
+legend<span class="p">(</span><span class="s">&quot;bottom left”, border=”white”,</span>
+
+<span class="s">xjust = 0, yjust = 0, x.intersp = 1, y.intersp = .8,</span>
+
+<span class="s">legend=names(attr(colors, &quot;</span><span class="kp">table</span>”<span class="p">)),</span>
+
+fill<span class="o">=</span><span class="kp">attr</span><span class="p">(</span>colors<span class="p">,</span> <span class="s">&quot;palette”), cex=0.8, bty=”n”,</span>
+
+<span class="s">title=”%Gastos sobre %Votos”)</span>
+
+<span class="s">##======&gt; Labels &lt;========</span>
+
+<span class="s">br.polgns &lt;- attr(brasil, &quot;</span>polygons”<span class="p">)</span>
+
+br.cntrd <span class="o">&lt;-</span> <span class="kp">lapply</span><span class="p">(</span>br.polgns<span class="p">,</span> slot<span class="p">,</span> <span class="s">&quot;</span><span class="err">labpt”)</span>
+
+text<span class="p">(</span><span class="kp">as.character</span><span class="p">(</span>data<span class="o">$</span>UF<span class="p">),</span> cex <span class="o">=</span> <span class="m">0.6</span><span class="p">)</span>
+
+br.x <span class="o">&lt;-</span> <span class="kp">sapply</span><span class="p">(</span>br.cntrd<span class="p">,</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> x<span class="p">[</span><span class="m">1</span><span class="p">])</span>
+
+br.y <span class="o">&lt;-</span> <span class="kp">sapply</span><span class="p">(</span>br.cntrd<span class="p">,</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> x<span class="p">[</span><span class="m">2</span><span class="p">])</span>
+
+text<span class="p">(</span>br.x<span class="p">,</span> br.y<span class="p">,</span> <span class="kp">as.character</span><span class="p">(</span>
+
+brasil<span class="o">$</span>sen06<span class="p">),</span> cex <span class="o">=</span> <span class="m">0.6</span><span class="p">)</span>
+<span class="c1">##End not run</span></code></pre></div>
+
+  </div>
+
+  <div class="date">
+    Written on October  4, 2011
+  </div>
+
+  
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+
+	    var disqus_shortname = 'daniel-marcelino';
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+</article>
+
+
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+           <footer>
+      <div class="row">
+          <div class="col-md-4 text-left">
+            Daniel Marcelino 2015 <span class="fa fa-creative-commons"></span>
+          </div>
+           <div class="col-md-4 text-center">
+            <span class="fa fa-pencil"></span> with <span class="red pulse fa fa-heart"></span> &
+            <span class="fa fa-coffee"></span>.
+              <span class="fa fa-code"></span> in <span class="fa fa-github-alt"></span>
+            </a>
+          </div>
+        <div class="col-md-4 text-right">
+          <a
+            href ="https://twitter.com/dmarcelinobr"
+            title="My twitter account">
+              <span class="thunder fa fa-twitter"></span>
+          </a>
+          <a
+            href ="https://facebook.com/dmarcelinobr"
+            title="My facebook account">
+              <span class="thunder fa fa-facebook-official"></span>
+          </a>
+          <a
+            href ="https://cl.linkedin.com/in/daniel-marcelino-80968656"
+            title="My linkedin profile">
+              <span class="thunder fa fa-linkedin"></span>
+          </a>
+          <a
+            href ="https://plus.google.com/+dmsilva.br/posts"
+            title="My google profile">
+              <span class="thunder fa fa-google-plus"></span>
+          </a>
+          <a
+            href ="https://github.com/danielmarcelino/"
+            title="My github repos!">
+              <span class="thunder fa fa-github"></span>
+          </a>
+          <a
+            href ="https://github.com/danielmarcelino/"
+            title="My github repos!">
+              <span class="thunder fa fa-rss"></span>
+          </a>
+        </div>
+        
+      </div>
+	 
+  </footer>
+        </footer>
+      </div>
+    </div>
+
+    
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-24186657-1', 'auto');
+		ga('send', 'pageview', {
+		  'page': '/r/2011/10/04/drawing-maps-using-shapefiles-and-R/',
+		  'title': 'Drawing maps using shape files and R'
+		});
+	</script>
+	<!-- End Google Analytics -->
+
+
+  </body>
+</html>

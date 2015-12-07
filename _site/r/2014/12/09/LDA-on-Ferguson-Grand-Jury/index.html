@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+		
+<title>&middot; Daniel &middot; LDA on Ferguson Grand Jury I</title>
+        <!-- favicon -->
+  <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+
+        <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' chrome=1>
+	<meta name="google-site-verification" content="Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ" />
+	<meta name="bing_webmastertools_id" content="97837256955BD270FD688E2B50F89FDB" />
+    <meta name="description" content="Code and data"/>
+    <meta name="viewport" content="width=device-width">
+    <meta name="author" content="Daniel Marcelino"/>
+    <meta name="viewport" content="width=640px, initial-scale=1.0, maximum-scale=1.5">	
+    <meta name="keywords" content="Daniel Marcelino, SciencesPo, SoundexBr, r-project, r-cran, r, statistics, methods, programming, data mining, data visualization, datascience, data"/>	
+    
+    <meta name="description" content="The case of Michael Brown, an unarmed black teenager, who was shot and killed on August 9th, by Darren Wilson, a white police officer, in Ferguson has driven public opinion around the globe to the suburb of St. Louis.
+" />
+    <meta property="og:description" content="The case of Michael Brown, an unarmed black teenager, who was shot and killed on August 9th, by Darren Wilson, a white police officer, in Ferguson has driven public opinion around the globe to the suburb of St. Louis.
+" />
+    
+    <meta name="author" content="EnfoRced Data Analysis" />
+    
+    <meta property="og:title" content="LDA on Ferguson Grand Jury I" />
+    <meta property="twitter:title" content="LDA on Ferguson Grand Jury I" />
+    
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="alternate" type="application/atom+xml" title="EnfoRced Data Analysis - Blog of Daniel Marcelino" href="/atom.xml" />
+	 <link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis - Blog of Daniel Marcelino" href="/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis - Blog of Daniel Marcelino" href="/feed.r.xml" />
+	
+        <!-- Google Fonts -->
+		<link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,300,400,600" rel="stylesheet" type="text/css">
+		<link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
+        <!-- Custom CSS -->
+		  <!-- Jquery & D3js -->
+	   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+		
+		
+    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+  </head>
+
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="/" class="site-avatar"><img src="https://41.media.tumblr.com/05546119a35e7acb34a47344bc7de012/tumblr_nypg9aPsBy1v0aqj1o1_500.jpg" /></a>
+
+          <div class="site-info">
+            <h1 class="site-name"><a href="/">EnfoRced Data Analysis</a></h1>
+            <p class="site-description">Blog of Daniel Marcelino</p>
+          </div>
+
+          <nav>
+            <a href="/">Blog</a>
+            <a href="/about">About</a>
+			<a href="/research">Research</a>
+			<a href="/randomwalks">Random Walks</a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main" class="container">
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [ ['$', '$'], ["\(", "\)"] ],
+        displayMath: [ ['$$', '$$'], ["\[", "\]"] ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+      //,
+      //displayAlign: "left",
+      //displayIndent: "2em"
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+
+
+	
+<article class="post">
+  <h1>LDA on Ferguson Grand Jury I</h1>
+
+  <div class="entry">
+    <p>The case of Michael Brown, an unarmed black teenager, who was shot and killed on August 9th, by Darren Wilson, a white police officer, in Ferguson has driven public opinion around the globe to the suburb of St. Louis.</p>
+
+<!--more-->
+
+<p><img src="/images/blog/2014/ferguson.jpeg" alt="LDA"></p>
+
+<h3 id="motivation">Motivation</h3>
+
+<p>The case of Michael Brown, an unarmed black teenager, who was shot and killed on August 9th, by Darren Wilson, a white police officer, in Ferguson has driven public opinion around the globe to the suburb of St. Louis. After few weeks, on Nov. 24, the St. Louis County prosecutor announced that a grand jury decided not to indict Mr. Wilson. This announcement triggered another ongoing wave of protests.</p>
+
+<p>This trial yields to significant amount of text, which soon became available over the <a href="http://twitter.com/MitchFraas">internet</a>. Thanks for work-horse on the text files, now I can simply <a href="https://s3.amazonaws.com/fraasdev/FergusonTextGuide.txt">download</a> and analyze them.</p>
+
+<p>I spent few hours learning about LDA–Latent Dirichlet Allocation from a package called Mallet&#39;. The Mallet machine learning package provides an interface to the Java implementation of latent Dirichlet allocation. To process a text file into mallet` a spot list of words file is required. Typically a file with unimportant words and tag marks that can instruct the algorithm.</p>
+
+<h4 id="important-packages">Important packages</h4>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kn">library</span><span class="p">(</span>devtools<span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>repmis<span class="p">)</span>
+<span class="kn">require</span><span class="p">(</span>dplyr<span class="p">)</span>
+<span class="kn">require</span><span class="p">(</span>mallet<span class="p">)</span>
+<span class="kn">require</span><span class="p">(</span>cluster<span class="p">)</span>
+<span class="kn">require</span><span class="p">(</span>wordcloud<span class="p">)</span>
+<span class="kn">require</span><span class="p">(</span>corrgram<span class="p">)</span>
+<span class="kn">require</span><span class="p">(</span>ellipse<span class="p">)</span>
+<span class="kn">require</span><span class="p">(</span>RColorBrewer<span class="p">)</span></code></pre></div>
+
+<h4 id="the-dictionary">The dictionary</h4>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">data_url <span class="o">&lt;-</span> <span class="s">&#39;https://github.com/danielmarcelino/Tables/raw/master/en.txt&#39;</span>
+
+stop <span class="kt">list</span> <span class="o">&lt;-</span> repmis<span class="o">::</span>source_data<span class="p">(</span>data_url<span class="p">,</span> sep <span class="o">=</span> <span class="s">&quot;,&quot;</span><span class="p">,</span> header <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span></code></pre></div>
+
+<p>Having downloaded the documents, let’s import them from the folder. Each document is split as 1000 words chunks. To proceed, we write the stop list file to the path directory.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">docs <span class="o">&lt;-</span> mallet.read.dir<span class="p">(</span><span class="s">&quot;FergusontText/chunks&quot;</span><span class="p">)</span>
+
+write.table<span class="p">(</span>stop <span class="kt">list</span><span class="p">,</span> file<span class="o">=</span><span class="s">&quot;stoplist.txt&quot;</span><span class="p">,</span>quote<span class="o">=</span><span class="bp">F</span><span class="p">,</span> sep<span class="o">=</span><span class="s">&quot; &quot;</span><span class="p">,</span> row.names<span class="o">=</span><span class="bp">F</span><span class="p">)</span>
+
+mallet.docs <span class="o">&lt;-</span> mallet.import<span class="p">(</span>docs<span class="o">$</span>id<span class="p">,</span> docs<span class="o">$</span>text<span class="p">,</span> <span class="s">&quot;en.txt&quot;</span><span class="p">,</span> token.regexp <span class="o">=</span> <span class="s">&quot;\p{L}[\p{L}\p{P}]+\p{L}&quot;</span><span class="p">)</span></code></pre></div>
+
+<p>Let’s create a topic trainer object for data</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">n.topics <span class="o">&lt;-</span> <span class="m">50</span> topic.model <span class="o">&lt;-</span> MalletLDA<span class="p">(</span>n.topics<span class="p">)</span></code></pre></div>
+
+<p>And then load the documents:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">topic.model<span class="o">$</span>loadDocuments<span class="p">(</span>mallet.instances<span class="p">)</span></code></pre></div>
+
+<p>Now we can actually get the vocabulary and few statistics about word frequencies.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">vocab <span class="o">&lt;-</span> topic.model<span class="o">$</span>getVocabulary<span class="p">()</span>
+
+word.freq <span class="o">&lt;-</span> mallet.word.freqs<span class="p">(</span>topic.model<span class="p">)</span>
+
+word.freq <span class="o">%&gt;%</span> arrange<span class="p">(</span>desc<span class="p">(</span>term.freq<span class="p">))</span> <span class="o">%&gt;%</span> <span class="kp">head</span><span class="p">(</span><span class="m">10</span><span class="p">)</span></code></pre></div>
+
+<h4 id="almost-there">Almost there</h4>
+
+<p>Nice, we have all set. Let’s use simulations to optimize hyper parameters every 25 iterations with a warm-up period of 100 iterations (by default, the hyper parameter optimization is on). After this we can actually train the model. Once again, we can specify the number of iterations, or draws after the burn-in. I’m specifying 200 draws.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">topic.model<span class="o">$</span>setAlphaOptimization<span class="p">(</span><span class="m">25</span><span class="p">,</span> <span class="m">100</span><span class="p">)</span>
+
+topic.model<span class="o">$</span>train<span class="p">(</span><span class="m">200</span><span class="p">)</span></code></pre></div>
+
+<p>Now it runs through only few iterations, but picking the ‘best’ topic for each token rather than sampling from the posterior distribution.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">topic.model<span class="o">$</span>maximize<span class="p">(</span><span class="m">20</span><span class="p">)</span></code></pre></div>
+
+<p>Notice that we a structure like: words nested topics, and topics in documents. Thus, it might be a good idea to get the probability of topics in documents and the probability of words in topics.</p>
+
+<p>There is no magic here. The following functions return raw word counts, as I want probabilities, I’ve to normalize them. I also add smoothing to that so to avoid seen some topics with exactly 0 probability.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">doc.topics <span class="o">&lt;-</span> mallet.doc.topics<span class="p">(</span>topic.model<span class="p">,</span> smoothed<span class="o">=</span><span class="bp">T</span><span class="p">,</span> normalized<span class="o">=</span><span class="bp">T</span><span class="p">)</span>
+
+topic.words <span class="o">&lt;-</span> mallet.topic.words<span class="p">(</span>topic.model<span class="p">,</span> smoothed<span class="o">=</span><span class="bp">T</span><span class="p">,</span> normalized<span class="o">=</span><span class="bp">T</span><span class="p">)</span></code></pre></div>
+
+<p>Now I’ve two matrixes to transpose and normalize the doc:topics</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">topic.docs <span class="o">&lt;-</span> <span class="kp">t</span><span class="p">(</span>doc.topics<span class="p">)</span>
+
+topic.docs <span class="o">&lt;-</span> topic.docs <span class="o">/</span> <span class="kp">rowSums</span><span class="p">(</span>topic.docs<span class="p">)</span>
+
+Write down the output as CSV <span class="kr">for</span> further analysis<span class="o">:</span>
+
+write.csv<span class="p">(</span>topic.docs<span class="p">,</span> <span class="s">&quot;ferguson-topics.csv&quot;</span> <span class="p">)</span></code></pre></div>
+
+<p>Now we can obtain a vector with short names for the topics:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">topics.labels <span class="o">&lt;-</span> <span class="kp">rep</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">,</span> n.topics<span class="p">)</span>
+
+<span class="kr">for</span><span class="p">(</span>topic <span class="kr">in</span> <span class="m">1</span><span class="o">:</span>n.topics<span class="p">)</span> topics.labels<span class="p">[</span>topic<span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">paste</span><span class="p">(</span>mallet.top.words<span class="p">(</span>topic.model<span class="p">,</span> topic.words<span class="p">[</span>topic<span class="p">,],</span> num.top.words<span class="o">=</span><span class="m">5</span><span class="p">)</span><span class="o">$</span>words<span class="p">,</span> collapse<span class="o">=</span><span class="s">&quot; &quot;</span><span class="p">)</span></code></pre></div>
+
+<p>Check out the keywords for each topic:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">topics.labels <span class="o">%&gt;%</span> <span class="kp">head</span><span class="p">(</span><span class="m">50</span><span class="p">)</span>
+
+write.csv<span class="p">(</span>topics.labels<span class="p">,</span> <span class="s">&quot;ferguson-topics-lbs.csv&quot;</span><span class="p">)</span></code></pre></div>
+
+<h4 id="correlation-matrix">Correlation matrix</h4>
+
+<p>Here, Correlations with significance levels – each 1000 line chunk correlated against the others. Positive correlation – similar topics.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">cor.matrix <span class="o">&lt;-</span> cor<span class="p">(</span>topic.docs<span class="p">,</span> use<span class="o">=</span><span class="s">&quot;complete.obs&quot;</span><span class="p">,</span> method<span class="o">=</span><span class="s">&quot;pearson&quot;</span><span class="p">)</span>
+write.csv<span class="p">(</span>cor.matrix<span class="p">,</span> <span class="s">&quot;corr-matrix.csv&quot;</span><span class="p">)</span></code></pre></div>
+
+<p>From here, a variety of analyses can be conducted. As an instance, one could approach this as a network diagram, showing which pieces of the testimony share similar patterns of discourse, which ones do not.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">corrgram<span class="p">(</span>cor.matrix<span class="p">,</span> order<span class="o">=</span><span class="kc">NULL</span><span class="p">,</span> lower.panel<span class="o">=</span>panel.shade<span class="p">,</span>
+upper.panel<span class="o">=</span><span class="kc">NULL</span><span class="p">,</span> text.panel<span class="o">=</span>panel.txt<span class="p">,</span>
+main<span class="o">=</span><span class="s">&quot;Correlated chunks of the Ferguson&#39;s grand jury testimony&quot;</span><span class="p">)</span></code></pre></div>
+
+<h4 id="gran-finale">Gran Finale</h4>
+
+<p>How about turn those bits into word clouds of the topics? A word cloud can be tricky as it doesn’t tell us much of anything if obvious words are included. That’s make our stop-list file key for generating good word clouds. Of course the subject names are going to show up a lot, but a word cloud is a lot more fancy and informative if it brings what sorts of emotional or subjective language is being used.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kr">for</span><span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span><span class="m">10</span><span class="p">){</span>
+topic.top.words <span class="o">&lt;-</span> mallet.top.words<span class="p">(</span>topic.model<span class="p">,</span>
+topic.words<span class="p">[</span>i<span class="p">,],</span> <span class="m">20</span><span class="p">)</span>
+<span class="kp">print</span><span class="p">(</span>wordcloud<span class="p">(</span>topic.top.words<span class="o">$</span>words<span class="p">,</span>
+topic.top.words<span class="o">$</span>weights<span class="p">,</span>
+<span class="kt">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="m">.8</span><span class="p">),</span> rot.per<span class="o">=</span><span class="m">0</span><span class="p">,</span>random.order<span class="o">=</span><span class="bp">F</span><span class="p">,</span>
+colors<span class="o">=</span>brewer.pal<span class="p">(</span><span class="m">5</span><span class="p">,</span> <span class="s">&quot;Dark2&quot;</span><span class="p">)</span> <span class="p">)</span> <span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+
+<p>We can also try clustering plot based on shared words:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">hc <span class="o">&lt;-</span> hclust<span class="p">(</span>dist<span class="p">(</span>topic.words<span class="p">))</span>
+
+<span class="p">(</span>dens <span class="o">&lt;-</span> as.dendrogram<span class="p">(</span>hc<span class="p">))</span>
+
+plot<span class="p">(</span>dens<span class="p">,</span> edgePar<span class="o">=</span><span class="kt">list</span><span class="p">(</span>col <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">,</span> lty <span class="o">=</span> <span class="m">2</span><span class="o">:</span><span class="m">3</span><span class="p">),</span> dLeaf<span class="o">=</span><span class="m">1</span><span class="p">,</span> edge.root <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+
+plot<span class="p">(</span>hclust<span class="p">(</span>dist<span class="p">(</span>topic.words<span class="p">)),</span> labels<span class="o">=</span>topics.labels<span class="p">)</span></code></pre></div>
+
+<p>It seems to messy, let’s create a data.frame and calculate a similarity matrix:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">topic_docs <span class="o">&lt;-</span> <span class="kt">data.frame</span><span class="p">(</span>topic.docs<span class="p">)</span>
+
+<span class="kp">names</span><span class="p">(</span>topic_docs<span class="p">)</span> <span class="o">&lt;-</span> docs<span class="o">$</span>id
+
+topic_dist <span class="o">&lt;-</span> <span class="kp">as.matrix</span><span class="p">(</span>daisy<span class="p">(</span><span class="kp">t</span><span class="p">(</span>topic_docs<span class="p">),</span> metric <span class="o">=</span> <span class="s">&quot;euclidean&quot;</span><span class="p">,</span> stand <span class="o">=</span> <span class="kc">TRUE</span><span class="p">))</span></code></pre></div>
+
+<p>The following does the trick to keep only closely related documents and avoid a dense diagram, otherwise it can become difficult to interpret. Change row values to zero if less than row minimum + row standard deviation</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">topic_dist<span class="p">[</span> <span class="kp">sweep</span><span class="p">(</span>topic_dist<span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="p">(</span><span class="kp">apply</span><span class="p">(</span>topic_dist<span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="kp">min</span><span class="p">)</span> <span class="o">+</span> <span class="kp">apply</span><span class="p">(</span>topic_dist<span class="p">,</span><span class="m">1</span><span class="p">,</span>sd<span class="p">)</span> <span class="p">))</span> <span class="o">&gt;</span> <span class="m">0</span> <span class="p">]</span> <span class="o">&lt;-</span> <span class="m">0</span></code></pre></div>
+
+<h4 id="gran-finale">Gran Finale</h4>
+
+<p>Finally, we can use means to identify groups of similar documents, and further get names for each cluster</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">km <span class="o">&lt;-</span> kmeans<span class="p">(</span>topic_dist<span class="p">,</span> n.topics<span class="p">)</span>
+
+alldocs <span class="o">&lt;-</span> <span class="kt">vector</span><span class="p">(</span><span class="s">&quot;list&quot;</span><span class="p">,</span> length <span class="o">=</span> n.topics<span class="p">)</span>
+
+<span class="kr">for</span><span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span>n.topics<span class="p">){</span>
+alldocs<span class="p">[[</span>i<span class="p">]]</span> <span class="o">&lt;-</span> <span class="kp">names</span><span class="p">(</span>km<span class="o">$</span>cluster<span class="p">[</span>km<span class="o">$</span>cluster <span class="o">==</span> i<span class="p">])</span> <span class="p">}</span></code></pre></div>
+
+  </div>
+
+  <div class="date">
+    Written on December  9, 2014
+  </div>
+
+  
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+
+	    var disqus_shortname = 'daniel-marcelino';
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+</article>
+
+
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+           <footer>
+      <div class="row">
+          <div class="col-md-4 text-left">
+            Daniel Marcelino 2015 <span class="fa fa-creative-commons"></span>
+          </div>
+           <div class="col-md-4 text-center">
+            <span class="fa fa-pencil"></span> with <span class="red pulse fa fa-heart"></span> &
+            <span class="fa fa-coffee"></span>.
+              <span class="fa fa-code"></span> in <span class="fa fa-github-alt"></span>
+            </a>
+          </div>
+        <div class="col-md-4 text-right">
+          <a
+            href ="https://twitter.com/dmarcelinobr"
+            title="My twitter account">
+              <span class="thunder fa fa-twitter"></span>
+          </a>
+          <a
+            href ="https://facebook.com/dmarcelinobr"
+            title="My facebook account">
+              <span class="thunder fa fa-facebook-official"></span>
+          </a>
+          <a
+            href ="https://cl.linkedin.com/in/daniel-marcelino-80968656"
+            title="My linkedin profile">
+              <span class="thunder fa fa-linkedin"></span>
+          </a>
+          <a
+            href ="https://plus.google.com/+dmsilva.br/posts"
+            title="My google profile">
+              <span class="thunder fa fa-google-plus"></span>
+          </a>
+          <a
+            href ="https://github.com/danielmarcelino/"
+            title="My github repos!">
+              <span class="thunder fa fa-github"></span>
+          </a>
+          <a
+            href ="https://github.com/danielmarcelino/"
+            title="My github repos!">
+              <span class="thunder fa fa-rss"></span>
+          </a>
+        </div>
+        
+      </div>
+	 
+  </footer>
+        </footer>
+      </div>
+    </div>
+
+    
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-24186657-1', 'auto');
+		ga('send', 'pageview', {
+		  'page': '/r/2014/12/09/LDA-on-Ferguson-Grand-Jury/',
+		  'title': 'LDA on Ferguson Grand Jury I'
+		});
+	</script>
+	<!-- End Google Analytics -->
+
+
+  </body>
+</html>
