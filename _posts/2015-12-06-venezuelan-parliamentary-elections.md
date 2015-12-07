@@ -8,7 +8,9 @@ output:
    keep_md: yes
    toc: yes
 category: R
-tags: [polls, Venezuela, elections]
+tags: [polls, Venezuela, elections, politics]
+published: true
+status: publish
 comments: true
 ---
 
@@ -23,7 +25,10 @@ I've collected some polls available on the internet dating back to January 2014,
 # Polls over time
 After a bit filling-in-the-blanks working with missing date values, we can visualize the poll trends over time. Given the sample size, sampling error and other sources of noise, a loess model can pretty much pick out the signals of long-term trends.
 
-<img src="/img/code-2015-12-06-venezuelan-parliamentary-elections/loess-1.png" alt="Loess model" style="display: block; margin: auto;" />
+<a href="{{ site.baseurl }}/img/code-2015-12-06-venezuelan-parliamentary-elections/loess-1.png" target="_blank">
+<img class="imgfull" src="{{ site.baseurl }}/img/code-2015-12-06-venezuelan-parliamentary-elections/loess-1.png" />
+</a>
+
 
 # Pollster biases
 Let's pretend we can trust on all those polls despite the huge variability among them as already mentioned [here](https://danielmarcelino.github.io/r/2015/12/04/venezuelan-parliamentary-election-2015/). In fact, the problem is not the variability as such, but my lack of knowledge about who are the pollsters and their past performance, so I can't judge them at first, let's say it clearly.
@@ -31,7 +36,7 @@ Nonetheless, if we accept the above models as a sound estimate of the expected p
 
 The graph below shows the distributions per polling house for those who polled more than a single poll in this dataset.
 
-<img src="/img/code-2015-12-06-venezuelan-parliamentary-elections/biases-3.png" alt="House Effects" style="display: block; margin: auto;" />
+![House Effects]({{ site.url }}/img/code-2015-12-06-venezuelan-parliamentary-elections/biases-3.png)
 
 We've to keep in mind that there are important caveats which we're not addressing here, as that different polls have used different question sets, methods etc, so this isn't evidence for anything underhanded per se. It seems reasonable to expect that while parties might have good reasons to publish polls in their favor, pollsters conducting the polls should generally be more or less indifferent.
 
