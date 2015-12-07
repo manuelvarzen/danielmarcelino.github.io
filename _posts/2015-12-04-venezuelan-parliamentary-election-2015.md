@@ -14,9 +14,9 @@ comments: true
 
 Next Sunday Venezuelans are heading to the polls once again with  international concerns about the clearness of the balloting. To get an idea about the political climate over there, I've collected some polls available on the internet. The surprising thing from those surveys is a tremendous variability from pollster to pollster about the single topic of voting intention. You may find national polls fielded in the same period with estimates varying as much as 20%, isn't it dramatic? If you always wanted to see house bias operating in practice, the Venezuelan elections may provide you a good case then.   
 
-
-![center]({{ site.url }}/img/2015/venezuela1.png)
-
+<a href="{{ site.baseurl }}/img/2015/venezuela1.png">
+<img class="imgfull" src="{{ site.baseurl }}/img/2015/venezuela1.png" />
+</a>
 
 {% highlight r %}
 ### The data
