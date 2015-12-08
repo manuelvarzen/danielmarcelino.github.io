@@ -71,6 +71,8 @@ The Venezuela's Socialists seem to be at risk, but predicting the final number o
 In fact, it might be really difficult to set forth a range of winning seats as the government recently enacted some redistricting seats in order to weaken an eventual absolute majority by the opposition. Somehow, the polls show this will be a significant symbolic defeat for the government that shows it lost despite all the advantages in state power and control over the media.
 
 
+## UPDATE (Error)
+ I was informed by André Salvati that the code block below was producing an error message of unknown column; the missing part has been included. Thanks for letting me know. The whole code can be found in this [gist](https://gist.github.com/danielmarcelino/904c804b2681ac8a9d08) 
 
 {% highlight r %}
 
@@ -80,7 +82,8 @@ library("grid")
 library("reshape2")
 library("lubridate")
 library("scales")
-library("SciencesPo")
+library("knitr")
+library("SciencesPo") # to use the themes, you must install the version from github
 
 source = "https://github.com/danielmarcelino/Polling/raw/master/Venezuela/data/polls.txt"
 
@@ -157,6 +160,15 @@ loessPrediction("Swing", l.Swing)
 
 polls$residual <- polls$value - polls$predicted
 hist(polls$residual)
+
+## Check pollsters' names
+polls$house <- gsub(" ?\\(.*", "", polls$house)
+polls$house <- gsub("-", " ", polls$house)
+
+houseNames <- do.call(rbind, strsplit(as.character(polls$house), "/"))
+colnames(houseNames) <- c("pollster", "commission")
+
+polls <- cbind(polls, houseNames)
 
 ## Order pollster by median residual:
 ordering <- group_by(polls, pollster) %>%
