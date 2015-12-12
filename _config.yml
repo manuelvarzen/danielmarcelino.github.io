@@ -52,7 +52,7 @@ baseurl: "/danielmarcelino.github.io"
 #
 
 highlighter: pygments
-permalink: /:categories/:year/:month/:day/:title/
+permalink: /:categories/:year/:title/
 markdown: redcarpet
 redcarpet:
   extensions: ["no_intra_emphasis", "fenced_code_blocks", "superscript", "strikethrough", "highlight", "autolink", "tables", "with_toc_data"]
@@ -69,6 +69,7 @@ gems:
   [jekyll-twitter-plugin,jekyll-sitemap,font-awesome-less,jekyll-feed,github-pages]
   
 # Exclude these files from your production _site
+include: [".htaccess"]
 exclude:
  - Gemfile
  - Gemfile.lock
