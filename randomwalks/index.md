@@ -12,6 +12,5 @@ permalink: /randomwalks/
 <img style=" float:left; display:inline" src="/img/daniel_marcelino.jpg" width="250px" alt="Apple Picking"/>
 <img style=" float:left; display:inline"   src="/img/daniel3.jpg" width="250px" alt="Daniel Marcelino"/>
     </div>
-    </div>
 
 
