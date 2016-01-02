@@ -128,7 +128,7 @@ ggplot(polls, aes(x=date, y=value, col=response, fill=response)) +
   ggtitle("Vote Intention Among Venezuelans") +
   labs(x="", y="%", fill="Poll response:", col="Poll response:")
 # credits
- plotFootnote("danielmarcelino.github.io")
+ geom_foot("danielmarcelino.github.io")
 {% endhighlight %}
 
 
