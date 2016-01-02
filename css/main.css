@@ -3,11 +3,9 @@
 /* --- General --- */
 
 body {
-  font-family: 'Lato', sans-serif;
+  font-family: 'Sans', sans-serif;
   font-size: 18px;
   color: #404040;
-  margin-left: 50;
-  position: relative;
   background: #FFF;
 }
 p {	
