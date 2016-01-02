@@ -3,7 +3,7 @@ layout: page
 permalink: /about/
 ---
 
-## About this website
+## About this Website
 
 For years, I have been studying and programming in many social sciences topics. As I do love to work with open source tools and learn from others, I created this personal space where I try to declutter some of my ideas and put my projects in order. This is easier said than done however.
 

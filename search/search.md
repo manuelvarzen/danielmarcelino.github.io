@@ -1,6 +1,5 @@
 ---
 layout: default
-title: "Search dmarcelino.com"
 css: "/css/search.css"
 ---
 
