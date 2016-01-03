@@ -27,7 +27,7 @@ a {
   text-decoration: none;
   color: #404040;
 }
-
+a:hover,
 a:focus {
   color: #4169E1;
 }

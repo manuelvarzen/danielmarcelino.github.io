@@ -1,7 +1,7 @@
 ---
 layout: page
 permalink: /about/
-css: "/css/aboutme.css"
+css: "/css/about.css"
 ---
 
 ## About this Website
