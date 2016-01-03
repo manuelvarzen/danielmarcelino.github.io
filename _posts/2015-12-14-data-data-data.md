@@ -13,7 +13,6 @@ published: true
 status: publish
 comments: true
 fb-img: "http://danielmarcelino.github.io/img/2015/CTs_distribuicao.png"
-bigimg: img/2015/CTs_distribuicao.png
 permalink: /2015/12/14/data-data-data
 ---
 

@@ -4,7 +4,8 @@ section-type: post
 title: "Retrieving Data from Google Books with `ngramr`"
 date: 2015-11-15
 category: R
-tags: [ngramr, how-to]
+tags: [ngramr, r, how-to]
+fb-img: "http://danielmarcelino.github.io/img/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/sociologists-1.png"
 ---
 
 
