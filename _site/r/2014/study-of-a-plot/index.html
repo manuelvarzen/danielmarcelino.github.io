@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   
-  <title>Random Walks</title>
+  <title>Study of a Plot: The Manhattan Plot</title>
   
 
   <meta name="author" content="Daniel Marcelino" />
@@ -46,13 +46,13 @@
   
   <!-- Facebook OpenGraph tags -->
   
-  <meta property="og:title" content="Random Walks" />
+  <meta property="og:title" content="Study of a Plot: The Manhattan Plot" />
   
   
   <meta property="og:type" content="website" />
   
   
-  <meta property="og:url" content="http://danielmarcelino.github.io/randomwalks/" />
+  <meta property="og:url" content="http://danielmarcelino.github.io/r/2014/study-of-a-plot//" />
   
   
   
@@ -130,10 +130,12 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div class="page-heading">
-          <h1>Random Walks</h1>
+        <div class="post-heading">
+          <h1>Study of a Plot: The Manhattan Plot</h1>
 		  
 		  
+		  
+		  <span class="post-meta">Posted on December 3, 2014</span>
 		  
         </div>
       </div>
@@ -146,18 +148,97 @@
 
 
 
-<div class="container" role="main">
+<div class="container">
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      <div style="width:750px; background-color:white; height:500px; overflow:scroll; overflow-x: scroll; overflow-y: hidden;">
-       <div style="width:800px;">
-<img style=" float:left; display:inline" src="/img/daniel_marcelino.jpg" width="250px" alt="Apple Picking" />
-<img style=" float:left; display:inline" src="/img/daniel3.jpg" width="250px" alt="Daniel Marcelino" />
-    </div>
+      <article role="main" class="blog-post">
+	    <p>I was thinking on a nice way of plotting campaign expenditures in a paper I’m working on. I thought this would be something like the following, simple, but meaningful even in the context of lots of outliers in both tails.</p>
+
+<!--more-->
+
+<p><img src="/images/blog/2014/manhattan.jpeg" alt="Manhattan Plot" /></p>
+
+<p>Although I like the seniors Tukey’s boxplot and scatter plots, I had already used them, so I want to oxygenate my figures. The  <a href="http://en.wikipedia.org/wiki/Manhattan_plot">Manhattan plot</a> is a potential replacement candidate.</p>
+
+<p>The very idea is to have types of elections, districts or parties along the X-axis, with the negative logarithm of the association (p-value) between a candidate’s spending and votes displayed on the Y-axis. Hence, each dot on the plot indicates a candidate’s position on this metric.</p>
+
+<p>Because stronger associations have the smallest p-values (a log of 0.05 = -1.30103), their negative logarithms will be positive and higher (e.g., 1.3), while those with p-values not <a href="http://www.nature.com/news/scientific-method-statistical-errors-1.14700">statistically significant</a> (whatever that means these days, maybe nothing ) will stay below this line.</p>
+
+<p>The positive thing of this version is that it draws our attention to the upper outliers instead to the average association, which tends to be left-skewed because Brazilian elections attract many sacrificial lamb candidates who expend nearly nothing in their campaigns.</p>
 
 
+	  </article>
+	  
+	  
+	  <div class="blog-tags">
+		Tags: R, manhattan plot
+	  </div>
+	  
+	  
+      <ul class="pager blog-pager">
+        
+        <li class="previous">
+          <a href="/danielmarcelino.github.io/r/2014/flowers-and-fractals/" data-toggle="tooltip" data-placement="top" title="Flowers Fractals, or Fractal Flowers">&larr; Previous Post</a>
+        </li>
+        
+        
+        <li class="next">
+          <a href="/danielmarcelino.github.io/r/2014/LDA-on-Ferguson-Grand-Jury/" data-toggle="tooltip" data-placement="top" title="LDA on Ferguson Grand Jury I">Next Post &rarr;</a>
+        </li>
+        
+      </ul>
+
+      
+        <div class="share-section">
+  <h1 class="share-title">Liked what you read?'</h1>
+  <div class="share-buttons">
+    
+    
+    
+    
+
+    
+    
+      
+    
+    
+    
+    <a href="http://danielmarcelino.github.io/contact" data-ga-event=1 data-ga-category="share" data-ga-action="message" data-ga-label="/r/2014/study-of-a-plot/">
+      Let me know
+    </a>
+    <a href="https://www.facebook.com/dialog/feed?app_id=1529566150689415&link=http://danielmarcelino.github.io/r/2014/study-of-a-plot/&name=Study of a Plot: The Manhattan Plot&caption=&redirect_uri=http://danielmarcelino.github.io/r/2014/study-of-a-plot/?message=Thanks for sharing!" data-ga-event=1 data-ga-category="share" data-ga-action="facebook" data-ga-label="/r/2014/study-of-a-plot/">
+      Share on Facebook
+    </a>
+    <a href="https://twitter.com/intent/tweet?url=http://danielmarcelino.github.io/r/2014/study-of-a-plot/&via=daniel&text=Study of a Plot: The Manhattan Plot" data-ga-event=1 data-ga-category="share" data-ga-action="twitter" data-ga-label="/r/2014/study-of-a-plot/">
+      Tweet it
+    </a>
+  </div>
 </div>
 
+      
+
+	  
+      <div class="disqus-comments">
+	    
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+	    var disqus_shortname = 'daniel-marcelino';
+	    // ensure that pages with query string get the same discussion
+            var url_parts = window.location.href.split("?");
+            var disqus_url = url_parts[0];
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+
+      </div>
 	  
     </div>
   </div>
