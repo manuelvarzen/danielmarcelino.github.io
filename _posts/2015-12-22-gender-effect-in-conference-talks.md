@@ -48,7 +48,7 @@ dat = SciencesPo::untable(tab)
 {% endhighlight %}
 
 {% highlight r %}
-> crossTable(dat, "chairs", "questions",
+> crosstabs(dat, "chairs", "questions",
 +            row.pct = TRUE,
 +            chisq = TRUE,
 +            sresid = TRUE)
