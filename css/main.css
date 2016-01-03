@@ -129,7 +129,7 @@ img::-moz-selection {
   -moz-transition: opacity 0.5s ease-in-out;
   transition: opacity 0.5s ease-in-out;
   left: 10%;
-  width: 30px;
+  width: 50px;
   margin-top: -25px;
 }
 .navbar-custom .avatar-container  .avatar-img-border {
@@ -267,7 +267,7 @@ footer .theme-by {
 }
 
 .post-preview .post-title {
-  font-size: 40px;
+  font-size: 30px;
   margin-top: 0;
 }
 .post-preview .post-subtitle {
@@ -334,11 +334,11 @@ footer .theme-by {
 }
 .intro-header .page-heading h1 {
   margin-top: 0;
-  font-size: 35px;
+  font-size: 40px;
 }
 .intro-header .post-heading h1 {
   margin-top: 0;
-  font-size: 25px;
+  font-size: 35px;
 }
 .intro-header .page-heading .page-subheading,
 .intro-header .post-heading .post-subheading {
@@ -387,10 +387,10 @@ footer .theme-by {
     padding: 150px 0;
   }  
   .intro-header .page-heading h1 {
-    font-size: 35px;
+    font-size: 50px;
   }
   .intro-header .post-heading h1 {
-    font-size: 25px;
+    font-size: 35px;
   }
   .intro-header.big-img .img-desc {
     font-size: 14px;
@@ -599,7 +599,7 @@ footer .theme-by {
     margin-top: 50px;
   }
   .share-section .share-title {
-    font-size: 45px;
+    font-size: 40px;
   }
   .share-section .share-buttons {
     margin-top: 30px;

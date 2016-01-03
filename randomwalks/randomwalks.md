@@ -5,7 +5,6 @@ permalink: /randomwalks/
 ---
 
 
-## Somewhere
 
 <div style="width:750px; background-color:white; height:500px; overflow:scroll; overflow-x: scroll; overflow-y: hidden;">
        <div style="width:800px;">
