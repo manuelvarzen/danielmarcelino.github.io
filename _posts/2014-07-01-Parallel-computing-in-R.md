@@ -2,8 +2,8 @@
 layout: post
 title: "Parallel computing in R"
 date: 2014-07-01
-category: R
-tags: [R, parallel computing]
+category: [Analysis, Coding]
+tags: [R, Parallel Computing]
 image: parallel.png
 ---
 

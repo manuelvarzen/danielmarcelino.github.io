@@ -2,7 +2,7 @@
 layout: post
 title: "Showing explained variance from multilevel models" 
 date: 2011-10-03
-category: R
+category: Viz
 tags: [R, multilevel]
 ---
 

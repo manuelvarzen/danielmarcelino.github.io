@@ -7,8 +7,8 @@ output:
  html_document: 
    keep_md: yes
    toc: yes
-category: R
-tags: [polls, Venezuela, elections, politics]
+category: Analysis
+tags: [R, Polls, Venezuela, Elections]
 published: true
 status: publish
 comments: true

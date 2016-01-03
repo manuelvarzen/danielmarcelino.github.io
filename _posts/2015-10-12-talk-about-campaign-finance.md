@@ -2,8 +2,8 @@
 layout: post
 title: "A Talk About Campaign Finance in Brazil"
 date: 2015-10-17
-category: R
-tags: [Brazil, campaign finance]
+category: Discussion
+tags: [Brazil, Campaign Finance]
 comments: true
 ---
 

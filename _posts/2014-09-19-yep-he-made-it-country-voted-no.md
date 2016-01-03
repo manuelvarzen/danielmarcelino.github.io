@@ -2,8 +2,8 @@
 layout: post
 title: "Yep. He made it; country voted No" 
 date: 2014-09-19
-category: R
-tags: [elections, Scotland]
+category: Discussion
+tags: [R, Elections, Scotland]
 comments: true
 ---
 

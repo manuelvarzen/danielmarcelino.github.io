@@ -2,7 +2,7 @@
 layout: post
 title: "Argentine general election, 2015" 
 date: 2015-08-07
-category: [R]
+category: Analysis
 tags: [R, elections, Argentina, polls]
 ---
 

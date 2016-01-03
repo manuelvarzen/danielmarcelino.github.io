@@ -2,7 +2,7 @@
 layout: post
 title: "Drawing maps using shape files and R" 
 date: 2011-10-04
-category: R
+category: Viz
 tags: [R, maps]
 ---
 

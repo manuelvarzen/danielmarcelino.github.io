@@ -3,8 +3,8 @@ layout: post
 section-type: post
 title: "House Effects in Argentinian polling"
 date: 2015-10-25
-category: R
-tags: [R, polls, Argentina, elections, house effects]
+category: Viz
+tags: [R, Polls, Argentina, Elections, House Effects]
 comments: true
 ---
 

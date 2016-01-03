@@ -2,8 +2,8 @@
 layout: post
 title: Discontinuity Bayesian Forecasting
 date: 2014-07-16
-category: R
-tags: [brazil, election, bayesian]
+category: Analysis 
+tags: [R, Brazil, Election, Bayesian]
 comments: true
 ---
 

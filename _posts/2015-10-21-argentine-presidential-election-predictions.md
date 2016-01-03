@@ -2,8 +2,8 @@
 layout: post
 title: "Argentina's 2015 Presidential Election Forecasts"
 date: 2015-10-21
-category: R
-tags: [polls, Argentina, elections]
+category: Analysis
+tags: [R, Polls, Argentina, Elections]
 comments: true
 ---
 

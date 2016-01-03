@@ -2,7 +2,7 @@
 layout: post
 title: "Parallel Processing: When does it worth?"
 date: 2013-05-29
-category: R
+category: Discussion
 tags: [R, parallel computing]
 ---
 

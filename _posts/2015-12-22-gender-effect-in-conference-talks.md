@@ -7,8 +7,8 @@ output:
  html_document: 
    keep_md: yes
    toc: yes
-category: [R]
-tags: [gender]
+category: [Discussion]
+tags: [R, Gender]
 published: true
 status: publish
 comments: true

@@ -2,8 +2,8 @@
 layout: post
 title: "The butterfly curve"
 date: 2015-10-07
-category: R
-tags: [Butterfly curve]
+category: Viz
+tags: [R, Butterfly Curve]
 comments: true
 ---
 

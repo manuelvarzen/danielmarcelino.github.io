@@ -3,7 +3,7 @@ layout: post
 section-type: post
 title: "Competing views on Argentina's Frontrunner"
 date: 2015-10-30
-category: R
+category: Analysis 
 tags: [R, Argentine election, house effects]
 ---
 

@@ -7,8 +7,8 @@ output:
  html_document: 
    keep_md: yes
    toc: yes
-category: R
-tags: [polls, Venezuela, elections]
+category: [Analysis, Coding]
+tags: [R Polls, Venezuela, Elections]
 comments: true
 ---
 

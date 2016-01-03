@@ -2,7 +2,7 @@
 layout: post
 title: "Paranormal Distribution"
 date: 2015-10-20
-category: R
+category: Viz
 tags: [R, fun-with-R]
 comments: true
 ---

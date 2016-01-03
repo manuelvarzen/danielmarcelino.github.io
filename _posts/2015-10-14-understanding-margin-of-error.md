@@ -2,8 +2,8 @@
 layout: post
 title: "Understanding Margin of Error for Small Populations"
 date: 2015-10-13
-category: R
-tags: [Survey, Margin of error]
+category: Discussion
+tags: [R, Survey, Margin of error]
 comments: true
 ---
 

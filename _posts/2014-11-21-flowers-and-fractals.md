@@ -2,8 +2,8 @@
 layout: post
 title: "Flowers Fractals, or Fractal Flowers" 
 date: 2014-11-21
-category: R
-tags: [fractals]
+category: Viz
+tags: [R, Fractals]
 comments: true
 ---
 

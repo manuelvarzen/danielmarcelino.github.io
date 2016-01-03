@@ -2,8 +2,8 @@
 layout: post
 title: "Runoff in Uruguay: FA is expected to win a third mandate" 
 date: 2014-11-14
-category: R
-tags: [elections, public opinion]
+category: Analysis
+tags: [Elections, Public Opinion]
 comments: true
 ---
 

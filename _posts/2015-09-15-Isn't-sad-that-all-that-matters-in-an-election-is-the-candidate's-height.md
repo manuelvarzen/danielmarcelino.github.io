@@ -2,8 +2,8 @@
 layout: post
 title: "Isn't sad that all that matters in an election is the candidate's height?"
 date: 2015-09-15
-category: [R]
-tags: [candidates' height, elections]
+category: [Viz, Analysis]
+tags: [R,  Candidates' Height, Elections]
 comments: true
 ---
 

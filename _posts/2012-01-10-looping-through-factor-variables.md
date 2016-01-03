@@ -2,8 +2,8 @@
 layout: post
 title: "Looping through factor variables" 
 date: 2012-01-10
-category: R
-tags: [R, looping]
+category: Coding
+tags: [R, Stata, looping]
 ---
 
 Today, I was chatting to a friend who is working on his Ph.D thesis which coincidently is about my favorite topic: campaign contributions. 

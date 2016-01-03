@@ -2,8 +2,8 @@
 layout: post
 title: "Do you believe in World Cup superstition?" 
 date: 2014-06-24
-category: R
-tags: [R, elections, public opinion]
+category: Discussion
+tags: [R, Elections, Public Opinion]
 ---
 
 

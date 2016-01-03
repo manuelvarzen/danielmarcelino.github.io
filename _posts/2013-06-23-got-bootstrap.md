@@ -2,7 +2,7 @@
 layout: post
 title: "Got Bootstrap?" 
 date: 2013-06-23
-category: R
+category: Coding
 tags: [R, bootstrap]
 ---
 
