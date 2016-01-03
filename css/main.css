@@ -12,7 +12,7 @@ p {
   line-height: 1.5;
   margin: 25px 0;
 }
-a {
+p a {
   text-decoration: underline;
   color: #404040;
 }
@@ -27,7 +27,7 @@ a {
   text-decoration: none;
   color: #404040;
 }
-a:hover,
+
 a:focus {
   color: #4169E1;
 }
