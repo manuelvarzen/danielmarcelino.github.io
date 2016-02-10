@@ -7,8 +7,7 @@ output:
  html_document: 
    keep_md: yes
    toc: yes
-category: [Discussion]
-tags: [R, Gender]
+tags: [R]
 published: true
 status: publish
 comments: true
@@ -18,7 +17,7 @@ I was searching in the arXiv repository for an interesting paper to read over th
  
 The plot below, taken from the paper, displays the most significant finding from the analysis: *a strong dependence on session chair gender*. Overall, males ask more question than females, but there is a large difference in number of questions asked by males vis-à-vis number asked by females, given a male or female chair. I'm wondering if this also holds for other science fields where the gap between male and female researchers is that not abnormal.
 
-![Main Findings]({{ site.url }}/img/2015/gender_chairs_n_questions.png)
+![Main Findings]({{ site.url }}/images/2015/gender_chairs_n_questions.png)
 
 The paper is stuffed with figures, but in this case I would prefer a table with residuals; way more telling.
 

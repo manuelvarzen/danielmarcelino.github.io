@@ -8,7 +8,7 @@ output:
    keep_md: yes
    toc: yes
 category: Analysis
-tags: [R, Polls, Venezuela, Elections]
+tags: [R, Polls, Elections]
 published: true
 status: publish
 comments: true
@@ -25,9 +25,7 @@ I've collected some polls available on the internet dating back to January 2014,
 # Polls over time
 After a bit filling-in-the-blanks working with missing date values, we can visualize the poll trends over time. Given the sample size, sampling error and other sources of noise, a loess model can pretty much pick out the signals of long-term trends.
 
-<a href="{{ site.baseurl }}/img/code-2015-12-06-venezuelan-parliamentary-elections/loess-1.png" target="_blank">
-<img class="imgfull" src="{{ site.baseurl }}/img/code-2015-12-06-venezuelan-parliamentary-elections/loess-1.png" />
-</a>
+![center]({{ site.url }}/images/code-2015-12-06-venezuelan-parliamentary-elections/loess-1.png) 
 
 
 # Pollster biases
@@ -37,9 +35,7 @@ Nonetheless, if we accept the above models as a sound estimate of the expected p
 The graph below shows the distributions per polling house for those who polled more than a single poll in this dataset.
 
 
-<a href="{{ site.baseurl }}/img/code-2015-12-06-venezuelan-parliamentary-elections/biases-3.png">
-<img class="imgfull" src="{{ site.baseurl }}/img/code-2015-12-06-venezuelan-parliamentary-elections/biases-3.png" />
-</a>
+![center]({{ site.url }}/images/code-2015-12-06-venezuelan-parliamentary-elections/biases-3.png) 
 
 
 We've to keep in mind that there are important caveats which we're not addressing here, as that different polls have used different question sets, methods etc, so this isn't evidence for anything underhanded per se. It seems reasonable to expect that while parties might have good reasons to publish polls in their favor, pollsters conducting the polls should generally be more or less indifferent.

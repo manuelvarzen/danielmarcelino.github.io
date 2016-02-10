@@ -3,7 +3,7 @@ layout: post
 title: "Runoff in Uruguay: FA is expected to win a third mandate" 
 date: 2014-11-14
 category: Analysis
-tags: [Elections, Public Opinion]
+tags: [Elections]
 comments: true
 ---
 
@@ -13,8 +13,8 @@ Within 2 weeks, electors in Uruguay will vote for the runoff election between FA
 
 #### Tabaré Vázquez – Frente Amplio:
 
-![Tabaré Vázquez]({{ site.url }}/img/2014/Frente_Amplio.png)
+![Tabaré Vázquez]({{ site.url }}/images/2014/Frente_Amplio.png)
 
 #### Luis Lacalle Pou – Partido Nacional:
 
-![Luis Lacalle Pou]({{ site.url }}/img/2014/Partido_Nacional.jpeg)
+![Luis Lacalle Pou]({{ site.url }}/images/2014/Partido_Nacional.jpeg)

@@ -4,21 +4,15 @@ section-type: post
 title: "House Effects in Argentinian polling"
 date: 2015-10-25
 category: Viz
-tags: [R, Polls, Argentina, Elections, House Effects]
+tags: [R, Polls, Elections]
 comments: true
 ---
 
-I've already posted on 'house effects', the tendency of polling organizations to systematically vary in their results from one another
+I've already [posted](http://danielmarcelino.com/r/08-2015/Argentine-general-election-2015/) previously on "house effects", the tendency of polling organizations to systematically vary in their results from one another. In this post, I look specifically at these house effects, and show which polling organizations over or under-estimate support for each candidate--compared to the average--in this presidential election in Argentina.
 
-<!--more-->
+The graph below plots the house effects for the main presidential candidates considering more than 115 polls that I've collected since 2014.
 
-
-![House Effects]({{ site.url }}/img/2015/3d-house-effects_argentine.png)
-
-
-I've already [posted](http://danielmarcelino.com/r/08-2015/Argentine-general-election-2015/) on "house effects", the tendency of polling organizations to systematically vary in their results from one another. In this post, I look specifically at these house effects, and show which polling organizations over or under-estimate support for each candidate--compared to the average--in this presidential election in Argentina.
-
-The graph above plots the house effects for the main presidential candidates considering more than 115 polls that I've collected since 2014.
+![House Effects]({{ site.url }}/images/2015/3d-house-effects_argentine.png)
 
 In essence, the house effects measure how far polls by a pollster are from what would be expected based on trends over time for the average polling house. In other words, the average house effect toward each candidate/party is expected to be zero by design. Then, a poll that is systematically 2% below what would be predicted for the date the poll was conducted will have a house effect of -2.0%.
 

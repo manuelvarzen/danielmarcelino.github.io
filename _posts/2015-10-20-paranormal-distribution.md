@@ -2,21 +2,16 @@
 layout: post
 title: "Paranormal Distribution"
 date: 2015-10-20
-category: Viz
-tags: [R, fun-with-R]
+tags: [R]
 comments: true
 ---
 
 What if, instead of a normal, you got a paranormal distribution?
-
-<!--more-->
-
-What if, instead of a normal, you got a paranormal distribution?
-
-![Paranormal Distribution]({{ site.url }}/img/2015/paranormal.png)
-
 In case you want to read an influential paper on this matter, you can find it [here](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2465539/).
- 
+
+ ![Paranormal Distribution]({{ site.url }}/images/2015/paranormal.png)
+
+
 #### Load packages and set up the theme 
 {% highlight r %}
 library(ggplot2)

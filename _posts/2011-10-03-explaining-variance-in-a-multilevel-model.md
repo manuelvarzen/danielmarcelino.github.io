@@ -3,7 +3,7 @@ layout: post
 title: "Showing explained variance from multilevel models" 
 date: 2011-10-03
 category: Viz
-tags: [R, multilevel]
+tags: [R, Multilevel]
 ---
 
 In this post I will show one way to display explained variance using a line chart. 
@@ -15,7 +15,7 @@ The following values were obtained using multilevel models performed in R (thank
  Basically, this chart shows the declining variance for each level when each independent parameter is included in the model. You can find the full script below the chart.
 
 
-![Explained Variance]({{ site.url }}/img/2011/ResultadoVariancia.png)
+![Explained Variance]({{ site.url }}/images/2011/ResultadoVariancia.png)
 
 ### Graph for explained variance
 

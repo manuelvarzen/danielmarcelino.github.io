@@ -3,22 +3,18 @@ layout: post
 section-type: post
 title: "Retrieving Data from Google Books with `ngramr`"
 date: 2015-11-15
-category: Viz
-tags: [ngramr, R, how-to]
+category:
+tags: [R, Viz]
 fb-img: "http://danielmarcelino.github.io/img/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/sociologists-1.png"
 ---
 
-
-[Karl Marx](https://en.wikipedia.org/wiki/Karl_Marx) is the most famous founding fathers of modern sociology with a popularity peak in 1975-6, but declining ever since.
-
-<!--more-->
-
-![center]({{ site.url }}/img/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/GoogleNgram.png)
-
-<hr/>
+[Karl Marx](https://en.wikipedia.org/wiki/Karl_Marx) is the most famous founding fathers of modern sociology with a popularity peak in 1975-6, but declining ever since my little research using the [Google Ngram Viewer](https://books.google.com/ngrams) suggests.
 
 ## Introduction 
-Google has a tool for tracking the frequency of words or phrases across its vast collection of scanned texts, the Google Books. The [Google Ngram Viewer](https://books.google.com/ngrams) reports data and graphs the frequency of words encountered in one or across several *corpus* over time. For instance, the chart above campares the appearance ==in the English== *corpus* of following bigrams names: "Karl Marx", "Max Weber", "Emile Durkheim". 
+Google has a tool for tracking the frequency of words or phrases across its vast collection of scanned texts, the Google Books. The [Google Ngram Viewer](https://books.google.com/ngrams) reports data and graphs the frequency of words encountered in one or across several *corpus* over time. For instance, the chart below campares the appearance in the English *corpus* of following bigrams names: "Karl Marx", "Max Weber", "Emile Durkheim". 
+
+![center]({{ site.url }}/images/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/GoogleNgram.png)
+
 
 The y-axis shows of all the bigrams contained in the sample of books written in English, what percentage of them are "Karl Marx" or "Max Weber" or "Emile Durkheim"? From the chart above, we can conclude that Marx is the most famous sociologist among the others founding fathers, with a peak in popularity about 1975-6, but his influence has been declining ever since. These thinkers are considered the founding fathers of sociology because they set out to develop practical and scientifically sound methods of research to examine theories of the social world rooted in a specific historical and cultural context. 
 
@@ -45,7 +41,7 @@ ggram(ng, year_start = 1800,
     theme_538(legend.position = "bottom")
 {% endhighlight %}
 
-![center]({{ site.url }}/img/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/sociologists-1.png) 
+![center]({{ site.url }}/images/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/sociologists-1.png) 
 
 
 ## Complex Queries
@@ -81,7 +77,7 @@ multiplot(cap, soc, com, ncols=1)
 ggfootnote(size = .5)
 {% endhighlight %}
 
-![center]({{ site.url }}/img/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/Capitalism Popularity-1.png) 
+![center]({{ site.url }}/images/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/Capitalism Popularity-1.png) 
 
 In the following, I retrieve the frequency for the unigram "Capitalism" in the Russian *corpus*, French, and British English. Note that the results can be case-insensitive variants.
 
@@ -117,7 +113,7 @@ multiplot(rus, fre, eng, ncols=1)
 ggfootnote(size = .5)
 {% endhighlight %}
 
-![center]({{ site.url }}/img/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/capitalism-1.png) 
+![center]({{ site.url }}/images/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/capitalism-1.png) 
 
     
     

@@ -2,17 +2,12 @@
 layout: post
 title: "Got Bootstrap?" 
 date: 2013-06-23
-category: Coding
-tags: [R, bootstrap]
+tags: [R, Bootstrap]
 ---
 
+I read a book by Michael Chernick and Robert LaBudde, [An Introduction to Bootstrap Methods with Applications to R](http://www.amazon.com/gp/product/0470467045/ref=as_li_ss_tl?ie=UTF8&camp=1789&%23038;creative=390957&%23038;creativeASIN=0470467045&%23038;linkCode=as2&%23038;tag=danielmarceli-20). It's an interesting *oeuvre* for useRs of all stripes. The book brings lots of examples of bootstrapping applications, such as standard errors, confidence intervals, hypothesis testing, and bootstrap applied for time-series analysis. The showcases in the book draw upon libraries like the **boot** by Angelo Canty and Brian Ripley, which is a great package. However, I’d love to find in the book more examples on "how to do my own bootstrap program" instead, so I decided to write down these lines. Before starting any code, it might be a good idea to refresh what exactly bootstrap is, and why it is so relevant for data analysis nowadays.
 
-![Bootstrap]({{ site.url }}/img/2013/boot.jpeg)
-
-
-This week I read the book by Michael Chernick and Robert LaBudde, [An Introduction to Bootstrap Methods with Applications to R](http://www.amazon.com/gp/product/0470467045/ref=as_li_ss_tl?ie=UTF8&camp=1789&%23038;creative=390957&%23038;creativeASIN=0470467045&%23038;linkCode=as2&%23038;tag=danielmarceli-20). It’s an interesting oeuvre for useRs of all stripes. I strongly recommend check it out. The book brings lots of examples of bootstrapping applications, such as standard errors, confidence intervals, hypothesis testing, and even bootstrap applied for time-series analysis. The showcases in the book draw upon libraries like the “boot” by Angelo Canty and Brian Ripley. Which is a great package, however, I’d love find in the book more on doing my own bootstrap program instead, so I decided to write down these lines.
-
-Before starting any code, it might be a good idea to refresh what exactly bootstrap is, and why it is so relevant for data analysis nowadays. The objective of bootstrapping is to provide an estimation of a parameter based on the data, such as standard deviation, mean, or median. The technique itself was introduced by Brad Efron in 1979. Third years before, however, Quenouille had introduced the jackknife method, and permutation tests were already described by Fisher in the early1930s. Hence, Efron’s resampling procedure build upon these pioneering methods and propose a simplification of them. Although, his original idea was a simple approximation of the jackknife method, depending on the context, computing a statistic from an estimator using bootstrap is as good as or even superior to jackknife method. Nonetheless, because the complexity to deal with big numbers $n^n$, for instance, a sample of size n=10 demands a huge computation: 10 billion, the bootstrapping—in practice—relies on Monte Carlo approximation rather than analytically computation.
+The objective of bootstrapping is to provide an estimation of a parameter based on the data, such as standard deviation, mean, or median. The technique itself was introduced by Brad Efron in 1979. Third years before, however, Quenouille had introduced the jackknife method, and permutation tests were already described by Fisher in the early1930s. Hence, Efron’s resampling procedure build upon these pioneering methods and propose a simplification of them. Although, his original idea was a simple approximation of the jackknife method, depending on the context, computing a statistic from an estimator using bootstrap is as good as or even superior to jackknife method. Nonetheless, because the complexity to deal with big numbers $n^n$, for instance, a sample of size n=10 demands a huge computation: 10 billion, the bootstrapping—in practice—relies on Monte Carlo approximation rather than analytically computation.
 
 Indeed, bootstrapping is all about sampling randomly with replacement from the original data. Here is an example, suppose we have a sample of size n=4 and the observations are $X_1 = 7, X_2 = 5, X_3 = 4, X_4 = 8$ and that we want to estimate the mean. Then, the sample estimate of the population parameter is the sample mean: $(7+5+4+8)/4 = **6.0**$. The bootstrap sample is denoted by $X_1^*,X_2^*,X_3^*,X_4^*$. The sampling distribution with replacement from $F_n$ is called the bootstrap distribution, which—to be consistent—we denote the bootstrap estimate by $T(F_n^*)$. So, a bootstrap sample might be $X_1^* = 5,X_2^* = 8,X_3^* = 7,X_4^* = 7$, with estimate of $(5+8+7+7)/4 = **6.75**$.
 
@@ -106,4 +101,4 @@ sds            0.1123 0.007351 0.001159
 
 Not only the values displayed in the prompt are informative, but the histogram of the distribution. The above histogram tells us about the distribution of the bootstrap estimates. By comparing these estimates with those obtained from the naïve OLS, we can guarantee that the OLS estimates are rather robust, since they are contained in the distribution of standard deviations produced by 10 thousands sampling simulations.
 
-![Histograms]({{ site.url }}/img/2013/boot_histograms.jpeg)
+![Histograms]({{ site.url }}/images/2013/boot_histograms.jpeg)
