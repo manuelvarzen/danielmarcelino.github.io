@@ -16,7 +16,7 @@ description: "Blog of Daniel Marcelino"
 timezone: "Brazil/Brasilia"
 markdown: kramdown
 highlighter: pygments
-permalink: /blog/:year/:title.html
+permalink: /blog/:year/:title/
 paginate: 5
 paginate_path: "/page:num/"
 
