@@ -1,5 +1,5 @@
 ---
-layout: base
+layout: post
 css: "/css/search.css"
 ---
 
