@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Current Interests"
+title: "My Current Interests"
 permalink: /interests/
 ---
 
