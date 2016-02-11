@@ -4,4 +4,5 @@
 .DS_Store
 .Rprofile
 .Rapp.history
-_draft
+_draft/*
+_site/*
