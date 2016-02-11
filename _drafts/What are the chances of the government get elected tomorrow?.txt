@@ -1,0 +1,27 @@
+#What are the chances of Dilma tomorrow?
+Although polling data are the most common source in an electoral campaign, there are also models that use prediction markets data (trade contracts flow) as the source of information about who is going to win the election. What is the best way of predicting an election is up to debate, but models based on the wisdom of crowds have been used extensively on the web for all-purpose forecasting, including prices, sales, and disasters. Actually, the range of events a bet can be trade has increased over the years; for elections, it is an obvious step to take.
+
+The debate can be placed as such: Berg et al (2001) compared opinion polls and market based predictions from 19 national elections, finding evidence that market predictions provide a serious alternative to opinion polls. Not surprisingly, this argument is contested. For instance, Erikson and Wleizen (2008) argue that opinion polls reflect opinion on the day they were collected, and therefore should not be naively interpreted as forecasts. It's pretty much a consensus in the literature, but further they suggest that, if opinion poll data are appropriately adjusted, they will outperform market predictions. 
+
+###Evidence for the Brazilian Election
+This suggests that market-based prediction provides a serious alternative to opinion polls in predicting political contests. So what does the market say about the outcome of the Brazilian election so far?
+
+The evidence used in this under constructing study has been retrieved from the history of the odds offered on “Dilma” and “Aécio” votes from 23 bookmakers between Sep 2013 and May 2014. 
+The bookmaker Ipredict had launched some contracts addressing Brazilian election outcome, one of them says:  "This contract pays $1 if the President of Brazil following the next General Election is a member of the Brazilian Workers' Party. Otherwise, this contract will close at $0." In other words, the purpose of this contract is to forecast the probability that the President of Brazil is a member of the Brazilian Workers' Party. A similar contract were in the place for a member of the Social Democracy Party (PSDB).
+
+<a href="http://danielmarcelino.com/wp-content/uploads/2014/10/app.png"><img src="http://danielmarcelino.com/wp-content/uploads/2014/10/app.png" alt="app" width="580" height="580" class="aligncenter size-full wp-image-920" /></a>
+
+Figure 1: Market-based probability of “Dilma” victory in the 2014 election
+
+It can be seen that over the last days, the market is betting high on Dilma. By today, the probability of seen her as the next president was about 80% compared to 20% of Aecio Neves.
+
+###Opinion Polls
+The obvious standard comparator to market-based predictions are the regular opinion polls that are continuously measuring the vote intentions for the candidates. In the following box, I show some predictions based on a Bayesian model I've been developing this year. It  aggregates many polls and filter them out based on sample size and time elapsed between one poll to the next. These prediction also includes Wasting votes, so it will typically diverge from the official results. However, the important point is that, considering the mean of the prediction, Dilma has a probability of 75% of winning this race, pretty close of the prediction market, isn't it?
+
+    Probability Intervals (95%):
+                   2.5%          50%      97.5%
+    PT       0.40575221  0.471395889 0.53077824
+    PSDB     0.38681539  0.450461758 0.49911252
+    WASTING  0.06448501  0.088751737 0.11329596
+
+I’ve been looking at the polls since last year, I never doubt the Workers’ Party would make it again, thought not-so-fast because of the economic downturn. 

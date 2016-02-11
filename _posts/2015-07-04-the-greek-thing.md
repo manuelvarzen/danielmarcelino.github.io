@@ -1,0 +1,12 @@
+---
+layout: post
+title: "The Greek thing" 
+date: 2015-07-04
+tags: [R, Polls]
+---
+
+Greeks have been quite volatile on their opinion whether they should accept or not a proposal by the country’s creditors for more austerity to keep aid flowing. The polls conducted over this week look like crazy, though that “belly” was likely provoked by the anxiety on what comes next after Greece not paying IMF back.
+
+![Loess]({{ site.url }}/images/2015/loess_1.png)
+
+The data for this analysis were collected on the internet, most of them assembled and made available by [http://metapolls.net](http://metapolls.net).

@@ -1,0 +1,28 @@
+merging our data
+
+Often enough we end up with multiple data sets on our hard drive that contain useful data for the same analysis. In this case we might want to amalgamate our data sets so that we have all the data in one set.
+
+R provides a function called merge() that does just that
+
+ave.n.cut.color.price <- merge(ave.n.cut.color, ave.price.cut, 
+                               by.x = "cut", by.y = "Group.1")
+ave.n.cut.color.price
+
+
+As the variable names of our two data sets differ, we need to specifically provide the names for each by which the merging should be done (by.x & by.y). The default of merge() tries to find variable names which are identical.
+
+Note, in order to merge more that two data frames at a time, we need to call a powerful higher order function called Reduce(). This is one mighty function for doing all sorts of things iteratively.
+
+names(ave.price.cut) <- c("cut", "price")
+
+set.seed(12)
+
+df3 <- data.frame(cut = ave.price.cut$cut,
+                  var1 = rnorm(nrow(ave.price.cut), 10, 2),
+                  var2 = rnorm(nrow(ave.price.cut), 100, 20))
+
+ave.n.cut.color.price <- Reduce(function(...) merge(..., all=T), 
+                                list(ave.n.cut.color, 
+                                     ave.price.cut,
+                                     df3))
+ave.n.cut.color.price

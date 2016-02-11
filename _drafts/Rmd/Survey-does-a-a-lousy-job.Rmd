@@ -1,0 +1,22 @@
+xl <- seq( 0 , 10000 , 100 )
+my_title <- 'if we randomly choose X people from some population and determine that none have a disease,\nwe can be 95% confident that the population prevalence rate is below Y% for this particular affliction.'
+plot( xl , qbeta(1 - 0.05, 1 , xl ) , ylim=c(0,.01),axes=F,xlab="",ylab="",main="\nhow rare is a rare disease?\n\nsurvey research does a lousy job of estimating prevalence rates for unlikely events")
+axis(2, at=seq(0,.01,.001), lab=paste0(seq(0,.01,.001)*100,"%"), las=TRUE)
+axis(1, at=seq(0,10000,1000), lab=prettyNum(seq(0,10000,1000),big.mark=","), las=TRUE)
+text( 3500 , 0.0075 , label = my_title , cex = 1.5, adj=c(0,0))
+
+z <- data.frame( x = 0:100000 , y = qbeta(1 - 0.05, 1 , 0:100000 ) )
+
+addseg <-
+  function( lev , xadj = 0 , yadj = 0 , pos = 4 ){
+    ex1 <- head( subset( z , y < lev ) , 1 )
+    points( ex1$x , ex1$y , col = 'red' , pch = 20)
+    segments( ex1$x , ex1$y , ex1$x + xadj , ex1$y + yadj )
+    text( ex1$x + xadj , ex1$y + yadj , pos = pos , labels = paste0( "after sampling about " , prettyNum( round( ex1$x , -2 ) , big.mark = "," ) , " individuals and finding that\nnone of them have the disease, we can be 95% confident that\nthe population prevalence rate is below " , lev * 100 , "%.  in other words,\nless than " , prettyNum( lev * 1000000 , big.mark = ',') , " out of 1,000,000 people have this rare disease." ) )
+  }
+
+addseg( 0.01 , 1000 , -.001 )
+addseg( 0.001 , 500 , .002 )
+addseg( 0.0001 , -22000 , .005 , pos = 2 )
+addseg( 0.0005 , 1000 , .001 )
+addseg( 0.005 , 1000 , .001 )

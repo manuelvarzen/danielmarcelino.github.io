@@ -1,0 +1,59 @@
+### Define the URL where the dataset (.csv) is located
+url<-"https://raw.githubusercontent.com/danielmarcelino/Tables/master/uk_social_attitudes_survey_2011.csv"
+
+
+### Read in the data from the url we just defined, call it "data"
+data <- read.csv(url)
+
+
+
+
+### Some Generic variables
+summary(data$PtyNMat2)  # doesn't matter which party, things go on the same way
+summary(data$GovNoSay)  # people like me have no say
+Summary(data$Voted)   # Did they vote
+summary(data$RAge)   # Age
+summary(data$RSex) # Sex
+summary(data$HEdQual)
+
+
+
+
+### For Hansard Society
+
+summary(data$RefSyst)
+summary(data$ChCandte)
+
+data$RefSystem <- ifelse(data$RefSyst < 0, NA, data$RefSyst)
+data$Candidate <- ifelse(data$ChCandte < 0, NA, data$ChCandte)
+
+
+model<-lm(RefSystem ~ RSex, data=data)
+summary(model)
+
+RefSyst # who should decide about system to elect MPs
+ChCandte # who should decide who gets to stand
+
+
+
+### For Unlock Democracy
+
+install.packages("memisc") # only have to do once per computer
+library(memisc)  # load the memisc package into R to use it
+
+summary(data$VoteSyst)  # check the codebook, negative values and 8/9 represent missing values, so let's remove them
+data$VoteSyst <- ifelse(data$VoteSyst < 0, NA, data$VoteSyst) # if < 0, make it NA, otherwise leave as is
+data$VoteSyst <- ifelse(data$VoteSyst > 2, NA, data$VoteSyst) # if > 2, make it NA, otherwise leave as is
+
+### Recode the values from 1 and 2 (numeric) to the categories those numbers represent
+data$VoteSyst<-recode(data$VoteSyst,
+                      "Let small parties get a fairer share of MPs" <- 1,
+                      "Keep House of Commons as it is" <- 2)
+summary(data$VoteSyst)
+
+summary(data$Spend1) # looks good
+summary(data$VoteOnly) # check the codebook, negative values mean missing, so let's remove them
+
+data$VoteOnly <- ifelse(data$VoteOnly < 0, NA, data$VoteOnly) # if < 0, make it NA, otherwise leave as is
+summary(data$TrstParl) # check the codebook, negative values mean missing, so let's remove them
+data$VTrstParl <- ifelse(data$TrstParl < 0, NA, data$TrstParl) # if < 0, make it NA, otherwise leave as is

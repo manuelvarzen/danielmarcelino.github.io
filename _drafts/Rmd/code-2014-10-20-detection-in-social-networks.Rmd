@@ -1,0 +1,204 @@
+#---
+#layout: post
+#title: 'Detection in Social Networks"
+#date: 2014-10-10
+#category: how-to
+#tags: [R, networks]
+# comments: true
+#image: 
+#---
+
+
+he iGraph package created by Gábor Csárdi is a huge library for everything graphs, graph layout and graph analysis in R. Much like any other graph library, it implies a learning curve and some math insights but it’s also refreshingly simple to use once you get through the basics. So, this article is bit of a tutorial in the right direction but also takes a pragmatic point of view by looking at concrete graph analysis situations rather than enumerating the API. In a way, one can endlessly explore graphs and their properties, there are so many values one can extract from a graph’s topology. Whether centrality, connectedness or community detection matters really depends on your (business) question.
+
+Note that there is a textbook on “Statistical Analysis of Network Data with R” wherein you can find plenty of in-depth info related to the library and that the Nexus Network Repository consolidates heaps of interesting networks (in R and Python format) to research. In fact, the Nexus search and load API is integrated in iGraph which makes it incredibly easy to experiment with all sorts of real-world graphs.
+Let’s fetch, for instance, the ‘football’ network from Nexus;
+
+
+<!--more-->
+
+![](/images/blog/2014/networks.png)
+
+<hr/>
+
+## Motivation
+
+```{r }
+Let’s fetch, for instance, the ‘football’ network from Nexus;
+
+library(igraph) # load the iGraph library
+nexus.search("football") # search for networks related to football
+## NEXUS 1-1/1 -- q: football
+## [1] football 115/616 #11 Network of American college football games
+nexus.info("football") # get info about it
+## NEXUS UN-- 115 616 #11 football -- Network of American college football ga+
+## + tags: sport; undirected
+## + nets: 1/football
+## + attr: Conference (v/n), name (v/c) 
+## + date: 2011-01-10
+## + licence: Creative Commons by-sa 3.0
+## + licence url: http://creativecommons.org/licenses/by-sa/3.0/
+## + summary: Network of American football games between Division IA
+##   colleges during regular season Fall 2000.
+## + description: The file football.gml contains the network of
+##   American football games between Division IA colleges during
+##   regular season Fall 2000, as compiled by M. Girvan and M.
+##   Newman.  The nodes have values that indicate to which
+##   conferences they belong.  The values are as follows:
+##   .
+##   0 = Atlantic Coast
+##   1 = Big East
+##   2 = Big Ten
+##   3 = Big Twelve
+##   4 = Conference USA
+##   5 = Independents
+##   6 = Mid-American
+##   7 = Mountain West
+##   8 = Pacific Ten
+##   9 = Southeastern
+##   10 = Sun Belt
+##   11 = Western Athletic
+##   .
+##   If you make use of these data, please cite M. Girvan and M. E.
+##   J. Newman, Community structure in social and biological
+##   networks, Proc. Natl. Acad. Sci. USA 99, 7821-7826 (2002).
+## + formats: GraphML(4487);R-igraph(6201);Python-igraph(5138)
+## + citation: M. Girvan and M. E. J. Newman, Community structure in
+##   social and biological networks , Proc. Natl. Acad. Sci. USA 99,
+##   7821-7826 (2002).
+g = nexus.get("football") # assign/create the graph
+plot(g) # plot the graph
+
+```
+
+
+If you wish to change the layout you can simply use TAB-key to scroll through the options after typing ‘layout = layout.’; 
+
+
+```{r}
+or emphasize one area by changing the color and adding a region
+
+utah = V(g)[name=="Utah"] #select from the vertices
+utah.index = as.numeric(utah) # take the index of that vertex
+utah$color = "red" # change the vertex color
+
+wyoming = V(g)[name=="Wyoming"]
+wyoming.index = as.numeric(wyoming) 
+wyoming$color = "red"
+
+E(g)$color = "grey"
+E(g, P=c("Wyoming", "Utah"))$color="red" # take the edge connecting the given names
+V(g)$label.cex = .5 # set the font-size of all vertices
+V(g)$label.cex[utah.index] = 1.5 # set the font-size of one particular vertex
+V(g)$label.color[utah.index] = "Red"
+## Warning in vattrs[[name]][index] <- value: number of items to replace is
+## not a multiple of replacement length
+V(g)$label.cex[wyoming.index] = 1.5
+V(g)$label.color[wyoming.index] = "Red"
+
+plot(g, layout=layout.auto, 
+     mark.groups=list(c(utah.index, wyoming.index)), # make a group
+     mark.expand = 10, # increase the padding of the group
+     vertex.size = 2 # make the vertices a bit smaller
+     
+```
+
+
+You can add weights to the vertices and the edges;
+
+E(g)$weight = rnorm(ecount(g))
+V(g)$weight = rnorm(vcount(g))
+taking the vertices with positive weight into a subgraph and including the edge weight in the plot;
+
+sg = induced.subgraph(g, which(V(g)$weight >0.7))
+plot(sg, edge.label=round(E(sg)$weight, 3))
+
+
+Sometimes you need to export the graph so it can be used elsewhere (e.g. the free yEd graph app by yWorks);
+
+write.graph(g, "~/Desktop/myGraph.graphml", "GraphML")
+A graph without loops and multiple edges between vertices is called simple and you can check that your graph is simple like so;
+
+is.simple(sg)
+## [1] TRUE
+is.simple(g)
+## [1] FALSE
+meaning that the parent graph has a loop or multiple edges somewhere. So, which couple of vertices have multiple edges? If you would want to turn the graph into a simple graph you could in any case use the simplify command
+
+is.simple(simplify(g))
+## [1] TRUE
+but that doesn’t answer our previous question. You can filter out the edges having a multiplicity
+
+E(g)[is.multiple(g, eids=E(g))]
+## Edge sequence:
+##                                         
+## [52]  Florida         -- Auburn         
+## [344] Oklahoma        -- KansasState    
+## [467] Marshall        -- WesternMichigan
+which reveals the list of suspicious vertices and we can use this to extract the subsgraph
+
+mg = induced.subgraph(g, vids=c("Florida","Oklahoma","Marshall", "Auburn","KansasState","WesternMichigan"))
+plot(mg)
+
+
+
+```{r, fig.width=9, fig.height=6}
+Let’s move onto some analysis of communities and collaboration in the domain of astrophysics research by looking at the netscience graph from Nexus;
+
+g = nexus.get("netscience")
+V(g)$label.cex = .15
+wc=walktrap.community(g)
+plot(wc,g, vertex.size=.5, layout=layout.fruchterman.reingold)
+```
+
+
+A rather intricate and interesting picture can also be obtained by looking at the dendrogram;
+
+plot(as.dendrogram(wc))
+
+
+
+
+It’s clear from this plot that there are many small-scale collaborations. Let’s filter those out. There are 429 communities according to the wc output and the largest club is obtained via
+
+x = which.max(sizes(wc))
+largestGroup = induced.subgraph(g, which(membership(wc) == x))
+plot(largestGroup)
+
+
+
+By looking at the centrality of the vertices we can discover who is the most important person in the main network;
+
+V(largestGroup)$label.cex = 0.5
+plot(largestGroup, vertex.size=betweenness(largestGroup)/17)
+
+
+
+which shows that there is a strong exponential law present;
+
+hist(betweenness(largestGroup))
+
+
+
+and the main person is gotten from
+
+head(sort(betweenness(largestGroup), decreasing = TRUE),1)
+## JEONG, H 
+##  1428.75
+His degree is and immediate collaborators are
+
+jeong = V(largestGroup)[name == "JEONG, H"]
+degree(largestGroup,jeong)
+## JEONG, H 
+##       27
+neighbors = neighborhood(largestGroup, 1,nodes=c(as.numeric(jeong)))
+lapply(neighbors,  function(i){V(largestGroup)[i]$name})
+## [[1]]
+##  [1] "JEONG, H"     "ALBERT, R"    "BARABASI, A"  "VICSEK, T"   
+##  [5] "OLTVAI, Z"    "BIANCONI, G"  "RAVASZ, E"    "NEDA, Z"     
+##  [9] "SCHUBERT, A"  "FARKAS, I"    "DERENYI, I"   "GOH, K"      
+## [13] "KAHNG, B"     "KIM, D"       "OH, E"        "HOLME, P"    
+## [17] "HUSS, M"      "KIM, B"       "YOON, C"      "HAN, S"      
+## [21] "MASON, S"     "TOMBOR, B"    "PARK, Y"      "RHO, K"      
+## [25] "PODANI, J"    "SZATHMARY, E" "YOOK, S"      "TU, Y"
+

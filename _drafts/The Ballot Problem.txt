@@ -1,0 +1,39 @@
+#The Ballot Problem
+
+http://www.math.uah.edu/stat/bernoulli/Walk.html#Basic
+
+Suppose that in an election, candidate A receives a votes and candidate B receives b votes where a>b. Assuming a random ordering of the votes, what is the probability that A is always ahead of B in the vote count? This is an historically famous problem known as the Ballot Problem, that was solved by Joseph Louis Bertrand in 1887. The ballot problem is intimately related to simple random walks.
+
+Comment on the validity of the assumption that the voters are randomly ordered for a real election. 
+The ballot problem can be solved by using a simple conditional probability argument to obtain a recurrence relation. Let f(a,b) denote the probability that A is always ahead of B in the vote count.
+
+f satisfies the initial condition f(1,0)=1 and the following recurrence relation:
+f(a,b)= \frac{a}{a+b} f(a−1,b)+\frac{b}{a+b} f(a,b−1)
+Proof:
+Condition on the candidate that receives the last vote.
+
+The probability that A is always ahead in the vote count is
+f(a,b)= \frac{a−b}{a+b}
+Proof:
+Use the recurrence relation in the last exercise and induction on the total number of votes n=a+b
+
+In the ballot experiment, vary the parameters a and b and note the change the ballot probability. For selected values of the parameters, run the experiment 1000 times and note the apparent convergence of the relative frequency to the true probability.
+
+In an election for mayor of a small town, Mr. Smith received 4352 votes while Ms. Jones received 7543 votes. Compute the probability that Jones was always ahead of Smith in the vote count.
+Answer:
+\frac{3191}{11895}≈0.2683
+
+Relation to Random Walks
+
+Consider again the simple random walk X with parameter p.
+
+Given X_n=k,
+There are \frac{n+k}{2} steps to the right and  \frac{n-k}{2}  steps to the left.
+All possible orderings of the steps to the right and the steps to the left are equally likely.
+
+For k>0,
+ℙ(X1>0,X2>0,…,Xn−1>0∣Xn=k)=\frac{k}{n}
+Proof:
+Use the previous exercise and the ballot probability.
+
+In the ballot experiment, vary the parameters a and b and note the change the ballot probability. For selected values of the parameters, run the experiment 1000 times and note the apparent convergence of the relative frequency to the true probability.

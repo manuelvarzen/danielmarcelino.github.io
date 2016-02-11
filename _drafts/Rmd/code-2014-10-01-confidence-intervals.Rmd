@@ -1,0 +1,138 @@
+---
+title: "Calculating Confidence Intervals"
+author: "Daniel Marcelino"
+date: "October 01, 2014"
+output: html_document
+---
+
+# Introduction
+Here I will be looking at some ways of calculating confidence intervals. The examples are for both normal and t distributions. I will assume that you can enter data and know the R commands associated with basic probability.
+
+# Calculating Confidence Intervals From a Normal Distribution
+
+Here we will look at a fictitious example. We will make some assumptions for what we might find in an experiment and find the resulting confidence interval using a [normal distribution](). Here we assume that the sample mean is 5, the standard deviation is 2, and the sample size is 20. In the example below we will use a 95% confidence level and wish to find the confidence interval. The commands to find the confidence interval in R are the following:
+
+```{r}
+mu <- 5
+s <- 2
+n <- 20
+# 0.975 
+error <- qnorm(0.975)*s/sqrt(n)
+lower <- mu-error
+upper <- mu+error
+lower
+upper
+```
+
+The true mean has a probability of 95% of being in the interval between 4.12 and 5.88 assuming that the original random variable is normally distributed, and the samples are independent.
+
+# Calculating Confidence Intervals From a t Distribution
+
+Calculating the confidence interval when using a t-test is similar to using a normal distribution. The only difference is that we use the command associated with the [t-distribution]() rather than the normal distribution. Here we repeat the procedures above, but we will assume that we are working with a sample standard deviation rather than an exact standard deviation.
+
+Again we assume that the sample mean is 5, the sample standard deviation is 2, and the sample size is 20. We use a 95% confidence level and wish to find the confidence interval. The commands to find the confidence interval in R are the following:
+
+```{r}
+> a <- 5
+> s <- 2
+> n <- 20
+> error <- qt(0.975,df=n-1)*s/sqrt(n)
+> left <- a-error
+> right <- a+error
+> left
+[1] 4.063971
+> right
+[1] 5.936029
+```
+The true mean has a probability of 95% of being in the interval between 4.06 and 5.94 assuming that the original random variable is normally distributed, and the samples are independent.
+
+We now look at an example where we have a univariate data set and want to find the 95% confidence interval for the mean. In this example we use one of the data sets given in the data input chapter. We use the w1.dat data set:
+
+
+> w1 <- read.csv(file="w1.dat",sep=",",head=TRUE)
+> summary(w1)
+     vals
+Min.   :0.130
+1st Qu.:0.480
+Median :0.720
+Mean   :0.765
+3rd Qu.:1.008
+Max.   :1.760
+> length(w1$vals)
+[1] 54
+> mean(w1$vals)
+[1] 0.765
+> sd(w1$vals)
+[1] 0.3781222
+
+
+We can now calculate an error for the mean:
+
+> error <- qt(0.975,df=length(w1$vals)-1)*sd(w1$vals)/sqrt(length(w1$vals))
+> error
+
+
+The confidence interval is found by adding and subtracting the error from the mean:
+
+> left <- mean(w1$vals)-error
+> right <- mean(w1$vals)+error
+> left
+[1] 0.6617925
+> right
+
+There is a 95% probability that the true mean is between 0.66 and 0.87 assuming that the original random variable is normally distributed, and the samples are independent.
+
+#The Easy Way
+The methods above demonstrate how to calculate the p values directly making use of the standard formulae. There is another, more direct way to do this using the t.test command. The t.test command takes a data set for an argument, and the default operation is to perform a two sided hypothesis test.
+
+> x = c(9.0,9.5,9.6,10.2,11.6)
+> t.test(x)
+
+That was an obvious result. If you want to test against a different assumed mean then you can use the mu argument:
+
+> x = c(9.0,9.5,9.6,10.2,11.6)
+> t.test(x,mu=10)
+
+
+> x = c(9.0,9.5,9.6,10.2,11.6)
+> t.test(x,mu=10,alternative="less")
+
+
+The t.test() command also accepts a second data set to compare two sets of samples. The default is to treat them as independent sets, but there is an option to treat them as dependent data sets. (Enter help(t.test) for more information.) To test two different samples, the first two arguments should be the data sets to compare:
+
+> x = c(9.0,9.5,9.6,10.2,11.6)
+> y=c(9.9,8.7,9.8,10.5,8.9,8.3,9.8,9.0)
+> t.test(x,y)
+
+The R command prop.test can be used similarly to construct confidence intervals for the normal approximation to the binomial.
+> prop.test(83, 100, 0.75)
+
+
+lizard = c(6.2, 6.6, 7.1, 7.4, 7.6, 7.9, 8, 8.3, 8.4, 8.5, 8.6,
+    8.8, 8.8, 9.1, 9.2, 9.4, 9.4, 9.7, 9.9, 10.2, 10.4, 10.8,
+     11.3, 11.9)
+     
+     
+
+R does not have a command to find confidence intervals for the mean of normal data when the variance is known. Because this arises rarely in practice, we could skip this. For those interested, the following command lines create a new command norm.interval based on material from this chapter. We apply it to the lizard data, assuming we know ahead that the variance is 2.
+> norm.interval = function(data, variance = var(data), conf.level = 0.95) {
++     z = qnorm((1 - conf.level)/2, lower.tail = FALSE)
++     xbar = mean(data)
++     sdx = sqrt(variance/length(data))
++ c(xbar - z * sdx, xbar + z * sdx) +}
+> norm.interval(lizard, 2)
+
+
+Similar calculations, or a similar function, could be developed for confidence intervals for the variance of a normal distribution. We illustrate this for the variance of the lizard data.
+> var.interval = function(data, conf.level = 0.95) {
++     df = length(data) - 1
++     chilower = qchisq((1 - conf.level)/2, df)
++     chiupper = qchisq((1 - conf.level)/2, df, lower.tail = FALSE)
++     v = var(data)
++ c(df * v/chiupper, df * v/chilower) +}
+> var.interval(lizard)
+
+# SciencesPo
+
+
+

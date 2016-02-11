@@ -1,0 +1,71 @@
+# first look at voting data from the Danish parliament
+
+
+As mentioned in this post, I have been using the powerful combination of the Beautiful Soup and Mechanize modules in Python to build a web scrapers. The amount of data on the web is amazing, and I believe that any quantitatively oriented social scientist is doing him/her self a disfavor by not learning how to extract this data. I am currently working on expanding the website with a section where I can upload my scrapers, and in an upcoming post I will describe how I typically go about getting data from a website. However this post is about a quite large amount of data I have collected from the Danish Parliament website. Since I am from Denmark, I have a natural interest in Danish politics, however for the Political Scientist, the Danish parliament is one of the few parliaments in the world where every vote is made public, and hence we get access to the full population of voting behavior in a parliamentary setting. This information is available since 2005.
+
+The data contains 638090 individual votes, of which 500292 where cast on legislative acts. I am not quite sure what to do with this data, however I am sure there is a paper in here somewhere, if any of you have a good idea I am open for suggestions :) As a first preliminary view of the patterns I wanted to look at at the output of the Danish parliament, the figure below show the count of legislative acts that were voted upon for every month
+
+library(plyr)
+library(ggplot2)
+setwd("/.../")
+
+data <- read.csv("ft.csv")
+
+data.final <- data[data$Amendment == 0,]
+data.amendment <- data[data$Amendment == 1,]
+
+activity <- ddply(data.final,c("Year","Month"),function(x) data.frame(count = length(unique(x$Voteid))))
+out <- expand.grid(seq(2005,2011,1),seq(1,12,1))
+out <- merge(out, activity, by.x = c("Var1","Var2"), by.y = c("Year","Month"), all.x = TRUE)
+out[is.na(out$count),"count"] <- 0
+out$date <- as.Date(paste("1-",out$Var2,"-",out$Var1, sep = ""), format = "%d-%m-%Y")
+
+plot <- ggplot(out, aes(x = date, y = count)) +
+  geom_line() +
+  geom_vline(xintercept = as.numeric(as.Date(c("13-11-2007","15-09-2011"), format = "%d-%m-%Y")), colour = "red") +
+  theme_bw()
+plot
+
+There is a strong seasonal component to the activity, where most of the legislative acts are voted upon in the summer or winter months. The red vertical lines represent election dates, however elections does not seem to have a large impact on the number of legislative acts present in the plenary.
+
+As a first rough look at the voting behavior, the Figure below show the proportion of yes votes for every month
+
+
+
+##degree of unanimity over time
+agreement.final <- ddply(data.final, c("Year","Month"), function(x) data.frame(agreement = sum(x$Vote.Numeric == 1)/(sum(x$Vote.Numeric == 1) + sum(x$Vote.Numeric == 4))))
+agreement.final$date <- as.Date(paste("1-",agreement.final$Month,"-",agreement.final$Year, sep = ""), format = "%d-%m-%Y")
+plot <- ggplot(agreement.final, aes(x = date, y = agreement)) +
+  geom_line() +
+  geom_vline(xintercept = as.numeric(as.Date(c("13-11-2007","15-09-2011"), format = "%d-%m-%Y")), colour = "red") +
+  scale_y_continuous(limits = c(0,1)) +
+  theme_bw()
+plot
+
+And the figures below show the proportion of yes votes for votes on the final legislative act, and votes on amendments.
+
+agreement.amendment <- ddply(data.amendment, c("Year","Month"), function(x) data.frame(agreement = sum(x$Vote.Numeric == 1)/(sum(x$Vote.Numeric == 1) + sum(x$Vote.Numeric == 4))))
+agreement.amendmemt$date <- as.Date(paste("1-",agreement.amendment$Month,"-",agreement.amendment$Year, sep = ""), format = "%d-%m-%Y")
+plot <- ggplot(agreement,amendmemt, aes(x = date, y = agreement)) +
+  geom_line() +
+  geom_vline(xintercept = as.numeric(as.Date(c("13-11-2007","15-09-2011"), format = "%d-%m-%Y")), colour = "red") +
+  scale_y_continuous(limits = c(0,1)) +
+  theme_bw()
+plot
+
+agreement.full <- ddply(data, c("Year","Month"), function(x) data.frame(agreement = sum(x$Vote.Numeric == 1)/(sum(x$Vote.Numeric == 1) + sum(x$Vote.Numeric == 4))))
+agreement.full$date <- as.Date(paste("1-",agreement.full$Month,"-",agreement.full$Year, sep = ""), format = "%d-%m-%Y")
+plot <- ggplot(agreement.full, aes(x = date, y = agreement)) +
+  geom_line() +
+  geom_vline(xintercept = as.numeric(as.Date(c("13-11-2007","15-09-2011"), format = "%d-%m-%Y")), colour = "red") +
+  scale_y_continuous(limits = c(0,1)) +
+  theme_bw()
+plot
+
+
+
+It is obvious from the above graphs that most of the dissent takes place on amendments, whereas final votes tend to be adopted with very oversized majorities. One thing that puzzle me is why there are so much dissent on amendments and so much agreement on final votes. Perhaps this is a topic for further investigation?
+
+The data with only legislative acts can be downloaded here, The file is ca. 116 mb. Below is the r script to reproduce the above graphs. If you decide to do anything with the data please let me know!
+
+  P.S: I am now part of the r-bloggers community, so if you have not checked out this excellent ressource for all things R, I encourage you to do so!

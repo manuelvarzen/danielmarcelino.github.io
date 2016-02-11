@@ -1,0 +1,3 @@
+
+
+I had some fun this weekend while mulling over the [CLIWOC data](http://pendientedemigracion.ucm.es/info/cliwoc/), which is the Climatological Database for the World’s Oceans. There are a bunch of people out there who are visualizing this data, some of the best are James Chesire who does Spatial.ly, and Ben Schmidt who provides interesting insight behind the data as well not to mention his awesome animations.

@@ -1,0 +1,44 @@
+
+Fisher's alpha
+
+This is a parametric index of diversity that assumes that the abundance of species follows the log series distribution:
+
+$$\alpha_x, \frac{\alpha_x{^2}}{2}, \frac{\alpha_x{^3}}{3}, \dots,  \frac{\alpha_x{^n}}{n}$$
+
+
+where each term gives the number of species predicted to have 1,2,3,....n individuals in the sample. The index is the alpha parameter.
+ 
+This is a useful index, which has been widely used. To test if a log series distribution is appropriate see Fitting abundance distributions - Log series.  It is estimated by an iterative procedure that may take an appreciable amount of time with large data sets.
+
+
+A number of authors argue strongly in favour of this index (eg Kempton, and Taylor, 1976)..
+Hayek & Buzas (1997) believe it to be a useful index provided the ratio of the total number of individuals to the species number (N/S) exceeds 1.44. In many situations, alpha is approximately equal to the number of species represented by a single individual. The value of alpha is independent of sample size when the number of individuals in the sample exceeds 1000.
+ 
+A simple plot of the way the index changes between samples is displayed by clicking on the Graph tab on the output window.
+ 
+To compare two indices see Testing for significant differences between indices.
+
+
+# http://www.pisces-conservation.com/sdrhelp/index.html?fishers.htm
+
+
+
+rarefy(x, sample, se = FALSE, MARGIN = 1)
+
+rrarefy(x, sample)
+
+fisher.alpha(x, MARGIN = 1, se = FALSE, ...)
+
+specnumber(x, MARGIN = 1)
+
+data(BCI)
+H <- diversity(BCI)
+simp <- diversity(BCI, "simpson")
+invsimp <- diversity(BCI, "inv")
+r.2 <- rarefy(BCI, 2)
+alpha <- fisher.alpha(BCI)
+pairs(cbind(H, simp, invsimp, r.2, alpha), pch="+", col="blue")
+## Species richness (S) and Pielou's evenness (J):
+S <- specnumber(BCI) ## rowSums(BCI > 0) does the same...
+J <- H/log(S)
+

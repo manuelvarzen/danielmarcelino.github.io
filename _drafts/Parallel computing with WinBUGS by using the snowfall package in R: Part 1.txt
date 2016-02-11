@@ -1,0 +1,91 @@
+## Parallel computing with WinBUGS by using the snowfall package in R: Part 1
+https://awaypku.wordpress.com/2011/04/22/parallel-computing-with-winbugsopenbugs-by-using-the-snowfall-package-in-r/
+
+
+he motivation to do parallel computing with WinBUGS/OpenBUGS is that I’m trying to fit a set of Bayesian regression models to 100~800 simulated datasets.  My solution follows the partial example code originally provided by Josh Nowak and posted at the BUGS email list by Alan Kelley.
+
+To speed up fitting one dataset, one of the solutions is to distribute multiple MCMC chains (usually 3) to several CPU cores (am I using the right terms? I’m no longer as familiar with computer hardwares any more as back to my college days).
+
+To speed up fitting multiple datasets, the idea is to distribute them to several CPU cores.
+
+I’ll post an example of how to distribute several chains to different cores here, and post another example of how to distribute several datasets later.
+
+Here is the example:  I simulated 100 datasets, and for each dataset I created a 8-fold cross-validation (CV) datasets.  I want to fit a Bayesian regression to each of the CV dataset, that is 800 (=100*8) in total.  I have a Dell PC with Intel Core2 Duo Processor, so I basically have two cores (or processors?) for parallel computing.  I’m gonna run two MCMC chains for each regression model and let them run on separate cores simultaneously.
+
+I use R2OpenBUGS to call OpenBUGS from R.  Here is the beginning of the R code.
+```
+# Import Packages
+library(coda)
+library(rlecuyer)
+library(snowfall)
+# Set Working Directory
+rm(list=ls()) # clears everything
+model.dir=""
+work.dir=""
+openbugs.dir=""
+stewd(work.dir)
+```
+
+The rlecuyer package is used to set different processors with different random seeds to let the two MCMC chains independent from each other (i.e. starting with different initial parameter values).  The snowfall package is essentially a wrapper of the real functions to set up parallel computing implemented in the snow package.
+````
+# Set up basic parameters
+nCores = 2
+nSim = 180
+kFold = 8
+# MCMC parameters for each node
+nChains = 1
+nIter = 50000
+````
+The next step is to set up some basic parameters for the data and MCMC. These parameters should be clear given the comments in my R code.  I have a duo-processor PC, so I specify the number of processors to be 2.  I have 100 simulated datasets, each of which has a 8-fold CV datasets.  These two parameters are set up for a loop.  I’m gonna run 2 MCMC chains in total, and one chain on one processor, so here I specify the number of chains to be run on one processor to be 1.  I run 50,000 iterations for each chain.
+```
+# Bayesian regression model for cross-validation
+for(i in 1:nSim){
+#loop through k-Fold cross-validation
+for(j in 1:kFold){
+#load simulated data
+file.in=paste(paste(paste(paste("sin_",i,sep=""), "_k", sep=""),
+j, sep=""), ".Rdata", sep="")
+load(file.in); ls()
+n.obs = dim(sim.cv)[1] # N of individuals
+x1 = sim.cv[,'x1'] # Individuals' covariate values 
+z1 = sim.cv[, 'z1'] # Neighborhoods' covariance values
+y  = sim.cv[,'y.logit.cv'] # outcome (CV)
+bugs.data = list("n.obs", "y", "x1", "z1")
+bugs.par = c("b0", "b1", "g1", "yhat")
+bugs.inits = function(){list(b0=rnorm(1), g=rnorm(1))}
+
+# Parallel computing 
+sfInt(parallel = T, cpus = nCores) #Initialize nodes
+sfExportAll () # export vars to all nodes
+sfLibrary(R2OpenBugs) # Load package to all the nodes
+sfClusterSetupRNG() # different RNG seeds for different nodes
+# Distributing model to nodes
+bugs.list = sfLapply(1:nCores, function(k){
+bugs.model = bugs(bug.data, bugs.inits, parameters=bugs.pars, 
+model.file = paste(model.dir, "BUGS_model.txt", sep=""),
+n.chains = nChains, n.iter=nIter, debug=F, clearWD=T, codaPkg=F, 
+working.directory = paste(work.dir, k, sep = ""), 
+OpenBUGS.pgm=paste(openbugs.dir, "OpenBUGS.exe", sep="")
+)
+})
+sfStop() # Ends parallel execution
+# Save estimates to a R data
+file.out=paste(paste(paste(paste("Logit_", sep=""),
+"_", sep=""), j, sep=""), ".Rdata", sep="")
+save(bugs.list, file=file.out)
+}
+}
+```
+
+Finally, do the parallel computing. The function sfInit() tells the computer that “I’m gonna use two processors to do something”.  From this point afterwards, you have to tell each processor what’s going on, what data, variables, etc. are defined or available, and  what to do.
+
+The function sfExportAll() tells each processor what variables defined in the R code above they need to know.  For example, each processor has to know what data, parameters, and initial values are used to fit the model (as defined in line 49-51).
+
+The function sfLibrary(R2OpenBUGS)  will load the R2OpenBUGS package to each of all the processors.
+
+The function sfClusterSetupRNG() will set different random streams for different processors to make sure each MCMC chain is independent from each other.
+
+The key to distribute each chain on a separate processor is to use the function sfLapply which is a parallel computing version of the lappy function in R.  The code in line 62 basically says applying a function with an argument k to the sequence 1:nCPU (i.e. 1:2 in this case).  The argument k “loop through” the values in 1:nCPU.  And the function is basically a call to the bugs function from R2OpenBUGS which takes the arguments defined in the previous step.  Since n.chains = nChains = 1, two OpenBUGS will be launched, each running one MCMC chain on separate processors.
+
+There is one trick here worth special attention.  R2OpenBUGS will create several txt files, including one model file, files of initial values (as many as the number of chains), and a log file storing BUGS results.  These are the actual files used to run OpenBUGS.  Since we are calling two OpenBUGS programs simultaneously, and R2OpenBUGS will write a set of files with same names (i.e. model.txt, inits1.txt, log.txt, etc.) to the hard drive, there will be a conflict between the two OpenBUGS programs.  Therefore, I create two folders named “1” and “2” under the working directory (line 66: working.directory = paste(work.dir, k, sep=””)).  The R2OpenBUGS running on one processor will write out the files to the folder named “1” and initiate an OpenBUGS to run, while the other R2OpenBUGS running on the second processor will write out the files to the folder named “2” and initiate a second OpenBUGS to run.
+

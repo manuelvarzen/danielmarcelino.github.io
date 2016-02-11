@@ -1,0 +1,46 @@
+
+
+### Define the URL where the dataset is located
+url<-"https://raw.githubusercontent.com/danielmarcelino/Tables/master/uk_health_survey_2011_2.csv"
+
+### Read the dataset straight from the web, name the dataframe "data"
+df <- read.csv(url)
+
+summary(df$compm13)  # quick descriptive stats
+summary(df$dnoft)    # quick descriptive stats
+summary(df$Age)      # quick descriptive stats
+summary(df$Sex)      # quick descriptive stats
+summary(df$gor1)      # quick descriptive stats
+
+hist(df$dnoft)       # looks wrong, weird negative values represent missing values
+
+df$dnoft <- ifelse(df$dnoft <0, NA, df$dnoft)  #if dnoft < 0, make it "NA," otherwise make it what it already is
+df$compm13<-as.factor(df$compm13) # Make compm13 a categorical variable (factor)
+df$gor1<-as.factor(df$gor1)     # Make the region variable a categorical variable (factor)
+
+### Regression model predicingt frequency of drinking with infectious disease, sex, age, region
+model <- lm(dnoft ~ compm13 + Sex + Age + gor1, data=df)
+summary(model)  # See model output
+
+
+
+hist(df$dnoft)
+
+summary(df$gor1)
+
+summary(df$Choicewk)
+
+summary(df$DIFFHEAL)
+
+summary(df$Sex)
+
+summary(df$Age)
+
+summary(df$SmokPpl1) #smoke near children
+hist(df$SmokPpl5) #smoke near pregnant woman
+
+MARITALB
+summary(df$addnum)
+summary(df$gor1)
+
+df$southeast<-ifelse(df$gor1==8, 1, 0)

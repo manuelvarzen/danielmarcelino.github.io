@@ -1,0 +1,220 @@
+#---
+#layout: post
+#title: "Venezuelan Parliamentary Election: What do the Polls Say?"
+#date: 2015-12-06
+#category: [R]
+#tags: [Venezuela, election, polls]
+# comments: true
+#image: 
+#---
+
+There is not a huge population of opinion polls covering this parliamentary election in Venezuela, but all I've can be used to gauge the public opinion by the local polling houses. This posting begs an obvious question: how has the mood in Venezuela varied over time with respect to voting intentions for the two political blocs? Next, can we detect any biases among those publishing polls?
+
+<!--more-->
+
+# The data
+I've collected some polls available on the internet dating back to January 2014, which I made available [here](https://github.com/danielmarcelino/Polling/raw/master/Venezuela/data/polls.txt) after some [data janitor work](http://www.nytimes.com/2014/08/18/technology/for-big-data-scientists-hurdle-to-insights-is-janitor-work.html?_r=0).
+
+
+```{r 'data'}
+library("dplyr")
+library("ggplot2")
+library("grid")
+library("reshape2")
+library("lubridate")
+library("scales")
+library("knitr")
+library("SciencesPo") # to use the themes, you must install the version from github
+library("xtable")
+library("zoo")
+
+source = "https://github.com/danielmarcelino/Polling/raw/master/Venezuela/data/polls.txt"
+
+data <- read.csv(source, sep="\t", encoding = "UTF-8")
+
+# Correcting for empty date values
+head(data)
+data[,2:3]<-lapply(data[,2:3],as.Date, format = "%d-%m-%Y")
+
+times <- function(x)(x*100)
+
+data[,5:8]<-lapply(data[,5:8],times)
+
+days = round(mean(data$end-data$begin, na.rm=TRUE))
+mask = is.na(data$end)
+
+data$end[mask] = data$begin[mask]+days
+
+# Find the middle point
+DaysInField = round(mean(data$end-data$begin, na.rm=TRUE))
+data$date = data$begin+DaysInField
+
+```
+
+
+# Polls over time
+After a bit filling-in-the-blanks working with missing date values, we can visualize the poll trends over time. Given the sample size, sampling error and other sources of noise, a loess model can pretty much pick out the signals of long-term trends.
+
+
+```{r 'loess'}
+polls <- melt(data, id.vars=c("house", "date"), 
+     measure.var=c("MUD", "PSUV", "Others", "Undecided"))
+colnames(polls)[3] <- "response"
+levels(polls$response) <- c("MUD", "PSUV", "Others", "Swing")
+
+
+ggplot(polls, aes(x=date, y=value, col=response, fill=response)) + 
+  geom_point() + geom_smooth(method="loess", alpha=I(.2)) +
+  theme_538() + 
+ theme(legend.position=c(.5,.95), legend.direction="horizontal") +
+  scale_color_manual(values = c("blue", "red", "orange", "grey40")) +
+  scale_fill_manual(values = c("blue", "red", "orange", "grey40")) +
+  scale_x_date(labels = date_format("%b '%y")) +
+  scale_y_continuous(breaks=seq(0, 70, 10), limits=c(0,70)) +
+  geom_hline(yintercept=0,size=1.2,colour="#535353") +
+  ggtitle("Vote Intention Among Venezuelans") +
+  labs(x="", y="%", fill="Poll response:", col="Poll response:")
+# credits
+  plotFootnote("danielmarcelino.github.io")
+```
+
+
+# Pollster biases
+
+Let's pretend we can trust on all those polls despite the huge variability among them as already mentioned [here](https://danielmarcelino.github.io/r/2015/12/04/venezuelan-parliamentary-election-2015/). In fact, the problem is not the variability as such, but my lack of knowledge about who are the pollsters and their past performance, so I can't judge them at first, let's say it clearly.
+
+Nonetheless, if we accept the above models as a sound estimate of the expected poll response at a given time, we can analyze the residuals of actual poll results and look for systematic biases. In theory, with a decent sample size (all have ~ 1300) and a reasonably stratified sampling method (I'm not even assuming  random samples here), we might expect polls results to be roughly normally distributed around the mean of other polls result, regardless of who performed or commissioned the poll, right?
+
+The graph below shows the distributions per polling house for those who polled more than a single poll in this dataset.
+
+
+```{r 'biases'}
+## results per pollster
+polls$house <- gsub(" ?\\(.*", "", polls$house)
+polls$house <- gsub("-", " ", polls$house)
+
+houseNames <- do.call(rbind, strsplit(as.character(polls$house), "/"))
+colnames(houseNames) <- c("pollster", "comission")
+
+#polling houses
+# pollsters <- c("IVAD", "Consultores", "Datanálisis", "VARIANZAS",
+#             "ICS", "DatinCorp", "Delphos", "Keller y Asociados",
+#             "Venebarómetro", "Meganalisis", "Hercón")
+
+polls <- cbind(polls, houseNames)
+
+## Residual analysis per pollster
+l.MUD <- loess(value ~ as.numeric(date), data=subset(polls, response=="MUD"))
+l.PSUV <- loess(value ~ as.numeric(date), data=subset(polls, response=="PSUV"))
+l.Others <- loess(value ~ as.numeric(date), data=subset(polls, response=="Others"))
+l.Swing <- loess(value ~ as.numeric(date), data=subset(polls, response=="Swing"))
+
+with(polls, plot(as.numeric(date), value))
+lines(as.numeric(polls[polls$response == "MUD",]$date),
+      predict(l.MUD, as.numeric(polls[polls$response == "MUD",]$date)))
+
+# Calculate predicted values per row, 
+polls$predicted <- NA
+
+loessPrediction <- function(resp, model){
+  rows <- polls$response == resp
+  curr <- polls[rows,]
+  preds <- with(curr, predict(model, as.numeric(date)))
+  polls[rows,]$predicted <<- preds
+}
+
+loessPrediction("MUD", l.MUD)
+loessPrediction("PSUV", l.PSUV)
+loessPrediction("Others", l.Others)
+loessPrediction("Swing", l.Swing)
+
+polls$residual <- polls$value - polls$predicted
+hist(polls$residual)
+
+## Order pollters by median residual:
+ordering <- group_by(polls, pollster) %>%
+  filter(response == "MUD") %>%
+  summarise(med = median(residual, na.rm=T), count=n()) %>%
+  arrange(med) 
+
+polls$pollster <- factor(polls$pollster, levels=ordering$pollster)
+
+## Testing for biases by a given pollster 
+
+ggplot(subset(polls, response == "MUD"), 
+       aes(x=pollster, y=residual)) +
+  geom_hline(aes(yintercept=0)) +
+  geom_violin(scale="width", fill=I("grey50"), col=I("grey50")) + 
+  geom_jitter(position=position_jitter(width=.05)) + 
+  stat_summary(geom = "crossbar", width=0.75, fatten=2, 
+               color="grey20", fun.y=median, fun.ymin=median, fun.ymax=median) +
+  #stat_summary(fun.y="mean_cl_boot", geom="point", col=I("red")) +
+  coord_flip() + theme_538() + ggtitle("Relative MUD voting intentions") +
+  labs(x="Polling house",
+       y="Comparison with other polls at the time") +
+  ylim(-12,12)
+# Note: mean.cl.boot is an implementation of the basic nonparametric bootstrap for obtaining confidence limits for the population mean without assuming normality
+```
+
+
+The results again are hampered by a small number of data points per pollster, but the pollster Panelbase emerges as one providing significantly yes-skewed poll results (p < 6 × 10-6). Interestingly they may be the only pollster here to have a rewards system inlace. The only other significantly non-zero biased results come again from TNS BMRB, who published most of their own polls in the above graph.
+
+The results are hampered by a small number of data points per pollster, and that to claim they are polling significantly above or below expectation, save for the *Hercón*, which is significantly more pro opposition (MUD) than expected, given the probability laws, although the p-value is just above the 5% thumb/convention. With a little research, I figure out that *Datanálisis* performed fine in the previous elections, and here it appears just around the center of the distribution tough leaning toward the Socialists (PSUV).
+
+```{r 'sig'}
+## Stats significance, is it any?
+options(scipen=0)
+
+sigTable <- polls %>% filter(response == "MUD") %>%
+  group_by( pollster) %>%
+  summarise(p=wilcox.test(residual, mu=0)$p.value) 
+
+kable(sigTable)
+
+```
+
+
+# Conclusion
+
+What do the polls say? Well, the majority of Venezuelans are favoring opposition candidates and this has been the trend for at least the latter two years, however polls appear to have been more variable in recent months. This election is expected to bring the opposition to control the National Assembly after 16 years loosing the elections in the country. 
+The Venezuela's Socialists seem to be at risk, but predicting the final number of seats is a tough task that I'm not considering in this post. 
+In fact, it might be really difficult to set forth a range of winning seats as the government recently enacted some redistricting seats in order to weaken an eventual absolute majority by the opposition. Somehow, the polls show this will be a significant symbolic defeat for the government that shows it lost despite all the advantages in state power and control over the media.
+
+
+```{r 'timeplot'}
+
+## generate HTML table
+xt <- data.frame(date=rep("12-15 Aug", 2),
+                 pollster=c("YouGov", "Panelbase"),
+                 client=c("The Times", "Yes Scotland"),
+                 sample.size=c(1085, 1026),
+                 yes=c(38, 42),
+                 no=c(51, 46), 
+                 undecided=c(11, 12),
+                 spread=c(13, 4))
+print(xtable(xt), type="html")
+
+
+data$perc <- with(data, 100*(PSUV / (MUD+PSUV)))
+
+ggplot(data, aes(x=date, y=perc, ymin=0, ymax=perc)) +
+  theme_538() + geom_ribbon(fill=I("grey80")) +
+  geom_line() + geom_smooth(method="lm", col=I("grey30")) +
+  labs(y="PSUV support (%)", x="") + 
+  geom_hline(yintercept=50) +
+    geom_hline(yintercept=0,size=1.2,colour="#535353") +
+  scale_x_date(breaks="3 months", minor_breaks=NULL, 
+               labels=date_format("%b '%y"), expand=c(.05,-5)) +
+    ggtitle("Vote Support for PSUV") +
+  scale_y_continuous(breaks=seq(0, 100, by=10), limits=c(0,80))
+
+# credits
+  plotFootnote("danielmarcelino.github.io")
+  
+## Sily stuff:
+lmod <- lm(perc ~ date, data=data)
+summary(lmod)
+predict(lmod, data.frame(date=as.Date("2015-12-07")), se.fit=T)
+# 42.94 % yes, +- .78*2.58
+# 40.9 to 45.0
+```

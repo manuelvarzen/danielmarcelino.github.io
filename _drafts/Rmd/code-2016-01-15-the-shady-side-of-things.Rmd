@@ -1,0 +1,43 @@
+
+
+
+
+http://wp.production.patheos.com/blogs/exploringourmatrix/files/2015/01/Venn-diagram-sky-and-pyramid.png
+
+
+```{r}
+pie(c(Sky = 78, "Sunny side of pyramid" = 17, "Shady side of pyramid" = 5), init.angle = 315, col = c("#6698FF", "#FDD017", "#CB9E00"), border = FALSE)
+
+```
+
+
+
+```{r}
+library("ggplot2")
+library("animation")
+
+
+saveGIF({
+  for(shadyside in 1:39)
+  {
+    sides <- c("Sky", "Sunny side of pyramid", "Shady side of pyramid")
+    amounts <- c(150, 40 - shadyside, shadyside)
+
+    mydf <- data.frame(values=ordered(rep(sides, amounts), levels = sides))
+
+    p <- ggplot(mydf, aes(x = factor(1), fill=factor(values))) +
+      geom_bar(width = 1) +
+      coord_polar(theta = "y", start = 3.8, direction = -1) +
+      scale_fill_manual(values = c("#6698FF", "#FDD017", "#CB9E00")) +
+      theme(axis.line = element_blank(),
+            axis.title = element_blank(),
+            axis.text = element_blank(),
+            axis.ticks = element_blank(),
+            legend.position = c(1, .9),
+            legend.title = element_blank(),
+            panel.background = element_blank())
+
+    print(p)
+  }
+}, interval = 1/30, ani.width = 550, ani.height=450)
+```

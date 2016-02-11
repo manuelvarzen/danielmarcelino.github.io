@@ -1,0 +1,44 @@
+library(stringr)
+library(plyr)
+
+http://www.wolframalpha.com/input/?i=popularity+of+the+name+%22John%22
+
+Another source of data ranging from 1880 to 1999 with sample of names even before that period.
+
+http://www.galbithink.org/names/agnames.htm
+
+First appearing 
+https://cooldata.wordpress.com/2010/07/09/how-to-infer-age-when-all-you-have-is-a-name/
+https://cooldata.wordpress.com/2013/05/02/new-twists-on-inferring-age-from-first-name/
+
+# We're assuming you've downloaded the SSA files into your R project directory.
+
+file_listing = list.files()[3:135]
+for (f in file_listing) {
+  year = str_extract(f, "[0-9]{4}")
+  if (year == "1880") { # Initializing the very long dataframe
+    name_data = read.csv(f, header=FALSE)
+    names(name_data) = c("Name", "Sex", "Pop")
+    name_data$Year = rep(year, dim(name_data)[1]) }
+  else { # adding onto the very long dataframe
+    name_data_new = read.csv(f, header=FALSE)
+    names(name_data_new) = c("Name", "Sex", "Pop")
+    name_data_new$Year = rep(year, dim(name_data_new)[1])
+    name_data = rbind(name_data, name_data_new)
+  }}
+
+year_pop_totals = ddply(name_data, .(Year), function (x) sum(x$Pop))
+name_data = merge(name_data, year_pop_totals, by.x="Year", by.y="Year", all.x=TRUE)
+name_data$Rel_Pop = name_data$Pop/name_data$V1
+
+estimate_age = function (input_name, sex = NA) {
+  if (is.na(sex)) {
+    name_subset = subset(name_data, Name == input_name & Year >= 1921)} #1921 is a year I chose arbitrarily.  Change how you like.
+  else {
+    name_subset = subset(name_data, Name == input_name & Year >= 1921 & Sex == sex)
+  }
+  year_and_rel_pop = name_subset[which(name_subset$Rel_Pop == max(name_subset$Rel_Pop)),c(1,6)]
+  current_year = as.numeric(substr(Sys.time(),1,4))
+  estimated_age = current_year - as.numeric(year_and_rel_pop[1])
+  return(list(year_of_birth=as.numeric(year_and_rel_pop[1]), age=estimated_age, relative_pop=sprintf("%1.2f%%",year_and_rel_pop[2]*100)))
+}

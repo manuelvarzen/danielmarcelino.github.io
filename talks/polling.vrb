@@ -1,0 +1,19 @@
+\frametitle{R code}
+
+Here's some code in R:
+\begin{Schunk}
+\begin{Sinput}
+> # toy example
+> some_str <- c("I", "love", "R")
+> some_str
+\end{Sinput}
+\begin{Soutput}
+[1] "I"    "love" "R"
+\end{Soutput}
+\begin{Sinput}
+> paste(some_str, collapse = " ")
+\end{Sinput}
+\begin{Soutput}
+[1] "I love R"
+\end{Soutput}
+\end{Schunk}

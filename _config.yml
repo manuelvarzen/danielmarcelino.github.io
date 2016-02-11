@@ -1,0 +1,100 @@
+# --- Serving options --- #
+
+# If you're hosting your site at a Project repository on GitHub pages
+# (http://yourusername.github.io/repository-name)
+# and NOT your User repository (http://yourusername.github.io)
+# then add in the baseurl here, like this: "/repository-name"
+url: "http://danielmarcelino.github.io"
+baseurl: ""
+
+# Brief name and description of the site
+title: EnfoRced Data Analysis
+description: "Blog of Daniel Marcelino"
+
+# --- Outputting options --- #
+# More information can be found on Jekyll's site
+timezone: "Brazil/Brasilia"
+markdown: kramdown
+highlighter: pygments
+permalink: /blog/:year/:title.html
+paginate: 5
+paginate_path: "/page:num/"
+
+# --- Navigation bar options --- #
+
+# Image to show in the navigation bar - image must be a square (width = height)
+# Remove this parameter if you don't want an image in the navbar
+avatar: "/images/daniel_rio.jpg"
+
+favicon: "/images/favicon.ico"
+
+# List of links in the navigation bar
+navbar-links:
+  Blog: "blog"
+  Interests: "interests"
+  Random Walks: "randomwalks" 
+  About: "about"
+nav-search: "search"
+
+# --- Footer options --- #
+
+# Change all these values or delete the ones you don't want.
+# Important: you must keep the "name" parameter, everything else you can remove
+author:
+  name: Daniel Marcelino
+  email: "dmarcelino@live.com"
+  facebook: 
+  github: "danielmarcelino/"
+  twitter: "dmarcelinobr"
+  linkedin: "daniel-marcelino-80968656"
+  stackoverflow: "users/792000/daniel" 
+
+  
+# Select which links to show in the footer  
+footer-links-active:
+  rss: true
+  facebook: true
+  email: true
+  twitter: true
+  github: true
+  linkedin: true
+  stackoverflow: true
+
+# How to display the link to the website in the footer
+# Remove this if you don't want a link in the footer
+# url-pretty: "danielmarcelino.com" 
+
+# --- Misc --- #
+
+# Fill in your Disqus shortname (NOT the userid) if you want to support Disqus comments
+disqus: "daniel-marcelino"
+
+# Fill in your Google Analytics ID to track your website using GA
+google_analytics: "UA-24186657-1"  # Your Google Analytics ID
+
+fb_app_id: "1529566150689415"
+
+# --- Don't need to touch anything below here (but you can if you want) --- #
+
+# Default YAML values (more information on Jekyll's site)  
+defaults:
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      comments: true  
+      show-share: true 
+  -
+    scope:
+      path: "" # all files
+    values:
+      layout: "default"
+
+# Exclude these files from production site
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - CNAME
+  - LICENSE
+  - README.md

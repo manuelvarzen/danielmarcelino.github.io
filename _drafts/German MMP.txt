@@ -1,0 +1,22 @@
+J. Carter Wood wrote:
+Überhangmandate are an example of one of those things that are really quite simple in principle but take a long time to explain.
+
+I'll try. Overhang mandates are - sometimes - the result of the basic idea of mixing the national (proportional) representation of voters' preferences with the local (relative majority) election of politicians in districts.
+
+Let's make a Gedankenexperiment. Think of whole Germany with only 100 voting districts and 100 seats in the Bundestag.
+
+Version 1: Voters only have a first vote. This would be a first-past-the-post (plurality) voting system with 100 direct candidates.
+
+Version 2: Voters only have a second vote. This would be a proportional representation system where the 100 seats are apportionent according to their percentages. Forget the nasty rounding problems. In Germany, parties only have state-lists. So, in a first step, calculate how many seats the party will get in the parliament (easy -> party A got 30 percent of the votes = 30 seats for party A). In a second step, apportion the party seats to the different states according to the regional vote shares (easy -> party A got all their votes from Bavaria [90 percent] and Berlin [10 percent], so Bavaria will get 27 and Berlin 3 seats). Hmm, sounds like the same rounding problem as on the national level! That's true. You will also need Sainte-Laguë and Co. for the state-lists.
+
+Now you want to merge both ideas in one voting system. One idea is simply to increase the number of parliament seats to 200 and to vote separately for both "parts". That's called "Grabensystem" and is used in some young Eastern European states. I won't talk about the disadvantages, what's important is: That's not the way we do it in Germany.
+
+The real German procedure is as follows: You have 299 voting districts and 2*299 = 598 seats in the Bundestag. 299 seats will be assigned to the 299 directly elected candidates (relative majority, first vote) from the 299 voting districts.
+
+Next step: You calculate the representative strenght of every party according to their second votes (5-percent...) for the whole 598 seats [I won't discuss the rather irrelevant exceptions like candidates without a party] and break it down to the party strenght in every state so you know how many seats every party in every state will get.
+
+Third step: You already have some elected candidates from different parties - the direct candidates for the 299 districts. Now subtract for every party in every state the already assigned district seats from the "proportional" second vote seats and fill up the rest with politicians from your state lists.
+
+At the end, you should get a national parliament in which a) the party strenght is proportional to the second vote, b) the composition in every party faction is proportional to the regional strenght and c) ever voting district is represented by one directly elected candidate.
+
+This sometimes fails and that's the reason why there are overhang mandates. If you have in step 3 a state with more direct candidates from one party than regional party seats according to the "proportional" second votes' share, you can't cancel the direct mandates. One way to fix it is to simply add one seat to the whole parliament for every additional direct candidate. That's an overhang mandate.

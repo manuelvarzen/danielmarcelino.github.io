@@ -1,0 +1,189 @@
+#---
+#layout: post
+#title: "Fitting Linear Models With Uncertainty"
+#date: 2015-12-10
+#category: [R]
+#tags: [stan, bayesian, uncertainty]
+#image:
+#---
+
+I'm writing about uncertain things very often, so I tought this post could clarify some of my views about uncertainty.
+
+<!--more-->
+Let's pretend we've conducted a well set experiment and independently measured values *x* and *y*, and that we want to find a linear relationship between them, accounting for measurement uncertainty.  To make things really exciting, each *x* and *y* value is assigned a different amount of uncertainty; the challenge is to take this information into account. 
+
+A standard linear model will treat all points equally. In the other hand, when we treat each measurement as a multivariate normal distribution, we can find a point along the proposed fitted line that is maximizing the probability density function (i.e. that has a maximum likelihood). Thus, given a slope and intercept, we virtually move all measurements to their most likely point along the line, and use the likelihood at this point. 
+
+```{r}
+
+library(ggplot2)
+
+set.seed(551)
+
+N <- 10
+
+x0 <- seq(-5, 5, 10.1/N)
+y0 <- x0
+
+sigma_x <- abs( rnorm( length(x0), 1) )
+x <- x0 + unlist(lapply(sigma_x, function(sigma) rnorm(1, 0, sigma)))
+
+sigma_y <- abs( rnorm( length(y0), 1) )
+y <- y0 + unlist(lapply(sigma_y, function(sigma) rnorm(1, 0, sigma)))
+
+data <- data.frame( x, sigma_x, y, sigma_y )
+
+data_list <- list( x=x, sigma_x=sigma_x, y=y, sigma_y = sigma_y, N=N)
+
+
+
+```
+
+We create `r N` points:
+
+```{r}
+ggplot( data, aes(x, y) ) + 
+  geom_point(size=3) + 
+  geom_abline(color="red", size=1.5) + 
+  geom_smooth(method="lm", se=F, size=1.5) + 
+  geom_errorbar(aes(ymin=y-sigma_y, ymax=y+sigma_y)) + geom_errorbarh(aes(xmin=x-sigma_x, xmax=x+sigma_x)) +
+  theme_538()
+
+```
+
+(Red: actual dependency, blue: simple linear fit)
+
+The simple linear model in STAN:
+
+```{r}
+
+simpleLinearModel <- "
+data {
+  int<lower=0> N;
+
+  vector[N] x;
+  vector[N] y;
+}
+
+parameters {
+  real slope;
+  real intercept;
+  real<lower=0> sigma;
+}
+
+model {
+  slope ~ normal(0, 10);
+  intercept ~ normal(0, 10);
+  sigma ~ cauchy(0, 25);
+
+  y ~ normal(x*slope+intercept, sigma);
+}
+"
+
+```
+
+And another model, taking uncertainty into account. Here, based on the proposed slope and intercept, the probability density function is maximized for each point:
+
+```{r}
+
+uncertaintyAddModel <- "
+data {
+  int<lower=0> N;
+
+  vector[N] x;
+  vector[N] y;
+  vector<lower=0>[N] sigma_x;
+  vector<lower=0>[N] sigma_y;
+}
+
+parameters {
+  real slope;
+  real intercept;
+}
+
+transformed parameters {
+  vector[N] xx;
+  vector[N] yy;
+
+  vector[N] sx2;
+  vector[N] sy2;
+  
+  sx2 <- sigma_x .* sigma_x;
+  sy2 <- sigma_y .* sigma_y;
+  
+  // find maximum PDF given slope and intercept
+  xx <- ( (sy2 .* x) + slope * sx2 .* ( y - intercept ) ) ./ ( slope * sx2 + sy2);
+  yy <- slope * xx + intercept;
+}
+
+model {
+  slope ~ normal(0, 10);
+  intercept ~ normal(0, 10);
+
+  xx ~ normal(x, sigma_x);
+  yy ~ normal(y, sigma_y);
+}
+"
+
+```
+
+Let's generate fits:
+
+```{r results="hide"}
+library(rstan)
+simple <- stan(model_code = simpleLinearModel, data = data_list)
+complex <- stan(model_code = uncertaintyAddModel, data = data_list)
+
+```
+
+Comparing the parameter distributions, taking uncertainty into account produces a much better fit:
+
+```{r}
+
+slopes <- do.call(cbind, extract(complex, "slope"))
+intercepts <- do.call(cbind, extract(complex, "intercept"))
+
+slopes_simple <- do.call(cbind, extract(simple, "slope"))
+intercepts_simple <- do.call(cbind, extract(simple, "intercept"))
+
+df_coef <- rbind(
+  data.frame( kind = "simple", slope = slopes_simple, intercept = intercepts_simple ),
+  data.frame( kind = "uncertainty", slope = slopes, intercept = intercepts )
+)
+
+ggplot(df_coef, aes(slope, color=kind)) + geom_density()
+ggplot(df_coef, aes(intercept, color=kind)) + geom_density()
+```
+
+Here are some sample fits:
+
+```{r}
+samples <- sample.int(length(slopes), 35)
+df_lines <- data.frame(slope=slopes[samples], intercept=intercepts[samples])
+
+ggplot( data, aes(x, y) ) + 
+  geom_abline(data = df_lines, 
+              aes(slope = slope, intercept=intercept),
+              color="grey") + 
+  coord_fixed() + 
+  geom_abline(color= "red", size=1.5) + 
+  geom_smooth(method="lm", se=F, size=1.5) +
+    geom_point(size=3) +
+  theme_538()
+
+```
+
+And a view of the "moved" points:
+
+```{r}
+xx <- do.call(cbind, extract(complex, "xx"))
+yy <- do.call(cbind, extract(complex, "yy"))
+
+df_points <- data.frame( x=c(x, xx[samples[1],]), y=c(y, yy[samples[1],]), kind = rep( c("observed", "inferred"), each=N), group = rep(1:N,2)  )
+
+ggplot( df_points, aes(x, y, group=group)) + geom_point(aes(color=kind, size=2)) +
+  geom_path(color="gray50") + 
+  geom_abline(color="gray40", size=1.5) + 
+  coord_fixed() + theme_538()
+```
+

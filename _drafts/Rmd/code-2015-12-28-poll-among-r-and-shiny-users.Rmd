@@ -1,0 +1,59 @@
+#---
+#layout: post
+#title: 'A Fresh Poll among R and Shiny Users'
+#date: 2015-12-28
+#category: how-to
+#tags: [R, polls, users]
+# comments: true
+#image: 
+#---
+
+In this post I will demosntrate a very basic approach to Community Detection in Social Networks.
+
+<!--more-->
+
+![](/images/blog/2014/networks.png)
+
+<hr/>
+
+ 
+
+Packages I'll be using:
+```{r}
+library(dplyr)
+library(tidyr)
+library(knitr)
+library(scales)
+library(ggplot2)
+library(SciencesPo)
+```
+
+
+```{r}
+raw_poll <- read.csv("~/Downloads/poll1-master/data/R - Shiny User Survey (Responses) - Form Responses 1.csv",stringsAsFactors=FALSE)
+```
+
+
+
+# Some preprocessing
+```{r}
+alphaOnly <- function(x) gsub("[^[:alnum:] ]", "", x)
+
+clean<-function(col){
+  return(trim(tolower(alphaOnly(unlist(strsplit(col, split=","))))))
+}
+
+
+```
+
+
+table(raw_poll$How.long.have.you.been.using.R.)
+Because the survey didn't cover the user experience between 1 to 2 years, the bar of 2-5 years on this chart may be overestimated. 
+
+ggplot(raw_poll, aes(x=How.long.have.you.been.using.R.)) + geom_bar()
+
+
+```{r, fig.width=9, fig.height=6}
+
+```
+

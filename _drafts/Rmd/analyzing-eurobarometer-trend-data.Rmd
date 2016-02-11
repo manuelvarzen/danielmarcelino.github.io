@@ -1,0 +1,101 @@
+### Starter script for analyzing the Eurobarometer Trend data (1970-2002).
+### Outline:
+### 1. Import the dataset straight from the web
+### 2. Isolate variables of interest and clean them up
+### 3. Estimate a regression model of what makes people turnout for EP elections
+
+### Download packages we're going to use
+install.packages("ggplot2")
+install.packages("foreign")
+library(ggplot2)
+library(foreign)
+
+### Define the URL where the dataset is located
+url<-"https://raw.githubusercontent.com/danielmarcelino/Tables/master/eurobarometer_trends.csv"
+
+# url<-"http://dl.dropboxusercontent.com/u/20498362/eurobarometer_trends/eurobarometer_trends.dta"
+
+### Read the dataset straight from the web, name the dataframe "data"
+data <- read.csv(url)
+
+### Variable "mediause" asks how much the respondent relies on the media.
+summary(data$mediause) # Get a simple summary
+data$mediause[data$mediause=="dk"]<-NA # Let's consider all the "dk" answerers as missing (NA)
+data$mediause[data$mediause=="na"]<-NA # Let's consider all the "dk" as missing (NA)
+data$mediause[data$mediause=="inap"]<-NA # Let's consider all the "inap" as missing (NA)
+data$mediause<-factor(data$mediause) # this removes unused levels
+levels(data$mediause)<-c("Very high", "High", "Low", "Very low") # Clean up the messy names of the levels
+data$medianum<-as.numeric(data$mediause) # convert the categories to a numerical scale (cheating a bit!)
+data$medianum<-(4 - data$medianum) # Subtract from 4 to make it more intuitive (higher number = more likely to vote)
+
+### Variable "particip" asks respondent how likely they are to vote in the EP elections.
+summary(data$particip)
+data$particip[data$particip=="DK,NA"]<-NA
+data$particip[data$particip=="depends"]<-NA
+data$particip[data$particip=="inap"]<-NA
+data$particip<-factor(data$particip)
+levels(data$particip)<-c("Certainly yes", "Probably yes", "Probably not", "Certainly not")
+data$participnum<-as.numeric(data$particip) # convert the categories to a numerical scale (cheating a bit!)
+data$participnum<-(4 - data$participnum) # Subtract from 4 to make it more intuitive (higher number = more likely to vote)
+summary(data$participnum)
+
+### Variable "income" asks the respondent's income level.
+summary(data$income)
+
+### Variable "polint" asks the respondent's political interest generally.
+summary(data$polint)
+data$polint[data$polint=="DK,NA"]<-NA
+data$polint[data$polint=="inap"]<-NA
+data$polint<-factor(data$polint)
+levels(data$polint)<-c("A great deal", "To some extent", "Not much", "Not at all")
+data$polintnum<-as.numeric(data$polint) # convert the categories to a numerical scale (cheating a bit!)
+data$polintnum<-(4 - data$polintnum) # Subtract from 4 to make it more intuitive (higher number = more likely to vote)
+summary(data$polintnum)
+
+### Variable "ecint3" asks the respondent's interest in EU politics.
+summary(data$ecint3)
+data$ecint3[data$ecint3=="DK, NA"]<-NA
+data$ecint3[data$ecint3=="inap"]<-NA
+data$ecint3<-factor(data$ecint3)
+levels(data$ecint3)<-c("Very interested", "A little", "Not at all")
+data$ecint3num<-as.numeric(data$ecint3) # convert the categories to a numerical scale (cheating a bit!)
+data$ecint3num<-(3 - data$ecint3num) # Subtract from 4 to make it more intuitive (higher number = more likely to vote)
+summary(data$ecint3num)
+
+### Variable "ecint4" asks the respondent's interest in EU politics.
+summary(data$ecint4)
+data$ecint4[data$ecint4=="DK, NA"]<-NA
+data$ecint4[data$ecint4=="inap"]<-NA
+data$ecint4<-factor(data$ecint4)
+levels(data$ecint4)<-c("A great deal", "To some extent", "Not much", "Not at all")
+data$ecint4num<-as.numeric(data$ecint4) # convert the categories to a numerical scale (cheating a bit!)
+data$ecint4num<-(4 - data$ecint4num) # Subtract from 4 to make it more intuitive (higher number = more likely to vote)
+summary(data$ecint4num)
+
+### Variable "nation1" captures the respondent's nation
+summary(data$nation1)
+data$gb<-ifelse(data$nation1=="GREAT BRITAIN", 1, 0)
+
+### Variable "year" captures the year of the survey
+summary(data$year)
+
+### Estimate a regression model of intention to turnout
+
+model<-lm(participnum ~ income + polintnum + medianum + gb + year, data=data)
+
+summary(model)
+
+
+
+
+### Other options for refining the analysis
+
+### Let's make a new, smaller dataframe with only variables of interest
+
+maindata<-subset(data, select=c("nation1", "year", "particip", "polint", "mediause", "income"))
+
+
+
+### Let's make another but only with the UK respondents in 2002
+
+maindataUK2002<-subset(data, data$nation1=="GREAT BRITAIN", data$year=="2002", select=c("particip", "polint", "mediause", "income"))

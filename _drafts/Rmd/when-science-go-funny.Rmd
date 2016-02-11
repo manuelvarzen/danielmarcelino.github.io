@@ -1,0 +1,27 @@
+---
+title: "When Science Go Funny"
+author: "Daniel Marcelino"
+date: "January 3, 2016"
+output: html_document
+---
+
+http://tylervigen.com/spurious-correlations
+
+# http://www.nejm.org/doi/full/10.1056/NEJMon1211064
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+spurious correlation, see <http://tylervigen.com/spurious-correlations>
+
+## R Markdown
+
+
+```{r cars}
+summary(cars)
+```
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```

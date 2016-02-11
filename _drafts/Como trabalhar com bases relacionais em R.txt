@@ -1,0 +1,90 @@
+Create A Quick Relational Database For Data Analysis Using R
+
+Mass spec analysis pipeline often requires combining all data from a single experiment and create a relational database for final visualization. Analysis programs such as PeptideShaker or IDPicker produce ID files for individual samples, but it doesn’t have a feature to combine different conditions and compare them at the same time. So I am going to show how you can combine multiple datafile using R.
+
+To summarize the process
+
+1) Save result files (.csv or .txt) in one directory
+
+2) Load all files into R
+
+3) Create a table that contains ID and Description without redundancy
+
+4) Connect all data files to 3)
+
+To create a relational database in R, there are several required packages. The most important one is called “sqldf” packages. However, there are some other packages in order to use this package. In my mac, these are required to use sqldf. Note that to use sqldf, you also need to install XQuarts.2.7.4 (or some sort) on your mac.
+
+>install.packages(“DBI”)
+>install.packages(“gsubfn”)
+>install.packages(“proto”)
+>install.packages(“chron”)
+>install.packages(“RSQLite”)
+>install.packages(“RSQLite.extfuns”)
+>install.packages(“sqldf”)
+
+Then load these packages
+
+>library(“DBI”)
+>library(“gubfn”)
+>library(“proto”)
+>library(“chron”)
+>library(“RSQLite”)
+>library(“RSQLite.extfuns”)
+>library(“sqldf”)
+
+Set  up working directory (I am going to  use R-test on desktop)
+>setwd(“~/Desktop/R-test”)
+
+Read data file (.csv) into R.　For .txt file use an appropriate separator, usually tab delimited (sep=”\t”).
+
+>files<-list.files(pattern=”*.csv”)
+>files # show filenames in the working directory
+>rdf<-lapply(files, read.csv) # files are loaded into rdf
+
+rdf is a list composed of multiple tables loaded from the working directory.
+For simplicity, we have three files in the directory. You can do step for many more files using for-loop or apply function. In this example,the data files contain three columns, Accession, Description and Score. For example,
+
+table1
+Accession Description Score
+1                   Gene A          100
+2                   Gene B           50
+3                   Gene C          75
+
+table2
+Accession Description Score
+2                   Gene B          42
+5                   Gene E          88
+3                   Gene C          37
+
+table3
+Accession Description Score
+1                   Gene A          100
+3                   Gene C           50
+6                   Gene F          22
+
+Note: There shouldn’t be any duplicates in accession in each table. If it does, the final list will be a longer one with many duplicates.
+
+Convert the three tables in the list to data frame and stored in table 1, 2 and 3.
+
+>table1<-as.data.frame(rdf[1])
+>table2<-as.data.frame(rdf[2])
+>table3<-as.data.frame(rdf[3])
+
+Create a table that contains only Accession and Description using union
+
+> unionall<-sqldf(“select Accession, Description from table1 union select Accession, Description from table2 union select Accession, Description from table3″)
+
+Finally, merge all three files and accession+description table.
+
+>mergeall<-sqldf(“select unionall.*, table1.Score, table2.Score, table3.Score FROM ((unionall LEFT JOIN table1 ON unionall.Accession = table1.Accession) LEFT JOIN table2 ON unionall.Accession = table2.Accession) LEFT JOIN table3 ON unionall.Accession = table3.Accession”)
+
+The mergeall table should look like this
+
+Accession    Description   Score Score Score
+1                   Gene A         100    NA      100
+2                   Gene B          50      42       NA
+3                   Gene C          75      37       50
+5                   Gene E          NA     88       NA
+6                   Gene F          NA     NA      22
+
+You see that each accession number only appears once. If some genes are not identified in particular samples, they will be left as NA.
