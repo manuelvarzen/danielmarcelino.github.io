@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: page
 css: "/css/search.css"
 permalink: /search/
 ---

@@ -1,5 +1,6 @@
 ---
-layout: blog_index
+layout: page
 title: Blog Posts
+css: "/css/index.css"
 permalink: /blog/
 ---
