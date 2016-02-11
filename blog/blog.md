@@ -4,7 +4,9 @@ favicon: favicon.ico
 css: "/css/index.css"
 permalink: /blog/
 ---
+<div class="index-posts-title">
 
+</div>
 <div class="posts-list">
   {% for post in paginator.posts %}
   <article class="post-preview">
