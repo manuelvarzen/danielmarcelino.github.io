@@ -14,9 +14,9 @@ comments: true
 ---
 
 # Motivation 
-I finally made to the movies for watching the new _Star Wars_ release this weekend. Although this episode wasn't that spectacular, in my view, it did inspire some data seeking afterwards. I wanted to know how this film compares to others top movies in terms of worldwide grossing as well as within the _Star Wars_ series. 
+I finally made to the movies for watching the new *Star Wars* release this weekend. Although this episode wasn't that spectacular, in my view, it did inspire some data seeking afterwards. I wanted to know how this film compares to others top movies in terms of worldwide grossing as well as within the *Star Wars* series. 
 
-Fortunately, there is a wealth--though incomplete--list of the top grossing films of all time at <boxofficemojo.com>. Although the information is right in the front-page, I'd rather like something more visual teasing. So, I decided to see how it goes with *R* and the new  _ggplot2_ package release. Also, because I must scrap the data from the _Box Office_ website, I will need a function to handle the HTML structure of those tables. The function `readHTMLTable()` from the _XML_ package can certainly be an asset here.
+Fortunately, there is a wealth--though incomplete--list of the top grossing films of all time at <boxofficemojo.com>. Although the information is right in the front-page, I'd rather like something more visual teasing. So, I decided to see how it goes with *R* and the new  *ggplot2* package release. Also, because I must scrap the data from the *Box Office* website, I will need a function to handle the HTML structure of those tables. The function `readHTMLTable()` from the *XML* package can certainly be an asset here.
 
 # The setup  
 First, let's load the packages we'll need.
@@ -129,7 +129,7 @@ min(box$Year, na.rm=TRUE)
 ## [1] 1939
 {% endhighlight %}
 
-The following chart displays the grossing worldwide values for the top 25 ranked movies of all time. As it shines out, the _Star Wars: The Force Awakens_ is doing pretty well worldwide. It's ranked fourth now, but it just began to play in China this week, so it may unseat _Titanic_ over the next weeks, and _Avatar_ in the long run.
+The following chart displays the grossing worldwide values for the top 25 ranked movies of all time. As it shines out, the *Star Wars: The Force Awakens_ is doing pretty well worldwide. It's ranked fourth now, but it just began to play in China this week, so it may unseat *Titanic* over the next weeks, and *Avatar* in the long run.
 
 ![center]({{ site.url }}/images/code-2016-01-11-star-wars-grossing-war/top25.png) 
 
@@ -166,4 +166,4 @@ coord_flip() +
 labs(x=NULL, y=NULL, title="Star Wars Grosses (US$ Millions)")
 {% endhighlight %}
 
-The new release by Disney of _Star Wars_ is making its way to the top films of all-time. Although the values presented are not in current currency, and old films in the list may have their grosses based on multiple releases, _The Force Awakens_ has just began its journey. 
+The new release by Disney of *Star Wars* is making its way to the top films of all-time. Although the values presented are not in current currency, and old films in the list may have their grosses based on multiple releases, *The Force Awakens* has just began its journey. 

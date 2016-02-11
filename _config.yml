@@ -19,8 +19,8 @@ extensions:
     - autolink
     - footnotes
     - smart
-highlighter: pygments
-permalink: /:year/:title.html
+highlighter: rouge
+permalink: /blog/:year/:title.html
 paginate: 5
 paginate_path: "/page:num/"
 
