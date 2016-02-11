@@ -15,8 +15,12 @@ description: "Blog of Daniel Marcelino"
 # More information can be found on Jekyll's site
 timezone: "Brazil/Brasilia"
 markdown: kramdown
+extensions:
+    - autolink
+    - footnotes
+    - smart
 highlighter: pygments
-permalink: /blog/:year/:title/
+permalink: /blog/:year/:title.html
 paginate: 5
 paginate_path: "/page:num/"
 
@@ -32,7 +36,7 @@ favicon: "/images/favicon.ico"
 navbar-links:
   Blog: "blog"
   Interests: "interests"
-  Random Walks: "randomwalks" 
+  Random Walks: "randomwalks"
   About: "about"
 nav-search: "search"
 
@@ -43,14 +47,14 @@ nav-search: "search"
 author:
   name: Daniel Marcelino
   email: "dmarcelino@live.com"
-  facebook: 
+  facebook:
   github: "danielmarcelino/"
   twitter: "dmarcelinobr"
   linkedin: "daniel-marcelino-80968656"
-  stackoverflow: "users/792000/daniel" 
+  stackoverflow: "users/792000/daniel"
 
-  
-# Select which links to show in the footer  
+
+# Select which links to show in the footer
 footer-links-active:
   rss: true
   facebook: true
@@ -62,7 +66,7 @@ footer-links-active:
 
 # How to display the link to the website in the footer
 # Remove this if you don't want a link in the footer
-# url-pretty: "danielmarcelino.com" 
+# url-pretty: "danielmarcelino.com"
 
 # --- Misc --- #
 
@@ -76,15 +80,15 @@ fb_app_id: "1529566150689415"
 
 # --- Don't need to touch anything below here (but you can if you want) --- #
 
-# Default YAML values (more information on Jekyll's site)  
+# Default YAML values (more information on Jekyll's site)
 defaults:
   -
     scope:
       path: ""
       type: "posts"
     values:
-      comments: true  
-      show-share: true 
+      comments: true
+      show-share: true
   -
     scope:
       path: "" # all files
