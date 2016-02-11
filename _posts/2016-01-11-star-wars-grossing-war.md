@@ -7,7 +7,6 @@ output:
  html_document: 
    keep_md: yes
    toc: yes
-category: [how-to]
 tags: [R, Films]
 published: true
 status: publish
