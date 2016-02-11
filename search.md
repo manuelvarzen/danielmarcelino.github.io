@@ -1,6 +1,7 @@
 ---
-layout: post
+layout: default
 css: "/css/search.css"
+permalink: /search/
 ---
 
 # Search danielmarcelino.com
