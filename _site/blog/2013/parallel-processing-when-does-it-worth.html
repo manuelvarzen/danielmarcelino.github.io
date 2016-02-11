@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+
+ 
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="keywords" content="Daniel Marcelino, SciencesPo, SoundexBR, r-project, r, political science, political behavior, social sciences, statistics, methods, applied methods, programming, data mining, data visualization, datascience, big data"/>	
+	<meta name="google-site-verification" content="Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ" />
+	<meta name="bing_webmastertools_id" content="97837256955BD270FD688E2B50F89FDB" />
+    <meta name="author" content="Daniel Marcelino" />
+	 <meta name="title" content="&middot; Daniel &middot; Parallel Processing: When does it worth?" />
+	 
+	   <!-- favicon -->
+	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+  
+	
+
+  
+ <title>EnfoRced Data Analysis</title>
+   
+
+  
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis - Blog of Daniel Marcelino" href="/feed.xml" />
+
+  
+    
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+    
+    
+  
+  
+    
+      <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="/css/main.css" />
+    
+  
+  
+  
+    
+	  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+    
+	  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+    
+  
+
+    
+  
+  
+  
+  
+  
+  <!-- Facebook OpenGraph tags -->
+  
+  <meta property="og:title" content="Parallel Processing: When does it worth?" />
+  
+  
+  <meta property="og:type" content="website" />
+  
+  
+  <meta property="og:url" content="http://danielmarcelino.github.io/blog/2013/parallel-processing-when-does-it-worth.html/" />
+  
+  
+  
+  <meta property="og:image" content="http://danielmarcelino.github.io/images/daniel_rio.jpg" />
+  
+
+</head>
+
+
+  <body>
+	 
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://danielmarcelino.github.io">EnfoRced Data Analysis</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+	    
+        <li>
+		  <a href="/blog">Blog</a>
+		</li>
+		
+        <li>
+		  <a href="/interests">Interests</a>
+		</li>
+		
+        <li>
+		  <a href="/randomwalks">Random Walks</a>
+		</li>
+		
+        <li>
+		  <a href="/about">About</a>
+		</li>
+		
+		
+		
+		<li>
+		  <a href="/search" class="nav-search-link" title="Search">
+		    <span class="fa fa-search nav-search-icon"></span>
+			<span class="nav-search-text">Search</span>
+		  </a>
+		</li>
+		
+      </ul>
+    </div>
+	
+	
+	<div class="avatar-container">
+	  <div class="avatar-img-border">
+	    <a href="http://danielmarcelino.github.io ">
+	      <img class="avatar-img" src="/images/daniel_rio.jpg" />
+		</a>
+	  </div>
+	</div>
+	
+	
+  </div>
+</nav>  
+
+    
+
+
+
+<header class="header-section ">
+
+<div class="intro-header no-img">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-heading">
+          <h1>Parallel Processing: When does it worth?</h1>
+		  
+		  
+		  
+		  <span class="post-meta">Posted on May 29, 2013</span>
+		  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+
+
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+	    <p>Parallel computing is incredibly useful, but not every thing worths distribute across as many cores as possible.</p>
+
+<p>Most computers nowadays have few cores that incredibly help us with our daily computing duties. However, when statistical softwares do use parallelization for analyzing data faster? R, my preferred analytical software, does not take too much advantage of multicore processing by default.</p>
+
+<p>In fact, R has been inherently a “single-processor” package until nowadays. Stata, another decent statistical package, allows for multicore processing, but not yet implemented for the default version. Additionally, Stata versions for multicore are quite expensive, for instance, if I want to use all of my quad-core computer power, I have to pay out $1,095 for a 4-core single license.</p>
+
+<p>Fortunately, several packages exploiting the resources of parallel processing began to gain attention in the R community lately. Specially, because of many computationally demanding statistical procedures, such as bootstrapping and Markov Chain Monte Carlo, I guess. Nonetheless, the myth of fast computation has also leading for (miss)understanding by ordinary R users like me. Yet before distributing patches among CPUs, it is important to have it clear when and why parallel processing is helpful and which functions performs better for a given job.</p>
+
+<p>First, what does exactly parallel do? Despite its complex implementation, the idea is incredible simple: parallelization simply distribute the work among two or more cores. It is done by packages that provide backend for the “foreach” function to work. The foreach function allows R to distribute the processes, each of which having access to the same shared memory; so the computer not get confused. For instance, in the program bellow, several instances of lapply-like function are able to access the processing units and then deal out with all the work.</p>
+
+<p>Since not every task runs better in parallel there is not too many ready to use parallel processing functions in R. Additionally, distributing processes among the cores may cause computation overhead. That means we may lose computer time and memory, firstly by distributing, secondly by gathering the patches shared out among the processing units. Therefore, depending on the task (time and memory demand), parallel computing can be rather inefficient. It may take more time for dispatching the processes and gathering them back than the computation itself. Hence, counterintuitively, one might want to minimize the number of dispatches rather than distribute them.</p>
+
+<p><img src="http://danielmarcelino.github.io/images/2013/parallel.jpg" alt="Experiment Result" /></p>
+
+<p>Here, I’m testing a nontrivial computation instance for measuring computer performance on four relevant functions: the base <strong>lapply</strong>, <strong>mclapply</strong> from the “multicore“ package, <strong>parLapply</strong> from “snow” package, and <strong>sfLapply</strong> from “snowfall“ package. The last three functions essentially provide parallelized equivalent for the <code>lapply</code>. I use these packages for parallel computing the average for each column of a data frame built on the fly, but repeating this procedure 100 times for each data frame trial; so each trial demands different amount of time and memory for computing: the matrix size increases as 1K, 10K, 100K, 1M, and 10M rows. The program I used for simulate the data and perform all the tests can be found <a href="https://gist.github.com/danielmarcelino/5668701">here</a>. I used Emacs on a MacBook pro with 4-core and 8-G memory.</p>
+
+<p><img src="http://danielmarcelino.github.io/images/2013/parallelfinal.jpeg" alt="Final Results" /></p>
+
+<p>My initial experiment also included the “mpi.parLapply” function from the “Rmpi” package. However, because it is outdated for running on R version 3.0, I decided for not including it in this instance.</p>
+
+<p>Overall, running repetition tasks in parallel incurs overhead. Therefore, only if the process takes a significant amount of time and memory (RAM), parallelization can improve the overall performance.</p>
+
+<p>The plots above, provide evidence when an individual process takes less than a second (<code>2.650/100 = 26.5 milliseconds </code> comparable to <code>13.419/100 = 134.2 milliseconds</code>) to be executed, the overhead of continually patching processes will decay the overall performance. For instance, in the first chart, the lapply function took less than one-third of the time of <strong>sfLapply</strong> to perform the same job. However, the pattern changes dramatically when the computer needs to repeat the same task with large vectors (&gt;= 1 million rows).</p>
+
+<p>In fact, I noticed that all functions began to consume even more time computing  averages of big matrixes than I expected. But in a setting with 10 millions rows, the <strong>lapply</strong> function was dramatically inefficient: it took <code>1281.8/100 = 12.82 seconds</code> for each process, while the <strong>mclapply</strong> only took <code>525.4/100 = 5.254 seconds</code>.</p>
+
+
+	  </article>
+	  
+	  
+	  <div class="blog-tags">
+		Tags: R
+	  </div>
+	  
+	  
+      <ul class="pager blog-pager">
+        
+        <li class="previous">
+          <a href="/blog/2011/explaining-variance-in-a-multilevel-model.html" data-toggle="tooltip" data-placement="top" title="Showing explained variance from multilevel models">&larr; Previous Post</a>
+        </li>
+        
+        
+        <li class="next">
+          <a href="/blog/2013/got-bootstrap.html" data-toggle="tooltip" data-placement="top" title="Got Bootstrap?">Next Post &rarr;</a>
+        </li>
+        
+      </ul>
+
+      
+        <div class="share-section">
+  <h1 class="share-title">Liked what you read?'</h1>
+  <div class="share-buttons">
+    
+    
+    
+    
+
+    
+    
+      
+    
+    
+    
+    <a href="http://danielmarcelino.github.io/contact" data-ga-event=1 data-ga-category="share" data-ga-action="message" data-ga-label="/blog/2013/parallel-processing-when-does-it-worth.html">
+      Let me know
+    </a>
+    <a href="https://www.facebook.com/dialog/feed?app_id=1529566150689415&link=http://danielmarcelino.github.io/blog/2013/parallel-processing-when-does-it-worth.html&name=Parallel Processing: When does it worth?&caption=&redirect_uri=http://danielmarcelino.github.io/blog/2013/parallel-processing-when-does-it-worth.html?message=Thanks for sharing!" data-ga-event=1 data-ga-category="share" data-ga-action="facebook" data-ga-label="/blog/2013/parallel-processing-when-does-it-worth.html">
+      Share on Facebook
+    </a>
+    <a href="https://twitter.com/intent/tweet?url=http://danielmarcelino.github.io/blog/2013/parallel-processing-when-does-it-worth.html&via=daniel&text=Parallel Processing: When does it worth?" data-ga-event=1 data-ga-category="share" data-ga-action="twitter" data-ga-label="/blog/2013/parallel-processing-when-does-it-worth.html">
+      Tweet it
+    </a>
+  </div>
+</div>
+
+      
+
+	  
+      <div class="disqus-comments">
+	    
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+	    var disqus_shortname = 'daniel-marcelino';
+	    // ensure that pages with query string get the same discussion
+            var url_parts = window.location.href.split("?");
+            var disqus_url = url_parts[0];
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+
+      </div>
+	  
+    </div>
+  </div>
+</div>
+
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+
+          
+          <li>
+            <a href="mailto:dmarcelino@live.com?subject=Hello from " title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://github.com/danielmarcelino/" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/dmarcelinobr" title="Twitter">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+
+          
+          <li>
+            <a href="https://stackoverflow.com/users/792000/daniel" title="StackOverflow">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://linkedin.com/daniel-marcelino-80968656" title="LinkedIn">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="/feed.xml" title="Subscribe to my blog">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>		
+          
+
+        </ul>
+
+        <p class="copyright text-muted">
+          &copy; Daniel Marcelino
+          &nbsp;&bull;&nbsp;
+          2016
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  
+    
+
+
+  
+	<script src="/js/jquery-1.11.2.min.js"></script>
+  
+	<script src="/js/bootstrap.min.js"></script>
+  
+	<script src="/js/main.js"></script>
+  
+
+
+
+
+
+
+
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-24186657-1', 'auto');
+		ga('send', 'pageview');
+	</script>
+	<!-- End Google Analytics -->
+
+  
+  </body>
+</html>

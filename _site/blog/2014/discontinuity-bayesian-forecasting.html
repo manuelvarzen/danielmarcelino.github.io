@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+ 
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="keywords" content="Daniel Marcelino, SciencesPo, SoundexBR, r-project, r, political science, political behavior, social sciences, statistics, methods, applied methods, programming, data mining, data visualization, datascience, big data"/>	
+	<meta name="google-site-verification" content="Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ" />
+	<meta name="bing_webmastertools_id" content="97837256955BD270FD688E2B50F89FDB" />
+    <meta name="author" content="Daniel Marcelino" />
+	 <meta name="title" content="&middot; Daniel &middot; Discontinuity Bayesian Forecasting" />
+	 
+	   <!-- favicon -->
+	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+  
+	
+
+  
+ <title>EnfoRced Data Analysis</title>
+   
+
+  
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis - Blog of Daniel Marcelino" href="/feed.xml" />
+
+  
+    
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+    
+    
+  
+  
+    
+      <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="/css/main.css" />
+    
+  
+  
+  
+    
+	  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+    
+	  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+    
+  
+
+    
+  
+  
+  
+  
+  
+  <!-- Facebook OpenGraph tags -->
+  
+  <meta property="og:title" content="Discontinuity Bayesian Forecasting" />
+  
+  
+  <meta property="og:type" content="website" />
+  
+  
+  <meta property="og:url" content="http://danielmarcelino.github.io/blog/2014/discontinuity-bayesian-forecasting.html/" />
+  
+  
+  
+  <meta property="og:image" content="http://danielmarcelino.github.io/images/daniel_rio.jpg" />
+  
+
+</head>
+
+
+  <body>
+	 
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://danielmarcelino.github.io">EnfoRced Data Analysis</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+	    
+        <li>
+		  <a href="/blog">Blog</a>
+		</li>
+		
+        <li>
+		  <a href="/interests">Interests</a>
+		</li>
+		
+        <li>
+		  <a href="/randomwalks">Random Walks</a>
+		</li>
+		
+        <li>
+		  <a href="/about">About</a>
+		</li>
+		
+		
+		
+		<li>
+		  <a href="/search" class="nav-search-link" title="Search">
+		    <span class="fa fa-search nav-search-icon"></span>
+			<span class="nav-search-text">Search</span>
+		  </a>
+		</li>
+		
+      </ul>
+    </div>
+	
+	
+	<div class="avatar-container">
+	  <div class="avatar-img-border">
+	    <a href="http://danielmarcelino.github.io ">
+	      <img class="avatar-img" src="/images/daniel_rio.jpg" />
+		</a>
+	  </div>
+	</div>
+	
+	
+  </div>
+</nav>  
+
+    
+
+
+
+<header class="header-section ">
+
+<div class="intro-header no-img">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-heading">
+          <h1>Discontinuity Bayesian Forecasting</h1>
+		  
+		  
+		  
+		  <span class="post-meta">Posted on July 16, 2014</span>
+		  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+
+
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+	    <p>Maybe Bayesian linear filtering models are not enough to forecast Brazilian subnational elections.</p>
+
+<h2 id="introduction">Introduction</h2>
+<p>I’m finalizing a paper presentation for the ABCP meeting, where I do explore poor polling forecast in a local election in Brazil. I drew upon Jackman (2005)’s paper “Pooling the Polls” to explore a bit about “house effects” in the Brazilian local elections.</p>
+
+<h2 id="motivation">Motivation</h2>
+<p>During the analysis I found myself extending his original model to fit the local election chosen (Sao Paulo) in regarding the local features.
+ In Brazil, political parties have incentives for canvassing free of charge in the aired media (radio and TV). The whole point is that this thing sometimes produces drastic changes to the vote distribution in a short period of time, so we can’t simply apply a Bayesian linear filtering as a Kalman filter,  because that would break up some linearity assumptions.
+ In order to account for the advertising effect on the popular support, I had to develop an extension where the transition component–the random walk–breaks at the last poll before the ads season began, and restarting with the first poll after it, but with a catch-up of the vote preference change. The following chart says more about the problem. The black spots are the observed polls by the major pollsters.</p>
+
+<h2 id="the-viz">The Viz</h2>
+<p><img src="http://danielmarcelino.github.io/images/2014/TVeffect.png" alt="Center" /></p>
+
+<p>A week of media exposition, made Haddad’s popular support increase in more than 5%; it is more than he could achieve in one year campaigning. Over 58 weeks before the ads season has commenced, he shows a weekly growth rate of about 2.6%. Nonetheless, in the next 5 weeks since the beginning of political advertising on radio and TV, the same growth rate went to 9.46%.</p>
+
+	  </article>
+	  
+	  
+	  <div class="blog-tags">
+		Tags: R, Elections, Bayesian, Polls
+	  </div>
+	  
+	  
+      <ul class="pager blog-pager">
+        
+        <li class="previous">
+          <a href="/blog/2014/Parallel-computing-in-R.html" data-toggle="tooltip" data-placement="top" title="Parallel computing in R">&larr; Previous Post</a>
+        </li>
+        
+        
+        <li class="next">
+          <a href="/blog/2014/bayes-says-dont-worry-about-scotlands-referendum.html" data-toggle="tooltip" data-placement="top" title="Bayes says `don't worry` about Scotland's Referendum">Next Post &rarr;</a>
+        </li>
+        
+      </ul>
+
+      
+        <div class="share-section">
+  <h1 class="share-title">Liked what you read?'</h1>
+  <div class="share-buttons">
+    
+    
+    
+    
+
+    
+    
+      
+    
+    
+    
+    <a href="http://danielmarcelino.github.io/contact" data-ga-event=1 data-ga-category="share" data-ga-action="message" data-ga-label="/blog/2014/discontinuity-bayesian-forecasting.html">
+      Let me know
+    </a>
+    <a href="https://www.facebook.com/dialog/feed?app_id=1529566150689415&link=http://danielmarcelino.github.io/blog/2014/discontinuity-bayesian-forecasting.html&name=Discontinuity Bayesian Forecasting&caption=&redirect_uri=http://danielmarcelino.github.io/blog/2014/discontinuity-bayesian-forecasting.html?message=Thanks for sharing!" data-ga-event=1 data-ga-category="share" data-ga-action="facebook" data-ga-label="/blog/2014/discontinuity-bayesian-forecasting.html">
+      Share on Facebook
+    </a>
+    <a href="https://twitter.com/intent/tweet?url=http://danielmarcelino.github.io/blog/2014/discontinuity-bayesian-forecasting.html&via=daniel&text=Discontinuity Bayesian Forecasting" data-ga-event=1 data-ga-category="share" data-ga-action="twitter" data-ga-label="/blog/2014/discontinuity-bayesian-forecasting.html">
+      Tweet it
+    </a>
+  </div>
+</div>
+
+      
+
+	  
+      <div class="disqus-comments">
+	    
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+	    var disqus_shortname = 'daniel-marcelino';
+	    // ensure that pages with query string get the same discussion
+            var url_parts = window.location.href.split("?");
+            var disqus_url = url_parts[0];
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+
+      </div>
+	  
+    </div>
+  </div>
+</div>
+
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+
+          
+          <li>
+            <a href="mailto:dmarcelino@live.com?subject=Hello from " title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://github.com/danielmarcelino/" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/dmarcelinobr" title="Twitter">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+
+          
+          <li>
+            <a href="https://stackoverflow.com/users/792000/daniel" title="StackOverflow">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://linkedin.com/daniel-marcelino-80968656" title="LinkedIn">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="/feed.xml" title="Subscribe to my blog">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>		
+          
+
+        </ul>
+
+        <p class="copyright text-muted">
+          &copy; Daniel Marcelino
+          &nbsp;&bull;&nbsp;
+          2016
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  
+    
+
+
+  
+	<script src="/js/jquery-1.11.2.min.js"></script>
+  
+	<script src="/js/bootstrap.min.js"></script>
+  
+	<script src="/js/main.js"></script>
+  
+
+
+
+
+
+
+
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-24186657-1', 'auto');
+		ga('send', 'pageview');
+	</script>
+	<!-- End Google Analytics -->
+
+  
+  </body>
+</html>

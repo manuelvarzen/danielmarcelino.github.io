@@ -1,0 +1,737 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+<link rel="hub" href="https://pubsubhubbub.appspot.com"/>
+
+  <title type="text" xml:lang="en"></title>
+    <link type="application/atom+xml" href="/atom.xml" rel="self"/>
+    <link href="/"/>
+  <updated>2016-02-11T13:17:28Z</updated>
+  <id>/</id>
+  <author>
+    <name>Daniel Marcelino</name>
+    <email>dmarcelino@live.com</email>
+  </author>
+  <rights type="text">Copyright © 2016 {"name"=>"Daniel Marcelino", "email"=>"dmarcelino@live.com", "facebook"=>nil, "github"=>"danielmarcelino/", "twitter"=>"dmarcelinobr", "linkedin"=>"daniel-marcelino-80968656", "stackoverflow"=>"users/792000/daniel"}. All rights reserved.</rights>
+  
+  <entry>
+    <title>The Star Wars Grossing War</title>
+    <link rel="alternate" type="text/html" href="/blog/2016/star-wars-grossing-war.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=TheStarWarsGrossingWar" />
+    <published>2016-01-11T00:00:00Z</published>
+    <updated>2016-01-11T00:00:00+00:00</updated>
+    <id>/blog/2016/star-wars-grossing-war</id>
+    <content type="html"><![CDATA[ <h1 id="motivation">Motivation</h1>
+<p>I finally made to the movies for watching the new <em>Star Wars</em> release this weekend. Although this episode wasn’t that spectacular, in my view, it did inspire some data seeking afterwards. I wanted to know how this film compares to others top movies in terms of worldwide grossing as well as within the <em>Star Wars</em> series.</p>
+
+<p>Fortunately, there is a wealth–though incomplete–list of the top grossing films of all time at <boxofficemojo.com>. Although the information is right in the front-page, I'd rather like something more visual teasing. So, I decided to see how it goes with *R* and the new  _ggplot2_ package release. Also, because I must scrap the data from the _Box Office_ website, I will need a function to handle the HTML structure of those tables. The function `readHTMLTable()` from the _XML_ package can certainly be an asset here.</boxofficemojo.com></p>
+
+<h1 id="the-setup">The setup</h1>
+<p>First, let’s load the packages we’ll need.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kn">library</span><span class="p">(</span>XML<span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>ggplot2<span class="p">)</span></code></pre></div>
+
+<p>In what follows is my setup for using the <code>readHTMLTable</code> function to retrieve, cleaning, and arrange HTML tables in a data.frame format. I’d rather wrap everything in a single function, but keeping the three snippets apart is rather easy to make out.</p>
+
+<p>The first function will pull out all tables on the webpage as a list of data.frames, and I’ll give them similar names.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">GetTable <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span><span class="kp">t</span><span class="p">)</span> <span class="p">{</span>
+table <span class="o">&lt;-</span> readHTMLTable<span class="p">(</span><span class="kp">t</span><span class="p">)[[</span><span class="m">2</span><span class="p">]]</span>
+<span class="kp">names</span><span class="p">(</span><span class="kp">table</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;Rank&quot;</span><span class="p">,</span> <span class="s">&quot;Title&quot;</span><span class="p">,</span> <span class="s">&quot;Studio&quot;</span><span class="p">,</span> <span class="s">&quot;Worldwide&quot;</span><span class="p">,</span> <span class="s">&quot;Domestic&quot;</span><span class="p">,</span> <span class="s">&quot;DomesticPct&quot;</span><span class="p">,</span> <span class="s">&quot;Overseas&quot;</span><span class="p">,</span> <span class="s">&quot;OverseasPct&quot;</span><span class="p">,</span> <span class="s">&quot;Year&quot;</span><span class="p">)</span>
+boxdf <span class="o">&lt;-</span> <span class="kp">as.data.frame</span><span class="p">(</span><span class="kp">lapply</span><span class="p">(</span><span class="kp">table</span><span class="p">[</span><span class="m">-1</span><span class="p">,</span> <span class="p">],</span> <span class="kp">as.character</span><span class="p">),</span> stringsAsFactors<span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+boxdf <span class="o">&lt;-</span> <span class="kp">as.data.frame</span><span class="p">(</span>boxdf<span class="p">,</span> stringsAsFactors<span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+boxdf <span class="o">&lt;-</span> <span class="kp">transform</span><span class="p">(</span>boxdf<span class="p">,</span> Year <span class="o">=</span> <span class="kp">ifelse</span><span class="p">(</span>Year<span class="o">==</span><span class="m">0</span><span class="p">,</span> <span class="kc">NA</span><span class="p">,</span> Year<span class="p">))</span>
+<span class="kr">return</span><span class="p">(</span>boxdf<span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+
+<p>The data will come <code>dirty</code> with lots of tags and marks, so a little <a href="http://www.nytimes.com/2014/08/18/technology/for-big-data-scientists-hurdle-to-insights-is-janitor-work.html?_r=0">janitor work</a> will be  necessary. The following code does just that.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">CleanDataFrame <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>boxdf<span class="p">)</span> <span class="p">{</span>
+clean <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span><span class="kp">col</span><span class="p">)</span> <span class="p">{</span>
+col <span class="o">&lt;-</span> <span class="kp">gsub</span><span class="p">(</span><span class="s">&quot;$&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="kp">col</span><span class="p">,</span> fixed <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+col <span class="o">&lt;-</span> <span class="kp">gsub</span><span class="p">(</span><span class="s">&quot;%&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="kp">col</span><span class="p">,</span> fixed <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+col <span class="o">&lt;-</span> <span class="kp">gsub</span><span class="p">(</span><span class="s">&quot;,&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="kp">col</span><span class="p">,</span> fixed <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+col <span class="o">&lt;-</span> <span class="kp">gsub</span><span class="p">(</span><span class="s">&quot;^&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="kp">col</span><span class="p">,</span> fixed <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+<span class="kr">return</span><span class="p">(</span><span class="kp">col</span><span class="p">)</span>
+<span class="p">}</span>
+boxdf <span class="o">&lt;-</span> <span class="kp">sapply</span><span class="p">(</span>boxdf<span class="p">,</span> clean<span class="p">)</span>
+boxdf <span class="o">&lt;-</span> <span class="kp">as.data.frame</span><span class="p">(</span>boxdf<span class="p">,</span> stringsAsFactors<span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+<span class="kr">return</span><span class="p">(</span>boxdf<span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+
+<p>The next snippet is the main piece. It will construct the URLs based on the number of pages we feed in and will call the two preceding functions.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">BoxOfficeMojoScraper <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>npages<span class="p">)</span> <span class="p">{</span>
+<span class="c1"># This line constructs the URLs</span>
+urls <span class="o">&lt;-</span> <span class="kp">paste</span><span class="p">(</span><span class="s">&quot;http://boxofficemojo.com/alltime/world/?pagenum=&quot;</span><span class="p">,</span> <span class="m">1</span><span class="o">:</span>npages<span class="p">,</span> <span class="s">&quot;&amp;p=.htm&quot;</span><span class="p">,</span> sep <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="c1"># The next line scrapes every table in the URLs formed</span>
+boxdf <span class="o">&lt;-</span> <span class="kp">do.call</span><span class="p">(</span><span class="s">&quot;rbind&quot;</span><span class="p">,</span> <span class="kp">lapply</span><span class="p">(</span>urls<span class="p">,</span> GetTable<span class="p">))</span>
+<span class="c1"># This does the janitor work</span>
+boxdf <span class="o">&lt;-</span> CleanDataFrame<span class="p">(</span>boxdf<span class="p">)</span>
+<span class="c1"># The next lines arrange the data to my needs</span>
+cols <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">4</span><span class="o">:</span><span class="m">9</span><span class="p">)</span>
+boxdf<span class="p">[,</span> cols<span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">sapply</span><span class="p">(</span>boxdf<span class="p">[,</span> cols<span class="p">],</span> <span class="kp">as.numeric</span><span class="p">)</span>
+boxdf<span class="o">$</span>Studio <span class="o">&lt;-</span> <span class="kp">as.factor</span><span class="p">(</span>boxdf<span class="o">$</span>Studio<span class="p">)</span>
+<span class="kr">return</span><span class="p">(</span>boxdf<span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+
+<p>I’m scrapping the first 7 pages of the target address <a href="http://www.boxofficemojo.com/alltime/world/">http://www.boxofficemojo.com/alltime/world/</a>. It will bring missing values too, don’t worry for the time being.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">npages <span class="o">&lt;-</span> <span class="m">7</span>
+box <span class="o">&lt;-</span> BoxOfficeMojoScraper<span class="p">(</span>npages<span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">## Warning in lapply(X = X, FUN = FUN, ...): NAs introduced by coercion</code></pre></div>
+
+<h1 id="results">Results</h1>
+<p>Our new acquired data is a data.frame with more than 620 rows or films, with the oldest dating back to 1939.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">str<span class="p">(</span>box<span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">## &#39;data.frame&#39;:	628 obs. of  9 variables:
+##  $ Rank       : num  1 2 3 4 5 6 7 8 9 10 ...
+##  $ Title      : chr  &quot;Avatar&quot; &quot;Titanic&quot; &quot;Jurassic World&quot; &quot;Star Wars: The Force Awakens&quot; ...
+##  $ Studio     : Factor w/ 38 levels &quot;Art.&quot;,&quot;BV&quot;,&quot;Col.&quot;,..: 7 22 32 2 2 32 2 36 2 2 ...
+##  $ Worldwide  : num  2788 2187 1669 1602 1520 ...
+##  $ Domestic   : num  760 659 652 781 623 ...
+##  $ DomesticPct: num  27.3 30.1 39.1 48.7 41 23.3 32.7 28.4 31.4 33.7 ...
+##  $ Overseas   : num  2028 1528 1017 821 896 ...
+##  $ OverseasPct: num  72.7 69.9 60.9 51.3 59 76.7 67.3 71.6 68.6 66.3 ...
+##  $ Year       : num  2009 1997 2015 2015 2012 ...</code></pre></div>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># the oldest:</span>
+<span class="kp">min</span><span class="p">(</span>box<span class="o">$</span>Year<span class="p">,</span> na.rm<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">## [1] 1939</code></pre></div>
+
+<p>The following chart displays the grossing worldwide values for the top 25 ranked movies of all time. As it shines out, the <em>Star Wars: The Force Awakens</em> is doing pretty well worldwide. It’s ranked fourth now, but it just began to play in China this week, so it may unseat <em>Titanic</em> over the next weeks, and <em>Avatar</em> in the long run.</p>
+
+<p><img src="http://danielmarcelino.github.io/images/code-2016-01-11-star-wars-grossing-war/top25.png" alt="center" /></p>
+
+<p>If you want to reproduce the very same plot decoration of this post, you’ll have to install the development version of <strong>SciencesPo</strong> package, and add <code>+ theme_538(legend="top")</code> to the following code.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">box2 <span class="o">&lt;-</span> <span class="kp">subset</span><span class="p">(</span>box<span class="p">,</span> Rank<span class="o">&lt;=</span><span class="m">25</span><span class="p">)</span>
+
+ggplot<span class="p">(</span>box2<span class="p">)</span> <span class="o">+</span>
+geom_bar<span class="p">(</span>aes<span class="p">(</span>x<span class="o">=</span>reorder<span class="p">(</span>Title<span class="p">,</span> Worldwide<span class="p">),</span> y<span class="o">=</span>Worldwide<span class="p">,</span> fill<span class="o">=</span><span class="s">&quot;Worldwide&quot;</span><span class="p">),</span> stat <span class="o">=</span> <span class="s">&quot;identity&quot;</span><span class="p">)</span> <span class="o">+</span>
+geom_bar<span class="p">(</span>aes<span class="p">(</span>x<span class="o">=</span>Title<span class="p">,</span> y<span class="o">=</span>Domestic<span class="p">,</span> fill<span class="o">=</span><span class="s">&quot;Domestic&quot;</span><span class="p">),</span>alpha<span class="o">=</span><span class="m">.5</span><span class="p">,</span> stat <span class="o">=</span> <span class="s">&quot;identity&quot;</span><span class="p">)</span> <span class="o">+</span>
+scale_fill_manual<span class="p">(</span>name<span class="o">=</span><span class="s">&quot;Grossing&quot;</span><span class="p">,</span> values<span class="o">=</span><span class="kt">c</span><span class="p">(</span>Worldwide<span class="o">=</span><span class="s">&quot;#A6CEE3&quot;</span><span class="p">,</span> Domestic<span class="o">=</span><span class="s">&quot;#386CB0&quot;</span><span class="p">))</span> <span class="o">+</span>
+coord_flip<span class="p">()</span> <span class="o">+</span> 
+ labs<span class="p">(</span>x<span class="o">=</span><span class="kc">NULL</span><span class="p">,</span> y<span class="o">=</span><span class="kc">NULL</span><span class="p">,</span> title<span class="o">=</span><span class="s">&quot;Top 25 Films by Worldwide Grosses (US$ Millions)&quot;</span><span class="p">)</span></code></pre></div>
+
+<p>Next, how <em>The Force Awakens</em> compares with other episodes of <em>Star Wars</em>?</p>
+
+<p><img src="http://danielmarcelino.github.io/images/code-2016-01-11-star-wars-grossing-war/starwars.png" alt="center" /></p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># will search for Star Wars names within the data.frame:</span>
+box3 <span class="o">&lt;-</span> <span class="kp">subset</span><span class="p">(</span>box<span class="p">,</span> <span class="kp">grepl</span><span class="p">(</span><span class="s">&quot;^Star Wars&quot;</span><span class="p">,</span> box<span class="o">$</span>Title<span class="p">)</span><span class="o">|</span><span class="kp">grepl</span><span class="p">(</span><span class="s">&quot;^Return of the Jedi&quot;</span><span class="p">,</span> box<span class="o">$</span>Title<span class="p">)</span><span class="o">|</span><span class="kp">grepl</span><span class="p">(</span><span class="s">&quot;^The Empire Strikes Back&quot;</span><span class="p">,</span> box<span class="o">$</span>Title<span class="p">))</span>
+
+<span class="c1"># will wrap the axis labels</span>
+wrap_20 <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span><span class="kp">gsub</span><span class="p">(</span><span class="s">&#39;(.{1,20})(\\s|$)&#39;</span><span class="p">,</span> <span class="s">&#39;\\1\n&#39;</span><span class="p">,</span> x<span class="p">)</span>
+
+ggplot<span class="p">(</span>box3<span class="p">)</span> <span class="o">+</span>
+geom_bar<span class="p">(</span>aes<span class="p">(</span>x<span class="o">=</span>reorder<span class="p">(</span>wrap_20<span class="p">(</span>Title<span class="p">),</span> Worldwide<span class="p">),</span> y<span class="o">=</span>Worldwide<span class="p">,</span> fill<span class="o">=</span><span class="s">&quot;Worldwide&quot;</span><span class="p">),</span> stat <span class="o">=</span> <span class="s">&quot;identity&quot;</span><span class="p">)</span> <span class="o">+</span>
+geom_bar<span class="p">(</span>aes<span class="p">(</span>x<span class="o">=</span>wrap_20<span class="p">(</span>Title<span class="p">),</span> y<span class="o">=</span>Domestic<span class="p">,</span> fill<span class="o">=</span><span class="s">&quot;Domestic&quot;</span><span class="p">),</span> alpha<span class="o">=</span><span class="m">.5</span><span class="p">,</span> stat <span class="o">=</span> <span class="s">&quot;identity&quot;</span><span class="p">)</span> <span class="o">+</span>
+scale_fill_manual<span class="p">(</span>name<span class="o">=</span><span class="s">&quot;Grossing&quot;</span><span class="p">,</span> values<span class="o">=</span><span class="kt">c</span><span class="p">(</span>Worldwide<span class="o">=</span><span class="s">&quot;#A6CEE3&quot;</span><span class="p">,</span> Domestic<span class="o">=</span><span class="s">&quot;#386CB0&quot;</span><span class="p">))</span> <span class="o">+</span>
+coord_flip<span class="p">()</span> <span class="o">+</span> 
+labs<span class="p">(</span>x<span class="o">=</span><span class="kc">NULL</span><span class="p">,</span> y<span class="o">=</span><span class="kc">NULL</span><span class="p">,</span> title<span class="o">=</span><span class="s">&quot;Star Wars Grosses (US$ Millions)&quot;</span><span class="p">)</span></code></pre></div>
+
+<p>The new release by Disney of <em>Star Wars</em> is making its way to the top films of all-time. Although the values presented are not in current currency, and old films in the list may have their grosses based on multiple releases, <em>The Force Awakens</em> has just began its journey.</p>
+ ]]></content>
+  </entry>
+  
+  <entry>
+    <title>Gender Effect in Conference Talks</title>
+    <link rel="alternate" type="text/html" href="/blog/2015/gender-effect-in-conference-talks.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=GenderEffectinConferenceTalks" />
+    <published>2015-12-22T00:00:00Z</published>
+    <updated>2015-12-22T00:00:00+00:00</updated>
+    <id>/blog/2015/gender-effect-in-conference-talks</id>
+    <content type="html"><![CDATA[ <p>I was searching in the arXiv repository for an interesting paper to read over the weekend, when I found this: <a href="http://arxiv.org/abs/1403.3091">“Studying Gender in Conference Talks – data from the 223rd meeting of the American Astronomical Society”</a>. The title and figures caught my attention more than the subject of the conference, I’ve to confess.</p>
+
+<p>The plot below, taken from the paper, displays the most significant finding from the analysis: <em>a strong dependence on session chair gender</em>. Overall, males ask more question than females, but there is a large difference in number of questions asked by males vis-à-vis number asked by females, given a male or female chair. I’m wondering if this also holds for other science fields where the gap between male and female researchers is that not abnormal.</p>
+
+<p><img src="http://danielmarcelino.github.io/images/2015/gender_chairs_n_questions.png" alt="Main Findings" /></p>
+
+<p>The paper is stuffed with figures, but in this case I would prefer a table with residuals; way more telling.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">tab <span class="o">=</span> <span class="kp">as.table</span><span class="p">(</span><span class="kt">matrix</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="m">63</span><span class="p">,</span> <span class="m">90</span><span class="p">,</span> <span class="m">122</span><span class="p">,</span> <span class="m">359</span><span class="p">),</span>nrow<span class="o">=</span><span class="m">2</span><span class="p">,</span>ncol<span class="o">=</span><span class="m">2</span><span class="p">,</span>
+dimnames<span class="o">=</span><span class="kt">list</span><span class="p">(</span>chairs<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&#39;FC&#39;</span><span class="p">,</span><span class="s">&#39;MC&#39;</span><span class="p">),</span>
+questions<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&#39;FQ&#39;</span><span class="p">,</span> <span class="s">&#39;MQ&#39;</span><span class="p">))))</span>
+
+<span class="o">&gt;</span> tab
+     questions
+chairs  FQ  MQ
+   FC  <span class="m">63</span> <span class="m">122</span>
+   MC  <span class="m">90</span> <span class="m">359</span>
+      
+dat <span class="o">=</span> SciencesPo<span class="o">::</span>untable<span class="p">(</span>tab<span class="p">)</span>
+
+<span class="o">&gt;</span> <span class="kp">head</span><span class="p">(</span>dat<span class="p">)</span>
+  chairs questions
+<span class="m">1</span>    FC       FQ
+<span class="m">2</span>    FC       FQ
+<span class="m">3</span>    FC       FQ
+<span class="m">4</span>    FC       FQ
+<span class="m">5</span>    FC       FQ
+<span class="m">6</span>    FC       FQ</code></pre></div>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="o">&gt;</span> crosstabs<span class="p">(</span>dat<span class="p">,</span> <span class="s">&quot;chairs&quot;</span><span class="p">,</span> <span class="s">&quot;questions&quot;</span><span class="p">,</span>
+<span class="o">+</span>            row.pct <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span>
+<span class="o">+</span>            chisq <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span>
+<span class="o">+</span>            sresid <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+
+Table of chairs by questions
+
+                         <span class="o">|</span>questions  
+<span class="o">-------------------------+-----------+-----------+-----------+</span>
+chairs                   <span class="o">|</span>FQ         <span class="o">|</span>MQ         <span class="o">|</span>Total      <span class="o">|</span>
+<span class="o">-------------------------+-----------+-----------+-----------+</span>
+FC      <span class="o">|</span>Obs Freq        <span class="o">|</span>         <span class="m">63</span><span class="o">|</span>        <span class="m">122</span><span class="o">|</span>        <span class="m">185</span><span class="o">|</span>
+        <span class="o">|% within chairs |    34.0541|    65.9459|   100.0000|</span>
+<span class="o">-------------------------+-----------+-----------+-----------+</span>
+<span class="o">MC      |Obs Freq        |         90|        359|        449|</span>
+<span class="o">        |%</span> within chairs <span class="o">|</span>    <span class="m">20.0445</span><span class="o">|</span>    <span class="m">79.9555</span><span class="o">|</span>   <span class="m">100.0000</span><span class="o">|</span>
+<span class="o">-------------------------+-----------+-----------+-----------+</span>
+Total   <span class="o">|</span>Obs Freq        <span class="o">|</span>        <span class="m">153</span><span class="o">|</span>        <span class="m">481</span><span class="o">|</span>        <span class="m">634</span><span class="o">|</span>
+<span class="o">-------------------------+-----------+-----------+-----------+</span>
+
+Statistics <span class="kr">for</span> Table chairs by questions
+
+Statistics                   DF      Value     Prob
+<span class="o">---------------------------------------------------</span>
+Pearson Chi<span class="o">-</span>Square           <span class="m">1</span>     <span class="m">13.2901</span>  <span class="m">0.0003</span>
+Likelihood Ratio Chi<span class="o">-</span>Square  <span class="m">1</span>     <span class="m">13.4689</span>  <span class="m">0.0002</span>
+Fisher<span class="s">&#39;</span><span class="err">s Exact Test                         0.0003</span>
+<span class="o">---------------------------------------------------</span>
+
+Residuals <span class="kr">for</span> Table chairs by questions
+
+         <span class="o">|</span>questions  
+<span class="o">---------+-----------+-----------+</span>
+chairs   <span class="o">|</span>FQ         <span class="o">|</span>MQ         <span class="o">|</span>
+<span class="o">---------+-----------+-----------+</span>
+FC       <span class="o">|</span>     <span class="m">2.7470</span><span class="o">|</span>    <span class="m">-1.5493</span><span class="o">|</span>
+MC       <span class="o">|</span>    <span class="m">-1.7633</span><span class="o">|</span>     <span class="m">0.9945</span><span class="o">|</span>
+<span class="o">---------+-----------+-----------+</span></code></pre></div>
+ ]]></content>
+  </entry>
+  
+  <entry>
+    <title>Data, data, data</title>
+    <link rel="alternate" type="text/html" href="/blog/2015/data-data-data.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=Datadatadata" />
+    <published>2015-12-14T00:00:00Z</published>
+    <updated>2015-12-14T00:00:00+00:00</updated>
+    <id>/blog/2015/data-data-data</id>
+    <content type="html"><![CDATA[ <p>Having presented preliminary findings from a national sample of therapeutic communities in Brazil, I thought the Babbage’s words  fits like a glove for those criticizing quantitative approaches for policy evaluations: the “Errors using inadequate data are much less than those using no data at all” (Charles Babbage).</p>
+
+<p><img src="http://danielmarcelino.github.io/images/2015/CTs_distribuicao.png" alt="Communities" /></p>
+ ]]></content>
+  </entry>
+  
+  <entry>
+    <title>Venezuelan Parliamentary Election: What do the Polls Say?</title>
+    <link rel="alternate" type="text/html" href="/blog/2015/venezuelan-parliamentary-elections.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=VenezuelanParliamentaryElection:WhatdothePollsSay?" />
+    <published>2015-12-06T00:00:00Z</published>
+    <updated>2015-12-06T00:00:00+00:00</updated>
+    <id>/blog/2015/venezuelan-parliamentary-elections</id>
+    <content type="html"><![CDATA[ <p>There is not a huge population of opinion polls covering this parliamentary election in Venezuela, but all I’ve can be used to gauge the public opinion by the local polling houses. This posting begs an obvious question: how has the mood in Venezuela varied over time with respect to voting intentions for the two political blocs? Next, can we detect any biases among those publishing polls?</p>
+
+<!--more-->
+
+<h1 id="the-data">The data</h1>
+<p>I’ve collected some polls available on the internet dating back to January 2014, which I made available <a href="https://github.com/danielmarcelino/Polling/raw/master/Venezuela/data/polls.txt">here</a> after some <a href="http://www.nytimes.com/2014/08/18/technology/for-big-data-scientists-hurdle-to-insights-is-janitor-work.html?_r=0">data janitor work</a>.</p>
+
+<h1 id="polls-over-time">Polls over time</h1>
+<p>After a bit filling-in-the-blanks working with missing date values, we can visualize the poll trends over time. Given the sample size, sampling error and other sources of noise, a loess model can pretty much pick out the signals of long-term trends.</p>
+
+<p><img src="http://danielmarcelino.github.io/images/code-2015-12-06-venezuelan-parliamentary-elections/loess-1.png" alt="center" /></p>
+
+<h1 id="pollster-biases">Pollster biases</h1>
+<p>Let’s pretend we can trust on all those polls despite the huge variability among them as already mentioned <a href="https://danielmarcelino.github.io/r/2015/12/04/venezuelan-parliamentary-election-2015/">here</a>. In fact, the problem is not the variability as such, but my lack of knowledge about who are the pollsters and their past performance, so I can’t judge them at first, let’s say it clearly.
+Nonetheless, if we accept the above models as a sound estimate of the expected poll response at a given time, we can analyze the residuals of actual poll results and look for systematic biases. In theory, with a decent sample size (all have ~ 1300) and a reasonably stratified sampling method (I’m not even assuming  random samples here), we might expect polls results to be roughly normally distributed around the expected polls result, regardless of who performed or commissioned the poll, right?</p>
+
+<p>The graph below shows the distributions per polling house for those who polled more than a single poll in this dataset.</p>
+
+<p><img src="http://danielmarcelino.github.io/images/code-2015-12-06-venezuelan-parliamentary-elections/biases-3.png" alt="center" /></p>
+
+<p>We’ve to keep in mind that there are important caveats which we’re not addressing here, as that different polls have used different question sets, methods etc, so this isn’t evidence for anything underhanded per se. It seems reasonable to expect that while parties might have good reasons to publish polls in their favor, pollsters conducting the polls should generally be more or less indifferent.</p>
+
+<p>The results are hampered by a small number of data points per pollster, and that to claim they are polling significantly above or below expectation, save for the <em>Hercón</em>, which is significantly more pro opposition (MUD) than expected, given the probability laws, although the p-value is just above the 5% thumb/convention. With a little research, I figure out that <em>Datanálisis</em> performed fine in the previous elections, and here it appears just around the center of the distribution leaning toward the Socialists (PSUV).</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"><strong>pollster</strong></th>
+      <th style="text-align: right"><strong>p</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Meganalisis</td>
+      <td style="text-align: right">0.1875000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Venebarómetro</td>
+      <td style="text-align: right">0.2500000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">IVAD</td>
+      <td style="text-align: right">0.4375000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">ICS</td>
+      <td style="text-align: right">0.5000000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Delphos</td>
+      <td style="text-align: right">1.0000000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Datanálisis</td>
+      <td style="text-align: right">0.7646484</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">VARIANZAS</td>
+      <td style="text-align: right">1.0000000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Consultores</td>
+      <td style="text-align: right">0.2500000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">DatinCorp</td>
+      <td style="text-align: right">0.5625000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Keller y Asociados</td>
+      <td style="text-align: right">0.2500000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Hercón</td>
+      <td style="text-align: right">0.0625000</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>What do the polls say? Well, the majority of Venezuelans are favoring opposition candidates and this has been the trend for at least the latter two years, however polls appear to have been more variable in recent months. This election is expected to bring the opposition to control the National Assembly after 16 years loosing the elections in the country. 
+The Venezuela’s Socialists seem to be at risk, but predicting the final number of seats is a tough task that I’m not considering in this post. 
+In fact, it might be really difficult to set forth a range of winning seats as the government recently enacted some redistricting seats in order to weaken an eventual absolute majority by the opposition. Somehow, the polls show this will be a significant symbolic defeat for the government that shows it lost despite all the advantages in state power and control over the media.</p>
+
+<h2 id="update-error">UPDATE (Error)</h2>
+<p>I was informed by André Salvati that the code block below was producing an error message of unknown column; the missing part has been included. Thanks for letting me know. The whole code can be found in this <a href="https://gist.github.com/danielmarcelino/904c804b2681ac8a9d08">gist</a></p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kn">library</span><span class="p">(</span><span class="s">&quot;dplyr&quot;</span><span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span><span class="s">&quot;ggplot2&quot;</span><span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span><span class="s">&quot;grid&quot;</span><span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span><span class="s">&quot;reshape2&quot;</span><span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span><span class="s">&quot;lubridate&quot;</span><span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span><span class="s">&quot;scales&quot;</span><span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span><span class="s">&quot;knitr&quot;</span><span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span><span class="s">&quot;SciencesPo&quot;</span><span class="p">)</span> <span class="c1"># to use the themes, you must install the version from github</span>
+
+<span class="kn">source</span> <span class="o">=</span> <span class="s">&quot;https://github.com/danielmarcelino/Polling/raw/master/Venezuela/data/polls.txt&quot;</span>
+
+data <span class="o">&lt;-</span> read.csv<span class="p">(</span><span class="kn">source</span><span class="p">,</span> sep<span class="o">=</span><span class="s">&quot;\t&quot;</span><span class="p">,</span> encoding <span class="o">=</span> <span class="s">&quot;UTF-8&quot;</span><span class="p">)</span>
+
+<span class="c1"># Correcting for empty date values</span>
+<span class="kp">head</span><span class="p">(</span>data<span class="p">)</span>
+
+data<span class="p">[,</span><span class="m">2</span><span class="o">:</span><span class="m">3</span><span class="p">]</span><span class="o">&lt;-</span><span class="kp">lapply</span><span class="p">(</span>data<span class="p">[,</span><span class="m">2</span><span class="o">:</span><span class="m">3</span><span class="p">],</span><span class="kp">as.Date</span><span class="p">,</span> format <span class="o">=</span> <span class="s">&quot;%d-%m-%Y&quot;</span><span class="p">)</span>
+
+times <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)(</span>x<span class="o">*</span><span class="m">100</span><span class="p">)</span>
+
+data<span class="p">[,</span><span class="m">5</span><span class="o">:</span><span class="m">8</span><span class="p">]</span><span class="o">&lt;-</span><span class="kp">lapply</span><span class="p">(</span>data<span class="p">[,</span><span class="m">5</span><span class="o">:</span><span class="m">8</span><span class="p">],</span>times<span class="p">)</span>
+
+days <span class="o">=</span> <span class="kp">round</span><span class="p">(</span><span class="kp">mean</span><span class="p">(</span>data<span class="o">$</span>end<span class="o">-</span>data<span class="o">$</span>begin<span class="p">,</span> na.rm<span class="o">=</span><span class="kc">TRUE</span><span class="p">))</span>
+mask <span class="o">=</span> <span class="kp">is.na</span><span class="p">(</span>data<span class="o">$</span>end<span class="p">)</span>
+
+data<span class="o">$</span>end<span class="p">[</span>mask<span class="p">]</span> <span class="o">=</span> data<span class="o">$</span>begin<span class="p">[</span>mask<span class="p">]</span><span class="o">+</span>days
+
+<span class="c1"># Find middle time point</span>
+DaysInField <span class="o">=</span> <span class="kp">round</span><span class="p">(</span><span class="kp">mean</span><span class="p">(</span>data<span class="o">$</span>end<span class="o">-</span>data<span class="o">$</span>begin<span class="p">,</span> na.rm<span class="o">=</span><span class="kc">TRUE</span><span class="p">))</span>
+data<span class="o">$</span>date <span class="o">=</span> data<span class="o">$</span>begin<span class="o">+</span>DaysInField</code></pre></div>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">polls <span class="o">&lt;-</span> melt<span class="p">(</span>data<span class="p">,</span> id.vars<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;house&quot;</span><span class="p">,</span> <span class="s">&quot;date&quot;</span><span class="p">),</span> 
+     measure.var<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;MUD&quot;</span><span class="p">,</span> <span class="s">&quot;PSUV&quot;</span><span class="p">,</span> <span class="s">&quot;Others&quot;</span><span class="p">,</span> <span class="s">&quot;Undecided&quot;</span><span class="p">))</span>
+<span class="kp">colnames</span><span class="p">(</span>polls<span class="p">)[</span><span class="m">3</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s">&quot;response&quot;</span>
+<span class="kp">levels</span><span class="p">(</span>polls<span class="o">$</span>response<span class="p">)</span> <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;MUD&quot;</span><span class="p">,</span> <span class="s">&quot;PSUV&quot;</span><span class="p">,</span> <span class="s">&quot;Others&quot;</span><span class="p">,</span> <span class="s">&quot;Swing&quot;</span><span class="p">)</span>
+
+
+ggplot<span class="p">(</span>polls<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span><span class="kp">date</span><span class="p">,</span> y<span class="o">=</span>value<span class="p">,</span> col<span class="o">=</span>response<span class="p">,</span> fill<span class="o">=</span>response<span class="p">))</span> <span class="o">+</span> 
+  geom_point<span class="p">()</span> <span class="o">+</span> geom_smooth<span class="p">(</span>method<span class="o">=</span><span class="s">&quot;loess&quot;</span><span class="p">,</span> alpha<span class="o">=</span><span class="kp">I</span><span class="p">(</span><span class="m">.2</span><span class="p">))</span> <span class="o">+</span>
+  theme_538<span class="p">()</span> <span class="o">+</span> 
+ theme<span class="p">(</span>legend.position<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">.5</span><span class="p">,</span><span class="m">.95</span><span class="p">),</span> legend.direction<span class="o">=</span><span class="s">&quot;horizontal&quot;</span><span class="p">)</span> <span class="o">+</span>
+  scale_color_manual<span class="p">(</span>values <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;orange&quot;</span><span class="p">,</span> <span class="s">&quot;grey40&quot;</span><span class="p">))</span> <span class="o">+</span>
+  scale_fill_manual<span class="p">(</span>values <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;orange&quot;</span><span class="p">,</span> <span class="s">&quot;grey40&quot;</span><span class="p">))</span> <span class="o">+</span>
+  scale_x_date<span class="p">(</span>labels <span class="o">=</span> date_format<span class="p">(</span><span class="s">&quot;%b &#39;%y&quot;</span><span class="p">))</span> <span class="o">+</span>
+  scale_y_continuous<span class="p">(</span>breaks<span class="o">=</span><span class="kp">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">70</span><span class="p">,</span> <span class="m">10</span><span class="p">),</span> limits<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">70</span><span class="p">))</span> <span class="o">+</span>
+  geom_hline<span class="p">(</span>yintercept<span class="o">=</span><span class="m">0</span><span class="p">,</span>size<span class="o">=</span><span class="m">1.2</span><span class="p">,</span>colour<span class="o">=</span><span class="s">&quot;#535353&quot;</span><span class="p">)</span> <span class="o">+</span>
+  ggtitle<span class="p">(</span><span class="s">&quot;Vote Intention Among Venezuelans&quot;</span><span class="p">)</span> <span class="o">+</span>
+  labs<span class="p">(</span>x<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> y<span class="o">=</span><span class="s">&quot;%&quot;</span><span class="p">,</span> fill<span class="o">=</span><span class="s">&quot;Poll response:&quot;</span><span class="p">,</span> col<span class="o">=</span><span class="s">&quot;Poll response:&quot;</span><span class="p">)</span>
+<span class="c1"># credits</span>
+ geom_foot<span class="p">(</span><span class="s">&quot;danielmarcelino.github.io&quot;</span><span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1">## Residual analysis per pollster</span>
+l.MUD <span class="o">&lt;-</span> loess<span class="p">(</span>value <span class="o">~</span> <span class="kp">as.numeric</span><span class="p">(</span><span class="kp">date</span><span class="p">),</span> data<span class="o">=</span><span class="kp">subset</span><span class="p">(</span>polls<span class="p">,</span> response<span class="o">==</span><span class="s">&quot;MUD&quot;</span><span class="p">))</span>
+l.PSUV <span class="o">&lt;-</span> loess<span class="p">(</span>value <span class="o">~</span> <span class="kp">as.numeric</span><span class="p">(</span><span class="kp">date</span><span class="p">),</span> data<span class="o">=</span><span class="kp">subset</span><span class="p">(</span>polls<span class="p">,</span> response<span class="o">==</span><span class="s">&quot;PSUV&quot;</span><span class="p">))</span>
+l.Others <span class="o">&lt;-</span> loess<span class="p">(</span>value <span class="o">~</span> <span class="kp">as.numeric</span><span class="p">(</span><span class="kp">date</span><span class="p">),</span> data<span class="o">=</span><span class="kp">subset</span><span class="p">(</span>polls<span class="p">,</span> response<span class="o">==</span><span class="s">&quot;Others&quot;</span><span class="p">))</span>
+l.Swing <span class="o">&lt;-</span> loess<span class="p">(</span>value <span class="o">~</span> <span class="kp">as.numeric</span><span class="p">(</span><span class="kp">date</span><span class="p">),</span> data<span class="o">=</span><span class="kp">subset</span><span class="p">(</span>polls<span class="p">,</span> response<span class="o">==</span><span class="s">&quot;Swing&quot;</span><span class="p">))</span>
+
+<span class="kp">with</span><span class="p">(</span>polls<span class="p">,</span> plot<span class="p">(</span><span class="kp">as.numeric</span><span class="p">(</span><span class="kp">date</span><span class="p">),</span> value<span class="p">))</span>
+lines<span class="p">(</span><span class="kp">as.numeric</span><span class="p">(</span>polls<span class="p">[</span>polls<span class="o">$</span>response <span class="o">==</span> <span class="s">&quot;MUD&quot;</span><span class="p">,]</span><span class="o">$</span><span class="kp">date</span><span class="p">),</span>
+      predict<span class="p">(</span>l.MUD<span class="p">,</span> <span class="kp">as.numeric</span><span class="p">(</span>polls<span class="p">[</span>polls<span class="o">$</span>response <span class="o">==</span> <span class="s">&quot;MUD&quot;</span><span class="p">,]</span><span class="o">$</span><span class="kp">date</span><span class="p">)))</span>
+
+<span class="c1"># Calculate predicted values per row, </span>
+polls<span class="o">$</span>predicted <span class="o">&lt;-</span> <span class="kc">NA</span>
+
+loessPrediction <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>resp<span class="p">,</span> model<span class="p">){</span>
+  rows <span class="o">&lt;-</span> polls<span class="o">$</span>response <span class="o">==</span> resp
+  curr <span class="o">&lt;-</span> polls<span class="p">[</span>rows<span class="p">,]</span>
+  preds <span class="o">&lt;-</span> <span class="kp">with</span><span class="p">(</span>curr<span class="p">,</span> predict<span class="p">(</span>model<span class="p">,</span> <span class="kp">as.numeric</span><span class="p">(</span><span class="kp">date</span><span class="p">)))</span>
+  polls<span class="p">[</span>rows<span class="p">,]</span><span class="o">$</span>predicted <span class="o">&lt;&lt;-</span> preds
+<span class="p">}</span>
+
+loessPrediction<span class="p">(</span><span class="s">&quot;MUD&quot;</span><span class="p">,</span> l.MUD<span class="p">)</span>
+loessPrediction<span class="p">(</span><span class="s">&quot;PSUV&quot;</span><span class="p">,</span> l.PSUV<span class="p">)</span>
+loessPrediction<span class="p">(</span><span class="s">&quot;Others&quot;</span><span class="p">,</span> l.Others<span class="p">)</span>
+loessPrediction<span class="p">(</span><span class="s">&quot;Swing&quot;</span><span class="p">,</span> l.Swing<span class="p">)</span>
+
+polls<span class="o">$</span>residual <span class="o">&lt;-</span> polls<span class="o">$</span>value <span class="o">-</span> polls<span class="o">$</span>predicted
+hist<span class="p">(</span>polls<span class="o">$</span>residual<span class="p">)</span>
+
+<span class="c1">## Check pollsters&#39; names</span>
+polls<span class="o">$</span>house <span class="o">&lt;-</span> <span class="kp">gsub</span><span class="p">(</span><span class="s">&quot; ?\\(.*&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> polls<span class="o">$</span>house<span class="p">)</span>
+polls<span class="o">$</span>house <span class="o">&lt;-</span> <span class="kp">gsub</span><span class="p">(</span><span class="s">&quot;-&quot;</span><span class="p">,</span> <span class="s">&quot; &quot;</span><span class="p">,</span> polls<span class="o">$</span>house<span class="p">)</span>
+
+houseNames <span class="o">&lt;-</span> <span class="kp">do.call</span><span class="p">(</span><span class="kp">rbind</span><span class="p">,</span> <span class="kp">strsplit</span><span class="p">(</span><span class="kp">as.character</span><span class="p">(</span>polls<span class="o">$</span>house<span class="p">),</span> <span class="s">&quot;/&quot;</span><span class="p">))</span>
+<span class="kp">colnames</span><span class="p">(</span>houseNames<span class="p">)</span> <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;pollster&quot;</span><span class="p">,</span> <span class="s">&quot;commission&quot;</span><span class="p">)</span>
+
+polls <span class="o">&lt;-</span> <span class="kp">cbind</span><span class="p">(</span>polls<span class="p">,</span> houseNames<span class="p">)</span>
+
+<span class="c1">## Order pollster by median residual:</span>
+ordering <span class="o">&lt;-</span> group_by<span class="p">(</span>polls<span class="p">,</span> pollster<span class="p">)</span> <span class="o">%&gt;%</span>
+  filter<span class="p">(</span>response <span class="o">==</span> <span class="s">&quot;MUD&quot;</span><span class="p">)</span> <span class="o">%&gt;%</span>
+  summarize<span class="p">(</span>med <span class="o">=</span> median<span class="p">(</span>residual<span class="p">,</span> na.rm<span class="o">=</span><span class="bp">T</span><span class="p">),</span> count<span class="o">=</span>n<span class="p">())</span> <span class="o">%&gt;%</span>
+  arrange<span class="p">(</span>med<span class="p">)</span> 
+
+polls<span class="o">$</span>pollster <span class="o">&lt;-</span> <span class="kp">factor</span><span class="p">(</span>polls<span class="o">$</span>pollster<span class="p">,</span> levels<span class="o">=</span>ordering<span class="o">$</span>pollster<span class="p">)</span>
+
+<span class="c1">## Testing for biases by a given pollster </span>
+ggplot<span class="p">(</span><span class="kp">subset</span><span class="p">(</span>polls<span class="p">,</span> response <span class="o">==</span> <span class="s">&quot;MUD&quot;</span><span class="p">),</span> 
+       aes<span class="p">(</span>x<span class="o">=</span>pollster<span class="p">,</span> y<span class="o">=</span>residual<span class="p">))</span> <span class="o">+</span>
+  geom_hline<span class="p">(</span>aes<span class="p">(</span>yintercept<span class="o">=</span><span class="m">0</span><span class="p">))</span> <span class="o">+</span>
+  geom_violin<span class="p">(</span>scale<span class="o">=</span><span class="s">&quot;width&quot;</span><span class="p">,</span> fill<span class="o">=</span><span class="kp">I</span><span class="p">(</span><span class="s">&quot;grey50&quot;</span><span class="p">),</span> col<span class="o">=</span><span class="kp">I</span><span class="p">(</span><span class="s">&quot;grey50&quot;</span><span class="p">))</span> <span class="o">+</span> 
+  geom_jitter<span class="p">(</span>position<span class="o">=</span>position_jitter<span class="p">(</span>width<span class="o">=</span><span class="m">.05</span><span class="p">))</span> <span class="o">+</span> 
+  stat_summary<span class="p">(</span>geom <span class="o">=</span> <span class="s">&quot;crossbar&quot;</span><span class="p">,</span> width<span class="o">=</span><span class="m">0.75</span><span class="p">,</span> fatten<span class="o">=</span><span class="m">2</span><span class="p">,</span> 
+               color<span class="o">=</span><span class="s">&quot;grey20&quot;</span><span class="p">,</span> fun.y<span class="o">=</span>median<span class="p">,</span> fun.ymin<span class="o">=</span>median<span class="p">,</span> fun.ymax<span class="o">=</span>median<span class="p">)</span> <span class="o">+</span>
+  coord_flip<span class="p">()</span> <span class="o">+</span> theme_538<span class="p">()</span> <span class="o">+</span> ggtitle<span class="p">(</span><span class="s">&quot;Relative MUD voting intentions&quot;</span><span class="p">)</span> <span class="o">+</span>
+  labs<span class="p">(</span>x<span class="o">=</span><span class="s">&quot;Polling house&quot;</span><span class="p">,</span>
+       y<span class="o">=</span><span class="s">&quot;Comparison with other polls at the time&quot;</span><span class="p">)</span> <span class="o">+</span>
+  ylim<span class="p">(</span><span class="m">-12</span><span class="p">,</span><span class="m">12</span><span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1">## Stats significance, is it any?</span>
+<span class="kp">options</span><span class="p">(</span>scipen<span class="o">=</span><span class="m">0</span><span class="p">)</span>
+sigTable <span class="o">&lt;-</span> polls <span class="o">%&gt;%</span> filter<span class="p">(</span>response <span class="o">==</span> <span class="s">&quot;MUD&quot;</span><span class="p">)</span> <span class="o">%&gt;%</span>
+  group_by<span class="p">(</span> pollster<span class="p">)</span> <span class="o">%&gt;%</span>
+  summarise<span class="p">(</span>p<span class="o">=</span>wilcox.test<span class="p">(</span>residual<span class="p">,</span> mu<span class="o">=</span><span class="m">0</span><span class="p">)</span><span class="o">$</span>p.value<span class="p">)</span> 
+kable<span class="p">(</span>sigTable<span class="p">)</span></code></pre></div>
+
+ ]]></content>
+  </entry>
+  
+  <entry>
+    <title>Venezuela&#39;s 2015 Parliamentary Elections</title>
+    <link rel="alternate" type="text/html" href="/blog/2015/venezuelan-parliamentary-election-2015.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=Venezuela&#39;s2015ParliamentaryElections" />
+    <published>2015-12-04T00:00:00Z</published>
+    <updated>2015-12-04T00:00:00+00:00</updated>
+    <id>/blog/2015/venezuelan-parliamentary-election-2015</id>
+    <content type="html"><![CDATA[ <p>Next Sunday Venezuelans are heading to the polls once again with  international concerns about the clearness of the balloting. To get an idea about the political climate over there, I’ve collected some polls available on the internet. The surprising thing from those surveys is a tremendous variability from pollster to pollster about the single topic of voting intention. You may find national polls fielded in the same period with estimates varying as much as 20%, isn’t it dramatic? If you always wanted to see house bias operating in practice, the Venezuelan elections may provide you a good case then.</p>
+
+<p><img src="http://danielmarcelino.github.io/images/2015/venezuela1.png" alt="center" /></p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1">### The data</span>
+<span class="kn">library</span><span class="p">(</span>ggplot2<span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>dplyr<span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>SciencesPo<span class="p">)</span> 
+
+<span class="kn">source</span> <span class="o">=</span> <span class="s">&quot;https://github.com/danielmarcelino/Polling/raw/master/Venezuela/data/polls.txt&quot;</span>
+
+data <span class="o">&lt;-</span> getdata<span class="p">(</span><span class="kn">source</span><span class="p">)</span>
+
+data<span class="o">$</span>begin <span class="o">&lt;-</span> <span class="kp">as.Date</span><span class="p">(</span>data<span class="o">$</span>begin<span class="p">,</span> format <span class="o">=</span> <span class="s">&quot;%d-%m-%Y&quot;</span><span class="p">)</span>
+<span class="c1"># just interested in some period</span>
+data <span class="o">&lt;-</span> data <span class="o">%&gt;%</span> 
+  filter<span class="p">(</span>begin<span class="o">&gt;</span><span class="kp">as.Date</span><span class="p">(</span><span class="s">&quot;01-07-2014&quot;</span><span class="p">,</span> format <span class="o">=</span> <span class="s">&quot;%d-%m-%Y&quot;</span><span class="p">))</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1">### The plot</span>
+ggplot<span class="p">(</span>data<span class="p">)</span> <span class="o">+</span>
+  geom_point<span class="p">(</span>aes<span class="p">(</span>x <span class="o">=</span> begin<span class="p">,</span> y <span class="o">=</span> MUD<span class="p">,</span>size<span class="o">=</span><span class="m">3</span><span class="p">),</span>color<span class="o">=</span><span class="s">&quot;gray25&quot;</span><span class="p">)</span> <span class="o">+</span>
+  geom_point<span class="p">(</span>aes<span class="p">(</span>x <span class="o">=</span> begin<span class="p">,</span> y <span class="o">=</span> PSUV<span class="p">,</span>size<span class="o">=</span><span class="m">3</span><span class="p">),</span> color<span class="o">=</span><span class="s">&quot;tomato&quot;</span><span class="p">)</span> <span class="o">+</span>
+  geom_hline<span class="p">(</span>yintercept<span class="o">=</span><span class="m">0</span><span class="p">,</span>size<span class="o">=</span><span class="m">1.2</span><span class="p">,</span>colour<span class="o">=</span><span class="s">&quot;#535353&quot;</span><span class="p">)</span> <span class="o">+</span>
+  plotTitleSubtitle<span class="p">(</span>title<span class="o">=</span><span class="s">&quot;Vote Intentions for the Gop (MUD) and Gov&#39;t (PSUV)&quot;</span><span class="p">,</span> subtitle<span class="o">=</span><span class="s">&quot;Black = MUD, Red = PSUV&quot;</span><span class="p">)</span> <span class="o">+</span>
+  theme_538<span class="p">()</span>
+<span class="c1"># credits</span>
+  plotFootnote<span class="p">(</span><span class="s">&quot;danielmarcelino.github.io&quot;</span><span class="p">)</span></code></pre></div>
+
+ ]]></content>
+  </entry>
+  
+  <entry>
+    <title>Retrieving Data from Google Books with `ngramr`</title>
+    <link rel="alternate" type="text/html" href="/blog/2015/retrieving-data-from-google-books-with-ngramr.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=RetrievingDatafromGoogleBookswith`ngramr`" />
+    <published>2015-11-15T00:00:00Z</published>
+    <updated>2015-11-15T00:00:00+00:00</updated>
+    <id>/blog/2015/retrieving-data-from-google-books-with-ngramr</id>
+    <content type="html"><![CDATA[ <p><a href="https://en.wikipedia.org/wiki/Karl_Marx">Karl Marx</a> is the most famous founding fathers of modern sociology with a popularity peak in 1975-6, but declining ever since my little research using the <a href="https://books.google.com/ngrams">Google Ngram Viewer</a> suggests.</p>
+
+<h2 id="introduction">Introduction</h2>
+<p>Google has a tool for tracking the frequency of words or phrases across its vast collection of scanned texts, the Google Books. The <a href="https://books.google.com/ngrams">Google Ngram Viewer</a> reports data and graphs the frequency of words encountered in one or across several <em>corpus</em> over time. For instance, the chart below campares the appearance in the English <em>corpus</em> of following bigrams names: “Karl Marx”, “Max Weber”, “Emile Durkheim”.</p>
+
+<p><img src="http://danielmarcelino.github.io/images/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/GoogleNgram.png" alt="center" /></p>
+
+<p>The y-axis shows of all the bigrams contained in the sample of books written in English, what percentage of them are “Karl Marx” or “Max Weber” or “Emile Durkheim”? From the chart above, we can conclude that Marx is the most famous sociologist among the others founding fathers, with a peak in popularity about 1975-6, but his influence has been declining ever since. These thinkers are considered the founding fathers of sociology because they set out to develop practical and scientifically sound methods of research to examine theories of the social world rooted in a specific historical and cultural context.</p>
+
+<h2 id="using-r-with-google-ngram-viewer">Using R with Google Ngram Viewer</h2>
+
+<p>There is a package to query the Google Ngram called <a href="https://cran.r-project.org/web/packages/ngramr/index.html">ngramr</a> written by Sean Carmody. With this package, one can retrieve data from Ngram pages in the form of data frame.</p>
+
+<h2 id="getting-started">Getting Started</h2>
+<p>The first thing to do is to load the <code>ggplot2</code> and <code>ngramr</code> packages. In case you don’t have them installed, an installation is required.</p>
+
+<h2 id="write-a-query-and-do-the-plots">Write a Query and Do the Plots</h2>
+
+<p>The following is equivalent to the chart above for the three sociologists bigrams, except that I’m applying a smoothed line–or moving average of 5 years, so trends become more apparent. For instance, the data shown for 2000 is an average of the raw count for 2000 plus 5 values on either side: (“count for 1995” + “count for 2000” + “count for 2005”), divided by 3. So a smoothing of 5 means that 11 values will be averaged: 5 on either side, plus the target value in the center of them.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">ng <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;(Karl Marx)&quot;</span><span class="p">,</span> <span class="s">&quot;(Max Weber)&quot;</span><span class="p">,</span> <span class="s">&quot;(Emile Durkheim)&quot;</span><span class="p">)</span> 
+ggram<span class="p">(</span>ng<span class="p">,</span> year_start <span class="o">=</span> <span class="m">1800</span><span class="p">,</span> 
+      year_end <span class="o">=</span> <span class="m">2012</span><span class="p">,</span>  
+      smoothing <span class="o">=</span> <span class="m">5</span><span class="p">,</span>
+      google_theme <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span> <span class="o">+</span>
+  ggtitle<span class="p">(</span><span class="s">&quot;Marx, Weber, Durkheim&quot;</span><span class="p">)</span><span class="o">+</span>
+    theme_538<span class="p">(</span>legend.position <span class="o">=</span> <span class="s">&quot;bottom&quot;</span><span class="p">)</span></code></pre></div>
+
+<p><img src="http://danielmarcelino.github.io/images/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/sociologists-1.png" alt="center" /></p>
+
+<h2 id="complex-queries">Complex Queries</h2>
+
+<p>I test the trend in popularity of the unigran “Capitalism” vis-à-vis other two unigrans (“Socialism”, “Communism”) from 1850 to 2012. Here’s how we might combine + and / to show how the unigram “Capitalism” has blossomed at the expense of “Socialism” and “Communism” terms in the literature published in English.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">ng <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;Capitalism /(Capitalism + Socialism + Communism)&quot;</span><span class="p">)</span>
+cap <span class="o">&lt;-</span> ggram<span class="p">(</span>ng<span class="p">,</span> year_start <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
+      year_end <span class="o">=</span> <span class="m">2012</span><span class="p">,</span>  
+      smoothing <span class="o">=</span> <span class="m">3</span><span class="p">,</span>
+      google_theme <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span> <span class="o">+</span>
+  ggtitle<span class="p">(</span><span class="s">&quot;Capitalism over (Capitalism + Socialism + Communism)&quot;</span><span class="p">)</span><span class="o">+</span>
+    theme_538<span class="p">()</span>
+
+ng <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;Socialism /(Capitalism + Socialism + Communism)&quot;</span><span class="p">)</span>
+soc <span class="o">&lt;-</span> ggram<span class="p">(</span>ng<span class="p">,</span> year_start <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
+      year_end <span class="o">=</span> <span class="m">2012</span><span class="p">,</span>  
+      smoothing <span class="o">=</span> <span class="m">3</span><span class="p">,</span>
+      google_theme <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span> <span class="o">+</span>
+  ggtitle<span class="p">(</span><span class="s">&quot;Socialism over (Capitalism + Socialism + Communism)&quot;</span><span class="p">)</span><span class="o">+</span>
+    theme_538<span class="p">()</span>
+
+ng <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;Communism /(Capitalism + Socialism + Communism)&quot;</span><span class="p">)</span>
+com <span class="o">&lt;-</span> ggram<span class="p">(</span>ng<span class="p">,</span> year_start <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
+      year_end <span class="o">=</span> <span class="m">2012</span><span class="p">,</span>  
+      smoothing <span class="o">=</span> <span class="m">3</span><span class="p">,</span>
+      google_theme <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span> <span class="o">+</span>
+  ggtitle<span class="p">(</span><span class="s">&quot;Communism over (Capitalism + Socialism + Communism)&quot;</span><span class="p">)</span><span class="o">+</span>
+    theme_538<span class="p">()</span>
+multiplot<span class="p">(</span>cap<span class="p">,</span> soc<span class="p">,</span> com<span class="p">,</span> ncols<span class="o">=</span><span class="m">1</span><span class="p">)</span>
+ggfootnote<span class="p">(</span>size <span class="o">=</span> <span class="m">.5</span><span class="p">)</span></code></pre></div>
+
+<p><img src="http://danielmarcelino.github.io/images/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/Capitalism Popularity-1.png" alt="center" /></p>
+
+<p>In the following, I retrieve the frequency for the unigram “Capitalism” in the Russian <em>corpus</em>, French, and British English. Note that the results can be case-insensitive variants.</p>
+
+<p>Below is a plot of the unigram “Capitalism” (“капитализм”) in the Russian language <em>corpus</em>.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">ng <span class="o">&lt;-</span> <span class="s">&quot;капитализм&quot;</span>
+rus<span class="o">=</span>ggram<span class="p">(</span>ng<span class="p">,</span> year_start <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
+      corpus <span class="o">=</span> <span class="s">&quot;rus_2012&quot;</span><span class="p">,</span>
+      ignore_case <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> 
+      google_theme <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span> <span class="o">+</span>
+    ggtitle<span class="p">(</span><span class="s">&quot;Russian: капитализм&quot;</span><span class="p">)</span><span class="o">+</span>
+     theme_538<span class="p">()</span>
+
+ng <span class="o">&lt;-</span> <span class="s">&quot;capitalisme&quot;</span>
+fre<span class="o">=</span>ggram<span class="p">(</span>ng<span class="p">,</span> year_start <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
+      corpus <span class="o">=</span> <span class="s">&quot;fre_2012&quot;</span><span class="p">,</span>
+      ignore_case <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> 
+      google_theme <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span> <span class="o">+</span>
+    ggtitle<span class="p">(</span><span class="s">&quot;French: Capitalisme&quot;</span><span class="p">)</span><span class="o">+</span>
+     theme_538<span class="p">()</span>
+
+ng <span class="o">&lt;-</span> <span class="s">&quot;capitalism&quot;</span>
+eng<span class="o">=</span>ggram<span class="p">(</span>ng<span class="p">,</span> year_start <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
+      corpus <span class="o">=</span> <span class="s">&quot;eng_gb_2012&quot;</span><span class="p">,</span>
+      ignore_case <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> 
+      google_theme <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span> <span class="o">+</span>
+    ggtitle<span class="p">(</span><span class="s">&quot;English: Capitalism&quot;</span><span class="p">)</span><span class="o">+</span>
+     theme_538<span class="p">()</span>
+
+multiplot<span class="p">(</span>rus<span class="p">,</span> fre<span class="p">,</span> eng<span class="p">,</span> ncols<span class="o">=</span><span class="m">1</span><span class="p">)</span>
+ggfootnote<span class="p">(</span>size <span class="o">=</span> <span class="m">.5</span><span class="p">)</span></code></pre></div>
+
+<p><img src="http://danielmarcelino.github.io/images/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/capitalism-1.png" alt="center" /></p>
+
+ ]]></content>
+  </entry>
+  
+  <entry>
+    <title>Competing views on Argentina&#39;s Frontrunner</title>
+    <link rel="alternate" type="text/html" href="/blog/2015/competing-views-in-argentina.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=CompetingviewsonArgentina&#39;sFrontrunner" />
+    <published>2015-10-30T00:00:00Z</published>
+    <updated>2015-10-30T00:00:00+00:00</updated>
+    <id>/blog/2015/competing-views-in-argentina</id>
+    <content type="html"><![CDATA[ <p>The last poll published today by <em>Polldata</em> put Scioli below 40%, with about 5% reporting being undecided.
+It might be too early to state anything solid, but the few polls prospecting the runoff election in Argentina seem to be telling two distinct histories. Polling houses <em>Hugo Haime</em> and <em>IPSOS</em> suggest that Daniel Scioli is going up while <em>Elypsis</em>  and <em>Polldata</em> say he’s actually sinking as the weeks go by. The last poll published today by <em>Polldata</em> puts Scioli below 40%, with about 5% reporting being undecided. My experience following  multiparty elections suggests that polls perform much better in the runoff than in primaries, meaning that the average of the polls now is much more close to the real vote preference than reported before.</p>
+
+<p><img src="http://danielmarcelino.github.io/images/2015/Daniel_Scioli_Gross_lm.png" alt="" /></p>
+
+ ]]></content>
+  </entry>
+  
+  <entry>
+    <title>House Effects in Argentinian polling</title>
+    <link rel="alternate" type="text/html" href="/blog/2015/argentine-house-effects.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=HouseEffectsinArgentinianpolling" />
+    <published>2015-10-25T00:00:00Z</published>
+    <updated>2015-10-25T00:00:00+00:00</updated>
+    <id>/blog/2015/argentine-house-effects</id>
+    <content type="html"><![CDATA[ <p>I’ve already <a href="http://danielmarcelino.com/r/08-2015/Argentine-general-election-2015/">posted</a> previously on “house effects”, the tendency of polling organizations to systematically vary in their results from one another. In this post, I look specifically at these house effects, and show which polling organizations over or under-estimate support for each candidate–compared to the average–in this presidential election in Argentina.</p>
+
+<p>The graph below plots the house effects for the main presidential candidates considering more than 115 polls that I’ve collected since 2014.</p>
+
+<p><img src="http://danielmarcelino.github.io/images/2015/3d-house-effects_argentine.png" alt="House Effects" /></p>
+
+<p>In essence, the house effects measure how far polls by a pollster are from what would be expected based on trends over time for the average polling house. In other words, the average house effect toward each candidate/party is expected to be zero by design. Then, a poll that is systematically 2% below what would be predicted for the date the poll was conducted will have a house effect of -2.0%.</p>
+
+<p>The dots in “red” in the plot represent the pollster whose house effects were negative toward Mauricio Macri, while dots in “blue” represent positive effects toward him.</p>
+
+<p>The electoral result tonight was a bit of surprise as several pollsters didn’t seem to have pick out a crescendo preference for the opposition candidate, Mauricio Macri, among undecided voters over the last week. <a href="http://us3.campaign-archive1.com/?u=6b1e9fcb4df3eaee1cd635f50&amp;id=0e702eecac&amp;e=c2780c4e4b">This blog</a> has more details.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kn">library</span><span class="p">(</span>scatterplot3d<span class="p">)</span>
+houseEffects<span class="o">$</span>pcolor<span class="p">[</span>houseEffects<span class="o">$</span>Macri<span class="o">&lt;</span> <span class="m">0</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s">&quot;red&quot;</span>
+houseEffects<span class="o">$</span>pcolor<span class="p">[</span>houseEffects<span class="o">$</span>Macri<span class="o">&gt;=</span><span class="m">0</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s">&quot;blue&quot;</span>
+
+<span class="kp">with</span><span class="p">(</span>houseEffects<span class="p">,</span> <span class="p">{</span>
+  s3d <span class="o">&lt;-</span> scatterplot3d<span class="p">(</span>Scioli<span class="p">,</span> Massa<span class="p">,</span> Macri<span class="p">,</span> <span class="c1"># x y and z axis</span>
+                       angle<span class="o">=</span><span class="m">30</span><span class="p">,</span> <span class="c1"># angle of the plot </span>
+                       color<span class="o">=</span>pcolor<span class="p">,</span> pch<span class="o">=</span><span class="m">19</span><span class="p">,</span> <span class="c1"># filled blue circles</span>
+                       type<span class="o">=</span><span class="s">&quot;h&quot;</span><span class="p">,</span> <span class="c1"># vertical lines to the x-y plane</span>
+                       main<span class="o">=</span><span class="s">&quot;House Effects&quot;</span><span class="p">,</span>
+                       xlab<span class="o">=</span><span class="s">&quot;Daniel Scioli&quot;</span><span class="p">,</span>
+                       ylab<span class="o">=</span><span class="s">&quot;Sergio Massa&quot;</span><span class="p">,</span>
+                       zlab<span class="o">=</span><span class="s">&quot;Mauricio Macri&quot;</span><span class="p">)</span>
+
+  s3d.coords <span class="o">&lt;-</span> s3d<span class="o">$</span>xyz.convert<span class="p">(</span>Scioli<span class="p">,</span> Massa<span class="p">,</span> Macri<span class="p">)</span> <span class="c1"># convert 3D coords to 2D projection</span>
+  text<span class="p">(</span>s3d.coords<span class="o">$</span>x<span class="p">,</span> s3d.coords<span class="o">$</span>y<span class="p">,</span>  <span class="c1"># x and y coordinates</span>
+       labels<span class="o">=</span>Pollster<span class="p">,</span>  <span class="c1"># text to plot</span>
+       cex<span class="o">=</span><span class="m">.5</span><span class="p">,</span> pos<span class="o">=</span><span class="m">4</span><span class="p">)</span> <span class="c1"># shrink text 50% and place to right of points)</span>
+  legend<span class="p">(</span><span class="s">&quot;topleft&quot;</span><span class="p">,</span> inset<span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="c1"># location and inset</span>
+         bty<span class="o">=</span><span class="s">&quot;n&quot;</span><span class="p">,</span> cex<span class="o">=</span><span class="m">.7</span><span class="p">,</span>  <span class="c1"># suppress legend box, shrink text 70%</span>
+         title<span class="o">=</span><span class="s">&quot;House effects toward\nDaniel Scioli&quot;</span><span class="p">,</span>
+         <span class="kt">c</span><span class="p">(</span><span class="s">&quot;-&quot;</span><span class="p">,</span> <span class="s">&quot;+&quot;</span><span class="p">),</span> fill<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;blue&quot;</span><span class="p">))</span>
+<span class="p">})</span></code></pre></div>
+
+ ]]></content>
+  </entry>
+  
+  <entry>
+    <title>Paranormal Distribution</title>
+    <link rel="alternate" type="text/html" href="/blog/2015/paranormal-distribution.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=ParanormalDistribution" />
+    <published>2015-10-20T00:00:00Z</published>
+    <updated>2015-10-20T00:00:00+00:00</updated>
+    <id>/blog/2015/paranormal-distribution</id>
+    <content type="html"><![CDATA[ <p>What if, instead of a normal, you got a paranormal distribution?
+In case you want to read an influential paper on this matter, you can find it <a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2465539/">here</a>.</p>
+
+<p><img src="http://danielmarcelino.github.io/images/2015/paranormal.png" alt="Paranormal Distribution" /></p>
+
+<h4 id="load-packages-and-set-up-the-theme">Load packages and set up the theme</h4>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kn">library</span><span class="p">(</span>ggplot2<span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>gridExtra<span class="p">)</span>
+
+theme_old <span class="o">&lt;-</span> theme<span class="p">(</span>panel.grid.minor <span class="o">=</span> element_blank<span class="p">(),</span>
+                   panel.grid.major <span class="o">=</span> element_blank<span class="p">(),</span>
+                   panel.background <span class="o">=</span> element_blank<span class="p">(),</span>
+                   plot.background <span class="o">=</span> element_rect<span class="p">(</span>fill<span class="o">=</span><span class="s">&quot;#F9F0Ea&quot;</span><span class="p">),</span>
+                   panel.border <span class="o">=</span>  element_blank<span class="p">(),</span>
+                   axis.line <span class="o">=</span> element_blank<span class="p">(),</span>
+                   axis.text.x <span class="o">=</span> element_blank<span class="p">(),</span>
+                   axis.text.y <span class="o">=</span> element_text<span class="p">(</span>colour<span class="o">=</span><span class="kc">NA</span><span class="p">),</span>
+                   <span class="c1"># axis.text.y = element_blank(),</span>
+                   axis.ticks <span class="o">=</span> element_blank<span class="p">(),</span>
+                   axis.title.x <span class="o">=</span> element_blank<span class="p">(),</span>
+                   axis.title.y <span class="o">=</span> element_blank<span class="p">(),</span>
+<span class="c1"># I&#39;m using xkcd fonts, replace or install if you don&#39;t have it.</span>
+                   text <span class="o">=</span> element_text<span class="p">(</span>size<span class="o">=</span><span class="m">14</span><span class="p">,</span> family<span class="o">=</span><span class="s">&quot;xkcd&quot;</span><span class="p">),</span>
+                   axis.line <span class="o">=</span> element_line<span class="p">(</span>colour <span class="o">=</span> <span class="s">&quot;black&quot;</span><span class="p">,</span> linetype <span class="o">=</span> <span class="s">&quot;solid&quot;</span><span class="p">,</span> size <span class="o">=</span> <span class="m">1</span><span class="p">),</span>
+                   axis.line.y <span class="o">=</span> element_blank<span class="p">(),</span>
+                   plot.title <span class="o">=</span> element_text<span class="p">(</span>size<span class="o">=</span><span class="m">22</span><span class="p">))</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1">#### Make a &quot;normal&quot; normal distribution </span>
+gplot1 <span class="o">&lt;-</span> ggplot<span class="p">(</span><span class="kt">data.frame</span><span class="p">(</span>x <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span> <span class="m">3</span><span class="p">)),</span> aes<span class="p">(</span>x<span class="p">))</span> <span class="o">+</span> stat_function<span class="p">(</span>fun <span class="o">=</span> dnorm<span class="p">)</span> <span class="o">+</span> labs<span class="p">(</span>title <span class="o">=</span> <span class="s">&quot;Normal Distribution&quot;</span><span class="p">)</span> <span class="o">+</span> theme_old</code></pre></div>
+
+<h4 id="make-a-floating-dress-for-the-paranormal-distribution">Make a floating dress for the paranormal distribution</h4>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">a <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span> <span class="m">-1.5</span><span class="p">,</span> <span class="m">-0.9</span><span class="p">,</span> <span class="m">-0.3</span><span class="p">,</span> <span class="m">0.6</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1.5</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">)</span>
+b <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">0.004431848</span><span class="p">,</span> <span class="m">0.03</span><span class="p">,</span> <span class="m">0.0044</span><span class="p">,</span> <span class="m">0.03</span><span class="p">,</span> <span class="m">0.01</span><span class="p">,</span> <span class="m">0.030</span><span class="p">,</span> <span class="m">0.0044</span><span class="p">,</span> <span class="m">0.015</span><span class="p">,</span> <span class="m">0.004431848</span><span class="p">)</span>
+
+data <span class="o">&lt;-</span> <span class="kt">data.frame</span><span class="p">(</span>a <span class="o">=</span> a<span class="p">,</span> b <span class="o">=</span> b<span class="p">)</span>
+<span class="kt">c</span> <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">-0.40</span><span class="p">,</span> <span class="m">0.04</span><span class="p">)</span>
+d <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">0.27</span><span class="p">,</span> <span class="m">0.27</span><span class="p">)</span>
+data2 <span class="o">&lt;-</span> <span class="kt">data.frame</span><span class="p">(</span><span class="kt">c</span> <span class="o">=</span> <span class="kt">c</span><span class="p">,</span> d <span class="o">=</span> d<span class="p">)</span></code></pre></div>
+
+<h4 id="plot-paranormal-distribution">Plot paranormal distribution</h4>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">gplot2 <span class="o">&lt;-</span> ggplot<span class="p">(</span>data<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span>a<span class="p">,</span> y<span class="o">=</span>b<span class="p">))</span> <span class="o">+</span> geom_line<span class="p">()</span>
+gplot2 <span class="o">&lt;-</span> gplot2 <span class="o">+</span> stat_function<span class="p">(</span>fun <span class="o">=</span> dnorm<span class="p">)</span> <span class="o">+</span>
+  geom_point<span class="p">(</span>data <span class="o">=</span> data2<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span><span class="kt">c</span><span class="p">,</span> y<span class="o">=</span>d<span class="p">),</span> pch<span class="o">=</span><span class="mh">0x30</span><span class="p">,</span> size<span class="o">=</span><span class="m">6</span><span class="p">)</span> <span class="o">+</span>
+  geom_point<span class="p">(</span>data <span class="o">=</span> data2<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span><span class="kt">c</span><span class="m">-0.008</span><span class="p">,</span> y<span class="o">=</span>d<span class="m">-0.006</span><span class="p">),</span> pch<span class="o">=</span><span class="m">19</span><span class="p">,</span> size<span class="o">=</span><span class="m">1</span><span class="p">)</span> <span class="o">+</span>
+  labs<span class="p">(</span>title <span class="o">=</span> <span class="s">&quot;Paranormal Distribution&quot;</span><span class="p">)</span> <span class="o">+</span> theme_old</code></pre></div>
+
+<h4 id="put-them-together">Put them together</h4>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">grid.arrange<span class="p">(</span>gplot1<span class="p">,</span> gplot2<span class="p">)</span></code></pre></div>
+ ]]></content>
+  </entry>
+  
+  <entry>
+    <title>A Talk About Campaign Finance in Brazil</title>
+    <link rel="alternate" type="text/html" href="/blog/2015/talk-about-campaign-finance.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=ATalkAboutCampaignFinanceinBrazil" />
+    <published>2015-10-17T00:00:00Z</published>
+    <updated>2015-10-17T00:00:00+00:00</updated>
+    <id>/blog/2015/talk-about-campaign-finance</id>
+    <content type="html"><![CDATA[ <p>Comments on campaign finance in brazil.</p>
+
+<!--more-->
+
+<p>Last week, I delivered a talk at <a href="http://www.unb.br">University of Brasilia</a> about my past research on the topic of campaign finance. I didn’t know in advance about the existence of this seminar. Indeed, it was a big surprise receiving the invitation from Prof. Marcelo Pimentel, who is teaching on Fridays afternoon a class on this topic with more than 50 registered students. I became his fan after seeing his syllabus. He did managed to assemble a handful studies covering why, what, how, and when money affects politics and elections in Brazil.</p>
+
+<p>Though I covered a lot of factors in my talk, I think, I had the wrong pictures to show for a heterogeneous crowd. Instead of wasting time showing regression tables, and trying to solve understanding issues after showing them, I should have shown simple yet powerful pictures like the following ones, so to give the intuition about the relationship between money and votes, generally debated in the literature and media.</p>
+
+<p><img src="http://danielmarcelino.github.io/images/2015/linearSS.png" alt="Linear Relationship with SS" /></p>
+
+<p><img src="http://danielmarcelino.github.io/images/2015/u-shape.png" alt="U-Shape Relationship" /></p>
+
+<p>Of course, the biggest challenge of this scholarship is how to disentangle any existing confounders in this rather seemingly relationship: votes ~ money.</p>
+
+<p>Overall, we know the recipe, preparing the dishy is different  thing. Studies being conducted on this area try to find the “treatment effect” of money on votes: What would have happened if the candidate had spent only a fraction of his budget, or What would have happened if the candidate who spent only a fraction could spend more?</p>
+
+<p>The problem arises because we can see one condition, but never both at the same time. The suboptimal solution is to measure the average effect <code>(Y_1i - Y_0i)</code>, or the average of groups of candidates, such as incumbents vs non-incumbents. It turns out that comparisons of who spend more or less in elections are likely to be a poor measure of the causal effect of campaign spending simply because selection bias should be extremely high (Morton and Williams, 2010). It’s not trivial to argue that those who has more money to spend would have earned more votes anyway.</p>
+
+<p>As Angrist and Pischke point out in their 2009’s book, if selection bias is positive, the naïve comparison <code>E(Y_1i | c_i=1) - E(Y_0i | c_i=0)</code> can be a real problem, since the benefits of spending extra money is exaggerated.</p>
+
+<p><img src="http://danielmarcelino.github.io/images/2015/Angrist_Pischke_bias.png" alt="U-Shape Relationship" /></p>
+
+<p>It could be “easier” to provide causal inference on this if we run a randomized experiment. If the treatment of campaign spending levels is randomly assigned, selection bias would be zero. The experiment don’t need to be that large, if treated units are random selection from the population of candidates, then the impact on treated also applies to the population. Isn’t cool?</p>
+
+ ]]></content>
+  </entry>
+  
+
+</feed>

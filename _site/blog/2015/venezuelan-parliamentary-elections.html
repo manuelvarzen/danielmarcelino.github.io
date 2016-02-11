@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+
+ 
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="keywords" content="Daniel Marcelino, SciencesPo, SoundexBR, r-project, r, political science, political behavior, social sciences, statistics, methods, applied methods, programming, data mining, data visualization, datascience, big data"/>	
+	<meta name="google-site-verification" content="Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ" />
+	<meta name="bing_webmastertools_id" content="97837256955BD270FD688E2B50F89FDB" />
+    <meta name="author" content="Daniel Marcelino" />
+	 <meta name="title" content="&middot; Daniel &middot; Venezuelan Parliamentary Election: What do the Polls Say?" />
+	 
+	   <!-- favicon -->
+	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+  
+	
+
+  
+ <title>EnfoRced Data Analysis</title>
+   
+
+  
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis - Blog of Daniel Marcelino" href="/feed.xml" />
+
+  
+    
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+    
+    
+  
+  
+    
+      <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="/css/main.css" />
+    
+  
+  
+  
+    
+	  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+    
+	  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+    
+  
+
+    
+  
+  
+  
+  
+  
+  <!-- Facebook OpenGraph tags -->
+  
+  <meta property="og:title" content="Venezuelan Parliamentary Election: What do the Polls Say?" />
+  
+  
+  <meta property="og:type" content="website" />
+  
+  
+  <meta property="og:url" content="http://danielmarcelino.github.io/blog/2015/venezuelan-parliamentary-elections.html/" />
+  
+  
+  
+  <meta property="og:image" content="http://danielmarcelino.github.io/images/daniel_rio.jpg" />
+  
+
+</head>
+
+
+  <body>
+	 
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://danielmarcelino.github.io">EnfoRced Data Analysis</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+	    
+        <li>
+		  <a href="/blog">Blog</a>
+		</li>
+		
+        <li>
+		  <a href="/interests">Interests</a>
+		</li>
+		
+        <li>
+		  <a href="/randomwalks">Random Walks</a>
+		</li>
+		
+        <li>
+		  <a href="/about">About</a>
+		</li>
+		
+		
+		
+		<li>
+		  <a href="/search" class="nav-search-link" title="Search">
+		    <span class="fa fa-search nav-search-icon"></span>
+			<span class="nav-search-text">Search</span>
+		  </a>
+		</li>
+		
+      </ul>
+    </div>
+	
+	
+	<div class="avatar-container">
+	  <div class="avatar-img-border">
+	    <a href="http://danielmarcelino.github.io ">
+	      <img class="avatar-img" src="/images/daniel_rio.jpg" />
+		</a>
+	  </div>
+	</div>
+	
+	
+  </div>
+</nav>  
+
+    
+
+
+
+<header class="header-section ">
+
+<div class="intro-header no-img">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-heading">
+          <h1>Venezuelan Parliamentary Election: What do the Polls Say?</h1>
+		  
+		  
+		  
+		  <span class="post-meta">Posted on December 6, 2015</span>
+		  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+
+
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+	    <p>There is not a huge population of opinion polls covering this parliamentary election in Venezuela, but all I’ve can be used to gauge the public opinion by the local polling houses. This posting begs an obvious question: how has the mood in Venezuela varied over time with respect to voting intentions for the two political blocs? Next, can we detect any biases among those publishing polls?</p>
+
+<!--more-->
+
+<h1 id="the-data">The data</h1>
+<p>I’ve collected some polls available on the internet dating back to January 2014, which I made available <a href="https://github.com/danielmarcelino/Polling/raw/master/Venezuela/data/polls.txt">here</a> after some <a href="http://www.nytimes.com/2014/08/18/technology/for-big-data-scientists-hurdle-to-insights-is-janitor-work.html?_r=0">data janitor work</a>.</p>
+
+<h1 id="polls-over-time">Polls over time</h1>
+<p>After a bit filling-in-the-blanks working with missing date values, we can visualize the poll trends over time. Given the sample size, sampling error and other sources of noise, a loess model can pretty much pick out the signals of long-term trends.</p>
+
+<p><img src="http://danielmarcelino.github.io/images/code-2015-12-06-venezuelan-parliamentary-elections/loess-1.png" alt="center" /></p>
+
+<h1 id="pollster-biases">Pollster biases</h1>
+<p>Let’s pretend we can trust on all those polls despite the huge variability among them as already mentioned <a href="https://danielmarcelino.github.io/r/2015/12/04/venezuelan-parliamentary-election-2015/">here</a>. In fact, the problem is not the variability as such, but my lack of knowledge about who are the pollsters and their past performance, so I can’t judge them at first, let’s say it clearly.
+Nonetheless, if we accept the above models as a sound estimate of the expected poll response at a given time, we can analyze the residuals of actual poll results and look for systematic biases. In theory, with a decent sample size (all have ~ 1300) and a reasonably stratified sampling method (I’m not even assuming  random samples here), we might expect polls results to be roughly normally distributed around the expected polls result, regardless of who performed or commissioned the poll, right?</p>
+
+<p>The graph below shows the distributions per polling house for those who polled more than a single poll in this dataset.</p>
+
+<p><img src="http://danielmarcelino.github.io/images/code-2015-12-06-venezuelan-parliamentary-elections/biases-3.png" alt="center" /></p>
+
+<p>We’ve to keep in mind that there are important caveats which we’re not addressing here, as that different polls have used different question sets, methods etc, so this isn’t evidence for anything underhanded per se. It seems reasonable to expect that while parties might have good reasons to publish polls in their favor, pollsters conducting the polls should generally be more or less indifferent.</p>
+
+<p>The results are hampered by a small number of data points per pollster, and that to claim they are polling significantly above or below expectation, save for the <em>Hercón</em>, which is significantly more pro opposition (MUD) than expected, given the probability laws, although the p-value is just above the 5% thumb/convention. With a little research, I figure out that <em>Datanálisis</em> performed fine in the previous elections, and here it appears just around the center of the distribution leaning toward the Socialists (PSUV).</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"><strong>pollster</strong></th>
+      <th style="text-align: right"><strong>p</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Meganalisis</td>
+      <td style="text-align: right">0.1875000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Venebarómetro</td>
+      <td style="text-align: right">0.2500000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">IVAD</td>
+      <td style="text-align: right">0.4375000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">ICS</td>
+      <td style="text-align: right">0.5000000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Delphos</td>
+      <td style="text-align: right">1.0000000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Datanálisis</td>
+      <td style="text-align: right">0.7646484</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">VARIANZAS</td>
+      <td style="text-align: right">1.0000000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Consultores</td>
+      <td style="text-align: right">0.2500000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">DatinCorp</td>
+      <td style="text-align: right">0.5625000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Keller y Asociados</td>
+      <td style="text-align: right">0.2500000</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Hercón</td>
+      <td style="text-align: right">0.0625000</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>What do the polls say? Well, the majority of Venezuelans are favoring opposition candidates and this has been the trend for at least the latter two years, however polls appear to have been more variable in recent months. This election is expected to bring the opposition to control the National Assembly after 16 years loosing the elections in the country. 
+The Venezuela’s Socialists seem to be at risk, but predicting the final number of seats is a tough task that I’m not considering in this post. 
+In fact, it might be really difficult to set forth a range of winning seats as the government recently enacted some redistricting seats in order to weaken an eventual absolute majority by the opposition. Somehow, the polls show this will be a significant symbolic defeat for the government that shows it lost despite all the advantages in state power and control over the media.</p>
+
+<h2 id="update-error">UPDATE (Error)</h2>
+<p>I was informed by André Salvati that the code block below was producing an error message of unknown column; the missing part has been included. Thanks for letting me know. The whole code can be found in this <a href="https://gist.github.com/danielmarcelino/904c804b2681ac8a9d08">gist</a></p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kn">library</span><span class="p">(</span><span class="s">&quot;dplyr&quot;</span><span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span><span class="s">&quot;ggplot2&quot;</span><span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span><span class="s">&quot;grid&quot;</span><span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span><span class="s">&quot;reshape2&quot;</span><span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span><span class="s">&quot;lubridate&quot;</span><span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span><span class="s">&quot;scales&quot;</span><span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span><span class="s">&quot;knitr&quot;</span><span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span><span class="s">&quot;SciencesPo&quot;</span><span class="p">)</span> <span class="c1"># to use the themes, you must install the version from github</span>
+
+<span class="kn">source</span> <span class="o">=</span> <span class="s">&quot;https://github.com/danielmarcelino/Polling/raw/master/Venezuela/data/polls.txt&quot;</span>
+
+data <span class="o">&lt;-</span> read.csv<span class="p">(</span><span class="kn">source</span><span class="p">,</span> sep<span class="o">=</span><span class="s">&quot;\t&quot;</span><span class="p">,</span> encoding <span class="o">=</span> <span class="s">&quot;UTF-8&quot;</span><span class="p">)</span>
+
+<span class="c1"># Correcting for empty date values</span>
+<span class="kp">head</span><span class="p">(</span>data<span class="p">)</span>
+
+data<span class="p">[,</span><span class="m">2</span><span class="o">:</span><span class="m">3</span><span class="p">]</span><span class="o">&lt;-</span><span class="kp">lapply</span><span class="p">(</span>data<span class="p">[,</span><span class="m">2</span><span class="o">:</span><span class="m">3</span><span class="p">],</span><span class="kp">as.Date</span><span class="p">,</span> format <span class="o">=</span> <span class="s">&quot;%d-%m-%Y&quot;</span><span class="p">)</span>
+
+times <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)(</span>x<span class="o">*</span><span class="m">100</span><span class="p">)</span>
+
+data<span class="p">[,</span><span class="m">5</span><span class="o">:</span><span class="m">8</span><span class="p">]</span><span class="o">&lt;-</span><span class="kp">lapply</span><span class="p">(</span>data<span class="p">[,</span><span class="m">5</span><span class="o">:</span><span class="m">8</span><span class="p">],</span>times<span class="p">)</span>
+
+days <span class="o">=</span> <span class="kp">round</span><span class="p">(</span><span class="kp">mean</span><span class="p">(</span>data<span class="o">$</span>end<span class="o">-</span>data<span class="o">$</span>begin<span class="p">,</span> na.rm<span class="o">=</span><span class="kc">TRUE</span><span class="p">))</span>
+mask <span class="o">=</span> <span class="kp">is.na</span><span class="p">(</span>data<span class="o">$</span>end<span class="p">)</span>
+
+data<span class="o">$</span>end<span class="p">[</span>mask<span class="p">]</span> <span class="o">=</span> data<span class="o">$</span>begin<span class="p">[</span>mask<span class="p">]</span><span class="o">+</span>days
+
+<span class="c1"># Find middle time point</span>
+DaysInField <span class="o">=</span> <span class="kp">round</span><span class="p">(</span><span class="kp">mean</span><span class="p">(</span>data<span class="o">$</span>end<span class="o">-</span>data<span class="o">$</span>begin<span class="p">,</span> na.rm<span class="o">=</span><span class="kc">TRUE</span><span class="p">))</span>
+data<span class="o">$</span>date <span class="o">=</span> data<span class="o">$</span>begin<span class="o">+</span>DaysInField</code></pre></div>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">polls <span class="o">&lt;-</span> melt<span class="p">(</span>data<span class="p">,</span> id.vars<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;house&quot;</span><span class="p">,</span> <span class="s">&quot;date&quot;</span><span class="p">),</span> 
+     measure.var<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;MUD&quot;</span><span class="p">,</span> <span class="s">&quot;PSUV&quot;</span><span class="p">,</span> <span class="s">&quot;Others&quot;</span><span class="p">,</span> <span class="s">&quot;Undecided&quot;</span><span class="p">))</span>
+<span class="kp">colnames</span><span class="p">(</span>polls<span class="p">)[</span><span class="m">3</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s">&quot;response&quot;</span>
+<span class="kp">levels</span><span class="p">(</span>polls<span class="o">$</span>response<span class="p">)</span> <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;MUD&quot;</span><span class="p">,</span> <span class="s">&quot;PSUV&quot;</span><span class="p">,</span> <span class="s">&quot;Others&quot;</span><span class="p">,</span> <span class="s">&quot;Swing&quot;</span><span class="p">)</span>
+
+
+ggplot<span class="p">(</span>polls<span class="p">,</span> aes<span class="p">(</span>x<span class="o">=</span><span class="kp">date</span><span class="p">,</span> y<span class="o">=</span>value<span class="p">,</span> col<span class="o">=</span>response<span class="p">,</span> fill<span class="o">=</span>response<span class="p">))</span> <span class="o">+</span> 
+  geom_point<span class="p">()</span> <span class="o">+</span> geom_smooth<span class="p">(</span>method<span class="o">=</span><span class="s">&quot;loess&quot;</span><span class="p">,</span> alpha<span class="o">=</span><span class="kp">I</span><span class="p">(</span><span class="m">.2</span><span class="p">))</span> <span class="o">+</span>
+  theme_538<span class="p">()</span> <span class="o">+</span> 
+ theme<span class="p">(</span>legend.position<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">.5</span><span class="p">,</span><span class="m">.95</span><span class="p">),</span> legend.direction<span class="o">=</span><span class="s">&quot;horizontal&quot;</span><span class="p">)</span> <span class="o">+</span>
+  scale_color_manual<span class="p">(</span>values <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;orange&quot;</span><span class="p">,</span> <span class="s">&quot;grey40&quot;</span><span class="p">))</span> <span class="o">+</span>
+  scale_fill_manual<span class="p">(</span>values <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;orange&quot;</span><span class="p">,</span> <span class="s">&quot;grey40&quot;</span><span class="p">))</span> <span class="o">+</span>
+  scale_x_date<span class="p">(</span>labels <span class="o">=</span> date_format<span class="p">(</span><span class="s">&quot;%b &#39;%y&quot;</span><span class="p">))</span> <span class="o">+</span>
+  scale_y_continuous<span class="p">(</span>breaks<span class="o">=</span><span class="kp">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">70</span><span class="p">,</span> <span class="m">10</span><span class="p">),</span> limits<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">70</span><span class="p">))</span> <span class="o">+</span>
+  geom_hline<span class="p">(</span>yintercept<span class="o">=</span><span class="m">0</span><span class="p">,</span>size<span class="o">=</span><span class="m">1.2</span><span class="p">,</span>colour<span class="o">=</span><span class="s">&quot;#535353&quot;</span><span class="p">)</span> <span class="o">+</span>
+  ggtitle<span class="p">(</span><span class="s">&quot;Vote Intention Among Venezuelans&quot;</span><span class="p">)</span> <span class="o">+</span>
+  labs<span class="p">(</span>x<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> y<span class="o">=</span><span class="s">&quot;%&quot;</span><span class="p">,</span> fill<span class="o">=</span><span class="s">&quot;Poll response:&quot;</span><span class="p">,</span> col<span class="o">=</span><span class="s">&quot;Poll response:&quot;</span><span class="p">)</span>
+<span class="c1"># credits</span>
+ geom_foot<span class="p">(</span><span class="s">&quot;danielmarcelino.github.io&quot;</span><span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1">## Residual analysis per pollster</span>
+l.MUD <span class="o">&lt;-</span> loess<span class="p">(</span>value <span class="o">~</span> <span class="kp">as.numeric</span><span class="p">(</span><span class="kp">date</span><span class="p">),</span> data<span class="o">=</span><span class="kp">subset</span><span class="p">(</span>polls<span class="p">,</span> response<span class="o">==</span><span class="s">&quot;MUD&quot;</span><span class="p">))</span>
+l.PSUV <span class="o">&lt;-</span> loess<span class="p">(</span>value <span class="o">~</span> <span class="kp">as.numeric</span><span class="p">(</span><span class="kp">date</span><span class="p">),</span> data<span class="o">=</span><span class="kp">subset</span><span class="p">(</span>polls<span class="p">,</span> response<span class="o">==</span><span class="s">&quot;PSUV&quot;</span><span class="p">))</span>
+l.Others <span class="o">&lt;-</span> loess<span class="p">(</span>value <span class="o">~</span> <span class="kp">as.numeric</span><span class="p">(</span><span class="kp">date</span><span class="p">),</span> data<span class="o">=</span><span class="kp">subset</span><span class="p">(</span>polls<span class="p">,</span> response<span class="o">==</span><span class="s">&quot;Others&quot;</span><span class="p">))</span>
+l.Swing <span class="o">&lt;-</span> loess<span class="p">(</span>value <span class="o">~</span> <span class="kp">as.numeric</span><span class="p">(</span><span class="kp">date</span><span class="p">),</span> data<span class="o">=</span><span class="kp">subset</span><span class="p">(</span>polls<span class="p">,</span> response<span class="o">==</span><span class="s">&quot;Swing&quot;</span><span class="p">))</span>
+
+<span class="kp">with</span><span class="p">(</span>polls<span class="p">,</span> plot<span class="p">(</span><span class="kp">as.numeric</span><span class="p">(</span><span class="kp">date</span><span class="p">),</span> value<span class="p">))</span>
+lines<span class="p">(</span><span class="kp">as.numeric</span><span class="p">(</span>polls<span class="p">[</span>polls<span class="o">$</span>response <span class="o">==</span> <span class="s">&quot;MUD&quot;</span><span class="p">,]</span><span class="o">$</span><span class="kp">date</span><span class="p">),</span>
+      predict<span class="p">(</span>l.MUD<span class="p">,</span> <span class="kp">as.numeric</span><span class="p">(</span>polls<span class="p">[</span>polls<span class="o">$</span>response <span class="o">==</span> <span class="s">&quot;MUD&quot;</span><span class="p">,]</span><span class="o">$</span><span class="kp">date</span><span class="p">)))</span>
+
+<span class="c1"># Calculate predicted values per row, </span>
+polls<span class="o">$</span>predicted <span class="o">&lt;-</span> <span class="kc">NA</span>
+
+loessPrediction <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>resp<span class="p">,</span> model<span class="p">){</span>
+  rows <span class="o">&lt;-</span> polls<span class="o">$</span>response <span class="o">==</span> resp
+  curr <span class="o">&lt;-</span> polls<span class="p">[</span>rows<span class="p">,]</span>
+  preds <span class="o">&lt;-</span> <span class="kp">with</span><span class="p">(</span>curr<span class="p">,</span> predict<span class="p">(</span>model<span class="p">,</span> <span class="kp">as.numeric</span><span class="p">(</span><span class="kp">date</span><span class="p">)))</span>
+  polls<span class="p">[</span>rows<span class="p">,]</span><span class="o">$</span>predicted <span class="o">&lt;&lt;-</span> preds
+<span class="p">}</span>
+
+loessPrediction<span class="p">(</span><span class="s">&quot;MUD&quot;</span><span class="p">,</span> l.MUD<span class="p">)</span>
+loessPrediction<span class="p">(</span><span class="s">&quot;PSUV&quot;</span><span class="p">,</span> l.PSUV<span class="p">)</span>
+loessPrediction<span class="p">(</span><span class="s">&quot;Others&quot;</span><span class="p">,</span> l.Others<span class="p">)</span>
+loessPrediction<span class="p">(</span><span class="s">&quot;Swing&quot;</span><span class="p">,</span> l.Swing<span class="p">)</span>
+
+polls<span class="o">$</span>residual <span class="o">&lt;-</span> polls<span class="o">$</span>value <span class="o">-</span> polls<span class="o">$</span>predicted
+hist<span class="p">(</span>polls<span class="o">$</span>residual<span class="p">)</span>
+
+<span class="c1">## Check pollsters&#39; names</span>
+polls<span class="o">$</span>house <span class="o">&lt;-</span> <span class="kp">gsub</span><span class="p">(</span><span class="s">&quot; ?\\(.*&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> polls<span class="o">$</span>house<span class="p">)</span>
+polls<span class="o">$</span>house <span class="o">&lt;-</span> <span class="kp">gsub</span><span class="p">(</span><span class="s">&quot;-&quot;</span><span class="p">,</span> <span class="s">&quot; &quot;</span><span class="p">,</span> polls<span class="o">$</span>house<span class="p">)</span>
+
+houseNames <span class="o">&lt;-</span> <span class="kp">do.call</span><span class="p">(</span><span class="kp">rbind</span><span class="p">,</span> <span class="kp">strsplit</span><span class="p">(</span><span class="kp">as.character</span><span class="p">(</span>polls<span class="o">$</span>house<span class="p">),</span> <span class="s">&quot;/&quot;</span><span class="p">))</span>
+<span class="kp">colnames</span><span class="p">(</span>houseNames<span class="p">)</span> <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;pollster&quot;</span><span class="p">,</span> <span class="s">&quot;commission&quot;</span><span class="p">)</span>
+
+polls <span class="o">&lt;-</span> <span class="kp">cbind</span><span class="p">(</span>polls<span class="p">,</span> houseNames<span class="p">)</span>
+
+<span class="c1">## Order pollster by median residual:</span>
+ordering <span class="o">&lt;-</span> group_by<span class="p">(</span>polls<span class="p">,</span> pollster<span class="p">)</span> <span class="o">%&gt;%</span>
+  filter<span class="p">(</span>response <span class="o">==</span> <span class="s">&quot;MUD&quot;</span><span class="p">)</span> <span class="o">%&gt;%</span>
+  summarize<span class="p">(</span>med <span class="o">=</span> median<span class="p">(</span>residual<span class="p">,</span> na.rm<span class="o">=</span><span class="bp">T</span><span class="p">),</span> count<span class="o">=</span>n<span class="p">())</span> <span class="o">%&gt;%</span>
+  arrange<span class="p">(</span>med<span class="p">)</span> 
+
+polls<span class="o">$</span>pollster <span class="o">&lt;-</span> <span class="kp">factor</span><span class="p">(</span>polls<span class="o">$</span>pollster<span class="p">,</span> levels<span class="o">=</span>ordering<span class="o">$</span>pollster<span class="p">)</span>
+
+<span class="c1">## Testing for biases by a given pollster </span>
+ggplot<span class="p">(</span><span class="kp">subset</span><span class="p">(</span>polls<span class="p">,</span> response <span class="o">==</span> <span class="s">&quot;MUD&quot;</span><span class="p">),</span> 
+       aes<span class="p">(</span>x<span class="o">=</span>pollster<span class="p">,</span> y<span class="o">=</span>residual<span class="p">))</span> <span class="o">+</span>
+  geom_hline<span class="p">(</span>aes<span class="p">(</span>yintercept<span class="o">=</span><span class="m">0</span><span class="p">))</span> <span class="o">+</span>
+  geom_violin<span class="p">(</span>scale<span class="o">=</span><span class="s">&quot;width&quot;</span><span class="p">,</span> fill<span class="o">=</span><span class="kp">I</span><span class="p">(</span><span class="s">&quot;grey50&quot;</span><span class="p">),</span> col<span class="o">=</span><span class="kp">I</span><span class="p">(</span><span class="s">&quot;grey50&quot;</span><span class="p">))</span> <span class="o">+</span> 
+  geom_jitter<span class="p">(</span>position<span class="o">=</span>position_jitter<span class="p">(</span>width<span class="o">=</span><span class="m">.05</span><span class="p">))</span> <span class="o">+</span> 
+  stat_summary<span class="p">(</span>geom <span class="o">=</span> <span class="s">&quot;crossbar&quot;</span><span class="p">,</span> width<span class="o">=</span><span class="m">0.75</span><span class="p">,</span> fatten<span class="o">=</span><span class="m">2</span><span class="p">,</span> 
+               color<span class="o">=</span><span class="s">&quot;grey20&quot;</span><span class="p">,</span> fun.y<span class="o">=</span>median<span class="p">,</span> fun.ymin<span class="o">=</span>median<span class="p">,</span> fun.ymax<span class="o">=</span>median<span class="p">)</span> <span class="o">+</span>
+  coord_flip<span class="p">()</span> <span class="o">+</span> theme_538<span class="p">()</span> <span class="o">+</span> ggtitle<span class="p">(</span><span class="s">&quot;Relative MUD voting intentions&quot;</span><span class="p">)</span> <span class="o">+</span>
+  labs<span class="p">(</span>x<span class="o">=</span><span class="s">&quot;Polling house&quot;</span><span class="p">,</span>
+       y<span class="o">=</span><span class="s">&quot;Comparison with other polls at the time&quot;</span><span class="p">)</span> <span class="o">+</span>
+  ylim<span class="p">(</span><span class="m">-12</span><span class="p">,</span><span class="m">12</span><span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1">## Stats significance, is it any?</span>
+<span class="kp">options</span><span class="p">(</span>scipen<span class="o">=</span><span class="m">0</span><span class="p">)</span>
+sigTable <span class="o">&lt;-</span> polls <span class="o">%&gt;%</span> filter<span class="p">(</span>response <span class="o">==</span> <span class="s">&quot;MUD&quot;</span><span class="p">)</span> <span class="o">%&gt;%</span>
+  group_by<span class="p">(</span> pollster<span class="p">)</span> <span class="o">%&gt;%</span>
+  summarise<span class="p">(</span>p<span class="o">=</span>wilcox.test<span class="p">(</span>residual<span class="p">,</span> mu<span class="o">=</span><span class="m">0</span><span class="p">)</span><span class="o">$</span>p.value<span class="p">)</span> 
+kable<span class="p">(</span>sigTable<span class="p">)</span></code></pre></div>
+
+
+	  </article>
+	  
+	  
+	  <div class="blog-tags">
+		Tags: R, Polls, Elections
+	  </div>
+	  
+	  
+      <ul class="pager blog-pager">
+        
+        <li class="previous">
+          <a href="/blog/2015/venezuelan-parliamentary-election-2015.html" data-toggle="tooltip" data-placement="top" title="Venezuela's 2015 Parliamentary Elections">&larr; Previous Post</a>
+        </li>
+        
+        
+        <li class="next">
+          <a href="/blog/2015/data-data-data.html" data-toggle="tooltip" data-placement="top" title="Data, data, data">Next Post &rarr;</a>
+        </li>
+        
+      </ul>
+
+      
+        <div class="share-section">
+  <h1 class="share-title">Liked what you read?'</h1>
+  <div class="share-buttons">
+    
+    
+    
+    
+
+    
+    
+      
+    
+    
+    
+    <a href="http://danielmarcelino.github.io/contact" data-ga-event=1 data-ga-category="share" data-ga-action="message" data-ga-label="/blog/2015/venezuelan-parliamentary-elections.html">
+      Let me know
+    </a>
+    <a href="https://www.facebook.com/dialog/feed?app_id=1529566150689415&link=http://danielmarcelino.github.io/blog/2015/venezuelan-parliamentary-elections.html&name=Venezuelan Parliamentary Election: What do the Polls Say?&caption=&redirect_uri=http://danielmarcelino.github.io/blog/2015/venezuelan-parliamentary-elections.html?message=Thanks for sharing!" data-ga-event=1 data-ga-category="share" data-ga-action="facebook" data-ga-label="/blog/2015/venezuelan-parliamentary-elections.html">
+      Share on Facebook
+    </a>
+    <a href="https://twitter.com/intent/tweet?url=http://danielmarcelino.github.io/blog/2015/venezuelan-parliamentary-elections.html&via=daniel&text=Venezuelan Parliamentary Election: What do the Polls Say?" data-ga-event=1 data-ga-category="share" data-ga-action="twitter" data-ga-label="/blog/2015/venezuelan-parliamentary-elections.html">
+      Tweet it
+    </a>
+  </div>
+</div>
+
+      
+
+	  
+      <div class="disqus-comments">
+	    
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+	    var disqus_shortname = 'daniel-marcelino';
+	    // ensure that pages with query string get the same discussion
+            var url_parts = window.location.href.split("?");
+            var disqus_url = url_parts[0];
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+
+      </div>
+	  
+    </div>
+  </div>
+</div>
+
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+
+          
+          <li>
+            <a href="mailto:dmarcelino@live.com?subject=Hello from " title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://github.com/danielmarcelino/" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/dmarcelinobr" title="Twitter">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+
+          
+          <li>
+            <a href="https://stackoverflow.com/users/792000/daniel" title="StackOverflow">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://linkedin.com/daniel-marcelino-80968656" title="LinkedIn">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="/feed.xml" title="Subscribe to my blog">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>		
+          
+
+        </ul>
+
+        <p class="copyright text-muted">
+          &copy; Daniel Marcelino
+          &nbsp;&bull;&nbsp;
+          2016
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  
+    
+
+
+  
+	<script src="/js/jquery-1.11.2.min.js"></script>
+  
+	<script src="/js/bootstrap.min.js"></script>
+  
+	<script src="/js/main.js"></script>
+  
+
+
+
+
+
+
+
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-24186657-1', 'auto');
+		ga('send', 'pageview');
+	</script>
+	<!-- End Google Analytics -->
+
+  
+  </body>
+</html>

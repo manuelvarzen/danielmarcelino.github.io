@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+ 
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="keywords" content="Daniel Marcelino, SciencesPo, SoundexBR, r-project, r, political science, political behavior, social sciences, statistics, methods, applied methods, programming, data mining, data visualization, datascience, big data"/>	
+	<meta name="google-site-verification" content="Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ" />
+	<meta name="bing_webmastertools_id" content="97837256955BD270FD688E2B50F89FDB" />
+    <meta name="author" content="Daniel Marcelino" />
+	 <meta name="title" content="&middot; Daniel &middot; The Star Wars Grossing War" />
+	 
+	   <!-- favicon -->
+	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+  
+	
+
+  
+ <title>EnfoRced Data Analysis</title>
+   
+
+  
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis - Blog of Daniel Marcelino" href="/feed.xml" />
+
+  
+    
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+    
+    
+  
+  
+    
+      <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="/css/main.css" />
+    
+  
+  
+  
+    
+	  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+    
+	  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+    
+  
+
+    
+  
+  
+  
+  
+  
+  <!-- Facebook OpenGraph tags -->
+  
+  <meta property="og:title" content="The Star Wars Grossing War" />
+  
+  
+  <meta property="og:type" content="website" />
+  
+  
+  <meta property="og:url" content="http://danielmarcelino.github.io/blog/2016/star-wars-grossing-war.html/" />
+  
+  
+  
+  <meta property="og:image" content="http://danielmarcelino.github.io/images/daniel_rio.jpg" />
+  
+
+</head>
+
+
+  <body>
+	 
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://danielmarcelino.github.io">EnfoRced Data Analysis</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+	    
+        <li>
+		  <a href="/blog">Blog</a>
+		</li>
+		
+        <li>
+		  <a href="/interests">Interests</a>
+		</li>
+		
+        <li>
+		  <a href="/randomwalks">Random Walks</a>
+		</li>
+		
+        <li>
+		  <a href="/about">About</a>
+		</li>
+		
+		
+		
+		<li>
+		  <a href="/search" class="nav-search-link" title="Search">
+		    <span class="fa fa-search nav-search-icon"></span>
+			<span class="nav-search-text">Search</span>
+		  </a>
+		</li>
+		
+      </ul>
+    </div>
+	
+	
+	<div class="avatar-container">
+	  <div class="avatar-img-border">
+	    <a href="http://danielmarcelino.github.io ">
+	      <img class="avatar-img" src="/images/daniel_rio.jpg" />
+		</a>
+	  </div>
+	</div>
+	
+	
+  </div>
+</nav>  
+
+    
+
+
+
+<header class="header-section ">
+
+<div class="intro-header no-img">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-heading">
+          <h1>The Star Wars Grossing War</h1>
+		  
+		  
+		  
+		  <span class="post-meta">Posted on January 11, 2016</span>
+		  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+
+
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+	    <h1 id="motivation">Motivation</h1>
+<p>I finally made to the movies for watching the new <em>Star Wars</em> release this weekend. Although this episode wasn’t that spectacular, in my view, it did inspire some data seeking afterwards. I wanted to know how this film compares to others top movies in terms of worldwide grossing as well as within the <em>Star Wars</em> series.</p>
+
+<p>Fortunately, there is a wealth–though incomplete–list of the top grossing films of all time at <boxofficemojo.com>. Although the information is right in the front-page, I'd rather like something more visual teasing. So, I decided to see how it goes with *R* and the new  _ggplot2_ package release. Also, because I must scrap the data from the _Box Office_ website, I will need a function to handle the HTML structure of those tables. The function `readHTMLTable()` from the _XML_ package can certainly be an asset here.</boxofficemojo.com></p>
+
+<h1 id="the-setup">The setup</h1>
+<p>First, let’s load the packages we’ll need.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kn">library</span><span class="p">(</span>XML<span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>ggplot2<span class="p">)</span></code></pre></div>
+
+<p>In what follows is my setup for using the <code>readHTMLTable</code> function to retrieve, cleaning, and arrange HTML tables in a data.frame format. I’d rather wrap everything in a single function, but keeping the three snippets apart is rather easy to make out.</p>
+
+<p>The first function will pull out all tables on the webpage as a list of data.frames, and I’ll give them similar names.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">GetTable <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span><span class="kp">t</span><span class="p">)</span> <span class="p">{</span>
+table <span class="o">&lt;-</span> readHTMLTable<span class="p">(</span><span class="kp">t</span><span class="p">)[[</span><span class="m">2</span><span class="p">]]</span>
+<span class="kp">names</span><span class="p">(</span><span class="kp">table</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;Rank&quot;</span><span class="p">,</span> <span class="s">&quot;Title&quot;</span><span class="p">,</span> <span class="s">&quot;Studio&quot;</span><span class="p">,</span> <span class="s">&quot;Worldwide&quot;</span><span class="p">,</span> <span class="s">&quot;Domestic&quot;</span><span class="p">,</span> <span class="s">&quot;DomesticPct&quot;</span><span class="p">,</span> <span class="s">&quot;Overseas&quot;</span><span class="p">,</span> <span class="s">&quot;OverseasPct&quot;</span><span class="p">,</span> <span class="s">&quot;Year&quot;</span><span class="p">)</span>
+boxdf <span class="o">&lt;-</span> <span class="kp">as.data.frame</span><span class="p">(</span><span class="kp">lapply</span><span class="p">(</span><span class="kp">table</span><span class="p">[</span><span class="m">-1</span><span class="p">,</span> <span class="p">],</span> <span class="kp">as.character</span><span class="p">),</span> stringsAsFactors<span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+boxdf <span class="o">&lt;-</span> <span class="kp">as.data.frame</span><span class="p">(</span>boxdf<span class="p">,</span> stringsAsFactors<span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+boxdf <span class="o">&lt;-</span> <span class="kp">transform</span><span class="p">(</span>boxdf<span class="p">,</span> Year <span class="o">=</span> <span class="kp">ifelse</span><span class="p">(</span>Year<span class="o">==</span><span class="m">0</span><span class="p">,</span> <span class="kc">NA</span><span class="p">,</span> Year<span class="p">))</span>
+<span class="kr">return</span><span class="p">(</span>boxdf<span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+
+<p>The data will come <code>dirty</code> with lots of tags and marks, so a little <a href="http://www.nytimes.com/2014/08/18/technology/for-big-data-scientists-hurdle-to-insights-is-janitor-work.html?_r=0">janitor work</a> will be  necessary. The following code does just that.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">CleanDataFrame <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>boxdf<span class="p">)</span> <span class="p">{</span>
+clean <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span><span class="kp">col</span><span class="p">)</span> <span class="p">{</span>
+col <span class="o">&lt;-</span> <span class="kp">gsub</span><span class="p">(</span><span class="s">&quot;$&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="kp">col</span><span class="p">,</span> fixed <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+col <span class="o">&lt;-</span> <span class="kp">gsub</span><span class="p">(</span><span class="s">&quot;%&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="kp">col</span><span class="p">,</span> fixed <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+col <span class="o">&lt;-</span> <span class="kp">gsub</span><span class="p">(</span><span class="s">&quot;,&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="kp">col</span><span class="p">,</span> fixed <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+col <span class="o">&lt;-</span> <span class="kp">gsub</span><span class="p">(</span><span class="s">&quot;^&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="kp">col</span><span class="p">,</span> fixed <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+<span class="kr">return</span><span class="p">(</span><span class="kp">col</span><span class="p">)</span>
+<span class="p">}</span>
+boxdf <span class="o">&lt;-</span> <span class="kp">sapply</span><span class="p">(</span>boxdf<span class="p">,</span> clean<span class="p">)</span>
+boxdf <span class="o">&lt;-</span> <span class="kp">as.data.frame</span><span class="p">(</span>boxdf<span class="p">,</span> stringsAsFactors<span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+<span class="kr">return</span><span class="p">(</span>boxdf<span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+
+<p>The next snippet is the main piece. It will construct the URLs based on the number of pages we feed in and will call the two preceding functions.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">BoxOfficeMojoScraper <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>npages<span class="p">)</span> <span class="p">{</span>
+<span class="c1"># This line constructs the URLs</span>
+urls <span class="o">&lt;-</span> <span class="kp">paste</span><span class="p">(</span><span class="s">&quot;http://boxofficemojo.com/alltime/world/?pagenum=&quot;</span><span class="p">,</span> <span class="m">1</span><span class="o">:</span>npages<span class="p">,</span> <span class="s">&quot;&amp;p=.htm&quot;</span><span class="p">,</span> sep <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+<span class="c1"># The next line scrapes every table in the URLs formed</span>
+boxdf <span class="o">&lt;-</span> <span class="kp">do.call</span><span class="p">(</span><span class="s">&quot;rbind&quot;</span><span class="p">,</span> <span class="kp">lapply</span><span class="p">(</span>urls<span class="p">,</span> GetTable<span class="p">))</span>
+<span class="c1"># This does the janitor work</span>
+boxdf <span class="o">&lt;-</span> CleanDataFrame<span class="p">(</span>boxdf<span class="p">)</span>
+<span class="c1"># The next lines arrange the data to my needs</span>
+cols <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">4</span><span class="o">:</span><span class="m">9</span><span class="p">)</span>
+boxdf<span class="p">[,</span> cols<span class="p">]</span> <span class="o">&lt;-</span> <span class="kp">sapply</span><span class="p">(</span>boxdf<span class="p">[,</span> cols<span class="p">],</span> <span class="kp">as.numeric</span><span class="p">)</span>
+boxdf<span class="o">$</span>Studio <span class="o">&lt;-</span> <span class="kp">as.factor</span><span class="p">(</span>boxdf<span class="o">$</span>Studio<span class="p">)</span>
+<span class="kr">return</span><span class="p">(</span>boxdf<span class="p">)</span>
+<span class="p">}</span></code></pre></div>
+
+<p>I’m scrapping the first 7 pages of the target address <a href="http://www.boxofficemojo.com/alltime/world/">http://www.boxofficemojo.com/alltime/world/</a>. It will bring missing values too, don’t worry for the time being.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">npages <span class="o">&lt;-</span> <span class="m">7</span>
+box <span class="o">&lt;-</span> BoxOfficeMojoScraper<span class="p">(</span>npages<span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">## Warning in lapply(X = X, FUN = FUN, ...): NAs introduced by coercion</code></pre></div>
+
+<h1 id="results">Results</h1>
+<p>Our new acquired data is a data.frame with more than 620 rows or films, with the oldest dating back to 1939.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">str<span class="p">(</span>box<span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">## &#39;data.frame&#39;:	628 obs. of  9 variables:
+##  $ Rank       : num  1 2 3 4 5 6 7 8 9 10 ...
+##  $ Title      : chr  &quot;Avatar&quot; &quot;Titanic&quot; &quot;Jurassic World&quot; &quot;Star Wars: The Force Awakens&quot; ...
+##  $ Studio     : Factor w/ 38 levels &quot;Art.&quot;,&quot;BV&quot;,&quot;Col.&quot;,..: 7 22 32 2 2 32 2 36 2 2 ...
+##  $ Worldwide  : num  2788 2187 1669 1602 1520 ...
+##  $ Domestic   : num  760 659 652 781 623 ...
+##  $ DomesticPct: num  27.3 30.1 39.1 48.7 41 23.3 32.7 28.4 31.4 33.7 ...
+##  $ Overseas   : num  2028 1528 1017 821 896 ...
+##  $ OverseasPct: num  72.7 69.9 60.9 51.3 59 76.7 67.3 71.6 68.6 66.3 ...
+##  $ Year       : num  2009 1997 2015 2015 2012 ...</code></pre></div>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># the oldest:</span>
+<span class="kp">min</span><span class="p">(</span>box<span class="o">$</span>Year<span class="p">,</span> na.rm<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">## [1] 1939</code></pre></div>
+
+<p>The following chart displays the grossing worldwide values for the top 25 ranked movies of all time. As it shines out, the <em>Star Wars: The Force Awakens</em> is doing pretty well worldwide. It’s ranked fourth now, but it just began to play in China this week, so it may unseat <em>Titanic</em> over the next weeks, and <em>Avatar</em> in the long run.</p>
+
+<p><img src="http://danielmarcelino.github.io/images/code-2016-01-11-star-wars-grossing-war/top25.png" alt="center" /></p>
+
+<p>If you want to reproduce the very same plot decoration of this post, you’ll have to install the development version of <strong>SciencesPo</strong> package, and add <code>+ theme_538(legend="top")</code> to the following code.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">box2 <span class="o">&lt;-</span> <span class="kp">subset</span><span class="p">(</span>box<span class="p">,</span> Rank<span class="o">&lt;=</span><span class="m">25</span><span class="p">)</span>
+
+ggplot<span class="p">(</span>box2<span class="p">)</span> <span class="o">+</span>
+geom_bar<span class="p">(</span>aes<span class="p">(</span>x<span class="o">=</span>reorder<span class="p">(</span>Title<span class="p">,</span> Worldwide<span class="p">),</span> y<span class="o">=</span>Worldwide<span class="p">,</span> fill<span class="o">=</span><span class="s">&quot;Worldwide&quot;</span><span class="p">),</span> stat <span class="o">=</span> <span class="s">&quot;identity&quot;</span><span class="p">)</span> <span class="o">+</span>
+geom_bar<span class="p">(</span>aes<span class="p">(</span>x<span class="o">=</span>Title<span class="p">,</span> y<span class="o">=</span>Domestic<span class="p">,</span> fill<span class="o">=</span><span class="s">&quot;Domestic&quot;</span><span class="p">),</span>alpha<span class="o">=</span><span class="m">.5</span><span class="p">,</span> stat <span class="o">=</span> <span class="s">&quot;identity&quot;</span><span class="p">)</span> <span class="o">+</span>
+scale_fill_manual<span class="p">(</span>name<span class="o">=</span><span class="s">&quot;Grossing&quot;</span><span class="p">,</span> values<span class="o">=</span><span class="kt">c</span><span class="p">(</span>Worldwide<span class="o">=</span><span class="s">&quot;#A6CEE3&quot;</span><span class="p">,</span> Domestic<span class="o">=</span><span class="s">&quot;#386CB0&quot;</span><span class="p">))</span> <span class="o">+</span>
+coord_flip<span class="p">()</span> <span class="o">+</span> 
+ labs<span class="p">(</span>x<span class="o">=</span><span class="kc">NULL</span><span class="p">,</span> y<span class="o">=</span><span class="kc">NULL</span><span class="p">,</span> title<span class="o">=</span><span class="s">&quot;Top 25 Films by Worldwide Grosses (US$ Millions)&quot;</span><span class="p">)</span></code></pre></div>
+
+<p>Next, how <em>The Force Awakens</em> compares with other episodes of <em>Star Wars</em>?</p>
+
+<p><img src="http://danielmarcelino.github.io/images/code-2016-01-11-star-wars-grossing-war/starwars.png" alt="center" /></p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># will search for Star Wars names within the data.frame:</span>
+box3 <span class="o">&lt;-</span> <span class="kp">subset</span><span class="p">(</span>box<span class="p">,</span> <span class="kp">grepl</span><span class="p">(</span><span class="s">&quot;^Star Wars&quot;</span><span class="p">,</span> box<span class="o">$</span>Title<span class="p">)</span><span class="o">|</span><span class="kp">grepl</span><span class="p">(</span><span class="s">&quot;^Return of the Jedi&quot;</span><span class="p">,</span> box<span class="o">$</span>Title<span class="p">)</span><span class="o">|</span><span class="kp">grepl</span><span class="p">(</span><span class="s">&quot;^The Empire Strikes Back&quot;</span><span class="p">,</span> box<span class="o">$</span>Title<span class="p">))</span>
+
+<span class="c1"># will wrap the axis labels</span>
+wrap_20 <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>x<span class="p">)</span><span class="kp">gsub</span><span class="p">(</span><span class="s">&#39;(.{1,20})(\\s|$)&#39;</span><span class="p">,</span> <span class="s">&#39;\\1\n&#39;</span><span class="p">,</span> x<span class="p">)</span>
+
+ggplot<span class="p">(</span>box3<span class="p">)</span> <span class="o">+</span>
+geom_bar<span class="p">(</span>aes<span class="p">(</span>x<span class="o">=</span>reorder<span class="p">(</span>wrap_20<span class="p">(</span>Title<span class="p">),</span> Worldwide<span class="p">),</span> y<span class="o">=</span>Worldwide<span class="p">,</span> fill<span class="o">=</span><span class="s">&quot;Worldwide&quot;</span><span class="p">),</span> stat <span class="o">=</span> <span class="s">&quot;identity&quot;</span><span class="p">)</span> <span class="o">+</span>
+geom_bar<span class="p">(</span>aes<span class="p">(</span>x<span class="o">=</span>wrap_20<span class="p">(</span>Title<span class="p">),</span> y<span class="o">=</span>Domestic<span class="p">,</span> fill<span class="o">=</span><span class="s">&quot;Domestic&quot;</span><span class="p">),</span> alpha<span class="o">=</span><span class="m">.5</span><span class="p">,</span> stat <span class="o">=</span> <span class="s">&quot;identity&quot;</span><span class="p">)</span> <span class="o">+</span>
+scale_fill_manual<span class="p">(</span>name<span class="o">=</span><span class="s">&quot;Grossing&quot;</span><span class="p">,</span> values<span class="o">=</span><span class="kt">c</span><span class="p">(</span>Worldwide<span class="o">=</span><span class="s">&quot;#A6CEE3&quot;</span><span class="p">,</span> Domestic<span class="o">=</span><span class="s">&quot;#386CB0&quot;</span><span class="p">))</span> <span class="o">+</span>
+coord_flip<span class="p">()</span> <span class="o">+</span> 
+labs<span class="p">(</span>x<span class="o">=</span><span class="kc">NULL</span><span class="p">,</span> y<span class="o">=</span><span class="kc">NULL</span><span class="p">,</span> title<span class="o">=</span><span class="s">&quot;Star Wars Grosses (US$ Millions)&quot;</span><span class="p">)</span></code></pre></div>
+
+<p>The new release by Disney of <em>Star Wars</em> is making its way to the top films of all-time. Although the values presented are not in current currency, and old films in the list may have their grosses based on multiple releases, <em>The Force Awakens</em> has just began its journey.</p>
+
+	  </article>
+	  
+	  
+	  <div class="blog-tags">
+		Tags: R, Films
+	  </div>
+	  
+	  
+      <ul class="pager blog-pager">
+        
+        <li class="previous">
+          <a href="/blog/2015/gender-effect-in-conference-talks.html" data-toggle="tooltip" data-placement="top" title="Gender Effect in Conference Talks">&larr; Previous Post</a>
+        </li>
+        
+        
+      </ul>
+
+      
+        <div class="share-section">
+  <h1 class="share-title">Liked what you read?'</h1>
+  <div class="share-buttons">
+    
+    
+    
+    
+
+    
+    
+      
+    
+    
+    
+    <a href="http://danielmarcelino.github.io/contact" data-ga-event=1 data-ga-category="share" data-ga-action="message" data-ga-label="/blog/2016/star-wars-grossing-war.html">
+      Let me know
+    </a>
+    <a href="https://www.facebook.com/dialog/feed?app_id=1529566150689415&link=http://danielmarcelino.github.io/blog/2016/star-wars-grossing-war.html&name=The Star Wars Grossing War&caption=&redirect_uri=http://danielmarcelino.github.io/blog/2016/star-wars-grossing-war.html?message=Thanks for sharing!" data-ga-event=1 data-ga-category="share" data-ga-action="facebook" data-ga-label="/blog/2016/star-wars-grossing-war.html">
+      Share on Facebook
+    </a>
+    <a href="https://twitter.com/intent/tweet?url=http://danielmarcelino.github.io/blog/2016/star-wars-grossing-war.html&via=daniel&text=The Star Wars Grossing War" data-ga-event=1 data-ga-category="share" data-ga-action="twitter" data-ga-label="/blog/2016/star-wars-grossing-war.html">
+      Tweet it
+    </a>
+  </div>
+</div>
+
+      
+
+	  
+      <div class="disqus-comments">
+	    
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+	    var disqus_shortname = 'daniel-marcelino';
+	    // ensure that pages with query string get the same discussion
+            var url_parts = window.location.href.split("?");
+            var disqus_url = url_parts[0];
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+
+      </div>
+	  
+    </div>
+  </div>
+</div>
+
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+
+          
+          <li>
+            <a href="mailto:dmarcelino@live.com?subject=Hello from " title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://github.com/danielmarcelino/" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/dmarcelinobr" title="Twitter">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+
+          
+          <li>
+            <a href="https://stackoverflow.com/users/792000/daniel" title="StackOverflow">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://linkedin.com/daniel-marcelino-80968656" title="LinkedIn">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="/feed.xml" title="Subscribe to my blog">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>		
+          
+
+        </ul>
+
+        <p class="copyright text-muted">
+          &copy; Daniel Marcelino
+          &nbsp;&bull;&nbsp;
+          2016
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  
+    
+
+
+  
+	<script src="/js/jquery-1.11.2.min.js"></script>
+  
+	<script src="/js/bootstrap.min.js"></script>
+  
+	<script src="/js/main.js"></script>
+  
+
+
+
+
+
+
+
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-24186657-1', 'auto');
+		ga('send', 'pageview');
+	</script>
+	<!-- End Google Analytics -->
+
+  
+  </body>
+</html>
