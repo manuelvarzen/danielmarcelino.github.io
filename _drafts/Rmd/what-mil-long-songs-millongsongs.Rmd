@@ -1,9 +1,0 @@
-What songs have you milled?
-
-I don't keep track. But I can mil long songs like Party Party or easy to perf songs like You I think.
-
-
-url<-"https://raw.githubusercontent.com/danielmarcelino/Tables/master/millongsongs.csv"
-data <- read.csv(url)
-
-head(data)
