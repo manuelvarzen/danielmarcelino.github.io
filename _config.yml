@@ -20,7 +20,7 @@ extensions:
     - footnotes
     - smart
 highlighter: pygments
-permalink: /blog/:year/:title.html
+permalink: /:year/:title.html
 paginate: 5
 paginate_path: "/page:num/"
 
