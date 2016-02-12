@@ -101,7 +101,7 @@ img::-moz-selection {
   color: #404040;
   text-decoration: none;
   margin-left: 0%;
-   display: inline;
+  
 }
 
 .navbar-custom .navbar-brand:hover,
