@@ -170,6 +170,8 @@ img::-moz-selection {
   
   .navbar-custom .avatar-container  .avatar-img {
     width: 70%;
+    border-radius: 50%;
+    display: block;
   }
 }
 
