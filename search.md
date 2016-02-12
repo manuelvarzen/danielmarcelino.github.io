@@ -4,7 +4,7 @@ css: "/css/search.css"
 permalink: /search/
 ---
 
-# Search danielmarcelino.github.io
+# Search in danielmarcelino.github.io
 
 ### Using the Amazing Google
 
