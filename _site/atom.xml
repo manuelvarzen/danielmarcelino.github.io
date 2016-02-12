@@ -3,10 +3,10 @@
 <link rel="hub" href="https://pubsubhubbub.appspot.com"/>
 
   <title type="text" xml:lang="en"></title>
-    <link type="application/atom+xml" href="//atom.xml" rel="self"/>
-    <link href="//"/>
-  <updated>2016-02-12T05:06:39Z</updated>
-  <id>//</id>
+    <link type="application/atom+xml" href="/atom.xml" rel="self"/>
+    <link href="/"/>
+  <updated>2016-02-12T05:46:28Z</updated>
+  <id>/</id>
   <author>
     <name>Daniel Marcelino</name>
     <email>dmarcelino@live.com</email>
@@ -15,10 +15,10 @@
   
   <entry>
     <title>The Star Wars Grossing War</title>
-    <link rel="alternate" type="text/html" href="//blog/2016/star-wars-grossing-war.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=TheStarWarsGrossingWar" />
+    <link rel="alternate" type="text/html" href="/blog/2016/star-wars-grossing-war.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=TheStarWarsGrossingWar" />
     <published>2016-01-11T00:00:00Z</published>
     <updated>2016-01-11T00:00:00+00:00</updated>
-    <id>//blog/2016/star-wars-grossing-war</id>
+    <id>/blog/2016/star-wars-grossing-war</id>
     <content type="html"><![CDATA[ <h1 id="motivation">Motivation</h1>
 <p>I finally made to the movies for watching the new <em>Star Wars</em> release this weekend. Although this episode wasn’t that spectacular, in my view, it did inspire some data seeking afterwards. I wanted to know how this film compares to others top movies in terms of worldwide grossing as well as within the <em>Star Wars</em> series.</p>
 
@@ -140,10 +140,10 @@ labs<span class="p">(</span>x<span class="o">=</span><span class="kc">NULL</span
   
   <entry>
     <title>Gender Effect in Conference Talks</title>
-    <link rel="alternate" type="text/html" href="//blog/2015/gender-effect-in-conference-talks.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=GenderEffectinConferenceTalks" />
+    <link rel="alternate" type="text/html" href="/blog/2015/gender-effect-in-conference-talks.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=GenderEffectinConferenceTalks" />
     <published>2015-12-22T00:00:00Z</published>
     <updated>2015-12-22T00:00:00+00:00</updated>
-    <id>//blog/2015/gender-effect-in-conference-talks</id>
+    <id>/blog/2015/gender-effect-in-conference-talks</id>
     <content type="html"><![CDATA[ <p>I was searching in the arXiv repository for an interesting paper to read over the weekend, when I found this: <a href="http://arxiv.org/abs/1403.3091">“Studying Gender in Conference Talks – data from the 223rd meeting of the American Astronomical Society”</a>. The title and figures caught my attention more than the subject of the conference, I’ve to confess.</p>
 
 <p>The plot below, taken from the paper, displays the most significant finding from the analysis: <em>a strong dependence on session chair gender</em>. Overall, males ask more question than females, but there is a large difference in number of questions asked by males vis-à-vis number asked by females, given a male or female chair. I’m wondering if this also holds for other science fields where the gap between male and female researchers is that not abnormal.</p>
@@ -216,10 +216,10 @@ MC       <span class="o">|</span>    <span class="m">-1.7633</span><span class="
   
   <entry>
     <title>Data, data, data</title>
-    <link rel="alternate" type="text/html" href="//blog/2015/data-data-data.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=Datadatadata" />
+    <link rel="alternate" type="text/html" href="/blog/2015/data-data-data.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=Datadatadata" />
     <published>2015-12-14T00:00:00Z</published>
     <updated>2015-12-14T00:00:00+00:00</updated>
-    <id>//blog/2015/data-data-data</id>
+    <id>/blog/2015/data-data-data</id>
     <content type="html"><![CDATA[ <p>Having presented preliminary findings from a national sample of therapeutic communities in Brazil, I thought the Babbage’s words  fits like a glove for those criticizing quantitative approaches for policy evaluations: the “Errors using inadequate data are much less than those using no data at all” (Charles Babbage).</p>
 
 <p><img src="http://danielmarcelino.github.io/images/2015/CTs_distribuicao.png" alt="Communities" /></p>
@@ -228,10 +228,10 @@ MC       <span class="o">|</span>    <span class="m">-1.7633</span><span class="
   
   <entry>
     <title>Venezuelan Parliamentary Election: What do the Polls Say?</title>
-    <link rel="alternate" type="text/html" href="//blog/2015/venezuelan-parliamentary-elections.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=VenezuelanParliamentaryElection:WhatdothePollsSay?" />
+    <link rel="alternate" type="text/html" href="/blog/2015/venezuelan-parliamentary-elections.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=VenezuelanParliamentaryElection:WhatdothePollsSay?" />
     <published>2015-12-06T00:00:00Z</published>
     <updated>2015-12-06T00:00:00+00:00</updated>
-    <id>//blog/2015/venezuelan-parliamentary-elections</id>
+    <id>/blog/2015/venezuelan-parliamentary-elections</id>
     <content type="html"><![CDATA[ <p>There is not a huge population of opinion polls covering this parliamentary election in Venezuela, but all I’ve can be used to gauge the public opinion by the local polling houses. This posting begs an obvious question: how has the mood in Venezuela varied over time with respect to voting intentions for the two political blocs? Next, can we detect any biases among those publishing polls?</p>
 
 <!--more-->
@@ -441,10 +441,10 @@ kable<span class="p">(</span>sigTable<span class="p">)</span></code></pre></div>
   
   <entry>
     <title>Venezuela&#39;s 2015 Parliamentary Elections</title>
-    <link rel="alternate" type="text/html" href="//blog/2015/venezuelan-parliamentary-election-2015.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=Venezuela&#39;s2015ParliamentaryElections" />
+    <link rel="alternate" type="text/html" href="/blog/2015/venezuelan-parliamentary-election-2015.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=Venezuela&#39;s2015ParliamentaryElections" />
     <published>2015-12-04T00:00:00Z</published>
     <updated>2015-12-04T00:00:00+00:00</updated>
-    <id>//blog/2015/venezuelan-parliamentary-election-2015</id>
+    <id>/blog/2015/venezuelan-parliamentary-election-2015</id>
     <content type="html"><![CDATA[ <p>Next Sunday Venezuelans are heading to the polls once again with  international concerns about the clearness of the balloting. To get an idea about the political climate over there, I’ve collected some polls available on the internet. The surprising thing from those surveys is a tremendous variability from pollster to pollster about the single topic of voting intention. You may find national polls fielded in the same period with estimates varying as much as 20%, isn’t it dramatic? If you always wanted to see house bias operating in practice, the Venezuelan elections may provide you a good case then.</p>
 
 <p><img src="http://danielmarcelino.github.io/images/2015/venezuela1.png" alt="center" /></p>
@@ -478,10 +478,10 @@ ggplot<span class="p">(</span>data<span class="p">)</span> <span class="o">+</sp
   
   <entry>
     <title>Retrieving Data from Google Books with `ngramr`</title>
-    <link rel="alternate" type="text/html" href="//blog/2015/retrieving-data-from-google-books-with-ngramr.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=RetrievingDatafromGoogleBookswith`ngramr`" />
+    <link rel="alternate" type="text/html" href="/blog/2015/retrieving-data-from-google-books-with-ngramr.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=RetrievingDatafromGoogleBookswith`ngramr`" />
     <published>2015-11-15T00:00:00Z</published>
     <updated>2015-11-15T00:00:00+00:00</updated>
-    <id>//blog/2015/retrieving-data-from-google-books-with-ngramr</id>
+    <id>/blog/2015/retrieving-data-from-google-books-with-ngramr</id>
     <content type="html"><![CDATA[ <p><a href="https://en.wikipedia.org/wiki/Karl_Marx">Karl Marx</a> is the most famous founding fathers of modern sociology with a popularity peak in 1975-6, but declining ever since my little research using the <a href="https://books.google.com/ngrams">Google Ngram Viewer</a> suggests.</p>
 
 <h2 id="introduction">Introduction</h2>
@@ -582,10 +582,10 @@ ggfootnote<span class="p">(</span>size <span class="o">=</span> <span class="m">
   
   <entry>
     <title>Competing views on Argentina&#39;s Frontrunner</title>
-    <link rel="alternate" type="text/html" href="//blog/2015/competing-views-in-argentina.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=CompetingviewsonArgentina&#39;sFrontrunner" />
+    <link rel="alternate" type="text/html" href="/blog/2015/competing-views-in-argentina.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=CompetingviewsonArgentina&#39;sFrontrunner" />
     <published>2015-10-30T00:00:00Z</published>
     <updated>2015-10-30T00:00:00+00:00</updated>
-    <id>//blog/2015/competing-views-in-argentina</id>
+    <id>/blog/2015/competing-views-in-argentina</id>
     <content type="html"><![CDATA[ <p>The last poll published today by <em>Polldata</em> put Scioli below 40%, with about 5% reporting being undecided.
 It might be too early to state anything solid, but the few polls prospecting the runoff election in Argentina seem to be telling two distinct histories. Polling houses <em>Hugo Haime</em> and <em>IPSOS</em> suggest that Daniel Scioli is going up while <em>Elypsis</em>  and <em>Polldata</em> say he’s actually sinking as the weeks go by. The last poll published today by <em>Polldata</em> puts Scioli below 40%, with about 5% reporting being undecided. My experience following  multiparty elections suggests that polls perform much better in the runoff than in primaries, meaning that the average of the polls now is much more close to the real vote preference than reported before.</p>
 
@@ -596,10 +596,10 @@ It might be too early to state anything solid, but the few polls prospecting the
   
   <entry>
     <title>House Effects in Argentinian polling</title>
-    <link rel="alternate" type="text/html" href="//blog/2015/argentine-house-effects.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=HouseEffectsinArgentinianpolling" />
+    <link rel="alternate" type="text/html" href="/blog/2015/argentine-house-effects.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=HouseEffectsinArgentinianpolling" />
     <published>2015-10-25T00:00:00Z</published>
     <updated>2015-10-25T00:00:00+00:00</updated>
-    <id>//blog/2015/argentine-house-effects</id>
+    <id>/blog/2015/argentine-house-effects</id>
     <content type="html"><![CDATA[ <p>I’ve already <a href="http://danielmarcelino.com/r/08-2015/Argentine-general-election-2015/">posted</a> previously on “house effects”, the tendency of polling organizations to systematically vary in their results from one another. In this post, I look specifically at these house effects, and show which polling organizations over or under-estimate support for each candidate–compared to the average–in this presidential election in Argentina.</p>
 
 <p>The graph below plots the house effects for the main presidential candidates considering more than 115 polls that I’ve collected since 2014.</p>
@@ -641,10 +641,10 @@ houseEffects<span class="o">$</span>pcolor<span class="p">[</span>houseEffects<s
   
   <entry>
     <title>Paranormal Distribution</title>
-    <link rel="alternate" type="text/html" href="//blog/2015/paranormal-distribution.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=ParanormalDistribution" />
+    <link rel="alternate" type="text/html" href="/blog/2015/paranormal-distribution.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=ParanormalDistribution" />
     <published>2015-10-20T00:00:00Z</published>
     <updated>2015-10-20T00:00:00+00:00</updated>
-    <id>//blog/2015/paranormal-distribution</id>
+    <id>/blog/2015/paranormal-distribution</id>
     <content type="html"><![CDATA[ <p>What if, instead of a normal, you got a paranormal distribution?
 In case you want to read an influential paper on this matter, you can find it <a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2465539/">here</a>.</p>
 
@@ -702,10 +702,10 @@ gplot2 <span class="o">&lt;-</span> gplot2 <span class="o">+</span> stat_functio
   
   <entry>
     <title>A Talk About Campaign Finance in Brazil</title>
-    <link rel="alternate" type="text/html" href="//blog/2015/talk-about-campaign-finance.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=ATalkAboutCampaignFinanceinBrazil" />
+    <link rel="alternate" type="text/html" href="/blog/2015/talk-about-campaign-finance.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=ATalkAboutCampaignFinanceinBrazil" />
     <published>2015-10-17T00:00:00Z</published>
     <updated>2015-10-17T00:00:00+00:00</updated>
-    <id>//blog/2015/talk-about-campaign-finance</id>
+    <id>/blog/2015/talk-about-campaign-finance</id>
     <content type="html"><![CDATA[ <p>Comments on campaign finance in brazil.</p>
 
 <!--more-->
