@@ -1,6 +1,5 @@
 ---
 layout: page
-css: "/css/aboutme.css"
 permalink: /about/
 ---
 
