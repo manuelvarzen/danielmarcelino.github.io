@@ -124,7 +124,7 @@ img::-moz-selection {
 
 .navbar-custom .avatar-container {
   opacity: 1;
-  position: absolute;
+  position: relative;
   -webkit-transition: opacity 0.5s ease-in-out;
   -moz-transition: opacity 0.5s ease-in-out;
   transition: opacity 0.5s ease-in-out;
@@ -170,8 +170,6 @@ img::-moz-selection {
   
   .navbar-custom .avatar-container  .avatar-img {
     width: 70%;
-    border-radius: 50%;
-    display: block;
   }
 }
 
@@ -192,7 +190,7 @@ img::-moz-selection {
 
 @media only screen and (max-width: 992px) {
   .navbar-custom .nav li a {
-    padding-left: 50px;
+    padding-left: 10px;
 	padding-right: 10px;
 	font-size: 12px;
   }
