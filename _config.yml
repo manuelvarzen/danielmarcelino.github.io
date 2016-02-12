@@ -21,6 +21,8 @@ gems:
 timezone: "Brazil/Brasilia"
 highlighter: rouge
 markdown: kramdown
+kramdown:
+     input: GFM
 extensions:
     - autolink
     - footnotes

@@ -3,17 +3,11 @@ layout: page
 permalink: /about/
 ---
 
+<img src="{{ site.baseurl }}images/avatar.jpg" style="float: right; width: 35%; margin-right: 1%; margin-bottom: 3em; margin-left: 0.5em">
 ## About Me, and this Website
 I have been studying and programming in topics related to applied social sciences for years. As I do love to work with open source tools and learn from others, I created this space where I try to declutter some of my ideas and put my projects in order.<br>
-I write here mainly about how **R** programming can be applied in social sciences research; mostly in English (or sort of), sometimes in Portuguese as the demand grows.<br>
-A posting only happens after many iterations and refinements, during days and nights in front of a computer often fueled by dozens of cups of coffee and tea. If you find any joy and value in it, please consider supporting me. You can help me get useful resources from my <a href="http://amzn.com/w/2CCCV54KPGIA2" target="_blank">wish list</a>.
-<br>
-
-### Overall Interests
-There are 3 major topics that I'm hooked to:<br>
-- I really like being engaged in challenging [work](/research). <br>
-- I'm an eager consumer of public opinion and electoral behavior [research](/research). <br>
-- I'm a passionate R user as well as a [developer](/software).
+I write here mainly about methods, data visualization, and how **R** programming can be an asset in political science research; mostly in English (or sort of), sometimes in Portuguese as the demand grows.<br>
+A posting only happens after many iterations and refinements, during days and nights in front of a computer often fueled by dozens of cups of coffee and tea. If you find any joy and value in it, please consider supporting me. You can help me get useful resources from my <a href="http://amzn.com/w/2CCCV54KPGIA2" target="_blank">**wish list**</a>.
 <br>
 
 ### Contact
