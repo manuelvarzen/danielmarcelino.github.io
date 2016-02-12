@@ -100,7 +100,7 @@ img::-moz-selection {
   font-weight: 800;
   color: #404040;
   text-decoration: none;
-  left: 5%;
+  margin-left: 0%;
 }
 
 .navbar-custom .navbar-brand:hover,
