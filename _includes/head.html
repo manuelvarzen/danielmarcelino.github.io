@@ -12,6 +12,13 @@
 	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
   
 	
+	{% if site.common-ext-css %}
+	  {% for css in site.common-ext-css %}
+	    <link rel="stylesheet" href="{{ css }}" />
+	  {% endfor %}
+	{% endif %}
+	
+	
 
   {% if page.meta-title %}
   <title>{{ page.meta-title }}</title>
