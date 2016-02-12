@@ -128,8 +128,8 @@ img::-moz-selection {
   -webkit-transition: opacity 0.5s ease-in-out;
   -moz-transition: opacity 0.5s ease-in-out;
   transition: opacity 0.5s ease-in-out;
-  left: 5%;
-  width: 50px;
+  left: 7%;
+  width: 20px;
   margin-top: -25px;
 }
 .navbar-custom .avatar-container  .avatar-img-border {
