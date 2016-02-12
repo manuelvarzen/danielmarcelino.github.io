@@ -11,7 +11,7 @@
         <description>&lt;h1 id=&quot;motivation&quot;&gt;Motivation&lt;/h1&gt;
 &lt;p&gt;I finally made to the movies for watching the new &lt;em&gt;Star Wars&lt;/em&gt; release this weekend. Although this episode wasn’t that spectacular, in my view, it did inspire some data seeking afterwards. I wanted to know how this film compares to others top movies in terms of worldwide grossing as well as within the &lt;em&gt;Star Wars&lt;/em&gt; series.&lt;/p&gt;
 
-&lt;p&gt;Fortunately, there is a wealth–though incomplete–list of the top grossing films of all time at &lt;boxofficemojo.com&gt;. Although the information is right in the front-page, I&#39;d rather like something more visual teasing. So, I decided to see how it goes with *R* and the new  _ggplot2_ package release. Also, because I must scrap the data from the _Box Office_ website, I will need a function to handle the HTML structure of those tables. The function `readHTMLTable()` from the _XML_ package can certainly be an asset here.&lt;/boxofficemojo.com&gt;&lt;/p&gt;
+&lt;p&gt;Fortunately, there is a wealth–though incomplete–list of the top grossing films of all time at &lt;boxofficemojo.com&gt;. Although the information is right in the front-page, I&#39;d rather like something more visual teasing. So, I decided to see how it goes with *R* and the new  *ggplot2* package release. Also, because I must scrap the data from the *Box Office* website, I will need a function to handle the HTML structure of those tables. The function `readHTMLTable()` from the *XML* package can certainly be an asset here.&lt;/boxofficemojo.com&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;the-setup&quot;&gt;The setup&lt;/h1&gt;
 &lt;p&gt;First, let’s load the packages we’ll need.&lt;/p&gt;
@@ -91,7 +91,7 @@ box &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; BoxOfficeMojoScraper&
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## [1] 1939&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;The following chart displays the grossing worldwide values for the top 25 ranked movies of all time. As it shines out, the &lt;em&gt;Star Wars: The Force Awakens&lt;/em&gt; is doing pretty well worldwide. It’s ranked fourth now, but it just began to play in China this week, so it may unseat &lt;em&gt;Titanic&lt;/em&gt; over the next weeks, and &lt;em&gt;Avatar&lt;/em&gt; in the long run.&lt;/p&gt;
+&lt;p&gt;The following chart displays the grossing worldwide values for the top 25 ranked movies of all time. As it shines out, the &lt;em&gt;Star Wars: The Force Awakens_ is doing pretty well worldwide. It’s ranked fourth now, but it just began to play in China this week, so it may unseat *Titanic&lt;/em&gt; over the next weeks, and &lt;em&gt;Avatar&lt;/em&gt; in the long run.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;http://danielmarcelino.github.io/images/code-2016-01-11-star-wars-grossing-war/top25.png&quot; alt=&quot;center&quot; /&gt;&lt;/p&gt;
 

@@ -1118,7 +1118,7 @@ img {
   height: auto;
 }
 .img-rounded {
-  border-radius: 6px;
+  border-radius: 5px;
 }
 .img-thumbnail {
   display: inline-block;

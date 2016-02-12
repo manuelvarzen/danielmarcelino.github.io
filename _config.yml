@@ -19,7 +19,7 @@ extensions:
     - autolink
     - footnotes
     - smart
-highlighter: rouge
+highlighter: pygments
 permalink: /blog/:year/:title.html
 paginate: 5
 paginate_path: "/page:num/"
