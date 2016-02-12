@@ -139,12 +139,10 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div class="post-heading">
+        <div class="page-heading">
           <h1>The Star Wars Grossing War</h1>
 		  
 		  
-		  
-		  <span class="post-meta">Posted on January 11, 2016</span>
 		  
         </div>
       </div>
@@ -157,11 +155,10 @@
 
 
 
-<div class="container">
+<div class="container" role="main">
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      <article role="main" class="blog-post">
-	    <h1 id="motivation">Motivation</h1>
+      <h1 id="motivation">Motivation</h1>
 <p>I finally made to the movies for watching the new <em>Star Wars</em> release this weekend. Although this episode wasn’t that spectacular, in my view, it did inspire some data seeking afterwards. I wanted to know how this film compares to others top movies in terms of worldwide grossing as well as within the <em>Star Wars</em> series.</p>
 
 <p>Fortunately, there is a wealth–though incomplete–list of the top grossing films of all time at <boxofficemojo.com>. Although the information is right in the front-page, I'd rather like something more visual teasing. So, I decided to see how it goes with *R* and the new  *ggplot2* package release. Also, because I must scrap the data from the *Box Office* website, I will need a function to handle the HTML structure of those tables. The function `readHTMLTable()` from the *XML* package can certainly be an asset here.</boxofficemojo.com></p>
@@ -277,52 +274,6 @@ coord_flip<span class="p">()</span> <span class="o">+</span>
 labs<span class="p">(</span>x<span class="o">=</span><span class="kc">NULL</span><span class="p">,</span> y<span class="o">=</span><span class="kc">NULL</span><span class="p">,</span> title<span class="o">=</span><span class="s">&quot;Star Wars Grosses (US$ Millions)&quot;</span><span class="p">)</span></code></pre></div>
 
 <p>The new release by Disney of <em>Star Wars</em> is making its way to the top films of all-time. Although the values presented are not in current currency, and old films in the list may have their grosses based on multiple releases, <em>The Force Awakens</em> has just began its journey.</p>
-
-	  </article>
-	  
-	  
-	  <div class="blog-tags">
-		Tags: R, Films
-	  </div>
-	  
-	  
-      <ul class="pager blog-pager">
-        
-        <li class="previous">
-          <a href="/blog/2015/gender-effect-in-conference-talks.html" data-toggle="tooltip" data-placement="top" title="Gender Effect in Conference Talks">&larr; Previous Post</a>
-        </li>
-        
-        
-      </ul>
-
-      
-        <div class="share-section">
-  <h3 class="share-title">Liked what you read? Don't be selfish!</h3>
-  <div class="share-buttons">
-    
-    
-    
-    
-
-    
-    
-      
-    
-    
-    
-    <a href="http://danielmarcelino.github.io/contact" data-ga-event=1 data-ga-category="share" data-ga-action="message" data-ga-label="/blog/2016/star-wars-grossing-war.html">
-      Let me know
-    </a>
-    <a href="https://www.facebook.com/dialog/feed?app_id=1529566150689415&link=http://danielmarcelino.github.io/blog/2016/star-wars-grossing-war.html&name=The Star Wars Grossing War&caption=&redirect_uri=http://danielmarcelino.github.io/blog/2016/star-wars-grossing-war.html?message=Thanks for sharing!" data-ga-event=1 data-ga-category="share" data-ga-action="facebook" data-ga-label="/blog/2016/star-wars-grossing-war.html">
-      Share on Facebook
-    </a>
-    <a href="https://twitter.com/intent/tweet?url=http://danielmarcelino.github.io/blog/2016/star-wars-grossing-war.html&via=daniel&text=The Star Wars Grossing War" data-ga-event=1 data-ga-category="share" data-ga-action="twitter" data-ga-label="/blog/2016/star-wars-grossing-war.html">
-      Tweet it
-    </a>
-  </div>
-</div>
-
-      
 
 	  
       <div class="disqus-comments">

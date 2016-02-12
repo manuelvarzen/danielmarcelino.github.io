@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: page
 title: "The Star Wars Grossing War"
 author: "Daniel Marcelino"
 date: 2016-01-11

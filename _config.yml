@@ -21,7 +21,7 @@ extensions:
     - smart
 highlighter: pygments
 permalink: /blog/:year/:title.html
-paginate: 5
+paginate: 10
 paginate_path: "/page:num/"
 
 # --- Navigation bar options --- #
