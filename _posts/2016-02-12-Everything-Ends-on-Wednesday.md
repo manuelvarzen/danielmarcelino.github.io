@@ -12,15 +12,15 @@ tags: [R]
 published: true
 ---
 
-The Brazilian Carnival just terminated this week, but for some people it is time to starting worry about crazy things that may have happened over the days of the flesh festival.
+The Brazilian Carnival just ended this week, but for some people it is time to starting worry about crazy things that may have happened over the days of the flesh festival.
 
-Watching the news, the spokes person of the Test and Prevention Center (CTA) of Brasilia estimates that people seeking for counseling and test kits increase on average 40% the day after the carnival (Wednesday). He disclosed that 2 out of 124 performed tests (most likely staff finger stick tests) revealed positive. 
+Watching the news, the spokesperson of the Test and Prevention Center (CTA) in Brasilia estimated that the number of people seeking counseling and test kits increases on average 40% the day after the carnival (Wednesday). He also disclosed that 2 out of 124 performed tests (most likely staff finger stick tests) turned out positive. 
 
-I started thinking of HIV incidence among Brazilians and how likely it is to be tested positive when incidence levels also change.
+After the news I started thinking of HIV incidence among Brazilians and how likely it is to be tested positive when incidence levels also change; every year these numbers go up and dow accordingly to the government policies.
 
-After a little research, I found several sources with estimated quantities of the incidence for  several countries. For instance, in 2011, the incidence rate of AIDS (stage when the disease manifests itself in the patient) in Brazil was 17.9 to 100,000 inhabitants. This number varies  significantly across the regions, so it's higher in South-East and lower in the Midwest of the country, with others regions falling in between. The incidence rate also varies between males and females and among age groups. For the sake of simplicity I will not consider those differences here. It would get too complicated for a blog post post-carnival. 
+After a little research, I found several sources with estimated quantities of the incidence of HIV/AIDS. The one I chose, says for instance, in 2011 the incidence rate of AIDS (stage when the disease manifests itself in the patient) in Brazil was 17.9 to 100,000 inhabitants. This number varies  significantly across the regions, so it's higher in South-East and lower in the Midwest of the country, with others regions falling in between. The incidence rate also varies between males and females, and among age groups. For the sake of simplicity, I will not consider those differences here. It would get too complicated for a blog post post-carnival. 
 
-The [enzyme-linked immunosorbent assay (ELISA screening test)](https://en.wikipedia.org/wiki/ELISA)  for testing a blood sample for the HIV antibodies being present in human blood has these properties:
+Consider that the [enzyme-linked immunosorbent assay (ELISA screening test)](https://en.wikipedia.org/wiki/ELISA) for testing a blood sample for the HIV antibodies being present in human blood has the following properties:
 
 Sensitivity:
 
@@ -30,9 +30,9 @@ Specificity:
 
 $$ P(negative~ELISA~|~person~is~HIV~negative) = .926 $$
 
-**Sensitivity** is the percentage of individuals with HIV infection (based on ELISA reading) whom  correctly identified as having infection (aka the true positive rate). **Specificity** is the percentage of individuals without HIV infection (based on ELISA reading) whom correctly identified as being free of infection (aka true negative rate);
+**Sensitivity** is the percentage of individuals with HIV infection (based on ELISA reading) whom  correctly identified as having infection (aka the true positive rate). **Specificity** is the percentage of individuals without HIV infection (based on ELISA reading) whom correctly identified as being free of infection (aka true negative rate). No test is perfect, as a consequence, few individuals will receive false negatives and others false positives. 
 
-Suppose the incidence of HIV in the population being tested is denoted by p . In class *p = 18/100000* -- or *0.00018*. In general we can show this relation using the Law of Total Probability:
+Suppose the incidence of HIV in the population being tested is denoted by p . Replacing: *p = 18/100000* or *0.00018*. Using the Law of Total Probability we can show this relation as:
 
 $$P(HIV~positive~|~positive~ELISA) = p * .977~/~(p * .977 + (1-p) * .074)$$
 
