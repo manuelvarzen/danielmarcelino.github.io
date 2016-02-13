@@ -12,11 +12,11 @@ tags: [R]
 published: true
 ---
 
-The Brazilian Carnival just finished this week, but for some people it is time to start worrying about crazy things that may have happened over the days of the flesh festival.
+The Brazilian Carnival just terminated this week, but for some people it is time to starting worry about crazy things that may have happened over the days of the flesh festival.
 
-Watching the news, the spoken person of the Test and Prevention Center (CTA) of Brasilia estimated that people seeking test services by this institution increases on average 40% the day after the carnival. By the end the day, the spoken person reveled that 2 out of 124 performed rapid tests (most likely staff finger stick tests) turned out positive. 
+Watching the news, the spoken person of the Test and Prevention Center (CTA) of Brasilia estimates that people seeking for counseling and test kits increase on average 40% the day after the carnival (Wednesday). He disclosed that 2 out of 124 performed tests (most likely staff finger stick tests) revealed positive. 
 
-I started to thinking about incidence of HIV among Brazilians and how likely it's to be tested positive when incidence levels also change.
+I started thinking of HIV incidence among Brazilians and how likely it is to be tested positive when incidence levels also change.
 
 After a little research, I found several sources with estimated quantities of the incidence for  several countries. For instance, in 2011, the incidence rate of AIDS (stage when the disease manifests itself in the patient) in Brazil was 17.9 to 100,000 inhabitants. This number varies  significantly across the regions, so it's higher in South-East and lower in the Midwest of the country, with others regions falling in between. The incidence rate also varies between males and females and among age groups. For the sake of simplicity I will not consider those differences here. It would get too complicated for a blog post post-carnival. 
 
