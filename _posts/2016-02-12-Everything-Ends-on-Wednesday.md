@@ -14,7 +14,7 @@ published: true
 
 The Brazilian Carnival just terminated this week, but for some people it is time to starting worry about crazy things that may have happened over the days of the flesh festival.
 
-Watching the news, the spoken person of the Test and Prevention Center (CTA) of Brasilia estimates that people seeking for counseling and test kits increase on average 40% the day after the carnival (Wednesday). He disclosed that 2 out of 124 performed tests (most likely staff finger stick tests) revealed positive. 
+Watching the news, the spokes person of the Test and Prevention Center (CTA) of Brasilia estimates that people seeking for counseling and test kits increase on average 40% the day after the carnival (Wednesday). He disclosed that 2 out of 124 performed tests (most likely staff finger stick tests) revealed positive. 
 
 I started thinking of HIV incidence among Brazilians and how likely it is to be tested positive when incidence levels also change.
 
