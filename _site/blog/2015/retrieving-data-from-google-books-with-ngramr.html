@@ -13,9 +13,59 @@
 	 
 	   <!-- favicon -->
 	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
-  
 	
+	
+  
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+  <!-- MathJax configuration -->
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+          processEscapes: true,
+          processEnvironments: true
+      },
+      TeX: {
+          equationNumbers: { autoNumber: "AMS" }
+      },
+      // Center justify equations in code and markdown cells. Elsewhere
+      // we use CSS to left justify single line equations in code cells.
+      displayAlign: 'center',
+      "HTML-CSS": {
+          styles: {'.MathJax_Display': {"margin": 0}},
+          linebreaks: { automatic: false },
+          scale: 100
+      }
+  });
+  </script>
 
+
+  
+    
+      <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="/css/main.css" />
+    
+  
+  
+
+  
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+  
+
+
+  
+    
+      <link rel="stylesheet" href="/js/jquery-1.11.2.min.js" />
+    
+      <link rel="stylesheet" href="/js/bootstrap.min.js" />
+    
+      <link rel="stylesheet" href="/js/main.js" />
+    
+  
+    
+  
   
  <title>EnfoRced Data Analysis</title>
    
@@ -25,26 +75,10 @@
   
   <link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis - Blog of Daniel Marcelino" href="/feed.xml" />
 
-  
-    
-      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
-    
-    
-  
-  
-    
-      <link rel="stylesheet" href="/css/bootstrap.min.css" />
-    
-      <link rel="stylesheet" href="/css/main.css" />
     
   
   
   
-    
-	  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-    
-	  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-    
   
 
     
@@ -129,7 +163,110 @@
   </div>
 </nav>  
 
+    <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="keywords" content="Daniel Marcelino, SciencesPo, SoundexBR, r-project, r, political science, political behavior, social sciences, statistics, methods, applied methods, programming, data mining, data visualization, datascience, big data"/>	
+	<meta name="google-site-verification" content="Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ" />
+	<meta name="bing_webmastertools_id" content="97837256955BD270FD688E2B50F89FDB" />
+    <meta name="author" content="Daniel Marcelino" />
+	 <meta name="title" content="&middot; Daniel &middot; Retrieving Data from Google Books with `ngramr`" />
+	 
+	   <!-- favicon -->
+	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+	
+	
+  
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+  <!-- MathJax configuration -->
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+          processEscapes: true,
+          processEnvironments: true
+      },
+      TeX: {
+          equationNumbers: { autoNumber: "AMS" }
+      },
+      // Center justify equations in code and markdown cells. Elsewhere
+      // we use CSS to left justify single line equations in code cells.
+      displayAlign: 'center',
+      "HTML-CSS": {
+          styles: {'.MathJax_Display': {"margin": 0}},
+          linebreaks: { automatic: false },
+          scale: 100
+      }
+  });
+  </script>
+
+
+  
     
+      <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="/css/main.css" />
+    
+  
+  
+
+  
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+  
+
+
+  
+    
+      <link rel="stylesheet" href="/js/jquery-1.11.2.min.js" />
+    
+      <link rel="stylesheet" href="/js/bootstrap.min.js" />
+    
+      <link rel="stylesheet" href="/js/main.js" />
+    
+  
+    
+  
+  
+ <title>EnfoRced Data Analysis</title>
+   
+
+  
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis - Blog of Daniel Marcelino" href="/feed.xml" />
+
+    
+  
+  
+  
+  
+
+    
+  
+  
+  
+  
+  
+  <!-- Facebook OpenGraph tags -->
+  
+  <meta property="og:title" content="Retrieving Data from Google Books with `ngramr`" />
+  
+  
+  <meta property="og:type" content="website" />
+  
+  
+  <meta property="og:url" content="http://danielmarcelino.github.io/blog/2015/retrieving-data-from-google-books-with-ngramr.html/" />
+  
+  
+  
+  <meta property="og:image" content="http://danielmarcelino.github.io/img/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/sociologists-1.png" />
+  
+
+</head>
+
+
 
 
 
@@ -175,19 +312,19 @@
 <p>There is a package to query the Google Ngram called <a href="https://cran.r-project.org/web/packages/ngramr/index.html">ngramr</a> written by Sean Carmody. With this package, one can retrieve data from Ngram pages in the form of data frame.</p>
 
 <h2 id="getting-started">Getting Started</h2>
-<p>The first thing to do is to load the <code>ggplot2</code> and <code>ngramr</code> packages. In case you don’t have them installed, an installation is required.</p>
+<p>The first thing to do is to load the <code class="highlighter-rouge">ggplot2</code> and <code class="highlighter-rouge">ngramr</code> packages. In case you don’t have them installed, an installation is required.</p>
 
 <h2 id="write-a-query-and-do-the-plots">Write a Query and Do the Plots</h2>
 
 <p>The following is equivalent to the chart above for the three sociologists bigrams, except that I’m applying a smoothed line–or moving average of 5 years, so trends become more apparent. For instance, the data shown for 2000 is an average of the raw count for 2000 plus 5 values on either side: (“count for 1995” + “count for 2000” + “count for 2005”), divided by 3. So a smoothing of 5 means that 11 values will be averaged: 5 on either side, plus the target value in the center of them.</p>
 
-<div class="highlight"><pre><code class="language-r" data-lang="r">ng <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;(Karl Marx)&quot;</span><span class="p">,</span> <span class="s">&quot;(Max Weber)&quot;</span><span class="p">,</span> <span class="s">&quot;(Emile Durkheim)&quot;</span><span class="p">)</span> 
-ggram<span class="p">(</span>ng<span class="p">,</span> year_start <span class="o">=</span> <span class="m">1800</span><span class="p">,</span> 
-      year_end <span class="o">=</span> <span class="m">2012</span><span class="p">,</span>  
-      smoothing <span class="o">=</span> <span class="m">5</span><span class="p">,</span>
-      google_theme <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span> <span class="o">+</span>
-  ggtitle<span class="p">(</span><span class="s">&quot;Marx, Weber, Durkheim&quot;</span><span class="p">)</span><span class="o">+</span>
-    theme_538<span class="p">(</span>legend.position <span class="o">=</span> <span class="s">&quot;bottom&quot;</span><span class="p">)</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">ng</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="s2">"(Karl Marx)"</span><span class="p">,</span> <span class="s2">"(Max Weber)"</span><span class="p">,</span> <span class="s2">"(Emile Durkheim)"</span><span class="p">)</span> 
+<span class="n">ggram</span><span class="p">(</span><span class="n">ng</span><span class="p">,</span> <span class="n">year_start</span> <span class="o">=</span> <span class="m">1800</span><span class="p">,</span> 
+      <span class="n">year_end</span> <span class="o">=</span> <span class="m">2012</span><span class="p">,</span>  
+      <span class="n">smoothing</span> <span class="o">=</span> <span class="m">5</span><span class="p">,</span>
+      <span class="n">google_theme</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">)</span> <span class="o">+</span>
+  <span class="n">ggtitle</span><span class="p">(</span><span class="s2">"Marx, Weber, Durkheim"</span><span class="p">)</span><span class="o">+</span>
+    <span class="n">theme_538</span><span class="p">(</span><span class="n">legend.position</span> <span class="o">=</span> <span class="s2">"bottom"</span><span class="p">)</span></code></pre></figure>
 
 <p><img src="http://danielmarcelino.github.io/images/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/sociologists-1.png" alt="center" /></p>
 
@@ -195,31 +332,31 @@ ggram<span class="p">(</span>ng<span class="p">,</span> year_start <span class="
 
 <p>I test the trend in popularity of the unigran “Capitalism” vis-à-vis other two unigrans (“Socialism”, “Communism”) from 1850 to 2012. Here’s how we might combine + and / to show how the unigram “Capitalism” has blossomed at the expense of “Socialism” and “Communism” terms in the literature published in English.</p>
 
-<div class="highlight"><pre><code class="language-r" data-lang="r">ng <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;Capitalism /(Capitalism + Socialism + Communism)&quot;</span><span class="p">)</span>
-cap <span class="o">&lt;-</span> ggram<span class="p">(</span>ng<span class="p">,</span> year_start <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
-      year_end <span class="o">=</span> <span class="m">2012</span><span class="p">,</span>  
-      smoothing <span class="o">=</span> <span class="m">3</span><span class="p">,</span>
-      google_theme <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span> <span class="o">+</span>
-  ggtitle<span class="p">(</span><span class="s">&quot;Capitalism over (Capitalism + Socialism + Communism)&quot;</span><span class="p">)</span><span class="o">+</span>
-    theme_538<span class="p">()</span>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">ng</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="s2">"Capitalism /(Capitalism + Socialism + Communism)"</span><span class="p">)</span>
+<span class="n">cap</span> <span class="o">&lt;-</span> <span class="n">ggram</span><span class="p">(</span><span class="n">ng</span><span class="p">,</span> <span class="n">year_start</span> <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
+      <span class="n">year_end</span> <span class="o">=</span> <span class="m">2012</span><span class="p">,</span>  
+      <span class="n">smoothing</span> <span class="o">=</span> <span class="m">3</span><span class="p">,</span>
+      <span class="n">google_theme</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">)</span> <span class="o">+</span>
+  <span class="n">ggtitle</span><span class="p">(</span><span class="s2">"Capitalism over (Capitalism + Socialism + Communism)"</span><span class="p">)</span><span class="o">+</span>
+    <span class="n">theme_538</span><span class="p">()</span>
 
-ng <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;Socialism /(Capitalism + Socialism + Communism)&quot;</span><span class="p">)</span>
-soc <span class="o">&lt;-</span> ggram<span class="p">(</span>ng<span class="p">,</span> year_start <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
-      year_end <span class="o">=</span> <span class="m">2012</span><span class="p">,</span>  
-      smoothing <span class="o">=</span> <span class="m">3</span><span class="p">,</span>
-      google_theme <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span> <span class="o">+</span>
-  ggtitle<span class="p">(</span><span class="s">&quot;Socialism over (Capitalism + Socialism + Communism)&quot;</span><span class="p">)</span><span class="o">+</span>
-    theme_538<span class="p">()</span>
+<span class="n">ng</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="s2">"Socialism /(Capitalism + Socialism + Communism)"</span><span class="p">)</span>
+<span class="n">soc</span> <span class="o">&lt;-</span> <span class="n">ggram</span><span class="p">(</span><span class="n">ng</span><span class="p">,</span> <span class="n">year_start</span> <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
+      <span class="n">year_end</span> <span class="o">=</span> <span class="m">2012</span><span class="p">,</span>  
+      <span class="n">smoothing</span> <span class="o">=</span> <span class="m">3</span><span class="p">,</span>
+      <span class="n">google_theme</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">)</span> <span class="o">+</span>
+  <span class="n">ggtitle</span><span class="p">(</span><span class="s2">"Socialism over (Capitalism + Socialism + Communism)"</span><span class="p">)</span><span class="o">+</span>
+    <span class="n">theme_538</span><span class="p">()</span>
 
-ng <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;Communism /(Capitalism + Socialism + Communism)&quot;</span><span class="p">)</span>
-com <span class="o">&lt;-</span> ggram<span class="p">(</span>ng<span class="p">,</span> year_start <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
-      year_end <span class="o">=</span> <span class="m">2012</span><span class="p">,</span>  
-      smoothing <span class="o">=</span> <span class="m">3</span><span class="p">,</span>
-      google_theme <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span> <span class="o">+</span>
-  ggtitle<span class="p">(</span><span class="s">&quot;Communism over (Capitalism + Socialism + Communism)&quot;</span><span class="p">)</span><span class="o">+</span>
-    theme_538<span class="p">()</span>
-multiplot<span class="p">(</span>cap<span class="p">,</span> soc<span class="p">,</span> com<span class="p">,</span> ncols<span class="o">=</span><span class="m">1</span><span class="p">)</span>
-ggfootnote<span class="p">(</span>size <span class="o">=</span> <span class="m">.5</span><span class="p">)</span></code></pre></div>
+<span class="n">ng</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="s2">"Communism /(Capitalism + Socialism + Communism)"</span><span class="p">)</span>
+<span class="n">com</span> <span class="o">&lt;-</span> <span class="n">ggram</span><span class="p">(</span><span class="n">ng</span><span class="p">,</span> <span class="n">year_start</span> <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
+      <span class="n">year_end</span> <span class="o">=</span> <span class="m">2012</span><span class="p">,</span>  
+      <span class="n">smoothing</span> <span class="o">=</span> <span class="m">3</span><span class="p">,</span>
+      <span class="n">google_theme</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">)</span> <span class="o">+</span>
+  <span class="n">ggtitle</span><span class="p">(</span><span class="s2">"Communism over (Capitalism + Socialism + Communism)"</span><span class="p">)</span><span class="o">+</span>
+    <span class="n">theme_538</span><span class="p">()</span>
+<span class="n">multiplot</span><span class="p">(</span><span class="n">cap</span><span class="p">,</span> <span class="n">soc</span><span class="p">,</span> <span class="n">com</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<span class="n">ggfootnote</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="m">.5</span><span class="p">)</span></code></pre></figure>
 
 <p><img src="http://danielmarcelino.github.io/images/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/Capitalism Popularity-1.png" alt="center" /></p>
 
@@ -227,32 +364,32 @@ ggfootnote<span class="p">(</span>size <span class="o">=</span> <span class="m">
 
 <p>Below is a plot of the unigram “Capitalism” (“капитализм”) in the Russian language <em>corpus</em>.</p>
 
-<div class="highlight"><pre><code class="language-r" data-lang="r">ng <span class="o">&lt;-</span> <span class="s">&quot;капитализм&quot;</span>
-rus<span class="o">=</span>ggram<span class="p">(</span>ng<span class="p">,</span> year_start <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
-      corpus <span class="o">=</span> <span class="s">&quot;rus_2012&quot;</span><span class="p">,</span>
-      ignore_case <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> 
-      google_theme <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span> <span class="o">+</span>
-    ggtitle<span class="p">(</span><span class="s">&quot;Russian: капитализм&quot;</span><span class="p">)</span><span class="o">+</span>
-     theme_538<span class="p">()</span>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">ng</span> <span class="o">&lt;-</span> <span class="s2">"капитализм"</span>
+<span class="n">rus</span><span class="o">=</span><span class="n">ggram</span><span class="p">(</span><span class="n">ng</span><span class="p">,</span> <span class="n">year_start</span> <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
+      <span class="n">corpus</span> <span class="o">=</span> <span class="s2">"rus_2012"</span><span class="p">,</span>
+      <span class="n">ignore_case</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">,</span> 
+      <span class="n">google_theme</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">)</span> <span class="o">+</span>
+    <span class="n">ggtitle</span><span class="p">(</span><span class="s2">"Russian: капитализм"</span><span class="p">)</span><span class="o">+</span>
+     <span class="n">theme_538</span><span class="p">()</span>
 
-ng <span class="o">&lt;-</span> <span class="s">&quot;capitalisme&quot;</span>
-fre<span class="o">=</span>ggram<span class="p">(</span>ng<span class="p">,</span> year_start <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
-      corpus <span class="o">=</span> <span class="s">&quot;fre_2012&quot;</span><span class="p">,</span>
-      ignore_case <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> 
-      google_theme <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span> <span class="o">+</span>
-    ggtitle<span class="p">(</span><span class="s">&quot;French: Capitalisme&quot;</span><span class="p">)</span><span class="o">+</span>
-     theme_538<span class="p">()</span>
+<span class="n">ng</span> <span class="o">&lt;-</span> <span class="s2">"capitalisme"</span>
+<span class="n">fre</span><span class="o">=</span><span class="n">ggram</span><span class="p">(</span><span class="n">ng</span><span class="p">,</span> <span class="n">year_start</span> <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
+      <span class="n">corpus</span> <span class="o">=</span> <span class="s2">"fre_2012"</span><span class="p">,</span>
+      <span class="n">ignore_case</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">,</span> 
+      <span class="n">google_theme</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">)</span> <span class="o">+</span>
+    <span class="n">ggtitle</span><span class="p">(</span><span class="s2">"French: Capitalisme"</span><span class="p">)</span><span class="o">+</span>
+     <span class="n">theme_538</span><span class="p">()</span>
 
-ng <span class="o">&lt;-</span> <span class="s">&quot;capitalism&quot;</span>
-eng<span class="o">=</span>ggram<span class="p">(</span>ng<span class="p">,</span> year_start <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
-      corpus <span class="o">=</span> <span class="s">&quot;eng_gb_2012&quot;</span><span class="p">,</span>
-      ignore_case <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> 
-      google_theme <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span> <span class="o">+</span>
-    ggtitle<span class="p">(</span><span class="s">&quot;English: Capitalism&quot;</span><span class="p">)</span><span class="o">+</span>
-     theme_538<span class="p">()</span>
+<span class="n">ng</span> <span class="o">&lt;-</span> <span class="s2">"capitalism"</span>
+<span class="n">eng</span><span class="o">=</span><span class="n">ggram</span><span class="p">(</span><span class="n">ng</span><span class="p">,</span> <span class="n">year_start</span> <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
+      <span class="n">corpus</span> <span class="o">=</span> <span class="s2">"eng_gb_2012"</span><span class="p">,</span>
+      <span class="n">ignore_case</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">,</span> 
+      <span class="n">google_theme</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">)</span> <span class="o">+</span>
+    <span class="n">ggtitle</span><span class="p">(</span><span class="s2">"English: Capitalism"</span><span class="p">)</span><span class="o">+</span>
+     <span class="n">theme_538</span><span class="p">()</span>
 
-multiplot<span class="p">(</span>rus<span class="p">,</span> fre<span class="p">,</span> eng<span class="p">,</span> ncols<span class="o">=</span><span class="m">1</span><span class="p">)</span>
-ggfootnote<span class="p">(</span>size <span class="o">=</span> <span class="m">.5</span><span class="p">)</span></code></pre></div>
+<span class="n">multiplot</span><span class="p">(</span><span class="n">rus</span><span class="p">,</span> <span class="n">fre</span><span class="p">,</span> <span class="n">eng</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<span class="n">ggfootnote</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="m">.5</span><span class="p">)</span></code></pre></figure>
 
 <p><img src="http://danielmarcelino.github.io/images/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/capitalism-1.png" alt="center" /></p>
 
@@ -286,12 +423,8 @@ ggfootnote<span class="p">(</span>size <span class="o">=</span> <span class="m">
     
     
     
-      
-    
 
     
-    
-      
     
     
     
@@ -432,14 +565,6 @@ Some contents of this blog is also contributed to <a href="http://www.r-bloggers
 
     
 
-
-  
-	<script src="/js/jquery-1.11.2.min.js"></script>
-  
-	<script src="/js/bootstrap.min.js"></script>
-  
-	<script src="/js/main.js"></script>
-  
 
 
 

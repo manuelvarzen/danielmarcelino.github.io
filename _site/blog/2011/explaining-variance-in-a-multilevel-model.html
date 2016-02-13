@@ -13,9 +13,59 @@
 	 
 	   <!-- favicon -->
 	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
-  
 	
+	
+  
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+  <!-- MathJax configuration -->
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+          processEscapes: true,
+          processEnvironments: true
+      },
+      TeX: {
+          equationNumbers: { autoNumber: "AMS" }
+      },
+      // Center justify equations in code and markdown cells. Elsewhere
+      // we use CSS to left justify single line equations in code cells.
+      displayAlign: 'center',
+      "HTML-CSS": {
+          styles: {'.MathJax_Display': {"margin": 0}},
+          linebreaks: { automatic: false },
+          scale: 100
+      }
+  });
+  </script>
 
+
+  
+    
+      <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="/css/main.css" />
+    
+  
+  
+
+  
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+  
+
+
+  
+    
+      <link rel="stylesheet" href="/js/jquery-1.11.2.min.js" />
+    
+      <link rel="stylesheet" href="/js/bootstrap.min.js" />
+    
+      <link rel="stylesheet" href="/js/main.js" />
+    
+  
+    
+  
   
  <title>EnfoRced Data Analysis</title>
    
@@ -25,26 +75,10 @@
   
   <link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis - Blog of Daniel Marcelino" href="/feed.xml" />
 
-  
-    
-      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
-    
-    
-  
-  
-    
-      <link rel="stylesheet" href="/css/bootstrap.min.css" />
-    
-      <link rel="stylesheet" href="/css/main.css" />
     
   
   
   
-    
-	  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-    
-	  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-    
   
 
     
@@ -129,7 +163,110 @@
   </div>
 </nav>  
 
+    <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="keywords" content="Daniel Marcelino, SciencesPo, SoundexBR, r-project, r, political science, political behavior, social sciences, statistics, methods, applied methods, programming, data mining, data visualization, datascience, big data"/>	
+	<meta name="google-site-verification" content="Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ" />
+	<meta name="bing_webmastertools_id" content="97837256955BD270FD688E2B50F89FDB" />
+    <meta name="author" content="Daniel Marcelino" />
+	 <meta name="title" content="&middot; Daniel &middot; Showing Explained Variance in Multilevel Models" />
+	 
+	   <!-- favicon -->
+	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+	
+	
+  
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+  <!-- MathJax configuration -->
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+          processEscapes: true,
+          processEnvironments: true
+      },
+      TeX: {
+          equationNumbers: { autoNumber: "AMS" }
+      },
+      // Center justify equations in code and markdown cells. Elsewhere
+      // we use CSS to left justify single line equations in code cells.
+      displayAlign: 'center',
+      "HTML-CSS": {
+          styles: {'.MathJax_Display': {"margin": 0}},
+          linebreaks: { automatic: false },
+          scale: 100
+      }
+  });
+  </script>
+
+
+  
     
+      <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="/css/main.css" />
+    
+  
+  
+
+  
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+  
+
+
+  
+    
+      <link rel="stylesheet" href="/js/jquery-1.11.2.min.js" />
+    
+      <link rel="stylesheet" href="/js/bootstrap.min.js" />
+    
+      <link rel="stylesheet" href="/js/main.js" />
+    
+  
+    
+  
+  
+ <title>EnfoRced Data Analysis</title>
+   
+
+  
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis - Blog of Daniel Marcelino" href="/feed.xml" />
+
+    
+  
+  
+  
+  
+
+    
+  
+  
+  
+  
+  
+  <!-- Facebook OpenGraph tags -->
+  
+  <meta property="og:title" content="Showing Explained Variance in Multilevel Models" />
+  
+  
+  <meta property="og:type" content="website" />
+  
+  
+  <meta property="og:url" content="http://danielmarcelino.github.io/blog/2011/explaining-variance-in-a-multilevel-model.html/" />
+  
+  
+  
+  <meta property="og:image" content="http://danielmarcelino.github.io/images/daniel_rio.jpg" />
+  
+
+</head>
+
+
 
 
 
@@ -165,69 +302,69 @@
 
 <p>For the best of my knowledge, there is no a default plot for displaying the effect of a factor on the deviance of multilevel models; so this is going to be a tentative for showing such a statistic in my ongoing dissertation.</p>
 
-<p>The following values were obtained using multilevel models performed in R (thanks for <code>nlme</code> and <code>lme4</code> packages).
+<p>The following values were obtained using multilevel models performed in R (thanks for <code class="highlighter-rouge">nlme</code> and <code class="highlighter-rouge">lme4</code> packages).<br />
  Basically, this chart shows the declining variance for each level when each independent parameter is included in the model. You can find the full script below the chart.</p>
 
 <p><img src="http://danielmarcelino.github.io/images/2011/ResultadoVariancia.png" alt="Explained Variance" /></p>
 
 <h3 id="graph-for-explained-variance">Graph for explained variance</h3>
 
-<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># camera 2002</span>
-df1<span class="o">&lt;-</span><span class="kt">data.frame</span><span class="p">(</span>level3<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">0.5045094</span><span class="p">,</span><span class="m">0.1485807</span><span class="p">,</span> <span class="m">0.0494265</span><span class="p">),</span>
-level2<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2.7814555</span><span class="p">,</span><span class="m">1.7936947</span><span class="p">,</span> <span class="m">1.6300276</span><span class="p">),</span>
-level1<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">3.7370482</span><span class="p">,</span> <span class="m">3.4816692</span><span class="p">,</span> <span class="m">3.4842407</span><span class="p">),</span>
-t<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">))</span>
-par<span class="p">(</span>mfrow <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">),</span> mar <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">4</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">4</span><span class="p">))</span><span class="c1">#Matrix</span>
-plot<span class="p">(</span>df1<span class="o">$</span>level1 <span class="o">~</span> df1<span class="o">$</span><span class="kp">t</span><span class="p">,</span> type<span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span> lwd<span class="o">=</span><span class="m">4</span><span class="p">,</span> col<span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span> xlab<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> ylab<span class="o">=</span><span class="s">&quot;Variance&quot;</span><span class="p">,</span>
-main<span class="o">=</span><span class="s">&quot;Câmara 2002&quot;</span><span class="p">,</span> cex.main <span class="o">=</span> <span class="m">1</span><span class="p">,</span>
-xlim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">2</span><span class="p">),</span> xaxt<span class="o">=</span><span class="s">&quot;n&quot;</span><span class="p">,</span> ylim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">4</span><span class="p">))</span>
-axis<span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">))</span><span class="c1">#to remaque axis</span>
-lines<span class="p">(</span>df1<span class="o">$</span>level2 <span class="o">~</span> df1<span class="o">$</span><span class="kp">t</span><span class="p">,</span> type<span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span> lwd<span class="o">=</span><span class="m">4</span><span class="p">,</span> col<span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">)</span>
-lines<span class="p">(</span>df1<span class="o">$</span>level3 <span class="o">~</span> df1<span class="o">$</span><span class="kp">t</span><span class="p">,</span> type<span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span> lwd<span class="o">=</span><span class="m">4</span><span class="p">,</span> col<span class="o">=</span><span class="s">&quot;purple&quot;</span><span class="p">)</span>
-text<span class="p">(</span>locator<span class="p">(</span><span class="m">1</span><span class="p">),</span> <span class="kp">expression</span><span class="p">(</span>sigma<span class="o">^</span><span class="m">2</span><span class="p">))</span> <span class="c1">#need to click</span>
-text<span class="p">(</span>locator<span class="p">(</span><span class="m">1</span><span class="p">),</span> <span class="kp">expression</span><span class="p">(</span>tau<span class="p">[</span><span class="m">0</span><span class="p">][</span><span class="m">0</span><span class="p">]))</span> <span class="c1"># need to click to add the text</span>
-text<span class="p">(</span>locator<span class="p">(</span><span class="m">1</span><span class="p">),</span> <span class="kp">expression</span><span class="p">(</span>omega<span class="p">[</span><span class="m">0</span><span class="p">][</span><span class="m">0</span><span class="p">]))</span><span class="c1"># need to click to add the text</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># camera 2002
+</span><span class="n">df1</span><span class="o">&lt;-</span><span class="n">data.frame</span><span class="p">(</span><span class="n">level3</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0.5045094</span><span class="p">,</span><span class="m">0.1485807</span><span class="p">,</span> <span class="m">0.0494265</span><span class="p">),</span>
+<span class="n">level2</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">2.7814555</span><span class="p">,</span><span class="m">1.7936947</span><span class="p">,</span> <span class="m">1.6300276</span><span class="p">),</span>
+<span class="n">level1</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">3.7370482</span><span class="p">,</span> <span class="m">3.4816692</span><span class="p">,</span> <span class="m">3.4842407</span><span class="p">),</span>
+<span class="n">t</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">))</span>
+<span class="n">par</span><span class="p">(</span><span class="n">mfrow</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">),</span> <span class="n">mar</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">4</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">4</span><span class="p">))</span><span class="c1">#Matrix
+</span><span class="n">plot</span><span class="p">(</span><span class="n">df1</span><span class="o">$</span><span class="n">level1</span> <span class="o">~</span> <span class="n">df1</span><span class="o">$</span><span class="n">t</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s2">"l"</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">4</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s2">"Variance"</span><span class="p">,</span>
+<span class="n">main</span><span class="o">=</span><span class="s2">"Câmara 2002"</span><span class="p">,</span> <span class="n">cex.main</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span>
+<span class="n">xlim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">2</span><span class="p">),</span> <span class="n">xaxt</span><span class="o">=</span><span class="s2">"n"</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">4</span><span class="p">))</span>
+<span class="n">axis</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">))</span><span class="c1">#to remaque axis
+</span><span class="n">lines</span><span class="p">(</span><span class="n">df1</span><span class="o">$</span><span class="n">level2</span> <span class="o">~</span> <span class="n">df1</span><span class="o">$</span><span class="n">t</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s2">"l"</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">4</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"blue"</span><span class="p">)</span>
+<span class="n">lines</span><span class="p">(</span><span class="n">df1</span><span class="o">$</span><span class="n">level3</span> <span class="o">~</span> <span class="n">df1</span><span class="o">$</span><span class="n">t</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s2">"l"</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">4</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"purple"</span><span class="p">)</span>
+<span class="n">text</span><span class="p">(</span><span class="n">locator</span><span class="p">(</span><span class="m">1</span><span class="p">),</span> <span class="n">expression</span><span class="p">(</span><span class="n">sigma</span><span class="o">^</span><span class="m">2</span><span class="p">))</span> <span class="c1">#need to click
+</span><span class="n">text</span><span class="p">(</span><span class="n">locator</span><span class="p">(</span><span class="m">1</span><span class="p">),</span> <span class="n">expression</span><span class="p">(</span><span class="n">tau</span><span class="p">[</span><span class="m">0</span><span class="p">][</span><span class="m">0</span><span class="p">]))</span> <span class="c1"># need to click to add the text
+</span><span class="n">text</span><span class="p">(</span><span class="n">locator</span><span class="p">(</span><span class="m">1</span><span class="p">),</span> <span class="n">expression</span><span class="p">(</span><span class="n">omega</span><span class="p">[</span><span class="m">0</span><span class="p">][</span><span class="m">0</span><span class="p">]))</span><span class="err">#</span> <span class="n">need</span> <span class="n">to</span> <span class="n">click</span> <span class="n">to</span> <span class="n">add</span> <span class="n">the</span> <span class="n">text</span></code></pre></figure>
 
-<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># camera 2006</span>
-df3<span class="o">&lt;-</span><span class="kt">data.frame</span><span class="p">(</span>level3<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">0.2562132</span><span class="p">,</span><span class="m">0.07523431</span><span class="p">,</span> <span class="m">0.04434483</span><span class="p">),</span>
-level2<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">1.7604626</span> <span class="p">,</span><span class="m">1.2956322</span> <span class="p">,</span> <span class="m">1.08924671</span><span class="p">),</span>
-level1<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">2.2531888</span><span class="p">,</span> <span class="m">1.9952469</span> <span class="p">,</span> <span class="m">2.00465342</span><span class="p">),</span>
-t<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">))</span>
-plot<span class="p">(</span>df3<span class="o">$</span>level1 <span class="o">~</span> df3<span class="o">$</span><span class="kp">t</span><span class="p">,</span> type<span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span> lwd<span class="o">=</span><span class="m">4</span><span class="p">,</span> col<span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span> xlab<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> ylab<span class="o">=</span><span class="s">&quot;Variance&quot;</span><span class="p">,</span>
-main<span class="o">=</span><span class="s">&quot;Câmara 2006&quot;</span><span class="p">,</span> cex.main <span class="o">=</span> <span class="m">1</span><span class="p">,</span>
-xlim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">2</span><span class="p">),</span> xaxt<span class="o">=</span><span class="s">&quot;n&quot;</span><span class="p">,</span> ylim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">3</span><span class="p">))</span>
-axis<span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">))</span><span class="c1">#to remaque axis</span>
-lines<span class="p">(</span>df3<span class="o">$</span>level2 <span class="o">~</span> df3<span class="o">$</span><span class="kp">t</span><span class="p">,</span> type<span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span> lwd<span class="o">=</span><span class="m">4</span><span class="p">,</span> col<span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">)</span>
-lines<span class="p">(</span>df3<span class="o">$</span>level3 <span class="o">~</span> df3<span class="o">$</span><span class="kp">t</span><span class="p">,</span> type<span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span> lwd<span class="o">=</span><span class="m">4</span><span class="p">,</span> col<span class="o">=</span><span class="s">&quot;purple&quot;</span><span class="p">)</span>
-text<span class="p">(</span>locator<span class="p">(</span><span class="m">1</span><span class="p">),</span> <span class="kp">expression</span><span class="p">(</span>sigma<span class="o">^</span><span class="m">2</span><span class="p">))</span> <span class="c1"># need to click to add the text</span>
-text<span class="p">(</span>locator<span class="p">(</span><span class="m">1</span><span class="p">),</span> <span class="kp">expression</span><span class="p">(</span>tau<span class="p">[</span><span class="m">0</span><span class="p">][</span><span class="m">0</span><span class="p">]))</span> <span class="c1"># need to click to add the text</span>
-text<span class="p">(</span>locator<span class="p">(</span><span class="m">1</span><span class="p">),</span> <span class="kp">expression</span><span class="p">(</span>omega<span class="p">[</span><span class="m">0</span><span class="p">][</span><span class="m">0</span><span class="p">]))</span> <span class="c1"># need to click to add the text</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># camera 2006
+</span><span class="n">df3</span><span class="o">&lt;-</span><span class="n">data.frame</span><span class="p">(</span><span class="n">level3</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0.2562132</span><span class="p">,</span><span class="m">0.07523431</span><span class="p">,</span> <span class="m">0.04434483</span><span class="p">),</span>
+<span class="n">level2</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">1.7604626</span> <span class="p">,</span><span class="m">1.2956322</span> <span class="p">,</span> <span class="m">1.08924671</span><span class="p">),</span>
+<span class="n">level1</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">2.2531888</span><span class="p">,</span> <span class="m">1.9952469</span> <span class="p">,</span> <span class="m">2.00465342</span><span class="p">),</span>
+<span class="n">t</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">))</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">df3</span><span class="o">$</span><span class="n">level1</span> <span class="o">~</span> <span class="n">df3</span><span class="o">$</span><span class="n">t</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s2">"l"</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">4</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s2">"Variance"</span><span class="p">,</span>
+<span class="n">main</span><span class="o">=</span><span class="s2">"Câmara 2006"</span><span class="p">,</span> <span class="n">cex.main</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span>
+<span class="n">xlim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">2</span><span class="p">),</span> <span class="n">xaxt</span><span class="o">=</span><span class="s2">"n"</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">3</span><span class="p">))</span>
+<span class="n">axis</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">))</span><span class="c1">#to remaque axis
+</span><span class="n">lines</span><span class="p">(</span><span class="n">df3</span><span class="o">$</span><span class="n">level2</span> <span class="o">~</span> <span class="n">df3</span><span class="o">$</span><span class="n">t</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s2">"l"</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">4</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"blue"</span><span class="p">)</span>
+<span class="n">lines</span><span class="p">(</span><span class="n">df3</span><span class="o">$</span><span class="n">level3</span> <span class="o">~</span> <span class="n">df3</span><span class="o">$</span><span class="n">t</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s2">"l"</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">4</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"purple"</span><span class="p">)</span>
+<span class="n">text</span><span class="p">(</span><span class="n">locator</span><span class="p">(</span><span class="m">1</span><span class="p">),</span> <span class="n">expression</span><span class="p">(</span><span class="n">sigma</span><span class="o">^</span><span class="m">2</span><span class="p">))</span> <span class="c1"># need to click to add the text
+</span><span class="n">text</span><span class="p">(</span><span class="n">locator</span><span class="p">(</span><span class="m">1</span><span class="p">),</span> <span class="n">expression</span><span class="p">(</span><span class="n">tau</span><span class="p">[</span><span class="m">0</span><span class="p">][</span><span class="m">0</span><span class="p">]))</span> <span class="c1"># need to click to add the text
+</span><span class="n">text</span><span class="p">(</span><span class="n">locator</span><span class="p">(</span><span class="m">1</span><span class="p">),</span> <span class="n">expression</span><span class="p">(</span><span class="n">omega</span><span class="p">[</span><span class="m">0</span><span class="p">][</span><span class="m">0</span><span class="p">]))</span> <span class="err">#</span> <span class="n">need</span> <span class="n">to</span> <span class="n">click</span> <span class="n">to</span> <span class="n">add</span> <span class="n">the</span> <span class="n">text</span></code></pre></figure>
 
-<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># senado 2002</span>
-df2<span class="o">&lt;-</span><span class="kt">data.frame</span><span class="p">(</span>level2<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">74.1874</span><span class="p">,</span><span class="m">50.21794</span><span class="p">,</span> <span class="m">39.31336</span><span class="p">),</span>
-level1<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">165.1340</span><span class="p">,</span> <span class="m">163.19076</span><span class="p">,</span> <span class="m">156.08912</span><span class="p">),</span>
-t<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">))</span>
-plot<span class="p">(</span>df2<span class="o">$</span>level1 <span class="o">~</span> df2<span class="o">$</span><span class="kp">t</span><span class="p">,</span> type<span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span> lwd<span class="o">=</span><span class="m">4</span><span class="p">,</span> col<span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span> xlab<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> ylab<span class="o">=</span><span class="s">&quot;Variance&quot;</span><span class="p">,</span>
-main<span class="o">=</span><span class="s">&quot;Senado 2002&quot;</span><span class="p">,</span> cex.main <span class="o">=</span> <span class="m">1</span><span class="p">,</span>
-xlim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">2</span><span class="p">),</span> xaxt<span class="o">=</span><span class="s">&quot;n&quot;</span><span class="p">,</span> ylim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">30</span><span class="p">,</span><span class="m">170</span><span class="p">))</span>
-axis<span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
-lines<span class="p">(</span>df2<span class="o">$</span>level2 <span class="o">~</span> df2<span class="o">$</span><span class="kp">t</span><span class="p">,</span> type<span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span> lwd<span class="o">=</span><span class="m">4</span><span class="p">,</span> col<span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">)</span>
-text<span class="p">(</span>locator<span class="p">(</span><span class="m">1</span><span class="p">),</span> <span class="kp">expression</span><span class="p">(</span>sigma<span class="o">^</span><span class="m">2</span><span class="p">))</span><span class="c1"># need to click to add the text</span>
-text<span class="p">(</span>locator<span class="p">(</span><span class="m">1</span><span class="p">),</span> <span class="kp">expression</span><span class="p">(</span>tau<span class="p">[</span><span class="m">0</span><span class="p">][</span><span class="m">0</span><span class="p">]))</span><span class="c1"># need to click to add the text</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># senado 2002
+</span><span class="n">df2</span><span class="o">&lt;-</span><span class="n">data.frame</span><span class="p">(</span><span class="n">level2</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">74.1874</span><span class="p">,</span><span class="m">50.21794</span><span class="p">,</span> <span class="m">39.31336</span><span class="p">),</span>
+<span class="n">level1</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">165.1340</span><span class="p">,</span> <span class="m">163.19076</span><span class="p">,</span> <span class="m">156.08912</span><span class="p">),</span>
+<span class="n">t</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">))</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">df2</span><span class="o">$</span><span class="n">level1</span> <span class="o">~</span> <span class="n">df2</span><span class="o">$</span><span class="n">t</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s2">"l"</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">4</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s2">"Variance"</span><span class="p">,</span>
+<span class="n">main</span><span class="o">=</span><span class="s2">"Senado 2002"</span><span class="p">,</span> <span class="n">cex.main</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span>
+<span class="n">xlim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">2</span><span class="p">),</span> <span class="n">xaxt</span><span class="o">=</span><span class="s2">"n"</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">30</span><span class="p">,</span><span class="m">170</span><span class="p">))</span>
+<span class="n">axis</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
+<span class="n">lines</span><span class="p">(</span><span class="n">df2</span><span class="o">$</span><span class="n">level2</span> <span class="o">~</span> <span class="n">df2</span><span class="o">$</span><span class="n">t</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s2">"l"</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">4</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"blue"</span><span class="p">)</span>
+<span class="n">text</span><span class="p">(</span><span class="n">locator</span><span class="p">(</span><span class="m">1</span><span class="p">),</span> <span class="n">expression</span><span class="p">(</span><span class="n">sigma</span><span class="o">^</span><span class="m">2</span><span class="p">))</span><span class="c1"># need to click to add the text
+</span><span class="n">text</span><span class="p">(</span><span class="n">locator</span><span class="p">(</span><span class="m">1</span><span class="p">),</span> <span class="n">expression</span><span class="p">(</span><span class="n">tau</span><span class="p">[</span><span class="m">0</span><span class="p">][</span><span class="m">0</span><span class="p">]))</span><span class="err">#</span> <span class="n">need</span> <span class="n">to</span> <span class="n">click</span> <span class="n">to</span> <span class="n">add</span> <span class="n">the</span> <span class="n">text</span></code></pre></figure>
 
-<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># senado 2006</span>
-df4<span class="o">&lt;-</span><span class="kt">data.frame</span><span class="p">(</span>level2<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">195.8233</span><span class="p">,</span> <span class="m">112.2718</span><span class="p">,</span> <span class="m">65.28095</span><span class="p">),</span>
-level1<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">292.0457</span><span class="p">,</span> <span class="m">270.1955</span><span class="p">,</span> <span class="m">250.65042</span><span class="p">),</span>
-t<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">))</span>
-plot<span class="p">(</span>df4<span class="o">$</span>level1 <span class="o">~</span> df4<span class="o">$</span><span class="kp">t</span><span class="p">,</span> type<span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span> lwd<span class="o">=</span><span class="m">4</span><span class="p">,</span> col<span class="o">=</span><span class="s">&quot;red&quot;</span><span class="p">,</span> xlab<span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span> ylab<span class="o">=</span><span class="s">&quot;Variance&quot;</span><span class="p">,</span>
-main<span class="o">=</span><span class="s">&quot;Senado 2006&quot;</span><span class="p">,</span> cex.main <span class="o">=</span> <span class="m">1</span><span class="p">,</span>
-xlim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">2</span><span class="p">),</span> xaxt<span class="o">=</span><span class="s">&quot;n&quot;</span><span class="p">,</span> ylim<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">50</span><span class="p">,</span><span class="m">300</span><span class="p">))</span>
-axis<span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="kt">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
-lines<span class="p">(</span>df4<span class="o">$</span>level2 <span class="o">~</span> df4<span class="o">$</span><span class="kp">t</span><span class="p">,</span> type<span class="o">=</span><span class="s">&quot;l&quot;</span><span class="p">,</span> lwd<span class="o">=</span><span class="m">4</span><span class="p">,</span> col<span class="o">=</span><span class="s">&quot;blue&quot;</span><span class="p">)</span>
-text<span class="p">(</span>locator<span class="p">(</span><span class="m">1</span><span class="p">),</span> <span class="kp">expression</span><span class="p">(</span>sigma<span class="o">^</span><span class="m">2</span><span class="p">))</span> <span class="c1"># need to click to add the text</span>
-text<span class="p">(</span>locator<span class="p">(</span><span class="m">1</span><span class="p">),</span> <span class="kp">expression</span><span class="p">(</span>tau<span class="p">[</span><span class="m">0</span><span class="p">][</span><span class="m">0</span><span class="p">]))</span> <span class="c1"># need to click to add the text</span>
-
-<span class="c1">##End not run</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># senado 2006
+</span><span class="n">df4</span><span class="o">&lt;-</span><span class="n">data.frame</span><span class="p">(</span><span class="n">level2</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">195.8233</span><span class="p">,</span> <span class="m">112.2718</span><span class="p">,</span> <span class="m">65.28095</span><span class="p">),</span>
+<span class="n">level1</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">292.0457</span><span class="p">,</span> <span class="m">270.1955</span><span class="p">,</span> <span class="m">250.65042</span><span class="p">),</span>
+<span class="n">t</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">))</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">df4</span><span class="o">$</span><span class="n">level1</span> <span class="o">~</span> <span class="n">df4</span><span class="o">$</span><span class="n">t</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s2">"l"</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">4</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s2">"Variance"</span><span class="p">,</span>
+<span class="n">main</span><span class="o">=</span><span class="s2">"Senado 2006"</span><span class="p">,</span> <span class="n">cex.main</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span>
+<span class="n">xlim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">2</span><span class="p">),</span> <span class="n">xaxt</span><span class="o">=</span><span class="s2">"n"</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">50</span><span class="p">,</span><span class="m">300</span><span class="p">))</span>
+<span class="n">axis</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
+<span class="n">lines</span><span class="p">(</span><span class="n">df4</span><span class="o">$</span><span class="n">level2</span> <span class="o">~</span> <span class="n">df4</span><span class="o">$</span><span class="n">t</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s2">"l"</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">4</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"blue"</span><span class="p">)</span>
+<span class="n">text</span><span class="p">(</span><span class="n">locator</span><span class="p">(</span><span class="m">1</span><span class="p">),</span> <span class="n">expression</span><span class="p">(</span><span class="n">sigma</span><span class="o">^</span><span class="m">2</span><span class="p">))</span> <span class="c1"># need to click to add the text
+</span><span class="n">text</span><span class="p">(</span><span class="n">locator</span><span class="p">(</span><span class="m">1</span><span class="p">),</span> <span class="n">expression</span><span class="p">(</span><span class="n">tau</span><span class="p">[</span><span class="m">0</span><span class="p">][</span><span class="m">0</span><span class="p">]))</span> <span class="c1"># need to click to add the text
+</span>
+<span class="err">##</span><span class="n">End</span> <span class="n">not</span> <span class="n">run</span></code></pre></figure>
 
 
 	  </article>
@@ -257,8 +394,6 @@ text<span class="p">(</span>locator<span class="p">(</span><span class="m">1</sp
     
 
     
-    
-      
     
     
     
@@ -399,14 +534,6 @@ Some contents of this blog is also contributed to <a href="http://www.r-bloggers
 
     
 
-
-  
-	<script src="/js/jquery-1.11.2.min.js"></script>
-  
-	<script src="/js/bootstrap.min.js"></script>
-  
-	<script src="/js/main.js"></script>
-  
 
 
 

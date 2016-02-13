@@ -13,9 +13,59 @@
 	 
 	   <!-- favicon -->
 	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
-  
 	
+	
+  
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+  <!-- MathJax configuration -->
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+          processEscapes: true,
+          processEnvironments: true
+      },
+      TeX: {
+          equationNumbers: { autoNumber: "AMS" }
+      },
+      // Center justify equations in code and markdown cells. Elsewhere
+      // we use CSS to left justify single line equations in code cells.
+      displayAlign: 'center',
+      "HTML-CSS": {
+          styles: {'.MathJax_Display': {"margin": 0}},
+          linebreaks: { automatic: false },
+          scale: 100
+      }
+  });
+  </script>
 
+
+  
+    
+      <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="/css/main.css" />
+    
+  
+  
+
+  
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+  
+
+
+  
+    
+      <link rel="stylesheet" href="/js/jquery-1.11.2.min.js" />
+    
+      <link rel="stylesheet" href="/js/bootstrap.min.js" />
+    
+      <link rel="stylesheet" href="/js/main.js" />
+    
+  
+    
+  
   
  <title>EnfoRced Data Analysis</title>
    
@@ -25,26 +75,10 @@
   
   <link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis - Blog of Daniel Marcelino" href="/feed.xml" />
 
-  
-    
-      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
-    
-    
-  
-  
-    
-      <link rel="stylesheet" href="/css/bootstrap.min.css" />
-    
-      <link rel="stylesheet" href="/css/main.css" />
     
   
   
   
-    
-	  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-    
-	  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-    
   
 
     
@@ -129,7 +163,110 @@
   </div>
 </nav>  
 
+    <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="keywords" content="Daniel Marcelino, SciencesPo, SoundexBR, r-project, r, political science, political behavior, social sciences, statistics, methods, applied methods, programming, data mining, data visualization, datascience, big data"/>	
+	<meta name="google-site-verification" content="Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ" />
+	<meta name="bing_webmastertools_id" content="97837256955BD270FD688E2B50F89FDB" />
+    <meta name="author" content="Daniel Marcelino" />
+	 <meta name="title" content="&middot; Daniel &middot; Understanding Margin of Error for Small Populations" />
+	 
+	   <!-- favicon -->
+	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+	
+	
+  
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+  <!-- MathJax configuration -->
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+          processEscapes: true,
+          processEnvironments: true
+      },
+      TeX: {
+          equationNumbers: { autoNumber: "AMS" }
+      },
+      // Center justify equations in code and markdown cells. Elsewhere
+      // we use CSS to left justify single line equations in code cells.
+      displayAlign: 'center',
+      "HTML-CSS": {
+          styles: {'.MathJax_Display': {"margin": 0}},
+          linebreaks: { automatic: false },
+          scale: 100
+      }
+  });
+  </script>
+
+
+  
     
+      <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="/css/main.css" />
+    
+  
+  
+
+  
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+  
+
+
+  
+    
+      <link rel="stylesheet" href="/js/jquery-1.11.2.min.js" />
+    
+      <link rel="stylesheet" href="/js/bootstrap.min.js" />
+    
+      <link rel="stylesheet" href="/js/main.js" />
+    
+  
+    
+  
+  
+ <title>EnfoRced Data Analysis</title>
+   
+
+  
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis - Blog of Daniel Marcelino" href="/feed.xml" />
+
+    
+  
+  
+  
+  
+
+    
+  
+  
+  
+  
+  
+  <!-- Facebook OpenGraph tags -->
+  
+  <meta property="og:title" content="Understanding Margin of Error for Small Populations" />
+  
+  
+  <meta property="og:type" content="website" />
+  
+  
+  <meta property="og:url" content="http://danielmarcelino.github.io/blog/2015/understanding-margin-of-error.html/" />
+  
+  
+  
+  <meta property="og:image" content="http://danielmarcelino.github.io/images/daniel_rio.jpg" />
+  
+
+</head>
+
+
 
 
 
@@ -176,7 +313,7 @@
 <h3 id="margin-of-error-for-large-infinite-populations">Margin of Error for Large (Infinite) Populations</h3>
 <p>The derivation of the maximum margin of error formula is given by:</p>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">e = zs/sqrt(n)
+<figure class="highlight"><pre><code class="language-text" data-lang="text">e = zs/sqrt(n)
 where:
 z = 
 2.576 for 99% level of confidence
@@ -191,7 +328,7 @@ n = sample size
 
 e = zs/sqrt(n)
 	= (1.96*0.5)/sqrt(340)
-	= 0.05314796</code></pre></div>
+	= 0.05314796</code></pre></figure>
 
 <p>Thus, if we sample n = 340, we get a margin of error of = 5.31%.</p>
 
@@ -199,7 +336,7 @@ e = zs/sqrt(n)
 
 <p>When the population is small (say less than 1 million), or the sample size represents more than 5% of the population, the pollster should multiply the margin of error by the Corrector Factor (FPCF), given the formula:</p>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">e = zs/sqrt(nadj)
+<figure class="highlight"><pre><code class="language-text" data-lang="text">e = zs/sqrt(nadj)
 
 where:
 z = 
@@ -217,7 +354,7 @@ N = population size
 e = zs/sqrt(nadj)
   = (1.96*0.5)/sqrt((594-1)*340/(594-340))
 	= (1.96*0.5)/sqrt(793.7795)
-	= 0.03478373</code></pre></div>
+	= 0.03478373</code></pre></figure>
 
 <p>By adjusting for finite populations, we get a margin of error of = 3.48%.</p>
 
@@ -228,14 +365,14 @@ e = zs/sqrt(nadj)
 
 <p>We compute <em>s</em> and plug it in the previous estimation, as:</p>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">s = sqrt(p(1-p)) 
+<figure class="highlight"><pre><code class="language-text" data-lang="text">s = sqrt(p(1-p)) 
   = sqrt(0.74*(1-0.74)) 
   = 0.4386342
 
 e = zs/sqrt(nadj)
   = (1.96*0.44)/sqrt((594-1)*340/(594-340))
 	= (1.96*0.44)/sqrt(793.7795)
-	= 0.0306097</code></pre></div>
+	= 0.0306097</code></pre></figure>
 
 <p>I found this poll very interesting. Actually, I think Datafolha should conduct polls like that more often. So, we can get to know more about the  average position of our representatives.</p>
 
@@ -270,8 +407,6 @@ e = zs/sqrt(nadj)
     
 
     
-    
-      
     
     
     
@@ -412,14 +547,6 @@ Some contents of this blog is also contributed to <a href="http://www.r-bloggers
 
     
 
-
-  
-	<script src="/js/jquery-1.11.2.min.js"></script>
-  
-	<script src="/js/bootstrap.min.js"></script>
-  
-	<script src="/js/main.js"></script>
-  
 
 
 

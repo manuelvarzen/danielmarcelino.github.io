@@ -13,9 +13,59 @@
 	 
 	   <!-- favicon -->
 	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
-  
 	
+	
+  
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+  <!-- MathJax configuration -->
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+          processEscapes: true,
+          processEnvironments: true
+      },
+      TeX: {
+          equationNumbers: { autoNumber: "AMS" }
+      },
+      // Center justify equations in code and markdown cells. Elsewhere
+      // we use CSS to left justify single line equations in code cells.
+      displayAlign: 'center',
+      "HTML-CSS": {
+          styles: {'.MathJax_Display': {"margin": 0}},
+          linebreaks: { automatic: false },
+          scale: 100
+      }
+  });
+  </script>
 
+
+  
+    
+      <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="/css/main.css" />
+    
+  
+  
+
+  
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+  
+
+
+  
+    
+      <link rel="stylesheet" href="/js/jquery-1.11.2.min.js" />
+    
+      <link rel="stylesheet" href="/js/bootstrap.min.js" />
+    
+      <link rel="stylesheet" href="/js/main.js" />
+    
+  
+    
+  
   
  <title>EnfoRced Data Analysis</title>
    
@@ -25,26 +75,10 @@
   
   <link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis - Blog of Daniel Marcelino" href="/feed.xml" />
 
-  
-    
-      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
-    
-    
-  
-  
-    
-      <link rel="stylesheet" href="/css/bootstrap.min.css" />
-    
-      <link rel="stylesheet" href="/css/main.css" />
     
   
   
   
-    
-	  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-    
-	  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-    
   
 
     
@@ -129,7 +163,110 @@
   </div>
 </nav>  
 
+    <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="keywords" content="Daniel Marcelino, SciencesPo, SoundexBR, r-project, r, political science, political behavior, social sciences, statistics, methods, applied methods, programming, data mining, data visualization, datascience, big data"/>	
+	<meta name="google-site-verification" content="Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ" />
+	<meta name="bing_webmastertools_id" content="97837256955BD270FD688E2B50F89FDB" />
+    <meta name="author" content="Daniel Marcelino" />
+	 <meta name="title" content="&middot; Daniel &middot; Parallel Processing: When does it worth?" />
+	 
+	   <!-- favicon -->
+	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+	
+	
+  
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+  <!-- MathJax configuration -->
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+          processEscapes: true,
+          processEnvironments: true
+      },
+      TeX: {
+          equationNumbers: { autoNumber: "AMS" }
+      },
+      // Center justify equations in code and markdown cells. Elsewhere
+      // we use CSS to left justify single line equations in code cells.
+      displayAlign: 'center',
+      "HTML-CSS": {
+          styles: {'.MathJax_Display': {"margin": 0}},
+          linebreaks: { automatic: false },
+          scale: 100
+      }
+  });
+  </script>
+
+
+  
     
+      <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="/css/main.css" />
+    
+  
+  
+
+  
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+  
+
+
+  
+    
+      <link rel="stylesheet" href="/js/jquery-1.11.2.min.js" />
+    
+      <link rel="stylesheet" href="/js/bootstrap.min.js" />
+    
+      <link rel="stylesheet" href="/js/main.js" />
+    
+  
+    
+  
+  
+ <title>EnfoRced Data Analysis</title>
+   
+
+  
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis - Blog of Daniel Marcelino" href="/feed.xml" />
+
+    
+  
+  
+  
+  
+
+    
+  
+  
+  
+  
+  
+  <!-- Facebook OpenGraph tags -->
+  
+  <meta property="og:title" content="Parallel Processing: When does it worth?" />
+  
+  
+  <meta property="og:type" content="website" />
+  
+  
+  <meta property="og:url" content="http://danielmarcelino.github.io/blog/2013/parallel-processing-when-does-it-worth.html/" />
+  
+  
+  
+  <meta property="og:image" content="http://danielmarcelino.github.io/images/daniel_rio.jpg" />
+  
+
+</head>
+
+
 
 
 
@@ -175,7 +312,7 @@
 
 <p><img src="http://danielmarcelino.github.io/images/2013/parallel.jpg" alt="Experiment Result" /></p>
 
-<p>Here, I’m testing a nontrivial computation instance for measuring computer performance on four relevant functions: the base <strong>lapply</strong>, <strong>mclapply</strong> from the “multicore“ package, <strong>parLapply</strong> from “snow” package, and <strong>sfLapply</strong> from “snowfall“ package. The last three functions essentially provide parallelized equivalent for the <code>lapply</code>. I use these packages for parallel computing the average for each column of a data frame built on the fly, but repeating this procedure 100 times for each data frame trial; so each trial demands different amount of time and memory for computing: the matrix size increases as 1K, 10K, 100K, 1M, and 10M rows. The program I used for simulate the data and perform all the tests can be found <a href="https://gist.github.com/danielmarcelino/5668701">here</a>. I used Emacs on a MacBook pro with 4-core and 8-G memory.</p>
+<p>Here, I’m testing a nontrivial computation instance for measuring computer performance on four relevant functions: the base <strong>lapply</strong>, <strong>mclapply</strong> from the “multicore“ package, <strong>parLapply</strong> from “snow” package, and <strong>sfLapply</strong> from “snowfall“ package. The last three functions essentially provide parallelized equivalent for the <code class="highlighter-rouge">lapply</code>. I use these packages for parallel computing the average for each column of a data frame built on the fly, but repeating this procedure 100 times for each data frame trial; so each trial demands different amount of time and memory for computing: the matrix size increases as 1K, 10K, 100K, 1M, and 10M rows. The program I used for simulate the data and perform all the tests can be found <a href="https://gist.github.com/danielmarcelino/5668701">here</a>. I used Emacs on a MacBook pro with 4-core and 8-G memory.</p>
 
 <p><img src="http://danielmarcelino.github.io/images/2013/parallelfinal.jpeg" alt="Final Results" /></p>
 
@@ -183,9 +320,9 @@
 
 <p>Overall, running repetition tasks in parallel incurs overhead. Therefore, only if the process takes a significant amount of time and memory (RAM), parallelization can improve the overall performance.</p>
 
-<p>The plots above, provide evidence when an individual process takes less than a second (<code>2.650/100 = 26.5 milliseconds </code> comparable to <code>13.419/100 = 134.2 milliseconds</code>) to be executed, the overhead of continually patching processes will decay the overall performance. For instance, in the first chart, the lapply function took less than one-third of the time of <strong>sfLapply</strong> to perform the same job. However, the pattern changes dramatically when the computer needs to repeat the same task with large vectors (&gt;= 1 million rows).</p>
+<p>The plots above, provide evidence when an individual process takes less than a second (<code class="highlighter-rouge">2.650/100 = 26.5 milliseconds </code> comparable to <code class="highlighter-rouge">13.419/100 = 134.2 milliseconds</code>) to be executed, the overhead of continually patching processes will decay the overall performance. For instance, in the first chart, the lapply function took less than one-third of the time of <strong>sfLapply</strong> to perform the same job. However, the pattern changes dramatically when the computer needs to repeat the same task with large vectors (&gt;= 1 million rows).</p>
 
-<p>In fact, I noticed that all functions began to consume even more time computing  averages of big matrixes than I expected. But in a setting with 10 millions rows, the <strong>lapply</strong> function was dramatically inefficient: it took <code>1281.8/100 = 12.82 seconds</code> for each process, while the <strong>mclapply</strong> only took <code>525.4/100 = 5.254 seconds</code>.</p>
+<p>In fact, I noticed that all functions began to consume even more time computing  averages of big matrixes than I expected. But in a setting with 10 millions rows, the <strong>lapply</strong> function was dramatically inefficient: it took <code class="highlighter-rouge">1281.8/100 = 12.82 seconds</code> for each process, while the <strong>mclapply</strong> only took <code class="highlighter-rouge">525.4/100 = 5.254 seconds</code>.</p>
 
 
 	  </article>
@@ -219,8 +356,6 @@
     
 
     
-    
-      
     
     
     
@@ -361,14 +496,6 @@ Some contents of this blog is also contributed to <a href="http://www.r-bloggers
 
     
 
-
-  
-	<script src="/js/jquery-1.11.2.min.js"></script>
-  
-	<script src="/js/bootstrap.min.js"></script>
-  
-	<script src="/js/main.js"></script>
-  
 
 
 

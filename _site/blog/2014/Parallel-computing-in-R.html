@@ -13,9 +13,59 @@
 	 
 	   <!-- favicon -->
 	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
-  
 	
+	
+  
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+  <!-- MathJax configuration -->
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+          processEscapes: true,
+          processEnvironments: true
+      },
+      TeX: {
+          equationNumbers: { autoNumber: "AMS" }
+      },
+      // Center justify equations in code and markdown cells. Elsewhere
+      // we use CSS to left justify single line equations in code cells.
+      displayAlign: 'center',
+      "HTML-CSS": {
+          styles: {'.MathJax_Display': {"margin": 0}},
+          linebreaks: { automatic: false },
+          scale: 100
+      }
+  });
+  </script>
 
+
+  
+    
+      <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="/css/main.css" />
+    
+  
+  
+
+  
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+  
+
+
+  
+    
+      <link rel="stylesheet" href="/js/jquery-1.11.2.min.js" />
+    
+      <link rel="stylesheet" href="/js/bootstrap.min.js" />
+    
+      <link rel="stylesheet" href="/js/main.js" />
+    
+  
+    
+  
   
  <title>EnfoRced Data Analysis</title>
    
@@ -25,26 +75,10 @@
   
   <link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis - Blog of Daniel Marcelino" href="/feed.xml" />
 
-  
-    
-      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
-    
-    
-  
-  
-    
-      <link rel="stylesheet" href="/css/bootstrap.min.css" />
-    
-      <link rel="stylesheet" href="/css/main.css" />
     
   
   
   
-    
-	  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-    
-	  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-    
   
 
     
@@ -129,7 +163,110 @@
   </div>
 </nav>  
 
+    <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="keywords" content="Daniel Marcelino, SciencesPo, SoundexBR, r-project, r, political science, political behavior, social sciences, statistics, methods, applied methods, programming, data mining, data visualization, datascience, big data"/>	
+	<meta name="google-site-verification" content="Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ" />
+	<meta name="bing_webmastertools_id" content="97837256955BD270FD688E2B50F89FDB" />
+    <meta name="author" content="Daniel Marcelino" />
+	 <meta name="title" content="&middot; Daniel &middot; Parallel computing in R" />
+	 
+	   <!-- favicon -->
+	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+	
+	
+  
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+  <!-- MathJax configuration -->
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+          processEscapes: true,
+          processEnvironments: true
+      },
+      TeX: {
+          equationNumbers: { autoNumber: "AMS" }
+      },
+      // Center justify equations in code and markdown cells. Elsewhere
+      // we use CSS to left justify single line equations in code cells.
+      displayAlign: 'center',
+      "HTML-CSS": {
+          styles: {'.MathJax_Display': {"margin": 0}},
+          linebreaks: { automatic: false },
+          scale: 100
+      }
+  });
+  </script>
+
+
+  
     
+      <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="/css/main.css" />
+    
+  
+  
+
+  
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+  
+
+
+  
+    
+      <link rel="stylesheet" href="/js/jquery-1.11.2.min.js" />
+    
+      <link rel="stylesheet" href="/js/bootstrap.min.js" />
+    
+      <link rel="stylesheet" href="/js/main.js" />
+    
+  
+    
+  
+  
+ <title>EnfoRced Data Analysis</title>
+   
+
+  
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis - Blog of Daniel Marcelino" href="/feed.xml" />
+
+    
+  
+  
+  
+  
+
+    
+  
+  
+  
+  
+  
+  <!-- Facebook OpenGraph tags -->
+  
+  <meta property="og:title" content="Parallel computing in R" />
+  
+  
+  <meta property="og:type" content="website" />
+  
+  
+  <meta property="og:url" content="http://danielmarcelino.github.io/blog/2014/Parallel-computing-in-R.html/" />
+  
+  
+  
+  <meta property="og:image" content="http://danielmarcelino.github.io/images/daniel_rio.jpg" />
+  
+
+</head>
+
+
 
 
 
@@ -193,7 +330,7 @@
       <ul class="pager blog-pager">
         
         <li class="previous">
-          <a href="/blog/2014/Do-you-believe-in-World-Cup-superstition%3F.html" data-toggle="tooltip" data-placement="top" title="Do you believe in World Cup superstition?">&larr; Previous Post</a>
+          <a href="/blog/2014/Do-you-believe-in-World-Cup-superstition.html" data-toggle="tooltip" data-placement="top" title="Do you believe in World Cup superstition?">&larr; Previous Post</a>
         </li>
         
         
@@ -213,8 +350,6 @@
     
 
     
-    
-      
     
     
     
@@ -355,14 +490,6 @@ Some contents of this blog is also contributed to <a href="http://www.r-bloggers
 
     
 
-
-  
-	<script src="/js/jquery-1.11.2.min.js"></script>
-  
-	<script src="/js/bootstrap.min.js"></script>
-  
-	<script src="/js/main.js"></script>
-  
 
 
 

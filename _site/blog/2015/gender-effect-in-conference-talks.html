@@ -13,9 +13,59 @@
 	 
 	   <!-- favicon -->
 	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
-  
 	
+	
+  
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+  <!-- MathJax configuration -->
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+          processEscapes: true,
+          processEnvironments: true
+      },
+      TeX: {
+          equationNumbers: { autoNumber: "AMS" }
+      },
+      // Center justify equations in code and markdown cells. Elsewhere
+      // we use CSS to left justify single line equations in code cells.
+      displayAlign: 'center',
+      "HTML-CSS": {
+          styles: {'.MathJax_Display': {"margin": 0}},
+          linebreaks: { automatic: false },
+          scale: 100
+      }
+  });
+  </script>
 
+
+  
+    
+      <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="/css/main.css" />
+    
+  
+  
+
+  
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+  
+
+
+  
+    
+      <link rel="stylesheet" href="/js/jquery-1.11.2.min.js" />
+    
+      <link rel="stylesheet" href="/js/bootstrap.min.js" />
+    
+      <link rel="stylesheet" href="/js/main.js" />
+    
+  
+    
+  
   
  <title>EnfoRced Data Analysis</title>
    
@@ -25,26 +75,10 @@
   
   <link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis - Blog of Daniel Marcelino" href="/feed.xml" />
 
-  
-    
-      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
-    
-    
-  
-  
-    
-      <link rel="stylesheet" href="/css/bootstrap.min.css" />
-    
-      <link rel="stylesheet" href="/css/main.css" />
     
   
   
   
-    
-	  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
-    
-	  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-    
   
 
     
@@ -129,7 +163,110 @@
   </div>
 </nav>  
 
+    <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="keywords" content="Daniel Marcelino, SciencesPo, SoundexBR, r-project, r, political science, political behavior, social sciences, statistics, methods, applied methods, programming, data mining, data visualization, datascience, big data"/>	
+	<meta name="google-site-verification" content="Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ" />
+	<meta name="bing_webmastertools_id" content="97837256955BD270FD688E2B50F89FDB" />
+    <meta name="author" content="Daniel Marcelino" />
+	 <meta name="title" content="&middot; Daniel &middot; Gender Effect in Conference Talks" />
+	 
+	   <!-- favicon -->
+	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+	
+	
+  
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+  <!-- MathJax configuration -->
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+          processEscapes: true,
+          processEnvironments: true
+      },
+      TeX: {
+          equationNumbers: { autoNumber: "AMS" }
+      },
+      // Center justify equations in code and markdown cells. Elsewhere
+      // we use CSS to left justify single line equations in code cells.
+      displayAlign: 'center',
+      "HTML-CSS": {
+          styles: {'.MathJax_Display': {"margin": 0}},
+          linebreaks: { automatic: false },
+          scale: 100
+      }
+  });
+  </script>
+
+
+  
     
+      <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="/css/main.css" />
+    
+  
+  
+
+  
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+  
+
+
+  
+    
+      <link rel="stylesheet" href="/js/jquery-1.11.2.min.js" />
+    
+      <link rel="stylesheet" href="/js/bootstrap.min.js" />
+    
+      <link rel="stylesheet" href="/js/main.js" />
+    
+  
+    
+  
+  
+ <title>EnfoRced Data Analysis</title>
+   
+
+  
+  
+  
+  <link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis - Blog of Daniel Marcelino" href="/feed.xml" />
+
+    
+  
+  
+  
+  
+
+    
+  
+  
+  
+  
+  
+  <!-- Facebook OpenGraph tags -->
+  
+  <meta property="og:title" content="Gender Effect in Conference Talks" />
+  
+  
+  <meta property="og:type" content="website" />
+  
+  
+  <meta property="og:url" content="http://danielmarcelino.github.io/blog/2015/gender-effect-in-conference-talks.html/" />
+  
+  
+  
+  <meta property="og:image" content="http://danielmarcelino.github.io/images/daniel_rio.jpg" />
+  
+
+</head>
+
+
 
 
 
@@ -169,65 +306,65 @@
 
 <p>The paper is stuffed with figures, but in this case I would prefer a table with residuals; way more telling.</p>
 
-<div class="highlight"><pre><code class="language-r" data-lang="r">tab <span class="o">=</span> <span class="kp">as.table</span><span class="p">(</span><span class="kt">matrix</span><span class="p">(</span><span class="kt">c</span><span class="p">(</span><span class="m">63</span><span class="p">,</span> <span class="m">90</span><span class="p">,</span> <span class="m">122</span><span class="p">,</span> <span class="m">359</span><span class="p">),</span>nrow<span class="o">=</span><span class="m">2</span><span class="p">,</span>ncol<span class="o">=</span><span class="m">2</span><span class="p">,</span>
-dimnames<span class="o">=</span><span class="kt">list</span><span class="p">(</span>chairs<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&#39;FC&#39;</span><span class="p">,</span><span class="s">&#39;MC&#39;</span><span class="p">),</span>
-questions<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="s">&#39;FQ&#39;</span><span class="p">,</span> <span class="s">&#39;MQ&#39;</span><span class="p">))))</span>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">tab</span> <span class="o">=</span> <span class="n">as.table</span><span class="p">(</span><span class="n">matrix</span><span class="p">(</span><span class="n">c</span><span class="p">(</span><span class="m">63</span><span class="p">,</span> <span class="m">90</span><span class="p">,</span> <span class="m">122</span><span class="p">,</span> <span class="m">359</span><span class="p">),</span><span class="n">nrow</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="n">ncol</span><span class="o">=</span><span class="m">2</span><span class="p">,</span>
+<span class="n">dimnames</span><span class="o">=</span><span class="n">list</span><span class="p">(</span><span class="n">chairs</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="s1">'FC'</span><span class="p">,</span><span class="s1">'MC'</span><span class="p">),</span>
+<span class="n">questions</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="s1">'FQ'</span><span class="p">,</span> <span class="s1">'MQ'</span><span class="p">))))</span>
 
-<span class="o">&gt;</span> tab
-     questions
-chairs  FQ  MQ
-   FC  <span class="m">63</span> <span class="m">122</span>
-   MC  <span class="m">90</span> <span class="m">359</span>
+<span class="o">&gt;</span> <span class="n">tab</span>
+     <span class="n">questions</span>
+<span class="n">chairs</span>  <span class="n">FQ</span>  <span class="n">MQ</span>
+   <span class="n">FC</span>  <span class="m">63</span> <span class="m">122</span>
+   <span class="n">MC</span>  <span class="m">90</span> <span class="m">359</span>
       
-dat <span class="o">=</span> SciencesPo<span class="o">::</span>untable<span class="p">(</span>tab<span class="p">)</span>
+<span class="n">dat</span> <span class="o">=</span> <span class="n">SciencesPo</span><span class="o">::</span><span class="n">untable</span><span class="p">(</span><span class="n">tab</span><span class="p">)</span>
 
-<span class="o">&gt;</span> <span class="kp">head</span><span class="p">(</span>dat<span class="p">)</span>
-  chairs questions
-<span class="m">1</span>    FC       FQ
-<span class="m">2</span>    FC       FQ
-<span class="m">3</span>    FC       FQ
-<span class="m">4</span>    FC       FQ
-<span class="m">5</span>    FC       FQ
-<span class="m">6</span>    FC       FQ</code></pre></div>
+<span class="o">&gt;</span> <span class="n">head</span><span class="p">(</span><span class="n">dat</span><span class="p">)</span>
+  <span class="n">chairs</span> <span class="n">questions</span>
+<span class="m">1</span>    <span class="n">FC</span>       <span class="n">FQ</span>
+<span class="m">2</span>    <span class="n">FC</span>       <span class="n">FQ</span>
+<span class="m">3</span>    <span class="n">FC</span>       <span class="n">FQ</span>
+<span class="m">4</span>    <span class="n">FC</span>       <span class="n">FQ</span>
+<span class="m">5</span>    <span class="n">FC</span>       <span class="n">FQ</span>
+<span class="m">6</span>    <span class="n">FC</span>       <span class="n">FQ</span></code></pre></figure>
 
-<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="o">&gt;</span> crosstabs<span class="p">(</span>dat<span class="p">,</span> <span class="s">&quot;chairs&quot;</span><span class="p">,</span> <span class="s">&quot;questions&quot;</span><span class="p">,</span>
-<span class="o">+</span>            row.pct <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span>
-<span class="o">+</span>            chisq <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span>
-<span class="o">+</span>            sresid <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="o">&gt;</span> <span class="n">crosstabs</span><span class="p">(</span><span class="n">dat</span><span class="p">,</span> <span class="s2">"chairs"</span><span class="p">,</span> <span class="s2">"questions"</span><span class="p">,</span>
+<span class="o">+</span>            <span class="n">row.pct</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">,</span>
+<span class="o">+</span>            <span class="n">chisq</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">,</span>
+<span class="o">+</span>            <span class="n">sresid</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">)</span>
 
-Table of chairs by questions
+<span class="n">Table</span> <span class="n">of</span> <span class="n">chairs</span> <span class="n">by</span> <span class="n">questions</span>
 
-                         <span class="o">|</span>questions  
+                         <span class="o">|</span><span class="n">questions</span>  
 <span class="o">-------------------------+-----------+-----------+-----------+</span>
-chairs                   <span class="o">|</span>FQ         <span class="o">|</span>MQ         <span class="o">|</span>Total      <span class="o">|</span>
+<span class="n">chairs</span>                   <span class="o">|</span><span class="n">FQ</span>         <span class="o">|</span><span class="n">MQ</span>         <span class="o">|</span><span class="n">Total</span>      <span class="o">|</span>
 <span class="o">-------------------------+-----------+-----------+-----------+</span>
-FC      <span class="o">|</span>Obs Freq        <span class="o">|</span>         <span class="m">63</span><span class="o">|</span>        <span class="m">122</span><span class="o">|</span>        <span class="m">185</span><span class="o">|</span>
-        <span class="o">|% within chairs |    34.0541|    65.9459|   100.0000|</span>
+<span class="n">FC</span>      <span class="o">|</span><span class="n">Obs</span> <span class="n">Freq</span>        <span class="o">|</span>         <span class="m">63</span><span class="o">|</span>        <span class="m">122</span><span class="o">|</span>        <span class="m">185</span><span class="o">|</span>
+        <span class="o">|%</span> <span class="n">within</span> <span class="n">chairs</span> <span class="o">|</span>    <span class="m">34.0541</span><span class="o">|</span>    <span class="m">65.9459</span><span class="o">|</span>   <span class="m">100.0000</span><span class="o">|</span>
 <span class="o">-------------------------+-----------+-----------+-----------+</span>
-<span class="o">MC      |Obs Freq        |         90|        359|        449|</span>
-<span class="o">        |%</span> within chairs <span class="o">|</span>    <span class="m">20.0445</span><span class="o">|</span>    <span class="m">79.9555</span><span class="o">|</span>   <span class="m">100.0000</span><span class="o">|</span>
+<span class="n">MC</span>      <span class="o">|</span><span class="n">Obs</span> <span class="n">Freq</span>        <span class="o">|</span>         <span class="m">90</span><span class="o">|</span>        <span class="m">359</span><span class="o">|</span>        <span class="m">449</span><span class="o">|</span>
+        <span class="o">|%</span> <span class="n">within</span> <span class="n">chairs</span> <span class="o">|</span>    <span class="m">20.0445</span><span class="o">|</span>    <span class="m">79.9555</span><span class="o">|</span>   <span class="m">100.0000</span><span class="o">|</span>
 <span class="o">-------------------------+-----------+-----------+-----------+</span>
-Total   <span class="o">|</span>Obs Freq        <span class="o">|</span>        <span class="m">153</span><span class="o">|</span>        <span class="m">481</span><span class="o">|</span>        <span class="m">634</span><span class="o">|</span>
+<span class="n">Total</span>   <span class="o">|</span><span class="n">Obs</span> <span class="n">Freq</span>        <span class="o">|</span>        <span class="m">153</span><span class="o">|</span>        <span class="m">481</span><span class="o">|</span>        <span class="m">634</span><span class="o">|</span>
 <span class="o">-------------------------+-----------+-----------+-----------+</span>
 
-Statistics <span class="kr">for</span> Table chairs by questions
+<span class="n">Statistics</span> <span class="k">for</span> <span class="n">Table</span> <span class="n">chairs</span> <span class="n">by</span> <span class="n">questions</span>
 
-Statistics                   DF      Value     Prob
+<span class="n">Statistics</span>                   <span class="n">DF</span>      <span class="n">Value</span>     <span class="n">Prob</span>
 <span class="o">---------------------------------------------------</span>
-Pearson Chi<span class="o">-</span>Square           <span class="m">1</span>     <span class="m">13.2901</span>  <span class="m">0.0003</span>
-Likelihood Ratio Chi<span class="o">-</span>Square  <span class="m">1</span>     <span class="m">13.4689</span>  <span class="m">0.0002</span>
-Fisher<span class="s">&#39;</span><span class="err">s Exact Test                         0.0003</span>
+<span class="n">Pearson</span> <span class="n">Chi</span><span class="o">-</span><span class="n">Square</span>           <span class="m">1</span>     <span class="m">13.2901</span>  <span class="m">0.0003</span>
+<span class="n">Likelihood</span> <span class="n">Ratio</span> <span class="n">Chi</span><span class="o">-</span><span class="n">Square</span>  <span class="m">1</span>     <span class="m">13.4689</span>  <span class="m">0.0002</span>
+<span class="n">Fisher</span><span class="err">'</span><span class="n">s</span> <span class="n">Exact</span> <span class="n">Test</span>                         <span class="m">0.0003</span>
 <span class="o">---------------------------------------------------</span>
 
-Residuals <span class="kr">for</span> Table chairs by questions
+<span class="n">Residuals</span> <span class="k">for</span> <span class="n">Table</span> <span class="n">chairs</span> <span class="n">by</span> <span class="n">questions</span>
 
-         <span class="o">|</span>questions  
+         <span class="o">|</span><span class="n">questions</span>  
 <span class="o">---------+-----------+-----------+</span>
-chairs   <span class="o">|</span>FQ         <span class="o">|</span>MQ         <span class="o">|</span>
+<span class="n">chairs</span>   <span class="o">|</span><span class="n">FQ</span>         <span class="o">|</span><span class="n">MQ</span>         <span class="o">|</span>
 <span class="o">---------+-----------+-----------+</span>
-FC       <span class="o">|</span>     <span class="m">2.7470</span><span class="o">|</span>    <span class="m">-1.5493</span><span class="o">|</span>
-MC       <span class="o">|</span>    <span class="m">-1.7633</span><span class="o">|</span>     <span class="m">0.9945</span><span class="o">|</span>
-<span class="o">---------+-----------+-----------+</span></code></pre></div>
+<span class="n">FC</span>       <span class="o">|</span>     <span class="m">2.7470</span><span class="o">|</span>    <span class="m">-1.5493</span><span class="o">|</span>
+<span class="n">MC</span>       <span class="o">|</span>    <span class="m">-1.7633</span><span class="o">|</span>     <span class="m">0.9945</span><span class="o">|</span>
+<span class="o">---------+-----------+-----------+</span></code></pre></figure>
 
 	  </article>
 	  
@@ -260,8 +397,6 @@ MC       <span class="o">|</span>    <span class="m">-1.7633</span><span class="
     
 
     
-    
-      
     
     
     
@@ -402,14 +537,6 @@ Some contents of this blog is also contributed to <a href="http://www.r-bloggers
 
     
 
-
-  
-	<script src="/js/jquery-1.11.2.min.js"></script>
-  
-	<script src="/js/bootstrap.min.js"></script>
-  
-	<script src="/js/main.js"></script>
-  
 
 
 
