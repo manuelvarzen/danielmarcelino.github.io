@@ -67,6 +67,7 @@ prob <- p*.977 / (p*.977 + (1-p)*.074)
 {% endhighlight %}
  
  {% highlight r %}
+ library(ggplot2)
  library(SciencesPo) # for using theme_538
 ggplot() + 
 geom_line(aes(prob, p), size=1) +
