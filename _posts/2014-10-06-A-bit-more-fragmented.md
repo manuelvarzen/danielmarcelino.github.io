@@ -14,19 +14,17 @@ The 2014 election gave rise to an even more fragmented lower house in Brazil. Th
 This year, the election gave rise to an even more fragmented lower house. The way political scientists measure how fragmented is a political system is by applying one of the several formulas for calculating the *Effective Number of Parties*. The *Effective Number of Parties* is a statistic that helps researchers to go beyond the simple (absolute) count of the number of parties for further analysis. A widely accepted formula was proposed by M. [Laakso and R. Taagepera
  (1979)](http://cps.sagepub.com/content/12/1/3.extract): 
 
-\\[ N =\frac{1}{\sum_{i=1}^{n}p_{i}^{2}} \\]
+$$N =\frac{1}{\sum_{i=1}^{n}p_{i}^{2}}$$
 
  where N denotes the effective number of parties and p_i denotes the $i^{th}$ party’s fraction of the seats. The problem with this method is that it produces distortions, particularly for small parties.
 
 Few years ago, [Grigorii Golosov (2010)](http://ppq.sagepub.com/content/16/2/171.abstract) suggested a new formula for estimating the effective number of parties in which both larger and smaller parties are not attributed unrealistic scores as produced by the Laakso—Taagepera index above. Golosov's formula can be expressed as:
 
-\\[ N = \sum_{i=1}^{n}\frac{p_{i}}{p_{i}+p{i}^{2}-p_{i}^{2}} \\]
+$$ N = \sum_{i=1}^{n}\frac{p_{i}}{p_{i}+p{i}^{2}-p_{i}^{2}} $$
  
-To compare the evolution in the effective number of parties between ~~2002~~ 1986 to 2014 in the Brazilian lower house, I programed a small function which computes some of the most standard political diversity measures, including the [Golosov (2010)](http://ppq.sagepub.com/content/16/2/171.abstract)'s formula above. The function is part of the [SciencesPo](https://cran.r-project.org/web/packages/SciencesPo/index.html) R package. For a more complete overview of the methods performed by the package, refer to this [vignette](https://cran.r-project.org/web/packages/SciencesPo/vignettes/Indices.html).
+To compare the evolution in the effective number of parties between ~~2002~~ 1986 to 2014 in the Brazilian lower house, I programed a small function which computes some of the most standard political diversity measures, including the [Golosov (2010)](http://ppq.sagepub.com/content/16/2/171.abstract)'s formula above. The function is part of the [SciencesPo](https://cran.r-project.org/web/packages/SciencesPo/index.html) R package. For a more complete overview of the indices performed by the package, refer to this [vignette](https://cran.r-project.org/web/packages/SciencesPo/vignettes/Indices.html).
 
-
-The results displayed below and summarized in the plot above, suggest the effective number of parties had a considerable upward shift between 2010 to 2014, from 10.5 to 14.5 in the Golosov's scale. The results using the more standard method by Laakso and Taagepera are also displayed for quick comparison.
-
+The results displayed below and summarized in the plot at the top of this post, indicate the effective number of parties had a considerable upward shift between 2010 to 2014, moving from 10.5 to 14.5 using the Golosov's scale or from 10.4 to 13.1 using the more standard method by Laakso and Taagepera.
 
 #### Sample of data 
 {% highlight r %}
@@ -51,18 +49,18 @@ library(SciencesPo)
 #### Compute the indices
 
 {% highlight r %}
-> politicalDiversity(seats_2010, index= "laakso/taagepera")
+politicalDiversity(seats_2010, index= "laakso/taagepera")
 [1] 10.369
 
-> politicalDiversity(seats_2010, index= "golosov")
+politicalDiversity(seats_2010, index= "golosov")
 [1] 10.511
 
-> politicalDiversity(seats_2014, index= "laakso/taagepera")
+politicalDiversity(seats_2014, index= "laakso/taagepera")
 [1] 13.064
-> 
-> politicalDiversity(seats_2014, index= "golosov")
+ 
+politicalDiversity(seats_2014, index= "golosov")
 [1] 14.472
 {% endhighlight %}
 
 ### Update
-After I published this post, I realized that it would be nicer to extend the series of election as well as compare the two indices in the plot above; so I updated the plot afterwards. The results may differ from other scholars because differences in the number provided. Some uses the *actual outcome* of the election, as I did, others prefer to use the number of representatives that actually *entered* in the office. 
+After I published this post, I realized it would be nicer to extend the election series as well as compare the two indices mentioned above. So, I did update the original plot, which contained only values computed under the Golosov's method. Also notice that the results may differ from other scholars because the overall sum of votes used may be different. Some may use the *actual outcome* of the election, as I did, others may use the final number of votes after any recounting and judicial revisions, and still others may use the number of votes considering  representatives that actually *entered* in the office. 
