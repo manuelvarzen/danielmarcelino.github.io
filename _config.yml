@@ -55,6 +55,8 @@ common-js:
 # Remove this parameter if you don't want an image in the navbar
 avatar: "/images/daniel_rio.jpg"
 
+bigimg: "/images/daniel_rio.jpg"
+
 favicon: "/images/favicon.ico"
 
 # List of links in the navigation bar
