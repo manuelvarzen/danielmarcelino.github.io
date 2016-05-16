@@ -1,22 +1,18 @@
 # --- Serving options --- #
-
-# If you're hosting your site at a Project repository on GitHub pages
-# (http://yourusername.github.io/repository-name)
-# and NOT your User repository (http://yourusername.github.io)
-# then add in the baseurl here, like this: "/repository-name"
+# If you are building a simple GitHub user page (http://username.github.io) then use these settings:
 url: "http://danielmarcelino.github.io"
 baseurl: ""
+
 
 # Brief name and description of the site
 title: EnfoRced Data Analysis
 description: "Blog of Daniel Marcelino"
 
 # --- Outputting options --- #
-# --- Outputting options --- #
 gems:
-  - 'jekyll-paginate'
-  - 'jekyll-gist'
-  
+  - jekyll-paginate
+  - jekyll-gist
+
 # More information can be found on Jekyll's site
 timezone: "Brazil/Brasilia"
 highlighter: rouge
@@ -28,10 +24,10 @@ extensions:
     - footnotes
     - smart
 
+
 permalink: /blog/:year/:title.html
 paginate: 10
 paginate_path: "/page:num/"
-
 
 
 # --- Style options --- #
@@ -47,7 +43,7 @@ common-js:
   - "/js/jquery-1.11.2.min.js"
   - "/js/bootstrap.min.js"
   - "/js/main.js"
-  
+
 
 # --- Navigation bar options --- #
 
@@ -55,9 +51,7 @@ common-js:
 # Remove this parameter if you don't want an image in the navbar
 avatar: "/images/daniel_rio.jpg"
 
-bigimg: "/images/daniel_rio.jpg"
-
-favicon: "/images/favicon.ico"
+favicon: "/images/manif-brasilia.jpg”
 
 # List of links in the navigation bar
 navbar-links:
@@ -121,6 +115,21 @@ defaults:
       path: "" # all files
     values:
       layout: "default"
+
+# prose.io config
+prose:
+  rooturl: '_posts'
+  media: 'images'
+  ignore:
+    - 404.html
+    - LICENSE
+    - feed.xml
+    - _config.yml
+    - /_layouts
+    - /_includes
+    - /css
+    - /images
+    - /js
 
 # Exclude these files from production site
 exclude:
