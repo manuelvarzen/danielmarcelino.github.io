@@ -10,6 +10,7 @@ output:
    toc: yes
 tags: [R]
 published: true
+header-img: "img/website/spaghetti.png"
 ---
 
 The Brazilian Carnival just ended this week, but for some people it is time to starting worry about crazy things that may have happened over the days of the flesh festival.
