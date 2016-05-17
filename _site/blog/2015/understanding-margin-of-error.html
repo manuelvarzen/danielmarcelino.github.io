@@ -10,9 +10,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Blog of Daniel Marcelino">
 
-    <title>Parallel Processing: When does it worth? - EnfoRced Data Analysis</title>
+    <title>Understanding Margin of Error for Small Populations - EnfoRced Data Analysis</title>
 
-    <link rel="canonical" href="http://danielmarcelino.github.io/blog/2013/parallel-processing-when-does-it-worth.html">
+    <link rel="canonical" href="http://danielmarcelino.github.io/blog/2015/understanding-margin-of-error.html">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -130,9 +130,9 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-heading">
-                    <h1>Parallel Processing: When does it worth?</h1>
+                    <h1>Understanding Margin of Error for Small Populations</h1>
                     
-                    <span class="meta">Posted by EnfoRced Data Analysis on May 29, 2013</span>
+                    <span class="meta">Posted by EnfoRced Data Analysis on October 13, 2015</span>
                 </div>
             </div>
         </div>
@@ -145,32 +145,83 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
-				<p>Parallel computing is incredibly useful, but not every thing worths distribute across as many cores as possible.</p>
+				<p>I got an email inquiring if the margin of sampling error reported in the newest poll by the Brazilian pollster Datafolha would be misleading. The polling firm often report surveys with regular sizes (1000/2400), so the margin of error calculated is in the range of +/-2% to +/-3%.</p>
 
-<p>Most computers nowadays have few cores that incredibly help us with our daily computing duties. However, when statistical softwares do use parallelization for analyzing data faster? R, my preferred analytical software, does not take too much advantage of multicore processing by default.</p>
+<p>However, in its <a href="http://www1.folha.uol.com.br/poder/2015/10/1693217-parlamentares-sao-mais-liberais-do-que-o-eleitorado.shtml">latest poll</a>, the pollster sampled only 340 congressmen, reporting a margin of error of 3%. Which apparently did puzzle the attentive reader, who knows the margin of error is an inverse square root function of the sample size. She asks: “Is the reported margin of error correct? Given such a small sample, shouldn’t it be something around 5.3% or so?</p>
 
-<p>In fact, R has been inherently a “single-processor” package until nowadays. Stata, another decent statistical package, allows for multicore processing, but not yet implemented for the default version. Additionally, Stata versions for multicore are quite expensive, for instance, if I want to use all of my quad-core computer power, I have to pay out $1,095 for a 4-core single license.</p>
+<p>My answer to the question was “sort of”. Firstly, given the fact the population of congressmen is a finite population (594 = 513 deputies + 81 senators), we must apply a Correction Factor for Finite Populations (FPCF), which will reduce the standard error of the mean. Essentially, the correction adjusts for the fact that although the number of elements is small, it comes from a small population too.</p>
 
-<p>Fortunately, several packages exploiting the resources of parallel processing began to gain attention in the R community lately. Specially, because of many computationally demanding statistical procedures, such as bootstrapping and Markov Chain Monte Carlo, I guess. Nonetheless, the myth of fast computation has also leading for (miss)understanding by ordinary R users like me. Yet before distributing patches among CPUs, it is important to have it clear when and why parallel processing is helpful and which functions performs better for a given job.</p>
+<p>Adjusted by the FPCF, the margin of error is close to what reported by the Datafolha, however, by omitting decimal digits, the pollster arbitrarily narrows the confidence interval (2 * the margin of error) in about 1%. It’s not that usual to round margins of error when reporting them, as a decimal digit may imply in substantial differences in the sample size as illustrated in the graph from Marcelino and Angel’s paper.</p>
 
-<p>First, what does exactly parallel do? Despite its complex implementation, the idea is incredible simple: parallelization simply distribute the work among two or more cores. It is done by packages that provide backend for the “foreach” function to work. The foreach function allows R to distribute the processes, each of which having access to the same shared memory; so the computer not get confused. For instance, in the program bellow, several instances of lapply-like function are able to access the processing units and then deal out with all the work.</p>
+<p><img src="http://danielmarcelino.github.io/img/2015/sample_size.jpg" alt="Sample size vs Confidence Interval" /></p>
 
-<p>Since not every task runs better in parallel there is not too many ready to use parallel processing functions in R. Additionally, distributing processes among the cores may cause computation overhead. That means we may lose computer time and memory, firstly by distributing, secondly by gathering the patches shared out among the processing units. Therefore, depending on the task (time and memory demand), parallel computing can be rather inefficient. It may take more time for dispatching the processes and gathering them back than the computation itself. Hence, counterintuitively, one might want to minimize the number of dispatches rather than distribute them.</p>
+<p>For pedagogical reasons, I won’t go through the simplified formula. So, let do it step-by-step.</p>
 
-<p><img src="http://danielmarcelino.github.io/img/2013/parallel.jpg" alt="Experiment Result" /></p>
+<h3 id="margin-of-error-for-large-infinite-populations">Margin of Error for Large (Infinite) Populations</h3>
+<p>The derivation of the maximum margin of error formula is given by:</p>
 
-<p>Here, I’m testing a nontrivial computation instance for measuring computer performance on four relevant functions: the base <strong>lapply</strong>, <strong>mclapply</strong> from the “multicore“ package, <strong>parLapply</strong> from “snow” package, and <strong>sfLapply</strong> from “snowfall“ package. The last three functions essentially provide parallelized equivalent for the <code class="highlighter-rouge">lapply</code>. I use these packages for parallel computing the average for each column of a data frame built on the fly, but repeating this procedure 100 times for each data frame trial; so each trial demands different amount of time and memory for computing: the matrix size increases as 1K, 10K, 100K, 1M, and 10M rows. The program I used for simulate the data and perform all the tests can be found <a href="https://gist.github.com/danielmarcelino/5668701">here</a>. I used Emacs on a MacBook pro with 4-core and 8-G memory.</p>
+<figure class="highlight"><pre><code class="language-text" data-lang="text">e = zs/sqrt(n)
+where:
+z = 
+2.576 for 99% level of confidence
+1.96 for 95% level of confidence
+1.645 for 90% level of confidence
 
-<p><img src="http://danielmarcelino.github.io/img/2013/parallelfinal.jpeg" alt="Final Results" /></p>
+s = sqrt(p(1-p))      
+p = proportion
 
-<p>My initial experiment also included the “mpi.parLapply” function from the “Rmpi” package. However, because it is outdated for running on R version 3.0, I decided for not including it in this instance.</p>
+n = sample size
 
-<p>Overall, running repetition tasks in parallel incurs overhead. Therefore, only if the process takes a significant amount of time and memory (RAM), parallelization can improve the overall performance.</p>
 
-<p>The plots above, provide evidence when an individual process takes less than a second (<code class="highlighter-rouge">2.650/100 = 26.5 milliseconds </code> comparable to <code class="highlighter-rouge">13.419/100 = 134.2 milliseconds</code>) to be executed, the overhead of continually patching processes will decay the overall performance. For instance, in the first chart, the lapply function took less than one-third of the time of <strong>sfLapply</strong> to perform the same job. However, the pattern changes dramatically when the computer needs to repeat the same task with large vectors (&gt;= 1 million rows).</p>
+e = zs/sqrt(n)
+	= (1.96*0.5)/sqrt(340)
+	= 0.05314796</code></pre></figure>
 
-<p>In fact, I noticed that all functions began to consume even more time computing  averages of big matrixes than I expected. But in a setting with 10 millions rows, the <strong>lapply</strong> function was dramatically inefficient: it took <code class="highlighter-rouge">1281.8/100 = 12.82 seconds</code> for each process, while the <strong>mclapply</strong> only took <code class="highlighter-rouge">525.4/100 = 5.254 seconds</code>.</p>
+<p>Thus, if we sample n = 340, we get a margin of error of = 5.31%.</p>
 
+<h3 id="margin-of-error-for-finite-populations">Margin of Error for Finite Populations</h3>
+
+<p>When the population is small (say less than 1 million), or the sample size represents more than 5% of the population, the pollster should multiply the margin of error by the Corrector Factor (FPCF), given the formula:</p>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">e = zs/sqrt(nadj)
+
+where:
+z = 
+2.576 for 99% level of confidence
+1.96 for 95% level of confidence
+1.645 for 90% level of confidence
+
+s = sqrt(p(1-p))     
+p = proportion 
+
+nadj = (N-1)n/(N-n)   
+n = sample size 
+N = population size
+
+e = zs/sqrt(nadj)
+  = (1.96*0.5)/sqrt((594-1)*340/(594-340))
+	= (1.96*0.5)/sqrt(793.7795)
+	= 0.03478373</code></pre></figure>
+
+<p>By adjusting for finite populations, we get a margin of error of = 3.48%.</p>
+
+<h3 id="stretching-the-concept">Stretching the concept</h3>
+<p>Now, take an instant. I’ve calculated the maximum margin of error–or the global margin–because in several situations we don’t know for sure where how the population falls apart on a particular issue. So, by estimating the population as 50/50 divided on the issue, we maximize the margin of error; a sort of conservative backup.</p>
+
+<p>However, if we discover that 74% of the congressmen gave the same answer, as they did on the topic of criminality, then the margin of error of two means for that particular question would be  smaller: 3%.</p>
+
+<p>We compute <em>s</em> and plug it in the previous estimation, as:</p>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">s = sqrt(p(1-p)) 
+  = sqrt(0.74*(1-0.74)) 
+  = 0.4386342
+
+e = zs/sqrt(nadj)
+  = (1.96*0.44)/sqrt((594-1)*340/(594-340))
+	= (1.96*0.44)/sqrt(793.7795)
+	= 0.0306097</code></pre></figure>
+
+<p>I found this poll very interesting. Actually, I think Datafolha should conduct polls like that more often. So, we can get to know more about the  average position of our representatives.</p>
 
 
                 <hr>
@@ -178,15 +229,20 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/blog/2011/explaining-variance-in-a-multilevel-model.html" data-toggle="tooltip" data-placement="top" title="Showing Explained Variance in Multilevel Models">&larr; Previous Post</a>
+                        <a href="/blog/2015/the-butterfly-curve.html" data-toggle="tooltip" data-placement="top" title="The Butterfly Curve">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/blog/2013/got-bootstrap.html" data-toggle="tooltip" data-placement="top" title="Got Bootstrap?">Next Post &rarr;</a>
+                        <a href="/blog/2015/talk-about-campaign-finance.html" data-toggle="tooltip" data-placement="top" title="A Talk About Campaign Finance in Brazil">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
+		  	  
+		        <div class="disqus-comments">
+		  	    
+
+		        </div>
 		  	  
 
             </div>

@@ -10,9 +10,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Blog of Daniel Marcelino">
 
-    <title>Parallel Processing: When does it worth? - EnfoRced Data Analysis</title>
+    <title>House Effects in Argentinian polling - EnfoRced Data Analysis</title>
 
-    <link rel="canonical" href="http://danielmarcelino.github.io/blog/2013/parallel-processing-when-does-it-worth.html">
+    <link rel="canonical" href="http://danielmarcelino.github.io/blog/2015/argentine-house-effects.html">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -130,9 +130,9 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-heading">
-                    <h1>Parallel Processing: When does it worth?</h1>
+                    <h1>House Effects in Argentinian polling</h1>
                     
-                    <span class="meta">Posted by EnfoRced Data Analysis on May 29, 2013</span>
+                    <span class="meta">Posted by EnfoRced Data Analysis on October 25, 2015</span>
                 </div>
             </div>
         </div>
@@ -145,31 +145,41 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
-				<p>Parallel computing is incredibly useful, but not every thing worths distribute across as many cores as possible.</p>
+				<p>I’ve already <a href="http://danielmarcelino.com/r/08-2015/Argentine-general-election-2015/">posted</a> previously on “house effects”, the tendency of polling organizations to systematically vary in their results from one another. In this post, I look specifically at these house effects, and show which polling organizations over or under-estimate support for each candidate–compared to the average–in this presidential election in Argentina.</p>
 
-<p>Most computers nowadays have few cores that incredibly help us with our daily computing duties. However, when statistical softwares do use parallelization for analyzing data faster? R, my preferred analytical software, does not take too much advantage of multicore processing by default.</p>
+<p>The graph below plots the house effects for the main presidential candidates considering more than 115 polls that I’ve collected since 2014.</p>
 
-<p>In fact, R has been inherently a “single-processor” package until nowadays. Stata, another decent statistical package, allows for multicore processing, but not yet implemented for the default version. Additionally, Stata versions for multicore are quite expensive, for instance, if I want to use all of my quad-core computer power, I have to pay out $1,095 for a 4-core single license.</p>
+<p><img src="http://danielmarcelino.github.io/img/2015/3d-house-effects_argentine.png" alt="House Effects" /></p>
 
-<p>Fortunately, several packages exploiting the resources of parallel processing began to gain attention in the R community lately. Specially, because of many computationally demanding statistical procedures, such as bootstrapping and Markov Chain Monte Carlo, I guess. Nonetheless, the myth of fast computation has also leading for (miss)understanding by ordinary R users like me. Yet before distributing patches among CPUs, it is important to have it clear when and why parallel processing is helpful and which functions performs better for a given job.</p>
+<p>In essence, the house effects measure how far polls by a pollster are from what would be expected based on trends over time for the average polling house. In other words, the average house effect toward each candidate/party is expected to be zero by design. Then, a poll that is systematically 2% below what would be predicted for the date the poll was conducted will have a house effect of -2.0%.</p>
 
-<p>First, what does exactly parallel do? Despite its complex implementation, the idea is incredible simple: parallelization simply distribute the work among two or more cores. It is done by packages that provide backend for the “foreach” function to work. The foreach function allows R to distribute the processes, each of which having access to the same shared memory; so the computer not get confused. For instance, in the program bellow, several instances of lapply-like function are able to access the processing units and then deal out with all the work.</p>
+<p>The dots in “red” in the plot represent the pollster whose house effects were negative toward Mauricio Macri, while dots in “blue” represent positive effects toward him.</p>
 
-<p>Since not every task runs better in parallel there is not too many ready to use parallel processing functions in R. Additionally, distributing processes among the cores may cause computation overhead. That means we may lose computer time and memory, firstly by distributing, secondly by gathering the patches shared out among the processing units. Therefore, depending on the task (time and memory demand), parallel computing can be rather inefficient. It may take more time for dispatching the processes and gathering them back than the computation itself. Hence, counterintuitively, one might want to minimize the number of dispatches rather than distribute them.</p>
+<p>The electoral result tonight was a bit of surprise as several pollsters didn’t seem to have pick out a crescendo preference for the opposition candidate, Mauricio Macri, among undecided voters over the last week. <a href="http://us3.campaign-archive1.com/?u=6b1e9fcb4df3eaee1cd635f50&amp;id=0e702eecac&amp;e=c2780c4e4b">This blog</a> has more details.</p>
 
-<p><img src="http://danielmarcelino.github.io/img/2013/parallel.jpg" alt="Experiment Result" /></p>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">scatterplot3d</span><span class="p">)</span>
+<span class="n">houseEffects</span><span class="o">$</span><span class="n">pcolor</span><span class="p">[</span><span class="n">houseEffects</span><span class="o">$</span><span class="n">Macri</span><span class="o">&lt;</span> <span class="m">0</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s2">"red"</span>
+<span class="n">houseEffects</span><span class="o">$</span><span class="n">pcolor</span><span class="p">[</span><span class="n">houseEffects</span><span class="o">$</span><span class="n">Macri</span><span class="o">&gt;=</span><span class="m">0</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s2">"blue"</span>
 
-<p>Here, I’m testing a nontrivial computation instance for measuring computer performance on four relevant functions: the base <strong>lapply</strong>, <strong>mclapply</strong> from the “multicore“ package, <strong>parLapply</strong> from “snow” package, and <strong>sfLapply</strong> from “snowfall“ package. The last three functions essentially provide parallelized equivalent for the <code class="highlighter-rouge">lapply</code>. I use these packages for parallel computing the average for each column of a data frame built on the fly, but repeating this procedure 100 times for each data frame trial; so each trial demands different amount of time and memory for computing: the matrix size increases as 1K, 10K, 100K, 1M, and 10M rows. The program I used for simulate the data and perform all the tests can be found <a href="https://gist.github.com/danielmarcelino/5668701">here</a>. I used Emacs on a MacBook pro with 4-core and 8-G memory.</p>
+<span class="n">with</span><span class="p">(</span><span class="n">houseEffects</span><span class="p">,</span> <span class="p">{</span>
+  <span class="n">s3d</span> <span class="o">&lt;-</span> <span class="n">scatterplot3d</span><span class="p">(</span><span class="n">Scioli</span><span class="p">,</span> <span class="n">Massa</span><span class="p">,</span> <span class="n">Macri</span><span class="p">,</span> <span class="c1"># x y and z axis
+</span>                       <span class="n">angle</span><span class="o">=</span><span class="m">30</span><span class="p">,</span> <span class="c1"># angle of the plot 
+</span>                       <span class="n">color</span><span class="o">=</span><span class="n">pcolor</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">19</span><span class="p">,</span> <span class="c1"># filled blue circles
+</span>                       <span class="n">type</span><span class="o">=</span><span class="s2">"h"</span><span class="p">,</span> <span class="c1"># vertical lines to the x-y plane
+</span>                       <span class="n">main</span><span class="o">=</span><span class="s2">"House Effects"</span><span class="p">,</span>
+                       <span class="n">xlab</span><span class="o">=</span><span class="s2">"Daniel Scioli"</span><span class="p">,</span>
+                       <span class="n">ylab</span><span class="o">=</span><span class="s2">"Sergio Massa"</span><span class="p">,</span>
+                       <span class="n">zlab</span><span class="o">=</span><span class="s2">"Mauricio Macri"</span><span class="p">)</span>
 
-<p><img src="http://danielmarcelino.github.io/img/2013/parallelfinal.jpeg" alt="Final Results" /></p>
-
-<p>My initial experiment also included the “mpi.parLapply” function from the “Rmpi” package. However, because it is outdated for running on R version 3.0, I decided for not including it in this instance.</p>
-
-<p>Overall, running repetition tasks in parallel incurs overhead. Therefore, only if the process takes a significant amount of time and memory (RAM), parallelization can improve the overall performance.</p>
-
-<p>The plots above, provide evidence when an individual process takes less than a second (<code class="highlighter-rouge">2.650/100 = 26.5 milliseconds </code> comparable to <code class="highlighter-rouge">13.419/100 = 134.2 milliseconds</code>) to be executed, the overhead of continually patching processes will decay the overall performance. For instance, in the first chart, the lapply function took less than one-third of the time of <strong>sfLapply</strong> to perform the same job. However, the pattern changes dramatically when the computer needs to repeat the same task with large vectors (&gt;= 1 million rows).</p>
-
-<p>In fact, I noticed that all functions began to consume even more time computing  averages of big matrixes than I expected. But in a setting with 10 millions rows, the <strong>lapply</strong> function was dramatically inefficient: it took <code class="highlighter-rouge">1281.8/100 = 12.82 seconds</code> for each process, while the <strong>mclapply</strong> only took <code class="highlighter-rouge">525.4/100 = 5.254 seconds</code>.</p>
+  <span class="n">s3d.coords</span> <span class="o">&lt;-</span> <span class="n">s3d</span><span class="o">$</span><span class="n">xyz.convert</span><span class="p">(</span><span class="n">Scioli</span><span class="p">,</span> <span class="n">Massa</span><span class="p">,</span> <span class="n">Macri</span><span class="p">)</span> <span class="c1"># convert 3D coords to 2D projection
+</span>  <span class="n">text</span><span class="p">(</span><span class="n">s3d.coords</span><span class="o">$</span><span class="n">x</span><span class="p">,</span> <span class="n">s3d.coords</span><span class="o">$</span><span class="n">y</span><span class="p">,</span>  <span class="c1"># x and y coordinates
+</span>       <span class="n">labels</span><span class="o">=</span><span class="n">Pollster</span><span class="p">,</span>  <span class="c1"># text to plot
+</span>       <span class="n">cex</span><span class="o">=</span><span class="m">.5</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="m">4</span><span class="p">)</span> <span class="c1"># shrink text 50% and place to right of points)
+</span>  <span class="n">legend</span><span class="p">(</span><span class="s2">"topleft"</span><span class="p">,</span> <span class="n">inset</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="c1"># location and inset
+</span>         <span class="n">bty</span><span class="o">=</span><span class="s2">"n"</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">.7</span><span class="p">,</span>  <span class="c1"># suppress legend box, shrink text 70%
+</span>         <span class="n">title</span><span class="o">=</span><span class="s2">"House effects toward\nDaniel Scioli"</span><span class="p">,</span>
+         <span class="n">c</span><span class="p">(</span><span class="s2">"-"</span><span class="p">,</span> <span class="s2">"+"</span><span class="p">),</span> <span class="n">fill</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="s2">"red"</span><span class="p">,</span> <span class="s2">"blue"</span><span class="p">))</span>
+<span class="p">})</span></code></pre></figure>
 
 
 
@@ -178,15 +188,20 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/blog/2011/explaining-variance-in-a-multilevel-model.html" data-toggle="tooltip" data-placement="top" title="Showing Explained Variance in Multilevel Models">&larr; Previous Post</a>
+                        <a href="/blog/2015/paranormal-distribution.html" data-toggle="tooltip" data-placement="top" title="Paranormal Distribution">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/blog/2013/got-bootstrap.html" data-toggle="tooltip" data-placement="top" title="Got Bootstrap?">Next Post &rarr;</a>
+                        <a href="/blog/2015/competing-views-in-argentina.html" data-toggle="tooltip" data-placement="top" title="Competing views on Argentina's Frontrunner">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
+		  	  
+		        <div class="disqus-comments">
+		  	    
+
+		        </div>
 		  	  
 
             </div>

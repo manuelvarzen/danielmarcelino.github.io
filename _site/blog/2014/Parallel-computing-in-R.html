@@ -10,9 +10,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Blog of Daniel Marcelino">
 
-    <title>Blog Posts - EnfoRced Data Analysis</title>
+    <title>Parallel computing in R - EnfoRced Data Analysis</title>
 
-    <link rel="canonical" href="http://danielmarcelino.github.io/blog/">
+    <link rel="canonical" href="http://danielmarcelino.github.io/blog/2014/Parallel-computing-in-R.html">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -94,84 +94,99 @@
 </nav>
 
 
-    <!-- Page Header -->
-<header class="intro-header" style="background-image: url('/img/website/blogheader.png')">
+    <script language="javascript">
+    function typeset() {
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+    }
+
+    function disqus_config() {
+        this.callbacks.onNewComment = [typeset];
+        this.callbacks.onInit = [typeset];
+    }
+
+
+    if(window.MathJax===undefined){
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src  = "http://cdn.mathjax.org/mathjax/latest/MathJax.js";
+        var config = 'MathJax.Hub.Config({' +
+                    'extensions: ["tex2jax.js"],' +
+                    'tex2jax: { inlineMath: [ ["$","$"]], displayMath: [["\$$","\$$"]], processEscapes: true },' +
+                    'jax: ["input/TeX","output/HTML-CSS"]' +
+                    '});' +
+                    'MathJax.Hub.Startup.onload();';
+        if (window.opera)
+            script.innerHTML = config;
+        else
+            script.text = config;
+        document.getElementsByTagName("head")[0].appendChild(script);
+    }
+</script>
+
+
+<!-- Post Header -->
+<header class="intro-header" style="background-image: url('/img/website/spaghetti.png')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading">
-                    <h1>Blog Posts</h1>
-                    <hr class="small">
-                    <span class="subheading"></span>
+                <div class="post-heading">
+                    <h1>Parallel computing in R</h1>
+                    
+                    <span class="meta">Posted by EnfoRced Data Analysis on July 1, 2014</span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-	<div class="row">
-		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-			<ul class="posts">
-  
-    <li><a href="/blog/2016/Everything-Ends-on-Wednesday.html">2016-02-12 - Everything Ends on Wednesday</a></li>
-  
-    <li><a href="/blog/2016/star-wars-grossing-war.html">2016-01-11 - The Star Wars Grossing War</a></li>
-  
-    <li><a href="/blog/2015/gender-effect-in-conference-talks.html">2015-12-22 - Gender Effect in Conference Talks</a></li>
-  
-    <li><a href="/blog/2015/venezuelan-parliamentary-elections.html">2015-12-06 - Venezuelan Parliamentary Election: What do the Polls Say?</a></li>
-  
-    <li><a href="/blog/2015/venezuelan-parliamentary-election-2015.html">2015-12-04 - Venezuela's 2015 Parliamentary Elections</a></li>
-  
-    <li><a href="/blog/2015/retrieving-data-from-google-books-with-ngramr.html">2015-11-15 - Retrieving Data from Google Books with `ngramr`</a></li>
-  
-    <li><a href="/blog/2015/competing-views-in-argentina.html">2015-10-30 - Competing views on Argentina's Frontrunner</a></li>
-  
-    <li><a href="/blog/2015/argentine-house-effects.html">2015-10-25 - House Effects in Argentinian polling</a></li>
-  
-    <li><a href="/blog/2015/paranormal-distribution.html">2015-10-20 - Paranormal Distribution</a></li>
-  
-    <li><a href="/blog/2015/talk-about-campaign-finance.html">2015-10-17 - A Talk About Campaign Finance in Brazil</a></li>
-  
-    <li><a href="/blog/2015/understanding-margin-of-error.html">2015-10-13 - Understanding Margin of Error for Small Populations</a></li>
-  
-    <li><a href="/blog/2015/the-butterfly-curve.html">2015-10-07 - The Butterfly Curve</a></li>
-  
-    <li><a href="/blog/2015/Isn't-sad-that-all-that-matters-in-an-election-is-the-candidate's-height.html">2015-09-15 - Isn't sad that all that matters in an election is the candidate's height?</a></li>
-  
-    <li><a href="/blog/2015/the-greek-thing.html">2015-07-04 - The Greek thing</a></li>
-  
-    <li><a href="/blog/2015/R-has-a-consortium-should-we-celebrate.html">2015-07-02 - R has a new consortium, should we celebrate?</a></li>
-  
-    <li><a href="/blog/2014/frente-amplio-winnability.html">2014-11-14 - Frente Amplio Winnability</a></li>
-  
-    <li><a href="/blog/2014/Runoff-in-Uruguay-FA-is-expected-to-win-a-third-mandate.html">2014-11-14 - Runoff in Uruguay: FA is expected to win a third mandate</a></li>
-  
-    <li><a href="/blog/2014/A-bit-more-fragmented.html">2014-10-06 - A Bit More Fragmented</a></li>
-  
-    <li><a href="/blog/2014/yep-he-made-it-country-voted-no.html">2014-09-19 - Yep. He made it; country voted No</a></li>
-  
-    <li><a href="/blog/2014/bayes-says-dont-worry-about-scotlands-referendum.html">2014-09-17 - Bayes says `don't worry` about Scotland's Referendum</a></li>
-  
-    <li><a href="/blog/2014/discontinuity-bayesian-forecasting.html">2014-07-16 - Discontinuity Bayesian Forecasting</a></li>
-  
-    <li><a href="/blog/2014/Parallel-computing-in-R.html">2014-07-01 - Parallel computing in R</a></li>
-  
-    <li><a href="/blog/2014/Do-you-believe-in-World-Cup-superstition.html">2014-06-24 - Do you believe in World Cup superstition?</a></li>
-  
-    <li><a href="/blog/2013/got-bootstrap.html">2013-06-23 - Got Bootstrap?</a></li>
-  
-    <li><a href="/blog/2013/parallel-processing-when-does-it-worth.html">2013-05-29 - Parallel Processing: When does it worth?</a></li>
-  
-    <li><a href="/blog/2011/explaining-variance-in-a-multilevel-model.html">2011-10-03 - Showing Explained Variance in Multilevel Models</a></li>
-  
-</ul>
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
-		</div>
-	</div>
-</div>
+				<p>Parallel computing is incredibly useful, but not every thing worths distribute across as many cores as possible.</p>
+
+<p>Roughly a year ago I published an article about parallel computing in R <a href="http://danielmarcelino.com/r/05-2013/parallel-processing-when-does-it-worth/">here</a>, in which I compared computation performance among 4 packages that provide R with parallel features once R is essentially a single-thread task package.</p>
+
+<p><img src="http://danielmarcelino.github.io/img/2014/parallel.png" alt="Experiment Result" /></p>
+
+<p>Parallel computing is incredibly useful, but not every thing worths distribute across as many cores as possible. Actually, there are cases without enough repetitions that R will gain in performance through serial computation. That is, R takes time to distribute tasks across the processors; conversely, it will need time for binding them all together later on. Therefore, if the time for distributing and gathering pieces together is greater than the time need for single-thread computing, it doesn’t worth parallelize.</p>
+
+<p>In this post I’ll perform the same experiment using the same physical resources, except that I will perform it in the Rstudio instead of Emacs. So I want to check whether the packages improved anything significant so far.</p>
+
+<p>I tested a nontrivial computation instance using four critical R functions: the base <strong>lapply</strong>, <strong>mclapply</strong> from the “multicore” package, <strong>parLapply</strong> from the “snow” package, and <strong>sfLapply</strong> from the “snowfall” package. The last three functions essentially provide parallelized equivalent for the lapply.</p>
+
+<h4 id="the-experiment">The Experiment</h4>
+<p>These packages were used for distributing tasks across four CPUs of my MacBook pro with 8-G memory. The duty was to average out each column of a data frame built on the fly, but repeating this procedure 100 times for each trial because I don’t want to rely on one single round estimate. In addition, each trial demands different amount of memory allocation and time for computing once the matrix size varies as 1K, 10K, 100K, 1M, and 10M rows. The program I used to perform the tests is left <a href="https://gist.github.com/danielmarcelino/5668701">here</a>.</p>
+
+<p>Overall, every function is doing a better job now than one year ago, but the <strong>mclapply</strong> from the “multicore” package rocks! <strong>parLapply</strong> from the “snow” package comes second. In my former experiment, the lapply function was the way to go when dealing with matrix just as big as 10k rows. The second best alternative was then <strong>mclapply</strong>. <strong>parLapply</strong> from “snow”, and <strong>sfLapply</strong> from the “snowfall” package were simply too slow.</p>
+
+<p>Now, comparing the older graph with the following one suggests that a “microrevolution” is taking place; the figures changed a big deal upon parallelizing small data vectors &lt; 10k; distributing across CPUs seems to be less time consuming now than let it go serialized. Single-core computing (lapply function) is still an alternative when datasets are very small 1k to 10k. Nonetheless, if your data is greater than 10k rows, lapply will be your last desirable performance function.</p>
+
+<p><img src="http://danielmarcelino.github.io/img/2014/parallelfinal.png" alt="Linear Relationship" /></p>
+
+
+                <hr>
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/blog/2014/Do-you-believe-in-World-Cup-superstition.html" data-toggle="tooltip" data-placement="top" title="Do you believe in World Cup superstition?">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/blog/2014/discontinuity-bayesian-forecasting.html" data-toggle="tooltip" data-placement="top" title="Discontinuity Bayesian Forecasting">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+		  	  
+
+            </div>
+        </div>
+    </div>
+</article>
 
 <hr>
 
