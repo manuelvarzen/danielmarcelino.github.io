@@ -8,7 +8,7 @@ comments: true
 
 The 2014 election gave rise to an even more fragmented lower house in Brazil. This is important because higher values of political fragmentation suggest a less stable political environment in comparison with previous years.
 
-![The Golosov effective number of parties]({{ site.url }}/images/2014/EffectiveNumberParties.png)
+![The Golosov effective number of parties]({{ site.url }}/img/2014/EffectiveNumberParties.png)
 
 ## The 2014 legislative election
 This year, the election gave rise to an even more fragmented lower house. The way political scientists measure how fragmented is a political system is by applying one of the several formulas for calculating the *Effective Number of Parties*. The *Effective Number of Parties* is a statistic that helps researchers to go beyond the simple (absolute) count of the number of parties for further analysis. A widely accepted formula was proposed by M. [Laakso and R. Taagepera
@@ -49,16 +49,16 @@ library(SciencesPo)
 #### Compute the indices
 
 {% highlight r %}
-politicalDiversity(seats_2010, index= "laakso/taagepera")
+PoliticalDiversity(seats_2010, index= "laakso/taagepera")
 [1] 10.369
 
-politicalDiversity(seats_2010, index= "golosov")
+PoliticalDiversity(seats_2010, index= "golosov")
 [1] 10.511
 
-politicalDiversity(seats_2014, index= "laakso/taagepera")
+PoliticalDiversity(seats_2014, index= "laakso/taagepera")
 [1] 13.064
  
-politicalDiversity(seats_2014, index= "golosov")
+PoliticalDiversity(seats_2014, index= "golosov")
 [1] 14.472
 {% endhighlight %}
 

@@ -5,29 +5,29 @@
   <title type="text" xml:lang="en"></title>
     <link type="application/atom+xml" href="/atom.xml" rel="self"/>
     <link href="/"/>
-  <updated>2016-02-13T02:32:29Z</updated>
+  <updated>2016-05-17T17:14:03Z</updated>
   <id>/</id>
   <author>
-    <name>Daniel Marcelino</name>
-    <email>dmarcelino@live.com</email>
+    <name></name>
+    <email></email>
   </author>
-  <rights type="text">Copyright © 2016 {"name"=>"Daniel Marcelino", "email"=>"dmarcelino@live.com", "facebook"=>nil, "github"=>"danielmarcelino/", "twitter"=>"dmarcelinobr", "linkedin"=>"daniel-marcelino-80968656", "stackoverflow"=>"users/792000/daniel"}. All rights reserved.</rights>
+  <rights type="text">Copyright © 2016 . All rights reserved.</rights>
   
   <entry>
     <title>Everything Ends on Wednesday</title>
     <link rel="alternate" type="text/html" href="/blog/2016/Everything-Ends-on-Wednesday.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=EverythingEndsonWednesday" />
     <published>2016-02-12T00:00:00Z</published>
-    <updated>2016-02-12T00:00:00+00:00</updated>
+    <updated>2016-02-12T00:00:00-02:00</updated>
     <id>/blog/2016/Everything-Ends-on-Wednesday</id>
-    <content type="html"><![CDATA[ <p>The Brazilian Carnival just finished this week, but for some people it is time to start worrying about crazy things that may have happened over the days of the flesh festival.</p>
+    <content type="html"><![CDATA[ <p>The Brazilian Carnival just ended this week, but for some people it is time to starting worry about crazy things that may have happened over the days of the flesh festival.</p>
 
-<p>Watching the news, the spoken person of the Test and Prevention Center (CTA) of Brasilia estimated that people seeking test services by this institution increases on average 40% the day after the carnival. By the end the day, the spoken person reveled that 2 out of 124 performed rapid tests (most likely staff finger stick tests) turned out positive.</p>
+<p>Watching the news, the spokesperson of the Test and Prevention Center (CTA) in Brasilia estimated that the number of people seeking counseling and test kits increases on average 40% the day after the carnival (Wednesday). He also disclosed that 2 out of 124 performed tests (most likely staff finger stick tests) turned out positive.</p>
 
-<p>I started to thinking about incidence of HIV among Brazilians and how likely it’s to be tested positive when incidence levels also change.</p>
+<p>After the news I started thinking of HIV incidence among Brazilians and how likely it is to be tested positive when incidence levels also change; every year these numbers go up and dow accordingly to the government policies.</p>
 
-<p>After a little research, I found several sources with estimated quantities of the incidence for  several countries. For instance, in 2011, the incidence rate of AIDS (stage when the disease manifests itself in the patient) in Brazil was 17.9 to 100,000 inhabitants. This number varies  significantly across the regions, so it’s higher in South-East and lower in the Midwest of the country, with others regions falling in between. The incidence rate also varies between males and females and among age groups. For the sake of simplicity I will not consider those differences here. It would get too complicated for a blog post post-carnival.</p>
+<p>After a little research, I found several sources with estimated quantities of the incidence of HIV/AIDS. The one I chose, says for instance, in 2011 the incidence rate of AIDS (stage when the disease manifests itself in the patient) in Brazil was 17.9 to 100,000 inhabitants. This number varies  significantly across the regions, so it’s higher in South-East and lower in the Midwest of the country, with others regions falling in between. The incidence rate also varies between males and females, and among age groups. For the sake of simplicity, I will not consider those differences here. It would get too complicated for a blog post post-carnival.</p>
 
-<p>The <a href="https://en.wikipedia.org/wiki/ELISA">enzyme-linked immunosorbent assay (ELISA screening test)</a>  for testing a blood sample for the HIV antibodies being present in human blood has these properties:</p>
+<p>Consider that the <a href="https://en.wikipedia.org/wiki/ELISA">enzyme-linked immunosorbent assay (ELISA screening test)</a> for testing a blood sample for the HIV antibodies being present in human blood has the following properties:</p>
 
 <p>Sensitivity:</p>
 
@@ -37,15 +37,15 @@
 
 <script type="math/tex; mode=display">P(negative~ELISA~|~person~is~HIV~negative) = .926</script>
 
-<p><strong>Sensitivity</strong> is the percentage of individuals with HIV infection (based on ELISA reading) whom  correctly identified as having infection (aka the true positive rate). <strong>Specificity</strong> is the percentage of individuals without HIV infection (based on ELISA reading) whom correctly identified as being free of infection (aka true negative rate);</p>
+<p><strong>Sensitivity</strong> is the percentage of individuals with HIV infection (based on ELISA reading) whom  correctly identified as having infection (aka the true positive rate). <strong>Specificity</strong> is the percentage of individuals without HIV infection (based on ELISA reading) whom correctly identified as being free of infection (aka true negative rate). No test is perfect, as a consequence, few individuals will receive false negatives and others false positives.</p>
 
-<p>Suppose the incidence of HIV in the population being tested is denoted by p . In class <em>p = 18/100000</em> – or <em>0.00018</em>. In general we can show this relation using the Law of Total Probability:</p>
+<p>Suppose the incidence of HIV in the population being tested is denoted by p . Replacing: <em>p = 18/100000</em> or <em>0.00018</em>. Using the Law of Total Probability we can show this relation as:</p>
 
 <script type="math/tex; mode=display">P(HIV~positive~|~positive~ELISA) = p * .977~/~(p * .977 + (1-p) * .074)</script>
 
 <p>Here is the output and R code  computing this for various values of p with a 25 interval.</p>
 
-<p><img src="http://danielmarcelino.github.io/images/2016/Sensitivity.png" alt="center" /></p>
+<p><img src="http://danielmarcelino.github.io/img/2016/Sensitivity.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">cases</span> <span class="o">&lt;-</span> <span class="n">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">10000</span><span class="p">,</span> <span class="m">25</span><span class="p">)</span>
 
@@ -65,7 +65,8 @@
  <span class="p">[</span><span class="m">9</span><span class="p">,]</span> <span class="m">0.002</span> <span class="m">0.026</span>
 <span class="p">[</span><span class="m">10</span><span class="p">,]</span> <span class="m">0.002</span> <span class="m">0.029</span></code></pre></figure>
 
-<figure class="highlight"><pre><code class="language-r" data-lang="r"> <span class="n">library</span><span class="p">(</span><span class="n">SciencesPo</span><span class="p">)</span> <span class="c1"># for using theme_538
+<figure class="highlight"><pre><code class="language-r" data-lang="r"> <span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+ <span class="n">library</span><span class="p">(</span><span class="n">SciencesPo</span><span class="p">)</span> <span class="c1"># for using theme_538
 </span><span class="n">ggplot</span><span class="p">()</span> <span class="o">+</span> 
 <span class="n">geom_line</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="n">p</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="m">1</span><span class="p">)</span> <span class="o">+</span>
     <span class="n">theme_538</span><span class="p">()</span>
@@ -80,7 +81,7 @@
     <title>The Star Wars Grossing War</title>
     <link rel="alternate" type="text/html" href="/blog/2016/star-wars-grossing-war.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=TheStarWarsGrossingWar" />
     <published>2016-01-11T00:00:00Z</published>
-    <updated>2016-01-11T00:00:00+00:00</updated>
+    <updated>2016-01-11T00:00:00-02:00</updated>
     <id>/blog/2016/star-wars-grossing-war</id>
     <content type="html"><![CDATA[ <h1 id="motivation">Motivation</h1>
 <p>I finally made to the movies for watching the new <em>Star Wars</em> release this weekend. Although this episode wasn’t that spectacular, in my view, it did inspire some data seeking afterwards. I wanted to know how this film compares to others top movies in terms of worldwide grossing as well as within the <em>Star Wars</em> series.</p>
@@ -167,7 +168,7 @@
 
 <p>The following chart displays the grossing worldwide values for the top 25 ranked movies of all time. As it shines out, the <em>Star Wars: The Force Awakens_ is doing pretty well worldwide. It’s ranked fourth now, but it just began to play in China this week, so it may unseat *Titanic</em> over the next weeks, and <em>Avatar</em> in the long run.</p>
 
-<p><img src="http://danielmarcelino.github.io/images/code-2016-01-11-star-wars-grossing-war/top25.png" alt="center" /></p>
+<p><img src="http://danielmarcelino.github.io/img/code-2016-01-11-star-wars-grossing-war/top25.png" alt="center" /></p>
 
 <p>If you want to reproduce the very same plot decoration of this post, you’ll have to install the development version of <strong>SciencesPo</strong> package, and add <code class="highlighter-rouge">+ theme_538(legend="top")</code> to the following code.</p>
 
@@ -182,7 +183,7 @@
 
 <p>Next, how <em>The Force Awakens</em> compares with other episodes of <em>Star Wars</em>?</p>
 
-<p><img src="http://danielmarcelino.github.io/images/code-2016-01-11-star-wars-grossing-war/starwars.png" alt="center" /></p>
+<p><img src="http://danielmarcelino.github.io/img/code-2016-01-11-star-wars-grossing-war/starwars.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># will search for Star Wars names within the data.frame:
 </span><span class="n">box3</span> <span class="o">&lt;-</span> <span class="n">subset</span><span class="p">(</span><span class="n">box</span><span class="p">,</span> <span class="n">grepl</span><span class="p">(</span><span class="s2">"^Star Wars"</span><span class="p">,</span> <span class="n">box</span><span class="o">$</span><span class="n">Title</span><span class="p">)</span><span class="o">|</span><span class="n">grepl</span><span class="p">(</span><span class="s2">"^Return of the Jedi"</span><span class="p">,</span> <span class="n">box</span><span class="o">$</span><span class="n">Title</span><span class="p">)</span><span class="o">|</span><span class="n">grepl</span><span class="p">(</span><span class="s2">"^The Empire Strikes Back"</span><span class="p">,</span> <span class="n">box</span><span class="o">$</span><span class="n">Title</span><span class="p">))</span>
@@ -202,98 +203,10 @@
   </entry>
   
   <entry>
-    <title>Gender Effect in Conference Talks</title>
-    <link rel="alternate" type="text/html" href="/blog/2015/gender-effect-in-conference-talks.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=GenderEffectinConferenceTalks" />
-    <published>2015-12-22T00:00:00Z</published>
-    <updated>2015-12-22T00:00:00+00:00</updated>
-    <id>/blog/2015/gender-effect-in-conference-talks</id>
-    <content type="html"><![CDATA[ <p>I was searching in the arXiv repository for an interesting paper to read over the weekend, when I found this: <a href="http://arxiv.org/abs/1403.3091">“Studying Gender in Conference Talks – data from the 223rd meeting of the American Astronomical Society”</a>. The title and figures caught my attention more than the subject of the conference, I’ve to confess.</p>
-
-<p>The plot below, taken from the paper, displays the most significant finding from the analysis: <em>a strong dependence on session chair gender</em>. Overall, males ask more question than females, but there is a large difference in number of questions asked by males vis-à-vis number asked by females, given a male or female chair. I’m wondering if this also holds for other science fields where the gap between male and female researchers is that not abnormal.</p>
-
-<p><img src="http://danielmarcelino.github.io/images/2015/gender_chairs_n_questions.png" alt="Main Findings" /></p>
-
-<p>The paper is stuffed with figures, but in this case I would prefer a table with residuals; way more telling.</p>
-
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">tab</span> <span class="o">=</span> <span class="n">as.table</span><span class="p">(</span><span class="n">matrix</span><span class="p">(</span><span class="n">c</span><span class="p">(</span><span class="m">63</span><span class="p">,</span> <span class="m">90</span><span class="p">,</span> <span class="m">122</span><span class="p">,</span> <span class="m">359</span><span class="p">),</span><span class="n">nrow</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="n">ncol</span><span class="o">=</span><span class="m">2</span><span class="p">,</span>
-<span class="n">dimnames</span><span class="o">=</span><span class="n">list</span><span class="p">(</span><span class="n">chairs</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="s1">'FC'</span><span class="p">,</span><span class="s1">'MC'</span><span class="p">),</span>
-<span class="n">questions</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="s1">'FQ'</span><span class="p">,</span> <span class="s1">'MQ'</span><span class="p">))))</span>
-
-<span class="o">&gt;</span> <span class="n">tab</span>
-     <span class="n">questions</span>
-<span class="n">chairs</span>  <span class="n">FQ</span>  <span class="n">MQ</span>
-   <span class="n">FC</span>  <span class="m">63</span> <span class="m">122</span>
-   <span class="n">MC</span>  <span class="m">90</span> <span class="m">359</span>
-      
-<span class="n">dat</span> <span class="o">=</span> <span class="n">SciencesPo</span><span class="o">::</span><span class="n">untable</span><span class="p">(</span><span class="n">tab</span><span class="p">)</span>
-
-<span class="o">&gt;</span> <span class="n">head</span><span class="p">(</span><span class="n">dat</span><span class="p">)</span>
-  <span class="n">chairs</span> <span class="n">questions</span>
-<span class="m">1</span>    <span class="n">FC</span>       <span class="n">FQ</span>
-<span class="m">2</span>    <span class="n">FC</span>       <span class="n">FQ</span>
-<span class="m">3</span>    <span class="n">FC</span>       <span class="n">FQ</span>
-<span class="m">4</span>    <span class="n">FC</span>       <span class="n">FQ</span>
-<span class="m">5</span>    <span class="n">FC</span>       <span class="n">FQ</span>
-<span class="m">6</span>    <span class="n">FC</span>       <span class="n">FQ</span></code></pre></figure>
-
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="o">&gt;</span> <span class="n">crosstabs</span><span class="p">(</span><span class="n">dat</span><span class="p">,</span> <span class="s2">"chairs"</span><span class="p">,</span> <span class="s2">"questions"</span><span class="p">,</span>
-<span class="o">+</span>            <span class="n">row.pct</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">,</span>
-<span class="o">+</span>            <span class="n">chisq</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">,</span>
-<span class="o">+</span>            <span class="n">sresid</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">)</span>
-
-<span class="n">Table</span> <span class="n">of</span> <span class="n">chairs</span> <span class="n">by</span> <span class="n">questions</span>
-
-                         <span class="o">|</span><span class="n">questions</span>  
-<span class="o">-------------------------+-----------+-----------+-----------+</span>
-<span class="n">chairs</span>                   <span class="o">|</span><span class="n">FQ</span>         <span class="o">|</span><span class="n">MQ</span>         <span class="o">|</span><span class="n">Total</span>      <span class="o">|</span>
-<span class="o">-------------------------+-----------+-----------+-----------+</span>
-<span class="n">FC</span>      <span class="o">|</span><span class="n">Obs</span> <span class="n">Freq</span>        <span class="o">|</span>         <span class="m">63</span><span class="o">|</span>        <span class="m">122</span><span class="o">|</span>        <span class="m">185</span><span class="o">|</span>
-        <span class="o">|%</span> <span class="n">within</span> <span class="n">chairs</span> <span class="o">|</span>    <span class="m">34.0541</span><span class="o">|</span>    <span class="m">65.9459</span><span class="o">|</span>   <span class="m">100.0000</span><span class="o">|</span>
-<span class="o">-------------------------+-----------+-----------+-----------+</span>
-<span class="n">MC</span>      <span class="o">|</span><span class="n">Obs</span> <span class="n">Freq</span>        <span class="o">|</span>         <span class="m">90</span><span class="o">|</span>        <span class="m">359</span><span class="o">|</span>        <span class="m">449</span><span class="o">|</span>
-        <span class="o">|%</span> <span class="n">within</span> <span class="n">chairs</span> <span class="o">|</span>    <span class="m">20.0445</span><span class="o">|</span>    <span class="m">79.9555</span><span class="o">|</span>   <span class="m">100.0000</span><span class="o">|</span>
-<span class="o">-------------------------+-----------+-----------+-----------+</span>
-<span class="n">Total</span>   <span class="o">|</span><span class="n">Obs</span> <span class="n">Freq</span>        <span class="o">|</span>        <span class="m">153</span><span class="o">|</span>        <span class="m">481</span><span class="o">|</span>        <span class="m">634</span><span class="o">|</span>
-<span class="o">-------------------------+-----------+-----------+-----------+</span>
-
-<span class="n">Statistics</span> <span class="k">for</span> <span class="n">Table</span> <span class="n">chairs</span> <span class="n">by</span> <span class="n">questions</span>
-
-<span class="n">Statistics</span>                   <span class="n">DF</span>      <span class="n">Value</span>     <span class="n">Prob</span>
-<span class="o">---------------------------------------------------</span>
-<span class="n">Pearson</span> <span class="n">Chi</span><span class="o">-</span><span class="n">Square</span>           <span class="m">1</span>     <span class="m">13.2901</span>  <span class="m">0.0003</span>
-<span class="n">Likelihood</span> <span class="n">Ratio</span> <span class="n">Chi</span><span class="o">-</span><span class="n">Square</span>  <span class="m">1</span>     <span class="m">13.4689</span>  <span class="m">0.0002</span>
-<span class="n">Fisher</span><span class="err">'</span><span class="n">s</span> <span class="n">Exact</span> <span class="n">Test</span>                         <span class="m">0.0003</span>
-<span class="o">---------------------------------------------------</span>
-
-<span class="n">Residuals</span> <span class="k">for</span> <span class="n">Table</span> <span class="n">chairs</span> <span class="n">by</span> <span class="n">questions</span>
-
-         <span class="o">|</span><span class="n">questions</span>  
-<span class="o">---------+-----------+-----------+</span>
-<span class="n">chairs</span>   <span class="o">|</span><span class="n">FQ</span>         <span class="o">|</span><span class="n">MQ</span>         <span class="o">|</span>
-<span class="o">---------+-----------+-----------+</span>
-<span class="n">FC</span>       <span class="o">|</span>     <span class="m">2.7470</span><span class="o">|</span>    <span class="m">-1.5493</span><span class="o">|</span>
-<span class="n">MC</span>       <span class="o">|</span>    <span class="m">-1.7633</span><span class="o">|</span>     <span class="m">0.9945</span><span class="o">|</span>
-<span class="o">---------+-----------+-----------+</span></code></pre></figure>
- ]]></content>
-  </entry>
-  
-  <entry>
-    <title>Data, data, data</title>
-    <link rel="alternate" type="text/html" href="/blog/2015/data-data-data.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=Datadatadata" />
-    <published>2015-12-14T00:00:00Z</published>
-    <updated>2015-12-14T00:00:00+00:00</updated>
-    <id>/blog/2015/data-data-data</id>
-    <content type="html"><![CDATA[ <p>Having presented preliminary findings from a national sample of therapeutic communities in Brazil, I thought the Babbage’s words fits like a glove for those criticizing quantitative approaches for policy evaluations: the “Errors using inadequate data are much less than those using no data at all” (Charles Babbage).</p>
-
-<p><img src="http://danielmarcelino.github.io/images/2015/CTs_distribuicao.png" alt="Communities" /></p>
- ]]></content>
-  </entry>
-  
-  <entry>
     <title>Venezuelan Parliamentary Election: What do the Polls Say?</title>
     <link rel="alternate" type="text/html" href="/blog/2015/venezuelan-parliamentary-elections.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=VenezuelanParliamentaryElection:WhatdothePollsSay?" />
     <published>2015-12-06T00:00:00Z</published>
-    <updated>2015-12-06T00:00:00+00:00</updated>
+    <updated>2015-12-06T00:00:00-02:00</updated>
     <id>/blog/2015/venezuelan-parliamentary-elections</id>
     <content type="html"><![CDATA[ <p>There is not a huge population of opinion polls covering this parliamentary election in Venezuela, but all I’ve can be used to gauge the public opinion by the local polling houses. This posting begs an obvious question: how has the mood in Venezuela varied over time with respect to voting intentions for the two political blocs? Next, can we detect any biases among those publishing polls?</p>
 
@@ -305,15 +218,15 @@
 <h1 id="polls-over-time">Polls over time</h1>
 <p>After a bit filling-in-the-blanks working with missing date values, we can visualize the poll trends over time. Given the sample size, sampling error and other sources of noise, a loess model can pretty much pick out the signals of long-term trends.</p>
 
-<p><img src="http://danielmarcelino.github.io/images/code-2015-12-06-venezuelan-parliamentary-elections/loess-1.png" alt="center" /></p>
+<p><img src="http://danielmarcelino.github.io/img/code-2015-12-06-venezuelan-parliamentary-elections/loess-1.png" alt="center" /></p>
 
 <h1 id="pollster-biases">Pollster biases</h1>
-<p>Let’s pretend we can trust on all those polls despite the huge variability among them as already mentioned <a href="https://danielmarcelino.github.io/r/2015/12/04/venezuelan-parliamentary-election-2015/">here</a>. In fact, the problem is not the variability as such, but my lack of knowledge about who are the pollsters and their past performance, so I can’t judge them at first, let’s say it clearly.<br />
+<p>Let’s pretend we can trust on all those polls despite the huge variability among them as already mentioned <a href="https://danielmarcelino.github.io/r/2015/12/04/venezuelan-parliamentary-election-2015/">here</a>. In fact, the problem is not the variability as such, but my lack of knowledge about who are the pollsters and their past performance, so I can’t judge them at first, let’s say it clearly.
 Nonetheless, if we accept the above models as a sound estimate of the expected poll response at a given time, we can analyze the residuals of actual poll results and look for systematic biases. In theory, with a decent sample size (all have ~ 1300) and a reasonably stratified sampling method (I’m not even assuming  random samples here), we might expect polls results to be roughly normally distributed around the expected polls result, regardless of who performed or commissioned the poll, right?</p>
 
 <p>The graph below shows the distributions per polling house for those who polled more than a single poll in this dataset.</p>
 
-<p><img src="http://danielmarcelino.github.io/images/code-2015-12-06-venezuelan-parliamentary-elections/biases-3.png" alt="center" /></p>
+<p><img src="http://danielmarcelino.github.io/img/code-2015-12-06-venezuelan-parliamentary-elections/biases-3.png" alt="center" /></p>
 
 <p>We’ve to keep in mind that there are important caveats which we’re not addressing here, as that different polls have used different question sets, methods etc, so this isn’t evidence for anything underhanded per se. It seems reasonable to expect that while parties might have good reasons to publish polls in their favor, pollsters conducting the polls should generally be more or less indifferent.</p>
 
@@ -376,8 +289,8 @@ Nonetheless, if we accept the above models as a sound estimate of the expected p
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p>What do the polls say? Well, the majority of Venezuelans are favoring opposition candidates and this has been the trend for at least the latter two years, however polls appear to have been more variable in recent months. This election is expected to bring the opposition to control the National Assembly after 16 years loosing the elections in the country. <br />
-The Venezuela’s Socialists seem to be at risk, but predicting the final number of seats is a tough task that I’m not considering in this post. <br />
+<p>What do the polls say? Well, the majority of Venezuelans are favoring opposition candidates and this has been the trend for at least the latter two years, however polls appear to have been more variable in recent months. This election is expected to bring the opposition to control the National Assembly after 16 years loosing the elections in the country. 
+The Venezuela’s Socialists seem to be at risk, but predicting the final number of seats is a tough task that I’m not considering in this post. 
 In fact, it might be really difficult to set forth a range of winning seats as the government recently enacted some redistricting seats in order to weaken an eventual absolute majority by the opposition. Somehow, the polls show this will be a significant symbolic defeat for the government that shows it lost despite all the advantages in state power and control over the media.</p>
 
 <h2 id="update-error">UPDATE (Error)</h2>
@@ -506,11 +419,11 @@ In fact, it might be really difficult to set forth a range of winning seats as t
     <title>Venezuela&#39;s 2015 Parliamentary Elections</title>
     <link rel="alternate" type="text/html" href="/blog/2015/venezuelan-parliamentary-election-2015.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=Venezuela&#39;s2015ParliamentaryElections" />
     <published>2015-12-04T00:00:00Z</published>
-    <updated>2015-12-04T00:00:00+00:00</updated>
+    <updated>2015-12-04T00:00:00-02:00</updated>
     <id>/blog/2015/venezuelan-parliamentary-election-2015</id>
     <content type="html"><![CDATA[ <p>Next Sunday Venezuelans are heading to the polls once again with  international concerns about the clearness of the balloting. To get an idea about the political climate over there, I’ve collected some polls available on the internet. The surprising thing from those surveys is a tremendous variability from pollster to pollster about the single topic of voting intention. You may find national polls fielded in the same period with estimates varying as much as 20%, isn’t it dramatic? If you always wanted to see house bias operating in practice, the Venezuelan elections may provide you a good case then.</p>
 
-<p><img src="http://danielmarcelino.github.io/images/2015/venezuela1.png" alt="center" /></p>
+<p><img src="http://danielmarcelino.github.io/img/2015/venezuela1.png" alt="center" /></p>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1">### The data
 </span><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
@@ -540,227 +453,292 @@ In fact, it might be really difficult to set forth a range of winning seats as t
   </entry>
   
   <entry>
-    <title>Retrieving Data from Google Books with `ngramr`</title>
-    <link rel="alternate" type="text/html" href="/blog/2015/retrieving-data-from-google-books-with-ngramr.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=RetrievingDatafromGoogleBookswith`ngramr`" />
-    <published>2015-11-15T00:00:00Z</published>
-    <updated>2015-11-15T00:00:00+00:00</updated>
-    <id>/blog/2015/retrieving-data-from-google-books-with-ngramr</id>
-    <content type="html"><![CDATA[ <p><a href="https://en.wikipedia.org/wiki/Karl_Marx">Karl Marx</a> is the most famous founding fathers of modern sociology with a popularity peak in 1975-6, but declining ever since my little research using the <a href="https://books.google.com/ngrams">Google Ngram Viewer</a> suggests.</p>
+    <title>A Bit More Fragmented</title>
+    <link rel="alternate" type="text/html" href="/blog/2014/A-bit-more-fragmented.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=ABitMoreFragmented" />
+    <published>2014-10-06T00:00:00Z</published>
+    <updated>2014-10-06T00:00:00-03:00</updated>
+    <id>/blog/2014/A-bit-more-fragmented</id>
+    <content type="html"><![CDATA[ <p>The 2014 election gave rise to an even more fragmented lower house in Brazil. This is important because higher values of political fragmentation suggest a less stable political environment in comparison with previous years.</p>
+
+<p><img src="http://danielmarcelino.github.io/img/2014/EffectiveNumberParties.png" alt="The Golosov effective number of parties" /></p>
+
+<h2 id="the-2014-legislative-election">The 2014 legislative election</h2>
+<p>This year, the election gave rise to an even more fragmented lower house. The way political scientists measure how fragmented is a political system is by applying one of the several formulas for calculating the <em>Effective Number of Parties</em>. The <em>Effective Number of Parties</em> is a statistic that helps researchers to go beyond the simple (absolute) count of the number of parties for further analysis. A widely accepted formula was proposed by M. <a href="http://cps.sagepub.com/content/12/1/3.extract">Laakso and R. Taagepera
+ (1979)</a>:</p>
+
+<script type="math/tex; mode=display">N =\frac{1}{\sum_{i=1}^{n}p_{i}^{2}}</script>
+
+<p>where N denotes the effective number of parties and p_i denotes the $i^{th}$ party’s fraction of the seats. The problem with this method is that it produces distortions, particularly for small parties.</p>
+
+<p>Few years ago, <a href="http://ppq.sagepub.com/content/16/2/171.abstract">Grigorii Golosov (2010)</a> suggested a new formula for estimating the effective number of parties in which both larger and smaller parties are not attributed unrealistic scores as produced by the Laakso—Taagepera index above. Golosov’s formula can be expressed as:</p>
+
+<script type="math/tex; mode=display">N = \sum_{i=1}^{n}\frac{p_{i}}{p_{i}+p{i}^{2}-p_{i}^{2}}</script>
+
+<p>To compare the evolution in the effective number of parties between <del>2002</del> 1986 to 2014 in the Brazilian lower house, I programed a small function which computes some of the most standard political diversity measures, including the <a href="http://ppq.sagepub.com/content/16/2/171.abstract">Golosov (2010)</a>’s formula above. The function is part of the <a href="https://cran.r-project.org/web/packages/SciencesPo/index.html">SciencesPo</a> R package. For a more complete overview of the indices performed by the package, refer to this <a href="https://cran.r-project.org/web/packages/SciencesPo/vignettes/Indices.html">vignette</a>.</p>
+
+<p>The results displayed below and summarized in the plot at the top of this post, indicate the effective number of parties had a considerable upward shift between 2010 to 2014, moving from 10.5 to 14.5 using the Golosov’s scale or from 10.4 to 13.1 using the more standard method by Laakso and Taagepera.</p>
+
+<h4 id="sample-of-data">Sample of data</h4>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">SciencesPo</span><span class="p">)</span>
+
+<span class="c1">## 2010 Election outcome as proportion of seats
+</span> <span class="n">seats_2010</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="m">88</span><span class="p">,</span> <span class="m">79</span><span class="p">,</span> <span class="m">53</span><span class="p">,</span> <span class="m">43</span><span class="p">,</span> <span class="m">41</span><span class="p">,</span> <span class="m">41</span><span class="p">,</span> <span class="m">34</span><span class="p">,</span> <span class="m">28</span><span class="p">,</span> <span class="m">21</span><span class="p">,</span>
+<span class="m">17</span><span class="p">,</span> <span class="m">15</span><span class="p">,</span> <span class="m">15</span><span class="p">,</span> <span class="m">12</span><span class="p">,</span> <span class="m">8</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span><span class="o">/</span><span class="m">513</span>
+
+<span class="c1">## will give the following props:
+</span><span class="o">&gt;</span> <span class="n">seats_2010</span>
+ <span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="m">0.171539961</span> <span class="m">0.153996101</span> <span class="m">0.103313840</span> <span class="m">0.083820663</span> <span class="m">0.079922027</span> <span class="m">0.079922027</span>
+ <span class="p">[</span><span class="m">7</span><span class="p">]</span> <span class="m">0.066276803</span> <span class="m">0.054580897</span> <span class="m">0.040935673</span> <span class="m">0.033138402</span> <span class="m">0.029239766</span> <span class="m">0.029239766</span>
+<span class="p">[</span><span class="m">13</span><span class="p">]</span> <span class="m">0.023391813</span> <span class="m">0.015594542</span> <span class="m">0.007797271</span> <span class="m">0.005847953</span> <span class="m">0.005847953</span> <span class="m">0.003898635</span>
+<span class="p">[</span><span class="m">19</span><span class="p">]</span> <span class="m">0.003898635</span> <span class="m">0.003898635</span> <span class="m">0.001949318</span> <span class="m">0.001949318</span>
+
+<span class="c1">## 2014 Election outcome as proportion of seats
+</span> <span class="n">seats_2014</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="m">70</span><span class="p">,</span> <span class="m">66</span><span class="p">,</span> <span class="m">55</span><span class="p">,</span> <span class="m">37</span><span class="p">,</span> <span class="m">38</span><span class="p">,</span> <span class="m">34</span><span class="p">,</span> <span class="m">34</span><span class="p">,</span> <span class="m">26</span><span class="p">,</span> <span class="m">22</span><span class="p">,</span> <span class="m">20</span><span class="p">,</span> <span class="m">19</span><span class="p">,</span> 
+<span class="m">15</span><span class="p">,</span> <span class="m">12</span><span class="p">,</span> <span class="m">11</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">9</span><span class="p">,</span> <span class="m">8</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="m">4</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span><span class="o">/</span><span class="m">513</span></code></pre></figure>
+
+<h4 id="compute-the-indices">Compute the indices</h4>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">PoliticalDiversity</span><span class="p">(</span><span class="n">seats_2010</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span> <span class="s2">"laakso/taagepera"</span><span class="p">)</span>
+<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="m">10.369</span>
+
+<span class="n">PoliticalDiversity</span><span class="p">(</span><span class="n">seats_2010</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span> <span class="s2">"golosov"</span><span class="p">)</span>
+<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="m">10.511</span>
+
+<span class="n">PoliticalDiversity</span><span class="p">(</span><span class="n">seats_2014</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span> <span class="s2">"laakso/taagepera"</span><span class="p">)</span>
+<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="m">13.064</span>
+ 
+<span class="n">PoliticalDiversity</span><span class="p">(</span><span class="n">seats_2014</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span> <span class="s2">"golosov"</span><span class="p">)</span>
+<span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="m">14.472</span></code></pre></figure>
+
+<h3 id="update">Update</h3>
+<p>After I published this post, I realized it would be nicer to extend the election series as well as compare the two indices mentioned above. So, I did update the original plot, which contained only values computed under the Golosov’s method. Also notice that the results may differ from other scholars because the overall sum of votes used or the number of elected candidates may be different. Some may use the <em>actual outcome</em> of the election, as I did, others may use the number of representatives that actually entered the office after any recounting or judicial decisions.</p>
+ ]]></content>
+  </entry>
+  
+  <entry>
+    <title>Discontinuity Bayesian Forecasting</title>
+    <link rel="alternate" type="text/html" href="/blog/2014/discontinuity-bayesian-forecasting.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=DiscontinuityBayesianForecasting" />
+    <published>2014-07-16T00:00:00Z</published>
+    <updated>2014-07-16T00:00:00-03:00</updated>
+    <id>/blog/2014/discontinuity-bayesian-forecasting</id>
+    <content type="html"><![CDATA[ <p>Maybe Bayesian linear filtering models are not enough to forecast Brazilian subnational elections.</p>
 
 <h2 id="introduction">Introduction</h2>
-<p>Google has a tool for tracking the frequency of words or phrases across its vast collection of scanned texts, the Google Books. The <a href="https://books.google.com/ngrams">Google Ngram Viewer</a> reports data and graphs the frequency of words encountered in one or across several <em>corpus</em> over time. For instance, the chart below campares the appearance in the English <em>corpus</em> of following bigrams names: “Karl Marx”, “Max Weber”, “Emile Durkheim”.</p>
+<p>I’m finalizing a paper presentation for the ABCP meeting, where I do explore poor polling forecast in a local election in Brazil. I drew upon Jackman (2005)’s paper “Pooling the Polls” to explore a bit about “house effects” in the Brazilian local elections.</p>
 
-<p><img src="http://danielmarcelino.github.io/images/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/GoogleNgram.png" alt="center" /></p>
+<h2 id="motivation">Motivation</h2>
+<p>During the analysis I found myself extending his original model to fit the local election chosen (Sao Paulo) in regarding the local features.
+ In Brazil, political parties have incentives for canvassing free of charge in the aired media (radio and TV). The whole point is that this thing sometimes produces drastic changes to the vote distribution in a short period of time, so we can’t simply apply a Bayesian linear filtering as a Kalman filter,  because that would break up some linearity assumptions.
+ In order to account for the advertising effect on the popular support, I had to develop an extension where the transition component–the random walk–breaks at the last poll before the ads season began, and restarting with the first poll after it, but with a catch-up of the vote preference change. The following chart says more about the problem. The black spots are the observed polls by the major pollsters.</p>
 
-<p>The y-axis shows of all the bigrams contained in the sample of books written in English, what percentage of them are “Karl Marx” or “Max Weber” or “Emile Durkheim”? From the chart above, we can conclude that Marx is the most famous sociologist among the others founding fathers, with a peak in popularity about 1975-6, but his influence has been declining ever since. These thinkers are considered the founding fathers of sociology because they set out to develop practical and scientifically sound methods of research to examine theories of the social world rooted in a specific historical and cultural context.</p>
+<h2 id="the-viz">The Viz</h2>
+<p><img src="http://danielmarcelino.github.io/img/2014/TVeffect.png" alt="Center" /></p>
 
-<h2 id="using-r-with-google-ngram-viewer">Using R with Google Ngram Viewer</h2>
+<p>A week of media exposition, made Haddad’s popular support increase in more than 5%; it is more than he could achieve in one year campaigning. Over 58 weeks before the ads season has commenced, he shows a weekly growth rate of about 2.6%. Nonetheless, in the next 5 weeks since the beginning of political advertising on radio and TV, the same growth rate went to 9.46%.</p>
+ ]]></content>
+  </entry>
+  
+  <entry>
+    <title>Got Bootstrap?</title>
+    <link rel="alternate" type="text/html" href="/blog/2013/got-bootstrap.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=GotBootstrap?" />
+    <published>2013-06-23T00:00:00Z</published>
+    <updated>2013-06-23T00:00:00-03:00</updated>
+    <id>/blog/2013/got-bootstrap</id>
+    <content type="html"><![CDATA[ <p>I read a book by Michael Chernick and Robert LaBudde, <a href="http://www.amazon.com/gp/product/0470467045/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;%23038;creative=390957&amp;%23038;creativeASIN=0470467045&amp;%23038;linkCode=as2&amp;%23038;tag=danielmarceli-20">An Introduction to Bootstrap Methods with Applications to R</a>. It’s an interesting <em>oeuvre</em> for useRs of all stripes. The book brings lots of examples of bootstrapping applications, such as standard errors, confidence intervals, hypothesis testing, and bootstrap applied for time-series analysis. The showcases in the book draw upon libraries like the <strong>boot</strong> by Angelo Canty and Brian Ripley, which is a great package. However, I’d love to find in the book more examples on “how to do my own bootstrap program” instead, so I decided to write down these lines. Before starting any code, it might be a good idea to refresh what exactly bootstrap is, and why it is so relevant for data analysis nowadays.</p>
 
-<p>There is a package to query the Google Ngram called <a href="https://cran.r-project.org/web/packages/ngramr/index.html">ngramr</a> written by Sean Carmody. With this package, one can retrieve data from Ngram pages in the form of data frame.</p>
+<p>The objective of bootstrapping is to provide an estimation of a parameter based on the data, such as standard deviation, mean, or median. The technique itself was introduced by Brad Efron in 1979. Third years before, however, Quenouille had introduced the jackknife method, and permutation tests were already described by Fisher in the early1930s. Hence, Efron’s resampling procedure build upon these pioneering methods and propose a simplification of them. Although, his original idea was a simple approximation of the jackknife method, depending on the context, computing a statistic from an estimator using bootstrap is as good as or even superior to jackknife method. Nonetheless, because the complexity to deal with big numbers $n^n$, for instance, a sample of size n=10 demands a huge computation: 10 billion, the bootstrapping—in practice—relies on Monte Carlo approximation rather than analytically computation.</p>
 
-<h2 id="getting-started">Getting Started</h2>
-<p>The first thing to do is to load the <code class="highlighter-rouge">ggplot2</code> and <code class="highlighter-rouge">ngramr</code> packages. In case you don’t have them installed, an installation is required.</p>
+<p>Indeed, bootstrapping is all about sampling randomly with replacement from the original data. Here is an example, suppose we have a sample of size n=4 and the observations are $X_1 = 7, X_2 = 5, X_3 = 4, X_4 = 8$ and that we want to estimate the mean. Then, the sample estimate of the population parameter is the sample mean: $(7+5+4+8)/4 = <strong>6.0</strong>$. The bootstrap sample is denoted by $X_1^<em>,X_2^</em>,X_3^<em>,X_4^</em>$. The sampling distribution with replacement from $F_n$ is called the bootstrap distribution, which—to be consistent—we denote the bootstrap estimate by $T(F_n^<em>)$. So, a bootstrap sample might be $X_1^</em> = 5,X_2^* = 8,X_3^* = 7,X_4^* = 7$, with estimate of $(5+8+7+7)/4 = <strong>6.75</strong>$.</p>
 
-<h2 id="write-a-query-and-do-the-plots">Write a Query and Do the Plots</h2>
+<p>Note that, although it is possible to get the original sample back, typically, some values get repeated one or more times and consequently others get omitted. In this simple bootstrap sample instance, the bootstrap estimate of the mean is given by $(5+8+7+7)/4 = <strong>6.75</strong>$, which differs slightly from the original sample mean estimate of 6.0. If we take another bootstrap sample, we may get yet another estimate that may differ from the previous one and the original sample, like in the next bootstrap sample: $X_1^* = 4,X_2^* = 8,X_4^* = 7,X_5^* = 4$. We get, in the case, two repeated observations at once, and the bootstrap estimate for the mean <strong>5.75</strong>.</p>
 
-<p>The following is equivalent to the chart above for the three sociologists bigrams, except that I’m applying a smoothed line–or moving average of 5 years, so trends become more apparent. For instance, the data shown for 2000 is an average of the raw count for 2000 plus 5 values on either side: (“count for 1995” + “count for 2000” + “count for 2005”), divided by 3. So a smoothing of 5 means that 11 values will be averaged: 5 on either side, plus the target value in the center of them.</p>
+<p>Despite the bootstrapping sounds complicated, the basic intuition is not. The bootstrap refers to a method that assigns values of accuracy of sample estimates by using resampling parcels of the original data. Therefore, it allows for inference about a population from a sample data [sample -&gt; population], which can be modeled by resampling the sample data and performing inference on [resample -&gt; sample]. In other words, all the bootstrap does is resample from a sampling distribution, and then estimate the desired statistic for the data parameter. The puzzle, nonetheless, is that as the population is unknown, the true error for a sample against its population is unknowable. Fortunately, by resampling with bootstrap, the ‘population’ becomes in fact the sample, and this is known. By following this logic: resampling the sample [resample -&gt; sample], the ‘true’ parameter is measurable.</p>
 
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">ng</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="s2">"(Karl Marx)"</span><span class="p">,</span> <span class="s2">"(Max Weber)"</span><span class="p">,</span> <span class="s2">"(Emile Durkheim)"</span><span class="p">)</span> 
-<span class="n">ggram</span><span class="p">(</span><span class="n">ng</span><span class="p">,</span> <span class="n">year_start</span> <span class="o">=</span> <span class="m">1800</span><span class="p">,</span> 
-      <span class="n">year_end</span> <span class="o">=</span> <span class="m">2012</span><span class="p">,</span>  
-      <span class="n">smoothing</span> <span class="o">=</span> <span class="m">5</span><span class="p">,</span>
-      <span class="n">google_theme</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">)</span> <span class="o">+</span>
-  <span class="n">ggtitle</span><span class="p">(</span><span class="s2">"Marx, Weber, Durkheim"</span><span class="p">)</span><span class="o">+</span>
-    <span class="n">theme_538</span><span class="p">(</span><span class="n">legend.position</span> <span class="o">=</span> <span class="s2">"bottom"</span><span class="p">)</span></code></pre></figure>
+<p>To apply the bootstrap, in the following example I’m going to use data (NLS-Y) from Griliches (1976) about the impact of years of schooling on individual revenues. These data are used in many econometric books, including one by Hayashi (2000), and are replicated in the SciencePo package, for educational reason, so you can easily get them by using the following commands:</p>
 
-<p><img src="http://danielmarcelino.github.io/images/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/sociologists-1.png" alt="center" /></p>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">require</span><span class="p">(</span><span class="s1">'SciencePo'</span><span class="p">))</span> <span class="n">install.packages</span><span class="p">(</span><span class="s1">'SciencePo'</span><span class="p">)</span>
+<span class="n">data</span><span class="p">(</span><span class="n">griliches76</span><span class="p">,</span> <span class="n">package</span><span class="o">=</span><span class="s2">"SciencePo"</span><span class="p">)</span>
+<span class="n">detail</span><span class="p">(</span><span class="n">griliches76</span><span class="p">)</span>
+<span class="n">summary</span><span class="p">(</span><span class="n">lm</span><span class="p">(</span><span class="n">lw</span><span class="o">~</span><span class="n">s</span><span class="o">+</span><span class="n">age</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">griliches76</span><span class="p">))</span></code></pre></figure>
 
-<h2 id="complex-queries">Complex Queries</h2>
+<p>To apply the bootstrap on the estimates, I used years of schooling “s” and IQ score “iq” to estimate the individual log wage rate “lw”—the dependent variable; therefore, the OLS equation is simply “lw = s + iq”. Which yield for the following statistics:</p>
 
-<p>I test the trend in popularity of the unigran “Capitalism” vis-à-vis other two unigrans (“Socialism”, “Communism”) from 1850 to 2012. Here’s how we might combine + and / to show how the unigram “Capitalism” has blossomed at the expense of “Socialism” and “Communism” terms in the literature published in English.</p>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">Call</span><span class="o">:</span>
+<span class="n">lm</span><span class="p">(</span><span class="n">formula</span> <span class="o">=</span> <span class="n">lw</span> <span class="o">~</span> <span class="n">s</span> <span class="o">+</span> <span class="n">iq</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">griliches76</span><span class="p">)</span>
 
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">ng</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="s2">"Capitalism /(Capitalism + Socialism + Communism)"</span><span class="p">)</span>
-<span class="n">cap</span> <span class="o">&lt;-</span> <span class="n">ggram</span><span class="p">(</span><span class="n">ng</span><span class="p">,</span> <span class="n">year_start</span> <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
-      <span class="n">year_end</span> <span class="o">=</span> <span class="m">2012</span><span class="p">,</span>  
-      <span class="n">smoothing</span> <span class="o">=</span> <span class="m">3</span><span class="p">,</span>
-      <span class="n">google_theme</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">)</span> <span class="o">+</span>
-  <span class="n">ggtitle</span><span class="p">(</span><span class="s2">"Capitalism over (Capitalism + Socialism + Communism)"</span><span class="p">)</span><span class="o">+</span>
-    <span class="n">theme_538</span><span class="p">()</span>
+<span class="n">Residuals</span><span class="o">:</span>
+    <span class="n">Min</span>      <span class="m">1</span><span class="n">Q</span>  <span class="n">Median</span>      <span class="m">3</span><span class="n">Q</span>     <span class="n">Max</span> 
+<span class="m">-1.2817</span> <span class="m">-0.2436</span>  <span class="m">0.0009</span>  <span class="m">0.2424</span>  <span class="m">1.1050</span> 
 
-<span class="n">ng</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="s2">"Socialism /(Capitalism + Socialism + Communism)"</span><span class="p">)</span>
-<span class="n">soc</span> <span class="o">&lt;-</span> <span class="n">ggram</span><span class="p">(</span><span class="n">ng</span><span class="p">,</span> <span class="n">year_start</span> <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
-      <span class="n">year_end</span> <span class="o">=</span> <span class="m">2012</span><span class="p">,</span>  
-      <span class="n">smoothing</span> <span class="o">=</span> <span class="m">3</span><span class="p">,</span>
-      <span class="n">google_theme</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">)</span> <span class="o">+</span>
-  <span class="n">ggtitle</span><span class="p">(</span><span class="s2">"Socialism over (Capitalism + Socialism + Communism)"</span><span class="p">)</span><span class="o">+</span>
-    <span class="n">theme_538</span><span class="p">()</span>
+<span class="n">Coefficients</span><span class="o">:</span>
+            <span class="n">Estimate</span> <span class="n">Std.</span> <span class="n">Error</span> <span class="n">t</span> <span class="n">value</span> <span class="n">Pr</span><span class="p">(</span><span class="o">&gt;|</span><span class="n">t</span><span class="o">|</span><span class="p">)</span>
+<span class="p">(</span><span class="n">Intercept</span><span class="p">)</span>  <span class="m">4.15573</span>    <span class="m">0.10810</span>   <span class="m">38.44</span>  <span class="o">&lt;</span> <span class="m">2e-16</span>
+<span class="n">s</span>            <span class="m">0.08470</span>    <span class="m">0.00699</span>   <span class="m">12.11</span>  <span class="o">&lt;</span> <span class="m">2e-16</span>
+<span class="n">iq</span>           <span class="m">0.00381</span>    <span class="m">0.00115</span>    <span class="m">3.32</span>  <span class="m">0.00093</span>
 
-<span class="n">ng</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="s2">"Communism /(Capitalism + Socialism + Communism)"</span><span class="p">)</span>
-<span class="n">com</span> <span class="o">&lt;-</span> <span class="n">ggram</span><span class="p">(</span><span class="n">ng</span><span class="p">,</span> <span class="n">year_start</span> <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
-      <span class="n">year_end</span> <span class="o">=</span> <span class="m">2012</span><span class="p">,</span>  
-      <span class="n">smoothing</span> <span class="o">=</span> <span class="m">3</span><span class="p">,</span>
-      <span class="n">google_theme</span> <span class="o">=</span> <span class="n">FALSE</span><span class="p">)</span> <span class="o">+</span>
-  <span class="n">ggtitle</span><span class="p">(</span><span class="s2">"Communism over (Capitalism + Socialism + Communism)"</span><span class="p">)</span><span class="o">+</span>
-    <span class="n">theme_538</span><span class="p">()</span>
-<span class="n">multiplot</span><span class="p">(</span><span class="n">cap</span><span class="p">,</span> <span class="n">soc</span><span class="p">,</span> <span class="n">com</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
-<span class="n">ggfootnote</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="m">.5</span><span class="p">)</span></code></pre></figure>
+<span class="n">Residual</span> <span class="n">standard</span> <span class="n">error</span><span class="o">:</span> <span class="m">0.369</span> <span class="n">on</span> <span class="m">755</span> <span class="n">degrees</span> <span class="n">of</span> <span class="n">freedom</span>
+<span class="n">Multiple</span> <span class="n">R</span><span class="o">-</span><span class="n">squared</span><span class="o">:</span>  <span class="m">0.264</span><span class="p">,</span>    <span class="n">Adjusted</span> <span class="n">R</span><span class="o">-</span><span class="n">squared</span><span class="o">:</span>  <span class="m">0.262</span> 
+<span class="n">F</span><span class="o">-</span><span class="n">statistic</span><span class="o">:</span>  <span class="m">135</span> <span class="n">on</span> <span class="m">2</span> <span class="n">and</span> <span class="m">755</span> <span class="n">DF</span><span class="p">,</span>  <span class="n">p</span><span class="o">-</span><span class="n">value</span><span class="o">:</span> <span class="o">&lt;</span><span class="m">2e-16</span></code></pre></figure>
 
-<p><img src="http://danielmarcelino.github.io/images/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/Capitalism Popularity-1.png" alt="center" /></p>
+<p>Based on these estimates, we can see that “s” has a standard error six times greater that of “iq” parameter. Now, for the sake of the doubt, let’s say you want to bootstrap the estimates and calculate the standard deviation of 10 thousands resamples on the fly. Because the standard deviation shows how much variation or dispersion exists from the average. A low standard deviation for the estimates (intercept, “s”, and “iq”) indicates that the data points tend to be very close to the mean.</p>
 
-<p>In the following, I retrieve the frequency for the unigram “Capitalism” in the Russian <em>corpus</em>, French, and British English. Note that the results can be case-insensitive variants.</p>
+<p>As you will learn, building such an exercise in R is incredible straightforward. First, you want to draw a function that takes data and the estimators for generating standard deviations for each variable. Second, you want to draw a function to bootstrap the standard deviation, as in the following.</p>
 
-<p>Below is a plot of the unigram “Capitalism” (“капитализм”) in the Russian language <em>corpus</em>.</p>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">myboot</span><span class="o">&lt;-</span><span class="k">function</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">stat</span><span class="p">,</span> <span class="n">nreps</span><span class="p">,</span> <span class="n">hist</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">)</span> <span class="p">{</span>
+<span class="n">estimates</span><span class="o">&lt;-</span><span class="n">get</span><span class="p">(</span><span class="n">stat</span><span class="p">)(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">len</span><span class="o">&lt;-</span><span class="n">length</span><span class="p">(</span><span class="n">estimates</span><span class="p">)</span> 
+<span class="n">container</span><span class="o">&lt;-</span><span class="n">matrix</span><span class="p">(</span><span class="n">NA</span><span class="p">,</span> <span class="n">ncol</span> <span class="o">=</span> <span class="n">len</span> <span class="p">,</span> <span class="n">nrow</span> <span class="o">=</span> <span class="n">nreps</span><span class="p">)</span> 
+<span class="n">nobs</span><span class="o">&lt;-</span><span class="n">nrow</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">1</span><span class="o">:</span><span class="n">nreps</span><span class="p">)</span> <span class="p">{</span> 
+<span class="n">posdraws</span><span class="o">&lt;-</span><span class="n">ceiling</span><span class="p">(</span><span class="n">runif</span><span class="p">(</span><span class="n">nobs</span><span class="p">)</span><span class="o">*</span><span class="n">nobs</span><span class="p">)</span>
+<span class="n">resample</span><span class="o">&lt;-</span><span class="n">data</span><span class="p">[</span><span class="n">posdraws</span><span class="p">,]</span> 
+<span class="n">container</span><span class="p">[</span><span class="n">i</span><span class="p">,]</span><span class="o">&lt;-</span><span class="n">get</span><span class="p">(</span><span class="n">stat</span><span class="p">)(</span><span class="n">resample</span><span class="p">)</span>
+<span class="p">}</span>
+  <span class="n">ads</span><span class="o">&lt;-</span><span class="n">apply</span><span class="p">(</span><span class="n">container</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="n">sd</span><span class="p">)</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">hist</span><span class="o">==</span><span class="n">T</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">mfrow</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">)</span>
+    <span class="n">frame</span><span class="p">()</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">len</span><span class="o">&lt;=</span> <span class="m">3</span><span class="p">)</span> <span class="n">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="n">len</span><span class="p">,</span><span class="m">1</span><span class="p">))</span>
+    <span class="k">if</span><span class="p">((</span><span class="n">len</span><span class="o">&gt;</span> <span class="m">3</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">len</span><span class="o">&lt;=</span> <span class="m">6</span><span class="p">))</span> <span class="n">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
+    <span class="k">for</span><span class="p">(</span><span class="n">j</span> <span class="k">in</span> <span class="m">1</span><span class="o">:</span><span class="n">len</span><span class="p">)</span> <span class="n">hist</span><span class="p">(</span><span class="n">container</span><span class="p">[,</span><span class="n">j</span><span class="p">],</span> 
+    <span class="n">main</span><span class="o">=</span><span class="n">paste</span><span class="p">(</span><span class="s2">"Estimates for "</span><span class="p">,</span> <span class="n">names</span><span class="p">(</span><span class="n">estimates</span><span class="p">)[</span><span class="n">j</span><span class="p">]),</span> <span class="n">xlab</span><span class="o">=</span><span class="s2">""</span><span class="p">)</span>
+  <span class="p">}</span>  
+  <span class="n">print</span><span class="p">(</span><span class="n">rbind</span><span class="p">(</span><span class="n">estimates</span><span class="p">,</span><span class="n">ads</span><span class="p">))</span>
+  <span class="k">return</span><span class="p">(</span><span class="n">list</span><span class="p">(</span><span class="n">estimation</span><span class="o">=</span><span class="n">container</span><span class="p">,</span> <span class="n">sds</span><span class="o">=</span><span class="n">sds</span><span class="p">))</span>
+<span class="p">}</span>
 
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">ng</span> <span class="o">&lt;-</span> <span class="s2">"капитализм"</span>
-<span class="n">rus</span><span class="o">=</span><span class="n">ggram</span><span class="p">(</span><span class="n">ng</span><span class="p">,</span> <span class="n">year_start</span> <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
-      <span class="n">corpus</span> <span class="o">=</span> <span class="s2">"rus_2012"</span><span class="p">,</span>
-      <span class="n">ignore_case</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">,</span> 
-      <span class="n">google_theme</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">)</span> <span class="o">+</span>
-    <span class="n">ggtitle</span><span class="p">(</span><span class="s2">"Russian: капитализм"</span><span class="p">)</span><span class="o">+</span>
-     <span class="n">theme_538</span><span class="p">()</span>
+<span class="c1">### 2 ###
+</span><span class="n">mod</span><span class="o">&lt;-</span><span class="k">function</span><span class="p">(</span><span class="n">griliches76</span><span class="p">)</span><span class="n">lm</span><span class="p">(</span><span class="n">lw</span><span class="o">~</span><span class="n">s</span><span class="o">+</span><span class="n">iq</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">griliches76</span><span class="p">)[[</span><span class="m">1</span><span class="p">]]</span>
 
-<span class="n">ng</span> <span class="o">&lt;-</span> <span class="s2">"capitalisme"</span>
-<span class="n">fre</span><span class="o">=</span><span class="n">ggram</span><span class="p">(</span><span class="n">ng</span><span class="p">,</span> <span class="n">year_start</span> <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
-      <span class="n">corpus</span> <span class="o">=</span> <span class="s2">"fre_2012"</span><span class="p">,</span>
-      <span class="n">ignore_case</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">,</span> 
-      <span class="n">google_theme</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">)</span> <span class="o">+</span>
-    <span class="n">ggtitle</span><span class="p">(</span><span class="s2">"French: Capitalisme"</span><span class="p">)</span><span class="o">+</span>
-     <span class="n">theme_538</span><span class="p">()</span>
+<span class="n">mod1.res</span><span class="o">&lt;-</span><span class="n">myboot</span><span class="p">(</span><span class="n">griliches76</span><span class="p">,</span> <span class="s2">"mod"</span><span class="p">,</span> <span class="m">10000</span><span class="p">,</span> <span class="n">hist</span><span class="o">=</span><span class="n">T</span><span class="p">)</span></code></pre></figure>
 
-<span class="n">ng</span> <span class="o">&lt;-</span> <span class="s2">"capitalism"</span>
-<span class="n">eng</span><span class="o">=</span><span class="n">ggram</span><span class="p">(</span><span class="n">ng</span><span class="p">,</span> <span class="n">year_start</span> <span class="o">=</span> <span class="m">1850</span><span class="p">,</span> 
-      <span class="n">corpus</span> <span class="o">=</span> <span class="s2">"eng_gb_2012"</span><span class="p">,</span>
-      <span class="n">ignore_case</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">,</span> 
-      <span class="n">google_theme</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">)</span> <span class="o">+</span>
-    <span class="n">ggtitle</span><span class="p">(</span><span class="s2">"English: Capitalism"</span><span class="p">)</span><span class="o">+</span>
-     <span class="n">theme_538</span><span class="p">()</span>
+<p>An annotated version of the program above can be found <a href="http://gist.github.com/danielmarcelino/5800912">here</a>.
+Having completed the bootstrap algorithm and the function to generate the standard deviation, you can finally perform the routine to get the results.</p>
 
-<span class="n">multiplot</span><span class="p">(</span><span class="n">rus</span><span class="p">,</span> <span class="n">fre</span><span class="p">,</span> <span class="n">eng</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
-<span class="n">ggfootnote</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="m">.5</span><span class="p">)</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">mod1</span> <span class="o">&lt;-</span> <span class="k">function</span><span class="p">(</span><span class="n">griliches76</span><span class="p">)</span><span class="n">lm</span><span class="p">(</span><span class="n">lw</span><span class="o">~</span><span class="n">s</span><span class="o">+</span><span class="n">iq</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">griliches76</span><span class="p">)[[</span><span class="m">1</span><span class="p">]]</span>
 
-<p><img src="http://danielmarcelino.github.io/images/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/capitalism-1.png" alt="center" /></p>
+<span class="n">mod1.sds</span> <span class="o">&lt;-</span> <span class="n">myboot</span><span class="p">(</span><span class="n">griliches76</span><span class="p">,</span> <span class="s2">"mod1"</span><span class="p">,</span> <span class="m">10000</span><span class="p">,</span> <span class="n">hist</span><span class="o">=</span><span class="n">TRUE</span><span class="p">)</span>
+
+         <span class="p">(</span><span class="n">Intercept</span><span class="p">)</span>      <span class="n">s</span>       <span class="n">iq</span>
+<span class="n">estimates</span>      <span class="m">4.1557</span> <span class="m">0.084696</span> <span class="m">0.003810</span>
+<span class="n">sds</span>            <span class="m">0.1123</span> <span class="m">0.007351</span> <span class="m">0.001159</span></code></pre></figure>
+
+<p>Not only the values displayed in the prompt are informative, but the histogram of the distribution. The above histogram tells us about the distribution of the bootstrap estimates. By comparing these estimates with those obtained from the naïve OLS, we can guarantee that the OLS estimates are rather robust, since they are contained in the distribution of standard deviations produced by 10 thousands sampling simulations.</p>
+
+<p><img src="http://danielmarcelino.github.io/img/2013/boot_histograms.jpeg" alt="Histograms" /></p>
+ ]]></content>
+  </entry>
+  
+  <entry>
+    <title>Parallel Processing: When does it worth?</title>
+    <link rel="alternate" type="text/html" href="/blog/2013/parallel-processing-when-does-it-worth.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=ParallelProcessing:Whendoesitworth?" />
+    <published>2013-05-29T00:00:00Z</published>
+    <updated>2013-05-29T00:00:00-03:00</updated>
+    <id>/blog/2013/parallel-processing-when-does-it-worth</id>
+    <content type="html"><![CDATA[ <p>Parallel computing is incredibly useful, but not every thing worths distribute across as many cores as possible.</p>
+
+<p>Most computers nowadays have few cores that incredibly help us with our daily computing duties. However, when statistical softwares do use parallelization for analyzing data faster? R, my preferred analytical software, does not take too much advantage of multicore processing by default.</p>
+
+<p>In fact, R has been inherently a “single-processor” package until nowadays. Stata, another decent statistical package, allows for multicore processing, but not yet implemented for the default version. Additionally, Stata versions for multicore are quite expensive, for instance, if I want to use all of my quad-core computer power, I have to pay out $1,095 for a 4-core single license.</p>
+
+<p>Fortunately, several packages exploiting the resources of parallel processing began to gain attention in the R community lately. Specially, because of many computationally demanding statistical procedures, such as bootstrapping and Markov Chain Monte Carlo, I guess. Nonetheless, the myth of fast computation has also leading for (miss)understanding by ordinary R users like me. Yet before distributing patches among CPUs, it is important to have it clear when and why parallel processing is helpful and which functions performs better for a given job.</p>
+
+<p>First, what does exactly parallel do? Despite its complex implementation, the idea is incredible simple: parallelization simply distribute the work among two or more cores. It is done by packages that provide backend for the “foreach” function to work. The foreach function allows R to distribute the processes, each of which having access to the same shared memory; so the computer not get confused. For instance, in the program bellow, several instances of lapply-like function are able to access the processing units and then deal out with all the work.</p>
+
+<p>Since not every task runs better in parallel there is not too many ready to use parallel processing functions in R. Additionally, distributing processes among the cores may cause computation overhead. That means we may lose computer time and memory, firstly by distributing, secondly by gathering the patches shared out among the processing units. Therefore, depending on the task (time and memory demand), parallel computing can be rather inefficient. It may take more time for dispatching the processes and gathering them back than the computation itself. Hence, counterintuitively, one might want to minimize the number of dispatches rather than distribute them.</p>
+
+<p><img src="http://danielmarcelino.github.io/img/2013/parallel.jpg" alt="Experiment Result" /></p>
+
+<p>Here, I’m testing a nontrivial computation instance for measuring computer performance on four relevant functions: the base <strong>lapply</strong>, <strong>mclapply</strong> from the “multicore“ package, <strong>parLapply</strong> from “snow” package, and <strong>sfLapply</strong> from “snowfall“ package. The last three functions essentially provide parallelized equivalent for the <code class="highlighter-rouge">lapply</code>. I use these packages for parallel computing the average for each column of a data frame built on the fly, but repeating this procedure 100 times for each data frame trial; so each trial demands different amount of time and memory for computing: the matrix size increases as 1K, 10K, 100K, 1M, and 10M rows. The program I used for simulate the data and perform all the tests can be found <a href="https://gist.github.com/danielmarcelino/5668701">here</a>. I used Emacs on a MacBook pro with 4-core and 8-G memory.</p>
+
+<p><img src="http://danielmarcelino.github.io/img/2013/parallelfinal.jpeg" alt="Final Results" /></p>
+
+<p>My initial experiment also included the “mpi.parLapply” function from the “Rmpi” package. However, because it is outdated for running on R version 3.0, I decided for not including it in this instance.</p>
+
+<p>Overall, running repetition tasks in parallel incurs overhead. Therefore, only if the process takes a significant amount of time and memory (RAM), parallelization can improve the overall performance.</p>
+
+<p>The plots above, provide evidence when an individual process takes less than a second (<code class="highlighter-rouge">2.650/100 = 26.5 milliseconds </code> comparable to <code class="highlighter-rouge">13.419/100 = 134.2 milliseconds</code>) to be executed, the overhead of continually patching processes will decay the overall performance. For instance, in the first chart, the lapply function took less than one-third of the time of <strong>sfLapply</strong> to perform the same job. However, the pattern changes dramatically when the computer needs to repeat the same task with large vectors (&gt;= 1 million rows).</p>
+
+<p>In fact, I noticed that all functions began to consume even more time computing  averages of big matrixes than I expected. But in a setting with 10 millions rows, the <strong>lapply</strong> function was dramatically inefficient: it took <code class="highlighter-rouge">1281.8/100 = 12.82 seconds</code> for each process, while the <strong>mclapply</strong> only took <code class="highlighter-rouge">525.4/100 = 5.254 seconds</code>.</p>
 
  ]]></content>
   </entry>
   
   <entry>
-    <title>Competing views on Argentina&#39;s Frontrunner</title>
-    <link rel="alternate" type="text/html" href="/blog/2015/competing-views-in-argentina.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=CompetingviewsonArgentina&#39;sFrontrunner" />
-    <published>2015-10-30T00:00:00Z</published>
-    <updated>2015-10-30T00:00:00+00:00</updated>
-    <id>/blog/2015/competing-views-in-argentina</id>
-    <content type="html"><![CDATA[ <p>The last poll published today by <em>Polldata</em> put Scioli below 40%, with about 5% reporting being undecided.<br />
-It might be too early to state anything solid, but the few polls prospecting the runoff election in Argentina seem to be telling two distinct histories. Polling houses <em>Hugo Haime</em> and <em>IPSOS</em> suggest that Daniel Scioli is going up while <em>Elypsis</em>  and <em>Polldata</em> say he’s actually sinking as the weeks go by. The last poll published today by <em>Polldata</em> puts Scioli below 40%, with about 5% reporting being undecided. My experience following  multiparty elections suggests that polls perform much better in the runoff than in primaries, meaning that the average of the polls now is much more close to the real vote preference than reported before.</p>
+    <title>Showing Explained Variance in Multilevel Models</title>
+    <link rel="alternate" type="text/html" href="/blog/2011/explaining-variance-in-a-multilevel-model.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=ShowingExplainedVarianceinMultilevelModels" />
+    <published>2011-10-03T00:00:00Z</published>
+    <updated>2011-10-03T00:00:00-03:00</updated>
+    <id>/blog/2011/explaining-variance-in-a-multilevel-model</id>
+    <content type="html"><![CDATA[ <p>In this post I will show one way to display explained variance using a line chart.</p>
 
-<p><img src="http://danielmarcelino.github.io/images/2015/Daniel_Scioli_Gross_lm.png" alt="" /></p>
+<p>For the best of my knowledge, there is no a default plot for displaying the effect of a factor on the deviance of multilevel models; so this is going to be a tentative for showing such a statistic in my ongoing dissertation.</p>
 
- ]]></content>
-  </entry>
-  
-  <entry>
-    <title>House Effects in Argentinian polling</title>
-    <link rel="alternate" type="text/html" href="/blog/2015/argentine-house-effects.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=HouseEffectsinArgentinianpolling" />
-    <published>2015-10-25T00:00:00Z</published>
-    <updated>2015-10-25T00:00:00+00:00</updated>
-    <id>/blog/2015/argentine-house-effects</id>
-    <content type="html"><![CDATA[ <p>I’ve already <a href="http://danielmarcelino.com/r/08-2015/Argentine-general-election-2015/">posted</a> previously on “house effects”, the tendency of polling organizations to systematically vary in their results from one another. In this post, I look specifically at these house effects, and show which polling organizations over or under-estimate support for each candidate–compared to the average–in this presidential election in Argentina.</p>
+<p>The following values were obtained using multilevel models performed in R (thanks for <code class="highlighter-rouge">nlme</code> and <code class="highlighter-rouge">lme4</code> packages).
+ Basically, this chart shows the declining variance for each level when each independent parameter is included in the model. You can find the full script below the chart.</p>
 
-<p>The graph below plots the house effects for the main presidential candidates considering more than 115 polls that I’ve collected since 2014.</p>
+<p><img src="http://danielmarcelino.github.io/img/2011/ResultadoVariancia.png" alt="Explained Variance" /></p>
 
-<p><img src="http://danielmarcelino.github.io/images/2015/3d-house-effects_argentine.png" alt="House Effects" /></p>
+<h3 id="graph-for-explained-variance">Graph for explained variance</h3>
 
-<p>In essence, the house effects measure how far polls by a pollster are from what would be expected based on trends over time for the average polling house. In other words, the average house effect toward each candidate/party is expected to be zero by design. Then, a poll that is systematically 2% below what would be predicted for the date the poll was conducted will have a house effect of -2.0%.</p>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># camera 2002
+</span><span class="n">df1</span><span class="o">&lt;-</span><span class="n">data.frame</span><span class="p">(</span><span class="n">level3</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0.5045094</span><span class="p">,</span><span class="m">0.1485807</span><span class="p">,</span> <span class="m">0.0494265</span><span class="p">),</span>
+<span class="n">level2</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">2.7814555</span><span class="p">,</span><span class="m">1.7936947</span><span class="p">,</span> <span class="m">1.6300276</span><span class="p">),</span>
+<span class="n">level1</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">3.7370482</span><span class="p">,</span> <span class="m">3.4816692</span><span class="p">,</span> <span class="m">3.4842407</span><span class="p">),</span>
+<span class="n">t</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">))</span>
+<span class="n">par</span><span class="p">(</span><span class="n">mfrow</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">2</span><span class="p">),</span> <span class="n">mar</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">4</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">4</span><span class="p">))</span><span class="c1">#Matrix
+</span><span class="n">plot</span><span class="p">(</span><span class="n">df1</span><span class="o">$</span><span class="n">level1</span> <span class="o">~</span> <span class="n">df1</span><span class="o">$</span><span class="n">t</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s2">"l"</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">4</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s2">"Variance"</span><span class="p">,</span>
+<span class="n">main</span><span class="o">=</span><span class="s2">"Câmara 2002"</span><span class="p">,</span> <span class="n">cex.main</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span>
+<span class="n">xlim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">2</span><span class="p">),</span> <span class="n">xaxt</span><span class="o">=</span><span class="s2">"n"</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">4</span><span class="p">))</span>
+<span class="n">axis</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">))</span><span class="c1">#to remaque axis
+</span><span class="n">lines</span><span class="p">(</span><span class="n">df1</span><span class="o">$</span><span class="n">level2</span> <span class="o">~</span> <span class="n">df1</span><span class="o">$</span><span class="n">t</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s2">"l"</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">4</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"blue"</span><span class="p">)</span>
+<span class="n">lines</span><span class="p">(</span><span class="n">df1</span><span class="o">$</span><span class="n">level3</span> <span class="o">~</span> <span class="n">df1</span><span class="o">$</span><span class="n">t</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s2">"l"</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">4</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"purple"</span><span class="p">)</span>
+<span class="n">text</span><span class="p">(</span><span class="n">locator</span><span class="p">(</span><span class="m">1</span><span class="p">),</span> <span class="n">expression</span><span class="p">(</span><span class="n">sigma</span><span class="o">^</span><span class="m">2</span><span class="p">))</span> <span class="c1">#need to click
+</span><span class="n">text</span><span class="p">(</span><span class="n">locator</span><span class="p">(</span><span class="m">1</span><span class="p">),</span> <span class="n">expression</span><span class="p">(</span><span class="n">tau</span><span class="p">[</span><span class="m">0</span><span class="p">][</span><span class="m">0</span><span class="p">]))</span> <span class="c1"># need to click to add the text
+</span><span class="n">text</span><span class="p">(</span><span class="n">locator</span><span class="p">(</span><span class="m">1</span><span class="p">),</span> <span class="n">expression</span><span class="p">(</span><span class="n">omega</span><span class="p">[</span><span class="m">0</span><span class="p">][</span><span class="m">0</span><span class="p">]))</span><span class="err">#</span> <span class="n">need</span> <span class="n">to</span> <span class="n">click</span> <span class="n">to</span> <span class="n">add</span> <span class="n">the</span> <span class="n">text</span></code></pre></figure>
 
-<p>The dots in “red” in the plot represent the pollster whose house effects were negative toward Mauricio Macri, while dots in “blue” represent positive effects toward him.</p>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># camera 2006
+</span><span class="n">df3</span><span class="o">&lt;-</span><span class="n">data.frame</span><span class="p">(</span><span class="n">level3</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0.2562132</span><span class="p">,</span><span class="m">0.07523431</span><span class="p">,</span> <span class="m">0.04434483</span><span class="p">),</span>
+<span class="n">level2</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">1.7604626</span> <span class="p">,</span><span class="m">1.2956322</span> <span class="p">,</span> <span class="m">1.08924671</span><span class="p">),</span>
+<span class="n">level1</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">2.2531888</span><span class="p">,</span> <span class="m">1.9952469</span> <span class="p">,</span> <span class="m">2.00465342</span><span class="p">),</span>
+<span class="n">t</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">))</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">df3</span><span class="o">$</span><span class="n">level1</span> <span class="o">~</span> <span class="n">df3</span><span class="o">$</span><span class="n">t</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s2">"l"</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">4</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s2">"Variance"</span><span class="p">,</span>
+<span class="n">main</span><span class="o">=</span><span class="s2">"Câmara 2006"</span><span class="p">,</span> <span class="n">cex.main</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span>
+<span class="n">xlim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">2</span><span class="p">),</span> <span class="n">xaxt</span><span class="o">=</span><span class="s2">"n"</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">3</span><span class="p">))</span>
+<span class="n">axis</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">))</span><span class="c1">#to remaque axis
+</span><span class="n">lines</span><span class="p">(</span><span class="n">df3</span><span class="o">$</span><span class="n">level2</span> <span class="o">~</span> <span class="n">df3</span><span class="o">$</span><span class="n">t</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s2">"l"</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">4</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"blue"</span><span class="p">)</span>
+<span class="n">lines</span><span class="p">(</span><span class="n">df3</span><span class="o">$</span><span class="n">level3</span> <span class="o">~</span> <span class="n">df3</span><span class="o">$</span><span class="n">t</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s2">"l"</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">4</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"purple"</span><span class="p">)</span>
+<span class="n">text</span><span class="p">(</span><span class="n">locator</span><span class="p">(</span><span class="m">1</span><span class="p">),</span> <span class="n">expression</span><span class="p">(</span><span class="n">sigma</span><span class="o">^</span><span class="m">2</span><span class="p">))</span> <span class="c1"># need to click to add the text
+</span><span class="n">text</span><span class="p">(</span><span class="n">locator</span><span class="p">(</span><span class="m">1</span><span class="p">),</span> <span class="n">expression</span><span class="p">(</span><span class="n">tau</span><span class="p">[</span><span class="m">0</span><span class="p">][</span><span class="m">0</span><span class="p">]))</span> <span class="c1"># need to click to add the text
+</span><span class="n">text</span><span class="p">(</span><span class="n">locator</span><span class="p">(</span><span class="m">1</span><span class="p">),</span> <span class="n">expression</span><span class="p">(</span><span class="n">omega</span><span class="p">[</span><span class="m">0</span><span class="p">][</span><span class="m">0</span><span class="p">]))</span> <span class="err">#</span> <span class="n">need</span> <span class="n">to</span> <span class="n">click</span> <span class="n">to</span> <span class="n">add</span> <span class="n">the</span> <span class="n">text</span></code></pre></figure>
 
-<p>The electoral result tonight was a bit of surprise as several pollsters didn’t seem to have pick out a crescendo preference for the opposition candidate, Mauricio Macri, among undecided voters over the last week. <a href="http://us3.campaign-archive1.com/?u=6b1e9fcb4df3eaee1cd635f50&amp;id=0e702eecac&amp;e=c2780c4e4b">This blog</a> has more details.</p>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># senado 2002
+</span><span class="n">df2</span><span class="o">&lt;-</span><span class="n">data.frame</span><span class="p">(</span><span class="n">level2</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">74.1874</span><span class="p">,</span><span class="m">50.21794</span><span class="p">,</span> <span class="m">39.31336</span><span class="p">),</span>
+<span class="n">level1</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">165.1340</span><span class="p">,</span> <span class="m">163.19076</span><span class="p">,</span> <span class="m">156.08912</span><span class="p">),</span>
+<span class="n">t</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">))</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">df2</span><span class="o">$</span><span class="n">level1</span> <span class="o">~</span> <span class="n">df2</span><span class="o">$</span><span class="n">t</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s2">"l"</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">4</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s2">"Variance"</span><span class="p">,</span>
+<span class="n">main</span><span class="o">=</span><span class="s2">"Senado 2002"</span><span class="p">,</span> <span class="n">cex.main</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span>
+<span class="n">xlim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">2</span><span class="p">),</span> <span class="n">xaxt</span><span class="o">=</span><span class="s2">"n"</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">30</span><span class="p">,</span><span class="m">170</span><span class="p">))</span>
+<span class="n">axis</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
+<span class="n">lines</span><span class="p">(</span><span class="n">df2</span><span class="o">$</span><span class="n">level2</span> <span class="o">~</span> <span class="n">df2</span><span class="o">$</span><span class="n">t</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s2">"l"</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">4</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"blue"</span><span class="p">)</span>
+<span class="n">text</span><span class="p">(</span><span class="n">locator</span><span class="p">(</span><span class="m">1</span><span class="p">),</span> <span class="n">expression</span><span class="p">(</span><span class="n">sigma</span><span class="o">^</span><span class="m">2</span><span class="p">))</span><span class="c1"># need to click to add the text
+</span><span class="n">text</span><span class="p">(</span><span class="n">locator</span><span class="p">(</span><span class="m">1</span><span class="p">),</span> <span class="n">expression</span><span class="p">(</span><span class="n">tau</span><span class="p">[</span><span class="m">0</span><span class="p">][</span><span class="m">0</span><span class="p">]))</span><span class="err">#</span> <span class="n">need</span> <span class="n">to</span> <span class="n">click</span> <span class="n">to</span> <span class="n">add</span> <span class="n">the</span> <span class="n">text</span></code></pre></figure>
 
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">scatterplot3d</span><span class="p">)</span>
-<span class="n">houseEffects</span><span class="o">$</span><span class="n">pcolor</span><span class="p">[</span><span class="n">houseEffects</span><span class="o">$</span><span class="n">Macri</span><span class="o">&lt;</span> <span class="m">0</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s2">"red"</span>
-<span class="n">houseEffects</span><span class="o">$</span><span class="n">pcolor</span><span class="p">[</span><span class="n">houseEffects</span><span class="o">$</span><span class="n">Macri</span><span class="o">&gt;=</span><span class="m">0</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="s2">"blue"</span>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1"># senado 2006
+</span><span class="n">df4</span><span class="o">&lt;-</span><span class="n">data.frame</span><span class="p">(</span><span class="n">level2</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">195.8233</span><span class="p">,</span> <span class="m">112.2718</span><span class="p">,</span> <span class="m">65.28095</span><span class="p">),</span>
+<span class="n">level1</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">292.0457</span><span class="p">,</span> <span class="m">270.1955</span><span class="p">,</span> <span class="m">250.65042</span><span class="p">),</span>
+<span class="n">t</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">))</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">df4</span><span class="o">$</span><span class="n">level1</span> <span class="o">~</span> <span class="n">df4</span><span class="o">$</span><span class="n">t</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s2">"l"</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">4</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s2">"Variance"</span><span class="p">,</span>
+<span class="n">main</span><span class="o">=</span><span class="s2">"Senado 2006"</span><span class="p">,</span> <span class="n">cex.main</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span>
+<span class="n">xlim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">2</span><span class="p">),</span> <span class="n">xaxt</span><span class="o">=</span><span class="s2">"n"</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">50</span><span class="p">,</span><span class="m">300</span><span class="p">))</span>
+<span class="n">axis</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="n">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
+<span class="n">lines</span><span class="p">(</span><span class="n">df4</span><span class="o">$</span><span class="n">level2</span> <span class="o">~</span> <span class="n">df4</span><span class="o">$</span><span class="n">t</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="s2">"l"</span><span class="p">,</span> <span class="n">lwd</span><span class="o">=</span><span class="m">4</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s2">"blue"</span><span class="p">)</span>
+<span class="n">text</span><span class="p">(</span><span class="n">locator</span><span class="p">(</span><span class="m">1</span><span class="p">),</span> <span class="n">expression</span><span class="p">(</span><span class="n">sigma</span><span class="o">^</span><span class="m">2</span><span class="p">))</span> <span class="c1"># need to click to add the text
+</span><span class="n">text</span><span class="p">(</span><span class="n">locator</span><span class="p">(</span><span class="m">1</span><span class="p">),</span> <span class="n">expression</span><span class="p">(</span><span class="n">tau</span><span class="p">[</span><span class="m">0</span><span class="p">][</span><span class="m">0</span><span class="p">]))</span> <span class="c1"># need to click to add the text
+</span>
+<span class="err">##</span><span class="n">End</span> <span class="n">not</span> <span class="n">run</span></code></pre></figure>
 
-<span class="n">with</span><span class="p">(</span><span class="n">houseEffects</span><span class="p">,</span> <span class="p">{</span>
-  <span class="n">s3d</span> <span class="o">&lt;-</span> <span class="n">scatterplot3d</span><span class="p">(</span><span class="n">Scioli</span><span class="p">,</span> <span class="n">Massa</span><span class="p">,</span> <span class="n">Macri</span><span class="p">,</span> <span class="c1"># x y and z axis
-</span>                       <span class="n">angle</span><span class="o">=</span><span class="m">30</span><span class="p">,</span> <span class="c1"># angle of the plot 
-</span>                       <span class="n">color</span><span class="o">=</span><span class="n">pcolor</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">19</span><span class="p">,</span> <span class="c1"># filled blue circles
-</span>                       <span class="n">type</span><span class="o">=</span><span class="s2">"h"</span><span class="p">,</span> <span class="c1"># vertical lines to the x-y plane
-</span>                       <span class="n">main</span><span class="o">=</span><span class="s2">"House Effects"</span><span class="p">,</span>
-                       <span class="n">xlab</span><span class="o">=</span><span class="s2">"Daniel Scioli"</span><span class="p">,</span>
-                       <span class="n">ylab</span><span class="o">=</span><span class="s2">"Sergio Massa"</span><span class="p">,</span>
-                       <span class="n">zlab</span><span class="o">=</span><span class="s2">"Mauricio Macri"</span><span class="p">)</span>
-
-  <span class="n">s3d.coords</span> <span class="o">&lt;-</span> <span class="n">s3d</span><span class="o">$</span><span class="n">xyz.convert</span><span class="p">(</span><span class="n">Scioli</span><span class="p">,</span> <span class="n">Massa</span><span class="p">,</span> <span class="n">Macri</span><span class="p">)</span> <span class="c1"># convert 3D coords to 2D projection
-</span>  <span class="n">text</span><span class="p">(</span><span class="n">s3d.coords</span><span class="o">$</span><span class="n">x</span><span class="p">,</span> <span class="n">s3d.coords</span><span class="o">$</span><span class="n">y</span><span class="p">,</span>  <span class="c1"># x and y coordinates
-</span>       <span class="n">labels</span><span class="o">=</span><span class="n">Pollster</span><span class="p">,</span>  <span class="c1"># text to plot
-</span>       <span class="n">cex</span><span class="o">=</span><span class="m">.5</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="m">4</span><span class="p">)</span> <span class="c1"># shrink text 50% and place to right of points)
-</span>  <span class="n">legend</span><span class="p">(</span><span class="s2">"topleft"</span><span class="p">,</span> <span class="n">inset</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="c1"># location and inset
-</span>         <span class="n">bty</span><span class="o">=</span><span class="s2">"n"</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">.7</span><span class="p">,</span>  <span class="c1"># suppress legend box, shrink text 70%
-</span>         <span class="n">title</span><span class="o">=</span><span class="s2">"House effects toward\nDaniel Scioli"</span><span class="p">,</span>
-         <span class="n">c</span><span class="p">(</span><span class="s2">"-"</span><span class="p">,</span> <span class="s2">"+"</span><span class="p">),</span> <span class="n">fill</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="s2">"red"</span><span class="p">,</span> <span class="s2">"blue"</span><span class="p">))</span>
-<span class="p">})</span></code></pre></figure>
-
- ]]></content>
-  </entry>
-  
-  <entry>
-    <title>Paranormal Distribution</title>
-    <link rel="alternate" type="text/html" href="/blog/2015/paranormal-distribution.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=ParanormalDistribution" />
-    <published>2015-10-20T00:00:00Z</published>
-    <updated>2015-10-20T00:00:00+00:00</updated>
-    <id>/blog/2015/paranormal-distribution</id>
-    <content type="html"><![CDATA[ <p>What if, instead of a normal, you got a paranormal distribution?<br />
-In case you want to read an influential paper on this matter, you can find it <a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2465539/">here</a>.</p>
-
-<p><img src="http://danielmarcelino.github.io/images/2015/paranormal.png" alt="Paranormal Distribution" /></p>
-
-<h4 id="load-packages-and-set-up-the-theme">Load packages and set up the theme</h4>
-
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
-<span class="n">library</span><span class="p">(</span><span class="n">gridExtra</span><span class="p">)</span>
-
-<span class="n">theme_old</span> <span class="o">&lt;-</span> <span class="n">theme</span><span class="p">(</span><span class="n">panel.grid.minor</span> <span class="o">=</span> <span class="n">element_blank</span><span class="p">(),</span>
-                   <span class="n">panel.grid.major</span> <span class="o">=</span> <span class="n">element_blank</span><span class="p">(),</span>
-                   <span class="n">panel.background</span> <span class="o">=</span> <span class="n">element_blank</span><span class="p">(),</span>
-                   <span class="n">plot.background</span> <span class="o">=</span> <span class="n">element_rect</span><span class="p">(</span><span class="n">fill</span><span class="o">=</span><span class="s2">"#F9F0Ea"</span><span class="p">),</span>
-                   <span class="n">panel.border</span> <span class="o">=</span>  <span class="n">element_blank</span><span class="p">(),</span>
-                   <span class="n">axis.line</span> <span class="o">=</span> <span class="n">element_blank</span><span class="p">(),</span>
-                   <span class="n">axis.text.x</span> <span class="o">=</span> <span class="n">element_blank</span><span class="p">(),</span>
-                   <span class="n">axis.text.y</span> <span class="o">=</span> <span class="n">element_text</span><span class="p">(</span><span class="n">colour</span><span class="o">=</span><span class="n">NA</span><span class="p">),</span>
-                   <span class="c1"># axis.text.y = element_blank(),
-</span>                   <span class="n">axis.ticks</span> <span class="o">=</span> <span class="n">element_blank</span><span class="p">(),</span>
-                   <span class="n">axis.title.x</span> <span class="o">=</span> <span class="n">element_blank</span><span class="p">(),</span>
-                   <span class="n">axis.title.y</span> <span class="o">=</span> <span class="n">element_blank</span><span class="p">(),</span>
-<span class="c1"># I'm using xkcd fonts, replace or install if you don't have it.
-</span>                   <span class="n">text</span> <span class="o">=</span> <span class="n">element_text</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">14</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="s2">"xkcd"</span><span class="p">),</span>
-                   <span class="n">axis.line</span> <span class="o">=</span> <span class="n">element_line</span><span class="p">(</span><span class="n">colour</span> <span class="o">=</span> <span class="s2">"black"</span><span class="p">,</span> <span class="n">linetype</span> <span class="o">=</span> <span class="s2">"solid"</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="m">1</span><span class="p">),</span>
-                   <span class="n">axis.line.y</span> <span class="o">=</span> <span class="n">element_blank</span><span class="p">(),</span>
-                   <span class="n">plot.title</span> <span class="o">=</span> <span class="n">element_text</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="m">22</span><span class="p">))</span></code></pre></figure>
-
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="c1">#### Make a "normal" normal distribution 
-</span><span class="n">gplot1</span> <span class="o">&lt;-</span> <span class="n">ggplot</span><span class="p">(</span><span class="n">data.frame</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span> <span class="m">3</span><span class="p">)),</span> <span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">+</span> <span class="n">stat_function</span><span class="p">(</span><span class="n">fun</span> <span class="o">=</span> <span class="n">dnorm</span><span class="p">)</span> <span class="o">+</span> <span class="n">labs</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s2">"Normal Distribution"</span><span class="p">)</span> <span class="o">+</span> <span class="n">theme_old</span></code></pre></figure>
-
-<h4 id="make-a-floating-dress-for-the-paranormal-distribution">Make a floating dress for the paranormal distribution</h4>
-
-<figure class="highlight"><pre><code class="language-r" data-lang="r"> 
-<span class="n">a</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="m">-3</span><span class="p">,</span> <span class="m">-1.5</span><span class="p">,</span> <span class="m">-0.9</span><span class="p">,</span> <span class="m">-0.3</span><span class="p">,</span> <span class="m">0.6</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1.5</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">)</span>
-<span class="n">b</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="m">0.004431848</span><span class="p">,</span> <span class="m">0.03</span><span class="p">,</span> <span class="m">0.0044</span><span class="p">,</span> <span class="m">0.03</span><span class="p">,</span> <span class="m">0.01</span><span class="p">,</span> <span class="m">0.030</span><span class="p">,</span> <span class="m">0.0044</span><span class="p">,</span> <span class="m">0.015</span><span class="p">,</span> <span class="m">0.004431848</span><span class="p">)</span>
-
-<span class="n">data</span> <span class="o">&lt;-</span> <span class="n">data.frame</span><span class="p">(</span><span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">)</span>
-<span class="n">c</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="m">-0.40</span><span class="p">,</span> <span class="m">0.04</span><span class="p">)</span>
-<span class="n">d</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="m">0.27</span><span class="p">,</span> <span class="m">0.27</span><span class="p">)</span>
-<span class="n">data2</span> <span class="o">&lt;-</span> <span class="n">data.frame</span><span class="p">(</span><span class="n">c</span> <span class="o">=</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">d</span><span class="p">)</span></code></pre></figure>
-
-<h4 id="plot-paranormal-distribution">Plot paranormal distribution</h4>
-
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">gplot2</span> <span class="o">&lt;-</span> <span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">b</span><span class="p">))</span> <span class="o">+</span> <span class="n">geom_line</span><span class="p">()</span>
-<span class="n">gplot2</span> <span class="o">&lt;-</span> <span class="n">gplot2</span> <span class="o">+</span> <span class="n">stat_function</span><span class="p">(</span><span class="n">fun</span> <span class="o">=</span> <span class="n">dnorm</span><span class="p">)</span> <span class="o">+</span>
-  <span class="n">geom_point</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">data2</span><span class="p">,</span> <span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">c</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">d</span><span class="p">),</span> <span class="n">pch</span><span class="o">=</span><span class="mh">0x30</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="m">6</span><span class="p">)</span> <span class="o">+</span>
-  <span class="n">geom_point</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">data2</span><span class="p">,</span> <span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">c</span><span class="m">-0.008</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">d</span><span class="m">-0.006</span><span class="p">),</span> <span class="n">pch</span><span class="o">=</span><span class="m">19</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="m">1</span><span class="p">)</span> <span class="o">+</span>
-  <span class="n">labs</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s2">"Paranormal Distribution"</span><span class="p">)</span> <span class="o">+</span> <span class="n">theme_old</span></code></pre></figure>
-
-<h4 id="put-them-together">Put them together</h4>
-
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">grid.arrange</span><span class="p">(</span><span class="n">gplot1</span><span class="p">,</span> <span class="n">gplot2</span><span class="p">)</span></code></pre></figure>
  ]]></content>
   </entry>
   

@@ -101,4 +101,4 @@ sds            0.1123 0.007351 0.001159
 
 Not only the values displayed in the prompt are informative, but the histogram of the distribution. The above histogram tells us about the distribution of the bootstrap estimates. By comparing these estimates with those obtained from the naïve OLS, we can guarantee that the OLS estimates are rather robust, since they are contained in the distribution of standard deviations produced by 10 thousands sampling simulations.
 
-![Histograms]({{ site.url }}/images/2013/boot_histograms.jpeg)
+![Histograms]({{ site.url }}/img/2013/boot_histograms.jpeg)

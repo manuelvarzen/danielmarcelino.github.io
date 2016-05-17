@@ -1,322 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <meta name="keywords" content="Daniel Marcelino, SciencesPo, SoundexBR, r-project, r, political science, political behavior, social sciences, statistics, methods, applied methods, programming, data mining, data visualization, datascience, big data"/>	
-	<meta name="google-site-verification" content="Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ" />
-	<meta name="bing_webmastertools_id" content="97837256955BD270FD688E2B50F89FDB" />
-    <meta name="author" content="Daniel Marcelino" />
-	 <meta name="title" content="&middot; Daniel &middot; A Bit More Fragmented" />
-	 
-	   <!-- favicon -->
-	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
-	
-	
-  
-<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
-  <!-- MathJax configuration -->
-  <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-      tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-          processEscapes: true,
-          processEnvironments: true
-      },
-      TeX: {
-          equationNumbers: { autoNumber: "AMS" }
-      },
-      // Center justify equations in code and markdown cells. Elsewhere
-      // we use CSS to left justify single line equations in code cells.
-      displayAlign: 'center',
-      "HTML-CSS": {
-          styles: {'.MathJax_Display': {"margin": 0}},
-          linebreaks: { automatic: false },
-          scale: 100
-      }
-  });
-  </script>
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
 
+<head>
 
-  
-    
-      <link rel="stylesheet" href="/css/bootstrap.min.css" />
-    
-      <link rel="stylesheet" href="/css/main.css" />
-    
-  
-  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Blog of Daniel Marcelino">
 
-  
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
-  
+    <title>A Bit More Fragmented - EnfoRced Data Analysis</title>
 
+    <link rel="canonical" href="http://danielmarcelino.github.io/blog/2014/A-bit-more-fragmented.html">
 
-  
-    
-      <link rel="stylesheet" href="/js/jquery-1.11.2.min.js" />
-    
-      <link rel="stylesheet" href="/js/bootstrap.min.js" />
-    
-      <link rel="stylesheet" href="/js/main.js" />
-    
-  
-    
-  
-  
- <title>EnfoRced Data Analysis</title>
-   
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
 
-  
-  
-  
-  <link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis - Blog of Daniel Marcelino" href="/feed.xml" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/clean-blog.css">
 
-    
-  
-  
-  
-  
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
 
-    
-  
-  
-  
-  
-  
-  <!-- Facebook OpenGraph tags -->
-  
-  <meta property="og:title" content="A Bit More Fragmented" />
-  
-  
-  <meta property="og:type" content="website" />
-  
-  
-  <meta property="og:url" content="http://danielmarcelino.github.io/blog/2014/A-bit-more-fragmented.html/" />
-  
-  
-  
-  <meta property="og:image" content="http://danielmarcelino.github.io/images/daniel_rio.jpg" />
-  
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link type="application/atom+xml" rel="alternate" href="http://danielmarcelino.github.io/feed.xml" title="EnfoRced Data Analysis" />
 
 </head>
 
 
-  <body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="http://danielmarcelino.github.io">EnfoRced Data Analysis</a>
-    </div>
+  ga('create', 'UA-24186657-1', 'danielmarcelino.github.io');
+  ga('send', 'pageview');
 
-    <div class="collapse navbar-collapse" id="main-navbar">
-      <ul class="nav navbar-nav navbar-right">
-	    
-        <li>
-		  <a href="/blog">Blog</a>
-		</li>
-		
-        <li>
-		  <a href="/interests">Interests</a>
-		</li>
-		
-        <li>
-		  <a href="/randomwalks">Random Walks</a>
-		</li>
-		
-        <li>
-		  <a href="/about">About</a>
-		</li>
-		
-		
-		
-		<li>
-		  <a href="/search" class="nav-search-link" title="Search">
-		    <span class="fa fa-search nav-search-icon"></span>
-			<span class="nav-search-text">Search</span>
-		  </a>
-		</li>
-		
-      </ul>
-    </div>
-	
-	
-	<div class="avatar-container">
-	  <div class="avatar-img-border">
-	    <a href="http://danielmarcelino.github.io ">
-	      <img class="avatar-img" src="/images/daniel_rio.jpg" />
-		</a>
-	  </div>
-	</div>
-	
-	
-  </div>
-</nav>  
+</script>
 
-    <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <meta name="keywords" content="Daniel Marcelino, SciencesPo, SoundexBR, r-project, r, political science, political behavior, social sciences, statistics, methods, applied methods, programming, data mining, data visualization, datascience, big data"/>	
-	<meta name="google-site-verification" content="Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ" />
-	<meta name="bing_webmastertools_id" content="97837256955BD270FD688E2B50F89FDB" />
-    <meta name="author" content="Daniel Marcelino" />
-	 <meta name="title" content="&middot; Daniel &middot; A Bit More Fragmented" />
-	 
-	   <!-- favicon -->
-	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
-	
-	
-  
-<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
-  <!-- MathJax configuration -->
-  <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-      tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-          processEscapes: true,
-          processEnvironments: true
-      },
-      TeX: {
-          equationNumbers: { autoNumber: "AMS" }
-      },
-      // Center justify equations in code and markdown cells. Elsewhere
-      // we use CSS to left justify single line equations in code cells.
-      displayAlign: 'center',
-      "HTML-CSS": {
-          styles: {'.MathJax_Display': {"margin": 0}},
-          linebreaks: { automatic: false },
-          scale: 100
-      }
-  });
-  </script>
+<body>
 
-
-  
-    
-      <link rel="stylesheet" href="/css/bootstrap.min.css" />
-    
-      <link rel="stylesheet" href="/css/main.css" />
-    
-  
-  
-
-  
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
-  
-
-
-  
-    
-      <link rel="stylesheet" href="/js/jquery-1.11.2.min.js" />
-    
-      <link rel="stylesheet" href="/js/bootstrap.min.js" />
-    
-      <link rel="stylesheet" href="/js/main.js" />
-    
-  
-    
-  
-  
- <title>EnfoRced Data Analysis</title>
-   
-
-  
-  
-  
-  <link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis - Blog of Daniel Marcelino" href="/feed.xml" />
-
-    
-  
-  
-  
-  
-
-    
-  
-  
-  
-  
-  
-  <!-- Facebook OpenGraph tags -->
-  
-  <meta property="og:title" content="A Bit More Fragmented" />
-  
-  
-  <meta property="og:type" content="website" />
-  
-  
-  <meta property="og:url" content="http://danielmarcelino.github.io/blog/2014/A-bit-more-fragmented.html/" />
-  
-  
-  
-  <meta property="og:image" content="http://danielmarcelino.github.io/images/daniel_rio.jpg" />
-  
-
-</head>
-
-
-
-
-
-<header class="header-section ">
-
-<div class="intro-header no-img">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div class="post-heading">
-          <h1>A Bit More Fragmented</h1>
-		  
-		  
-		  
-		  <span class="post-meta">Posted on October 6, 2014</span>
-		  
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!-- <a class="navbar-brand" href="/">EnfoRced Data Analysis</a> -->
         </div>
-      </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                <li>
+                    <a href="/blog/">Blog</a>
+                </li>
+                <li>
+                    <a href="/interests/">Interests</a>
+                </li>
+                <li>
+                    <a href="/randomwalks/">Random Walks</a>
+                </li>
+                  <li>
+                    <a href="/about/">About</a>
+                </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
     </div>
-  </div>
-</div>
+    <!-- /.container -->
+</nav>
+
+
+    <script language="javascript">
+    function typeset() {
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+    }
+
+    function disqus_config() {
+        this.callbacks.onNewComment = [typeset];
+        this.callbacks.onInit = [typeset];
+    }
+
+
+    if(window.MathJax===undefined){
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src  = "http://cdn.mathjax.org/mathjax/latest/MathJax.js";
+        var config = 'MathJax.Hub.Config({' +
+                    'extensions: ["tex2jax.js"],' +
+                    'tex2jax: { inlineMath: [ ["$","$"]], displayMath: [["\$$","\$$"]], processEscapes: true },' +
+                    'jax: ["input/TeX","output/HTML-CSS"]' +
+                    '});' +
+                    'MathJax.Hub.Startup.onload();';
+        if (window.opera)
+            script.innerHTML = config;
+        else
+            script.text = config;
+        document.getElementsByTagName("head")[0].appendChild(script);
+    }
+</script>
+
+<!-- Post Header -->
+<header class="intro-header" style="background-image: url('/img/website/kombi.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>A Bit More Fragmented</h1>
+                    
+                    <span class="meta">Posted by EnfoRced Data Analysis on October 6, 2014</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </header>
 
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
+				<p>The 2014 election gave rise to an even more fragmented lower house in Brazil. This is important because higher values of political fragmentation suggest a less stable political environment in comparison with previous years.</p>
 
-
-
-<div class="container">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      <article role="main" class="blog-post">
-	    <p>The 2014 election gave rise to an even more fragmented lower house in Brazil. This is important because higher values of political fragmentation suggest a less stable political environment in comparison with previous years.</p>
-
-<p><img src="http://danielmarcelino.github.io/images/2014/EffectiveNumberParties.png" alt="The Golosov effective number of parties" /></p>
+<p><img src="http://danielmarcelino.github.io/img/2014/EffectiveNumberParties.png" alt="The Golosov effective number of parties" /></p>
 
 <h2 id="the-2014-legislative-election">The 2014 legislative election</h2>
-<p>This year, the election gave rise to an even more fragmented lower house. The way political scientists measure how fragmented is a political system is by applying one of the several formulas for calculating the <em>Effective Number of Parties</em>. The <em>Effective Number of Parties</em> is a statistic that helps researchers to go beyond the simple (absolute) count of the number of parties for further analysis. A widely accepted formula was proposed by M. <a href="http://cps.sagepub.com/content/12/1/3.extract">Laakso and R. Taagepera<br />
+<p>This year, the election gave rise to an even more fragmented lower house. The way political scientists measure how fragmented is a political system is by applying one of the several formulas for calculating the <em>Effective Number of Parties</em>. The <em>Effective Number of Parties</em> is a statistic that helps researchers to go beyond the simple (absolute) count of the number of parties for further analysis. A widely accepted formula was proposed by M. <a href="http://cps.sagepub.com/content/12/1/3.extract">Laakso and R. Taagepera
  (1979)</a>:</p>
 
-<p>\[ N =\frac{1}{\sum_{i=1}^{n}p_{i}^{2}} \]</p>
+<script type="math/tex; mode=display">N =\frac{1}{\sum_{i=1}^{n}p_{i}^{2}}</script>
 
 <p>where N denotes the effective number of parties and p_i denotes the $i^{th}$ party’s fraction of the seats. The problem with this method is that it produces distortions, particularly for small parties.</p>
 
 <p>Few years ago, <a href="http://ppq.sagepub.com/content/16/2/171.abstract">Grigorii Golosov (2010)</a> suggested a new formula for estimating the effective number of parties in which both larger and smaller parties are not attributed unrealistic scores as produced by the Laakso—Taagepera index above. Golosov’s formula can be expressed as:</p>
 
-<p>\[ N = \sum_{i=1}^{n}\frac{p_{i}}{p_{i}+p{i}^{2}-p_{i}^{2}} \]</p>
+<script type="math/tex; mode=display">N = \sum_{i=1}^{n}\frac{p_{i}}{p_{i}+p{i}^{2}-p_{i}^{2}}</script>
 
-<p>To compare the evolution in the effective number of parties between ~~2002~~ 1986 to 2014 in the Brazilian lower house, I programed a small function which computes some of the most standard political diversity measures, including the <a href="http://ppq.sagepub.com/content/16/2/171.abstract">Golosov (2010)</a>’s formula above. The function is part of the <a href="https://cran.r-project.org/web/packages/SciencesPo/index.html">SciencesPo</a> R package. For a more complete overview of the methods performed by the package, refer to this <a href="https://cran.r-project.org/web/packages/SciencesPo/vignettes/Indices.html">vignette</a>.</p>
+<p>To compare the evolution in the effective number of parties between <del>2002</del> 1986 to 2014 in the Brazilian lower house, I programed a small function which computes some of the most standard political diversity measures, including the <a href="http://ppq.sagepub.com/content/16/2/171.abstract">Golosov (2010)</a>’s formula above. The function is part of the <a href="https://cran.r-project.org/web/packages/SciencesPo/index.html">SciencesPo</a> R package. For a more complete overview of the indices performed by the package, refer to this <a href="https://cran.r-project.org/web/packages/SciencesPo/vignettes/Indices.html">vignette</a>.</p>
 
-<p>The results displayed below and summarized in the plot above, suggest the effective number of parties had a considerable upward shift between 2010 to 2014, from 10.5 to 14.5 in the Golosov’s scale. The results using the more standard method by Laakso and Taagepera are also displayed for quick comparison.</p>
+<p>The results displayed below and summarized in the plot at the top of this post, indicate the effective number of parties had a considerable upward shift between 2010 to 2014, moving from 10.5 to 14.5 using the Golosov’s scale or from 10.4 to 13.1 using the more standard method by Laakso and Taagepera.</p>
 
 <h4 id="sample-of-data">Sample of data</h4>
 
@@ -339,175 +185,96 @@
 
 <h4 id="compute-the-indices">Compute the indices</h4>
 
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="o">&gt;</span> <span class="n">politicalDiversity</span><span class="p">(</span><span class="n">seats_2010</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span> <span class="s2">"laakso/taagepera"</span><span class="p">)</span>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">PoliticalDiversity</span><span class="p">(</span><span class="n">seats_2010</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span> <span class="s2">"laakso/taagepera"</span><span class="p">)</span>
 <span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="m">10.369</span>
 
-<span class="o">&gt;</span> <span class="n">politicalDiversity</span><span class="p">(</span><span class="n">seats_2010</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span> <span class="s2">"golosov"</span><span class="p">)</span>
+<span class="n">PoliticalDiversity</span><span class="p">(</span><span class="n">seats_2010</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span> <span class="s2">"golosov"</span><span class="p">)</span>
 <span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="m">10.511</span>
 
-<span class="o">&gt;</span> <span class="n">politicalDiversity</span><span class="p">(</span><span class="n">seats_2014</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span> <span class="s2">"laakso/taagepera"</span><span class="p">)</span>
+<span class="n">PoliticalDiversity</span><span class="p">(</span><span class="n">seats_2014</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span> <span class="s2">"laakso/taagepera"</span><span class="p">)</span>
 <span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="m">13.064</span>
-<span class="o">&gt;</span> 
-<span class="o">&gt;</span> <span class="n">politicalDiversity</span><span class="p">(</span><span class="n">seats_2014</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span> <span class="s2">"golosov"</span><span class="p">)</span>
+ 
+<span class="n">PoliticalDiversity</span><span class="p">(</span><span class="n">seats_2014</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span> <span class="s2">"golosov"</span><span class="p">)</span>
 <span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="m">14.472</span></code></pre></figure>
 
 <h3 id="update">Update</h3>
-<p>After I published this post, I realized that it would be nicer to extend the series of election as well as compare the two indices in the plot above; so I updated the plot afterwards. The results may differ from other scholars because differences in the number provided. Some uses the <em>actual outcome</em> of the election, as I did, others prefer to use the number of representatives that actually <em>entered</em> in the office.</p>
-
-	  </article>
-	  
-	  
-	  <div class="blog-tags">
-		Tags: R
-	  </div>
-	  
-	  
-      <ul class="pager blog-pager">
-        
-        <li class="previous">
-          <a href="/blog/2014/yep-he-made-it-country-voted-no.html" data-toggle="tooltip" data-placement="top" title="Yep. He made it; country voted No">&larr; Previous Post</a>
-        </li>
-        
-        
-        <li class="next">
-          <a href="/blog/2014/Runoff-in-Uruguay-FA-is-expected-to-win-a-third-mandate.html" data-toggle="tooltip" data-placement="top" title="Runoff in Uruguay: FA is expected to win a third mandate">Next Post &rarr;</a>
-        </li>
-        
-      </ul>
-
-      
-        <div class="share-section">
-  <h3 class="share-title">Liked what you read? Don't be selfish!</h3>
-  <div class="share-buttons">
-    
-    
-    
-    
-
-    
-    
-    
-    
-    <a href="http://danielmarcelino.github.io/contact" data-ga-event=1 data-ga-category="share" data-ga-action="message" data-ga-label="/blog/2014/A-bit-more-fragmented.html">
-      Let me know
-    </a>
-    <a href="https://www.facebook.com/dialog/feed?app_id=1529566150689415&link=http://danielmarcelino.github.io/blog/2014/A-bit-more-fragmented.html&name=A Bit More Fragmented&caption=&redirect_uri=http://danielmarcelino.github.io/blog/2014/A-bit-more-fragmented.html?message=Thanks for sharing!" data-ga-event=1 data-ga-category="share" data-ga-action="facebook" data-ga-label="/blog/2014/A-bit-more-fragmented.html">
-      Share on Facebook
-    </a>
-    <a href="https://twitter.com/intent/tweet?url=http://danielmarcelino.github.io/blog/2014/A-bit-more-fragmented.html&via=daniel&text=A Bit More Fragmented" data-ga-event=1 data-ga-category="share" data-ga-action="twitter" data-ga-label="/blog/2014/A-bit-more-fragmented.html">
-      Tweet it
-    </a>
-  </div>
-</div>
-
-      
-
-	  
-      <div class="disqus-comments">
-	    
-<div class="comments">
-	<div id="disqus_thread"></div>
-	<script type="text/javascript">
-	    var disqus_shortname = 'daniel-marcelino';
-	    // ensure that pages with query string get the same discussion
-            var url_parts = window.location.href.split("?");
-            var disqus_url = url_parts[0];
-
-	    (function() {
-	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-	    })();
-	</script>
-	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
+<p>After I published this post, I realized it would be nicer to extend the election series as well as compare the two indices mentioned above. So, I did update the original plot, which contained only values computed under the Golosov’s method. Also notice that the results may differ from other scholars because the overall sum of votes used or the number of elected candidates may be different. Some may use the <em>actual outcome</em> of the election, as I did, others may use the number of representatives that actually entered the office after any recounting or judicial decisions.</p>
 
 
-      </div>
-	  
+                <hr>
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/blog/2014/discontinuity-bayesian-forecasting.html" data-toggle="tooltip" data-placement="top" title="Discontinuity Bayesian Forecasting">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/blog/2015/venezuelan-parliamentary-election-2015.html" data-toggle="tooltip" data-placement="top" title="Venezuela's 2015 Parliamentary Elections">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+            </div>
+        </div>
     </div>
-  </div>
-</div>
+</article>
+
+<hr>
 
 
-    <footer>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <ul class="list-inline text-center footer-links">
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://twitter.com/dmarcelinobr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="https://github.com/danielmarcelino">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+		            
 
-          
-          <li>
-            <a href="mailto:dmarcelino@live.com?subject=Hello from " title="Email me">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
-          
-
-          
-          <li>
-            <a href="https://github.com/danielmarcelino/" title="GitHub">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
-          
-
-          
-          <li>
-            <a href="https://twitter.com/dmarcelinobr" title="Twitter">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
-          
-
-          
-
-          
-          <li>
-            <a href="https://stackoverflow.com/users/792000/daniel" title="StackOverflow">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
-          
-
-          
-          <li>
-            <a href="https://linkedin.com/daniel-marcelino-80968656" title="LinkedIn">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
-          
-
-          
-          <li>
-            <a href="/feed.xml" title="Subscribe to my blog">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>		
-          
-
-        </ul>
-
-<p class="syndicated text-center footer-links">
-Some contents of this blog is also contributed to <a href="http://www.r-bloggers.com">R-Bloggers</a> and <a href="http://www.statsblogs.com">Statsblogs</a> 
+		            
+                    
+                    <li>
+                        <a href="mailto:dmarcelino@live.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="syndicated text-center footer-links">
+                 Some contents of this blog is also contributed to <a href="http://www.r-bloggers.com">R-Bloggers</a> and <a href="http://www.statsblogs.com">Statsblogs</a> 
 <br/>
 </p>
         <p class="copyright text-muted">
@@ -517,32 +284,21 @@ Some contents of this blog is also contributed to <a href="http://www.r-bloggers
 &nbsp;&bull;&nbsp;
 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">(CC) BY-NC-SA</a>
         </p>
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </footer>
 
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
 
-    
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
 
-
-
-
-
-
-
-
-	<!-- Google Analytics -->
-	<script>
-		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-		ga('create', 'UA-24186657-1', 'auto');
-		ga('send', 'pageview');
-	</script>
-	<!-- End Google Analytics -->
+<!-- Custom Theme JavaScript -->
+<script src="/js/clean-blog.min.js "></script>
 
 
-  </body>
+</body>
+
 </html>

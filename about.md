@@ -1,12 +1,13 @@
 ---
 layout: page
+title: About Me, and this Website
 permalink: /about/
+header-img: "img/website/leaf_header.jpg"
 ---
 
-<img src="{{ site.baseurl }}/images/avatar.jpg" style="float: right; width: 30%; margin-right: 1%; margin-bottom: 3em; margin-left: 0.5em">
+<img src="{{ site.baseurl }}/img/avatar.jpg" style="float: right; width: 30%; margin-right: 1%; margin-bottom: 3em; margin-left: 0.5em">
 
-## About Me, and this Website
-I have been studying and programming in topics related to applied social sciences for years. As I do love to work with open source tools and learn from others, I created this space where I try to declutter some of my ideas and put my projects in order.
+**I** have been studying and programming in topics related to applied social sciences for years. As I do love to work with open source tools and learn from others, I created this space where I try to declutter some of my ideas and put my projects in order.
 I write here mainly about methods, data visualization, and how **R** programming can be an asset in political science research; mostly in English (or sort of), sometimes in Portuguese as the demand grows.
 A posting only happens after many iterations and refinements, during days and nights in front of a computer often fueled by dozens of cups of coffee and tea. If you find any joy and value in it, please consider supporting me. You can help me get useful resources from my <a href="http://amzn.com/w/2CCCV54KPGIA2" target="_blank">**wish list**</a>.
 

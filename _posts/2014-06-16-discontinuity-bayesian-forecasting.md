@@ -18,7 +18,7 @@ I'm finalizing a paper presentation for the ABCP meeting, where I do explore poo
  In order to account for the advertising effect on the popular support, I had to develop an extension where the transition component--the random walk--breaks at the last poll before the ads season began, and restarting with the first poll after it, but with a catch-up of the vote preference change. The following chart says more about the problem. The black spots are the observed polls by the major pollsters.
 
 ## The Viz
-![Center]({{ site.url }}/images/2014/TVeffect.png)
+![Center]({{ site.url }}/img/2014/TVeffect.png)
 
 
 A week of media exposition, made Haddad's popular support increase in more than 5%; it is more than he could achieve in one year campaigning. Over 58 weeks before the ads season has commenced, he shows a weekly growth rate of about 2.6%. Nonetheless, in the next 5 weeks since the beginning of political advertising on radio and TV, the same growth rate went to 9.46%.

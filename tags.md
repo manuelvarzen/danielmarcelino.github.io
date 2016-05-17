@@ -2,6 +2,7 @@
 layout: page
 title: Tags
 permalink: /tags/
+header-img: ""
 ---
 
 {% capture tags %}

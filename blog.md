@@ -3,6 +3,7 @@ layout: page
 title: Blog Posts
 css: "/css/index.css"
 permalink: /blog/
+header-img: "img/website/blogheader.png"
 ---
 
 <ul class="posts">

@@ -1,7 +1,8 @@
 ---
 layout: page
-title: "My Current Interests"
+title: "Current Interests"
 permalink: /interests/
+header-img: "img/website/Congresso.jpg"
 ---
 
 ## Elections

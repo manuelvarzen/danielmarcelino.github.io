@@ -1,304 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <meta name="keywords" content="Daniel Marcelino, SciencesPo, SoundexBR, r-project, r, political science, political behavior, social sciences, statistics, methods, applied methods, programming, data mining, data visualization, datascience, big data"/>	
-	<meta name="google-site-verification" content="Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ" />
-	<meta name="bing_webmastertools_id" content="97837256955BD270FD688E2B50F89FDB" />
-    <meta name="author" content="Daniel Marcelino" />
-	 <meta name="title" content="&middot; Daniel &middot; Venezuelan Parliamentary Election: What do the Polls Say?" />
-	 
-	   <!-- favicon -->
-	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
-	
-	
-  
-<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
-  <!-- MathJax configuration -->
-  <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-      tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-          processEscapes: true,
-          processEnvironments: true
-      },
-      TeX: {
-          equationNumbers: { autoNumber: "AMS" }
-      },
-      // Center justify equations in code and markdown cells. Elsewhere
-      // we use CSS to left justify single line equations in code cells.
-      displayAlign: 'center',
-      "HTML-CSS": {
-          styles: {'.MathJax_Display': {"margin": 0}},
-          linebreaks: { automatic: false },
-          scale: 100
-      }
-  });
-  </script>
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
 
+<head>
 
-  
-    
-      <link rel="stylesheet" href="/css/bootstrap.min.css" />
-    
-      <link rel="stylesheet" href="/css/main.css" />
-    
-  
-  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Blog of Daniel Marcelino">
 
-  
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
-  
+    <title>Venezuelan Parliamentary Election: What do the Polls Say? - EnfoRced Data Analysis</title>
 
+    <link rel="canonical" href="http://danielmarcelino.github.io/blog/2015/venezuelan-parliamentary-elections.html">
 
-  
-    
-      <link rel="stylesheet" href="/js/jquery-1.11.2.min.js" />
-    
-      <link rel="stylesheet" href="/js/bootstrap.min.js" />
-    
-      <link rel="stylesheet" href="/js/main.js" />
-    
-  
-    
-  
-  
- <title>EnfoRced Data Analysis</title>
-   
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
 
-  
-  
-  
-  <link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis - Blog of Daniel Marcelino" href="/feed.xml" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/clean-blog.css">
 
-    
-  
-  
-  
-  
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
 
-    
-  
-  
-  
-  
-  
-  <!-- Facebook OpenGraph tags -->
-  
-  <meta property="og:title" content="Venezuelan Parliamentary Election: What do the Polls Say?" />
-  
-  
-  <meta property="og:type" content="website" />
-  
-  
-  <meta property="og:url" content="http://danielmarcelino.github.io/blog/2015/venezuelan-parliamentary-elections.html/" />
-  
-  
-  
-  <meta property="og:image" content="http://danielmarcelino.github.io/images/daniel_rio.jpg" />
-  
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link type="application/atom+xml" rel="alternate" href="http://danielmarcelino.github.io/feed.xml" title="EnfoRced Data Analysis" />
 
 </head>
 
 
-  <body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="http://danielmarcelino.github.io">EnfoRced Data Analysis</a>
-    </div>
+  ga('create', 'UA-24186657-1', 'danielmarcelino.github.io');
+  ga('send', 'pageview');
 
-    <div class="collapse navbar-collapse" id="main-navbar">
-      <ul class="nav navbar-nav navbar-right">
-	    
-        <li>
-		  <a href="/blog">Blog</a>
-		</li>
-		
-        <li>
-		  <a href="/interests">Interests</a>
-		</li>
-		
-        <li>
-		  <a href="/randomwalks">Random Walks</a>
-		</li>
-		
-        <li>
-		  <a href="/about">About</a>
-		</li>
-		
-		
-		
-		<li>
-		  <a href="/search" class="nav-search-link" title="Search">
-		    <span class="fa fa-search nav-search-icon"></span>
-			<span class="nav-search-text">Search</span>
-		  </a>
-		</li>
-		
-      </ul>
-    </div>
-	
-	
-	<div class="avatar-container">
-	  <div class="avatar-img-border">
-	    <a href="http://danielmarcelino.github.io ">
-	      <img class="avatar-img" src="/images/daniel_rio.jpg" />
-		</a>
-	  </div>
-	</div>
-	
-	
-  </div>
-</nav>  
+</script>
 
-    <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <meta name="keywords" content="Daniel Marcelino, SciencesPo, SoundexBR, r-project, r, political science, political behavior, social sciences, statistics, methods, applied methods, programming, data mining, data visualization, datascience, big data"/>	
-	<meta name="google-site-verification" content="Vk0IOJ2jwG_qEoG7fuEXYqv0m2rLa8P778Fi_GrsgEQ" />
-	<meta name="bing_webmastertools_id" content="97837256955BD270FD688E2B50F89FDB" />
-    <meta name="author" content="Daniel Marcelino" />
-	 <meta name="title" content="&middot; Daniel &middot; Venezuelan Parliamentary Election: What do the Polls Say?" />
-	 
-	   <!-- favicon -->
-	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
-	
-	
-  
-<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
-  <!-- MathJax configuration -->
-  <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-      tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-          processEscapes: true,
-          processEnvironments: true
-      },
-      TeX: {
-          equationNumbers: { autoNumber: "AMS" }
-      },
-      // Center justify equations in code and markdown cells. Elsewhere
-      // we use CSS to left justify single line equations in code cells.
-      displayAlign: 'center',
-      "HTML-CSS": {
-          styles: {'.MathJax_Display': {"margin": 0}},
-          linebreaks: { automatic: false },
-          scale: 100
-      }
-  });
-  </script>
+<body>
 
-
-  
-    
-      <link rel="stylesheet" href="/css/bootstrap.min.css" />
-    
-      <link rel="stylesheet" href="/css/main.css" />
-    
-  
-  
-
-  
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
-  
-
-
-  
-    
-      <link rel="stylesheet" href="/js/jquery-1.11.2.min.js" />
-    
-      <link rel="stylesheet" href="/js/bootstrap.min.js" />
-    
-      <link rel="stylesheet" href="/js/main.js" />
-    
-  
-    
-  
-  
- <title>EnfoRced Data Analysis</title>
-   
-
-  
-  
-  
-  <link rel="alternate" type="application/rss+xml" title="EnfoRced Data Analysis - Blog of Daniel Marcelino" href="/feed.xml" />
-
-    
-  
-  
-  
-  
-
-    
-  
-  
-  
-  
-  
-  <!-- Facebook OpenGraph tags -->
-  
-  <meta property="og:title" content="Venezuelan Parliamentary Election: What do the Polls Say?" />
-  
-  
-  <meta property="og:type" content="website" />
-  
-  
-  <meta property="og:url" content="http://danielmarcelino.github.io/blog/2015/venezuelan-parliamentary-elections.html/" />
-  
-  
-  
-  <meta property="og:image" content="http://danielmarcelino.github.io/images/daniel_rio.jpg" />
-  
-
-</head>
-
-
-
-
-
-<header class="header-section ">
-
-<div class="intro-header no-img">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div class="post-heading">
-          <h1>Venezuelan Parliamentary Election: What do the Polls Say?</h1>
-		  
-		  
-		  
-		  <span class="post-meta">Posted on December 6, 2015</span>
-		  
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!-- <a class="navbar-brand" href="/">EnfoRced Data Analysis</a> -->
         </div>
-      </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                <li>
+                    <a href="/blog/">Blog</a>
+                </li>
+                <li>
+                    <a href="/interests/">Interests</a>
+                </li>
+                <li>
+                    <a href="/randomwalks/">Random Walks</a>
+                </li>
+                  <li>
+                    <a href="/about/">About</a>
+                </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
     </div>
-  </div>
-</div>
+    <!-- /.container -->
+</nav>
+
+
+    <script language="javascript">
+    function typeset() {
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+    }
+
+    function disqus_config() {
+        this.callbacks.onNewComment = [typeset];
+        this.callbacks.onInit = [typeset];
+    }
+
+
+    if(window.MathJax===undefined){
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src  = "http://cdn.mathjax.org/mathjax/latest/MathJax.js";
+        var config = 'MathJax.Hub.Config({' +
+                    'extensions: ["tex2jax.js"],' +
+                    'tex2jax: { inlineMath: [ ["$","$"]], displayMath: [["\$$","\$$"]], processEscapes: true },' +
+                    'jax: ["input/TeX","output/HTML-CSS"]' +
+                    '});' +
+                    'MathJax.Hub.Startup.onload();';
+        if (window.opera)
+            script.innerHTML = config;
+        else
+            script.text = config;
+        document.getElementsByTagName("head")[0].appendChild(script);
+    }
+</script>
+
+<!-- Post Header -->
+<header class="intro-header" style="background-image: url('/')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>Venezuelan Parliamentary Election: What do the Polls Say?</h1>
+                    
+                    <span class="meta">Posted by Daniel Marcelino on December 6, 2015</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </header>
 
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
-
-
-
-<div class="container">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      <article role="main" class="blog-post">
-	    <p>There is not a huge population of opinion polls covering this parliamentary election in Venezuela, but all I’ve can be used to gauge the public opinion by the local polling houses. This posting begs an obvious question: how has the mood in Venezuela varied over time with respect to voting intentions for the two political blocs? Next, can we detect any biases among those publishing polls?</p>
+				<p>There is not a huge population of opinion polls covering this parliamentary election in Venezuela, but all I’ve can be used to gauge the public opinion by the local polling houses. This posting begs an obvious question: how has the mood in Venezuela varied over time with respect to voting intentions for the two political blocs? Next, can we detect any biases among those publishing polls?</p>
 
 <!--more-->
 
@@ -308,15 +154,15 @@
 <h1 id="polls-over-time">Polls over time</h1>
 <p>After a bit filling-in-the-blanks working with missing date values, we can visualize the poll trends over time. Given the sample size, sampling error and other sources of noise, a loess model can pretty much pick out the signals of long-term trends.</p>
 
-<p><img src="http://danielmarcelino.github.io/images/code-2015-12-06-venezuelan-parliamentary-elections/loess-1.png" alt="center" /></p>
+<p><img src="http://danielmarcelino.github.io/img/code-2015-12-06-venezuelan-parliamentary-elections/loess-1.png" alt="center" /></p>
 
 <h1 id="pollster-biases">Pollster biases</h1>
-<p>Let’s pretend we can trust on all those polls despite the huge variability among them as already mentioned <a href="https://danielmarcelino.github.io/r/2015/12/04/venezuelan-parliamentary-election-2015/">here</a>. In fact, the problem is not the variability as such, but my lack of knowledge about who are the pollsters and their past performance, so I can’t judge them at first, let’s say it clearly.<br />
+<p>Let’s pretend we can trust on all those polls despite the huge variability among them as already mentioned <a href="https://danielmarcelino.github.io/r/2015/12/04/venezuelan-parliamentary-election-2015/">here</a>. In fact, the problem is not the variability as such, but my lack of knowledge about who are the pollsters and their past performance, so I can’t judge them at first, let’s say it clearly.
 Nonetheless, if we accept the above models as a sound estimate of the expected poll response at a given time, we can analyze the residuals of actual poll results and look for systematic biases. In theory, with a decent sample size (all have ~ 1300) and a reasonably stratified sampling method (I’m not even assuming  random samples here), we might expect polls results to be roughly normally distributed around the expected polls result, regardless of who performed or commissioned the poll, right?</p>
 
 <p>The graph below shows the distributions per polling house for those who polled more than a single poll in this dataset.</p>
 
-<p><img src="http://danielmarcelino.github.io/images/code-2015-12-06-venezuelan-parliamentary-elections/biases-3.png" alt="center" /></p>
+<p><img src="http://danielmarcelino.github.io/img/code-2015-12-06-venezuelan-parliamentary-elections/biases-3.png" alt="center" /></p>
 
 <p>We’ve to keep in mind that there are important caveats which we’re not addressing here, as that different polls have used different question sets, methods etc, so this isn’t evidence for anything underhanded per se. It seems reasonable to expect that while parties might have good reasons to publish polls in their favor, pollsters conducting the polls should generally be more or less indifferent.</p>
 
@@ -379,8 +225,8 @@ Nonetheless, if we accept the above models as a sound estimate of the expected p
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p>What do the polls say? Well, the majority of Venezuelans are favoring opposition candidates and this has been the trend for at least the latter two years, however polls appear to have been more variable in recent months. This election is expected to bring the opposition to control the National Assembly after 16 years loosing the elections in the country. <br />
-The Venezuela’s Socialists seem to be at risk, but predicting the final number of seats is a tough task that I’m not considering in this post. <br />
+<p>What do the polls say? Well, the majority of Venezuelans are favoring opposition candidates and this has been the trend for at least the latter two years, however polls appear to have been more variable in recent months. This election is expected to bring the opposition to control the National Assembly after 16 years loosing the elections in the country. 
+The Venezuela’s Socialists seem to be at risk, but predicting the final number of seats is a tough task that I’m not considering in this post. 
 In fact, it might be really difficult to set forth a range of winning seats as the government recently enacted some redistricting seats in order to weaken an eventual absolute majority by the opposition. Somehow, the polls show this will be a significant symbolic defeat for the government that shows it lost despite all the advantages in state power and control over the media.</p>
 
 <h2 id="update-error">UPDATE (Error)</h2>
@@ -503,160 +349,81 @@ In fact, it might be really difficult to set forth a range of winning seats as t
 <span class="n">kable</span><span class="p">(</span><span class="n">sigTable</span><span class="p">)</span></code></pre></figure>
 
 
-	  </article>
-	  
-	  
-	  <div class="blog-tags">
-		Tags: R, Polls, Elections
-	  </div>
-	  
-	  
-      <ul class="pager blog-pager">
-        
-        <li class="previous">
-          <a href="/blog/2015/venezuelan-parliamentary-election-2015.html" data-toggle="tooltip" data-placement="top" title="Venezuela's 2015 Parliamentary Elections">&larr; Previous Post</a>
-        </li>
-        
-        
-        <li class="next">
-          <a href="/blog/2015/data-data-data.html" data-toggle="tooltip" data-placement="top" title="Data, data, data">Next Post &rarr;</a>
-        </li>
-        
-      </ul>
 
-      
-        <div class="share-section">
-  <h3 class="share-title">Liked what you read? Don't be selfish!</h3>
-  <div class="share-buttons">
-    
-    
-    
-    
+                <hr>
 
-    
-    
-    
-    
-    <a href="http://danielmarcelino.github.io/contact" data-ga-event=1 data-ga-category="share" data-ga-action="message" data-ga-label="/blog/2015/venezuelan-parliamentary-elections.html">
-      Let me know
-    </a>
-    <a href="https://www.facebook.com/dialog/feed?app_id=1529566150689415&link=http://danielmarcelino.github.io/blog/2015/venezuelan-parliamentary-elections.html&name=Venezuelan Parliamentary Election: What do the Polls Say?&caption=&redirect_uri=http://danielmarcelino.github.io/blog/2015/venezuelan-parliamentary-elections.html?message=Thanks for sharing!" data-ga-event=1 data-ga-category="share" data-ga-action="facebook" data-ga-label="/blog/2015/venezuelan-parliamentary-elections.html">
-      Share on Facebook
-    </a>
-    <a href="https://twitter.com/intent/tweet?url=http://danielmarcelino.github.io/blog/2015/venezuelan-parliamentary-elections.html&via=daniel&text=Venezuelan Parliamentary Election: What do the Polls Say?" data-ga-event=1 data-ga-category="share" data-ga-action="twitter" data-ga-label="/blog/2015/venezuelan-parliamentary-elections.html">
-      Tweet it
-    </a>
-  </div>
-</div>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/blog/2015/venezuelan-parliamentary-election-2015.html" data-toggle="tooltip" data-placement="top" title="Venezuela's 2015 Parliamentary Elections">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/blog/2016/star-wars-grossing-war.html" data-toggle="tooltip" data-placement="top" title="The Star Wars Grossing War">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
 
-      
-
-	  
-      <div class="disqus-comments">
-	    
-<div class="comments">
-	<div id="disqus_thread"></div>
-	<script type="text/javascript">
-	    var disqus_shortname = 'daniel-marcelino';
-	    // ensure that pages with query string get the same discussion
-            var url_parts = window.location.href.split("?");
-            var disqus_url = url_parts[0];
-
-	    (function() {
-	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-	    })();
-	</script>
-	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-
-
-      </div>
-	  
+            </div>
+        </div>
     </div>
-  </div>
-</div>
+</article>
+
+<hr>
 
 
-    <footer>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <ul class="list-inline text-center footer-links">
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://twitter.com/dmarcelinobr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    
+                    
+                    <li>
+                        <a href="https://github.com/danielmarcelino">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+		            
 
-          
-          <li>
-            <a href="mailto:dmarcelino@live.com?subject=Hello from " title="Email me">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
-          
-
-          
-          <li>
-            <a href="https://github.com/danielmarcelino/" title="GitHub">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
-          
-
-          
-          <li>
-            <a href="https://twitter.com/dmarcelinobr" title="Twitter">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
-          
-
-          
-
-          
-          <li>
-            <a href="https://stackoverflow.com/users/792000/daniel" title="StackOverflow">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
-          
-
-          
-          <li>
-            <a href="https://linkedin.com/daniel-marcelino-80968656" title="LinkedIn">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
-          
-
-          
-          <li>
-            <a href="/feed.xml" title="Subscribe to my blog">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>		
-          
-
-        </ul>
-
-<p class="syndicated text-center footer-links">
-Some contents of this blog is also contributed to <a href="http://www.r-bloggers.com">R-Bloggers</a> and <a href="http://www.statsblogs.com">Statsblogs</a> 
+		            
+                    
+                    <li>
+                        <a href="mailto:dmarcelino@live.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    
+                </ul>
+                <p class="syndicated text-center footer-links">
+                 Some contents of this blog is also contributed to <a href="http://www.r-bloggers.com">R-Bloggers</a> and <a href="http://www.statsblogs.com">Statsblogs</a> 
 <br/>
 </p>
         <p class="copyright text-muted">
@@ -666,32 +433,21 @@ Some contents of this blog is also contributed to <a href="http://www.r-bloggers
 &nbsp;&bull;&nbsp;
 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">(CC) BY-NC-SA</a>
         </p>
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </footer>
 
+<!-- jQuery -->
+<script src="/js/jquery.min.js "></script>
 
-    
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js "></script>
 
-
-
-
-
-
-
-
-	<!-- Google Analytics -->
-	<script>
-		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-		ga('create', 'UA-24186657-1', 'auto');
-		ga('send', 'pageview');
-	</script>
-	<!-- End Google Analytics -->
+<!-- Custom Theme JavaScript -->
+<script src="/js/clean-blog.min.js "></script>
 
 
-  </body>
+</body>
+
 </html>

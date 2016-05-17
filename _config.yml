@@ -1,140 +1,29 @@
-# --- Serving options --- #
-# If you are building a simple GitHub user page (http://username.github.io) then use these settings:
-url: "http://danielmarcelino.github.io"
-baseurl: ""
-
-
-# Brief name and description of the site
+# Site settings
 title: EnfoRced Data Analysis
+header-img: img/website/kombi.jpg
+avatar: img/daniel_rio.jpg
+favicon: favicon.ico
+email: dmarcelino@live.com
+copyright_name: Daniel Marcelino
 description: "Blog of Daniel Marcelino"
+# baseurl: ""
+url: "http://danielmarcelino.github.io"
+twitter_username: dmarcelinobr
+github_username:  danielmarcelino
+stackoverflow_username: "users/792000/daniel"
+linkedin_username: "daniel-marcelino-80968656"
+# facebook_username:  Sebastian Daza
+email_username:  dmarcelino@live.com
+fb_app_id: "1529566150689415"
+google_analytics: "UA-24186657-1" 
+disqus_username: "daniel-marcelino"
 
-# --- Outputting options --- #
-gems:
-  - jekyll-paginate
-  - jekyll-gist
-
-# More information can be found on Jekyll's site
-timezone: "Brazil/Brasilia"
-highlighter: rouge
+# Build settings
 markdown: kramdown
-kramdown:
-     input: GFM
-extensions:
-    - autolink
-    - footnotes
-    - smart
-
-
+highlighter: rouge
 permalink: /blog/:year/:title.html
 paginate: 10
-paginate_path: "/page:num/"
+paginate_path: /page:num/
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
 
-
-# --- Style options --- #
-common-css:
-  - "/css/bootstrap.min.css"
-  - "/css/main.css"
-common-ext-css:
-  - "//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
-common-googlefonts:
-  - "Lora:400,700,400italic,700italic"
-  - "Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
-common-js:
-  - "/js/jquery-1.11.2.min.js"
-  - "/js/bootstrap.min.js"
-  - "/js/main.js"
-
-
-# --- Navigation bar options --- #
-
-# Image to show in the navigation bar - image must be a square (width = height)
-# Remove this parameter if you don't want an image in the navbar
-avatar: "/images/daniel_rio.jpg"
-
-favicon: "/images/manif-brasilia.jpg”
-
-# List of links in the navigation bar
-navbar-links:
-  Blog: "blog"
-  Interests: "interests"
-  Random Walks: "randomwalks"
-  About: "about"
-nav-search: "search"
-
-# --- Footer options --- #
-
-# Change all these values or delete the ones you don't want.
-# Important: you must keep the "name" parameter, everything else you can remove
-author:
-  name: Daniel Marcelino
-  email: "dmarcelino@live.com"
-  facebook:
-  github: "danielmarcelino/"
-  twitter: "dmarcelinobr"
-  linkedin: "daniel-marcelino-80968656"
-  stackoverflow: "users/792000/daniel"
-
-
-# Select which links to show in the footer
-footer-links-active:
-  rss: true
-  facebook: true
-  email: true
-  twitter: true
-  github: true
-  linkedin: true
-  stackoverflow: true
-
-# How to display the link to the website in the footer
-# Remove this if you don't want a link in the footer
-# url-pretty: "danielmarcelino.com"
-
-# --- Misc --- #
-
-# Fill in your Disqus shortname (NOT the userid) if you want to support Disqus comments
-disqus: "daniel-marcelino"
-
-# Fill in your Google Analytics ID to track your website using GA
-google_analytics: "UA-24186657-1"  # Your Google Analytics ID
-
-fb_app_id: "1529566150689415"
-
-# --- Don't need to touch anything below here (but you can if you want) --- #
-
-# Default YAML values (more information on Jekyll's site)
-defaults:
-  -
-    scope:
-      path: ""
-      type: "posts"
-    values:
-      comments: true
-      show-share: true
-  -
-    scope:
-      path: "" # all files
-    values:
-      layout: "default"
-
-# prose.io config
-prose:
-  rooturl: '_posts'
-  media: 'images'
-  ignore:
-    - 404.html
-    - LICENSE
-    - feed.xml
-    - _config.yml
-    - /_layouts
-    - /_includes
-    - /css
-    - /images
-    - /js
-
-# Exclude these files from production site
-exclude:
-  - Gemfile
-  - Gemfile.lock
-  - CNAME
-  - LICENSE
-  - README.md
+gems: [jekyll-paginate, jekyll-feed]

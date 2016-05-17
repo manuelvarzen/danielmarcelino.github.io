@@ -1,9 +1,20 @@
----
-layout: base
----
+<!DOCTYPE html>
+<html lang="en">
 
-<div class="intro-header"></div>
+<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
 
-<div role="main" class="container">
-  {{ content }}
-</div>
+{% include head.html %}
+
+{% include analytics.html %}
+
+<body>
+
+    {% include nav.html %}
+
+    {{ content }}
+
+    {% include footer.html %}
+
+</body>
+
+</html>

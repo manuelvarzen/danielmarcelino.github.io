@@ -39,7 +39,7 @@ $$P(HIV~positive~|~positive~ELISA) = p * .977~/~(p * .977 + (1-p) * .074)$$
 Here is the output and R code  computing this for various values of p with a 25 interval.
 
 
-![center]({{ site.url }}/images/2016/Sensitivity.png)
+![center]({{ site.url }}/img/2016/Sensitivity.png)
 
 
 {% highlight r %}

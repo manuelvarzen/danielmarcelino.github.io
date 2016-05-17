@@ -1,0 +1,3 @@
+Latexmk: Run number 1 of rule 'pdflatex'
+Latexmk: ===For rule 'pdflatex', actual output 'Output/cv_sdaza.pdf'
+       ======appears not to match expected output '/Users/sdaza/Dropbox/github/sdaza.github.com/docs/Output/cv_sdaza.pdf'

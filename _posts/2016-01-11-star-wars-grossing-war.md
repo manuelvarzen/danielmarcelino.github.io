@@ -131,7 +131,7 @@ min(box$Year, na.rm=TRUE)
 
 The following chart displays the grossing worldwide values for the top 25 ranked movies of all time. As it shines out, the *Star Wars: The Force Awakens_ is doing pretty well worldwide. It's ranked fourth now, but it just began to play in China this week, so it may unseat *Titanic* over the next weeks, and *Avatar* in the long run.
 
-![center]({{ site.url }}/images/code-2016-01-11-star-wars-grossing-war/top25.png) 
+![center]({{ site.url }}/img/code-2016-01-11-star-wars-grossing-war/top25.png) 
 
 If you want to reproduce the very same plot decoration of this post, you'll have to install the development version of **SciencesPo** package, and add `+ theme_538(legend="top")` to the following code. 
 
@@ -149,7 +149,7 @@ coord_flip() +
 
 Next, how *The Force Awakens* compares with other episodes of *Star Wars*? 
 
-![center]({{ site.url }}/images/code-2016-01-11-star-wars-grossing-war/starwars.png) 
+![center]({{ site.url }}/img/code-2016-01-11-star-wars-grossing-war/starwars.png) 
 
 {% highlight r %}
 # will search for Star Wars names within the data.frame:
