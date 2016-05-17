@@ -5,6 +5,7 @@ date: 2014-07-16
 category: Analysis 
 tags: [R, Elections, Bayesian, Polls]
 comments: true
+header-img: "img/website/spaghetti.png"
 ---
 
 Maybe Bayesian linear filtering models are not enough to forecast Brazilian subnational elections.

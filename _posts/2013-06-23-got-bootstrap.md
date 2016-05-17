@@ -3,6 +3,7 @@ layout: post
 title: "Got Bootstrap?" 
 date: 2013-06-23
 tags: [R, Bootstrap]
+header-img: "img/website/spaghetti.png"
 ---
 
 I read a book by Michael Chernick and Robert LaBudde, [An Introduction to Bootstrap Methods with Applications to R](http://www.amazon.com/gp/product/0470467045/ref=as_li_ss_tl?ie=UTF8&camp=1789&%23038;creative=390957&%23038;creativeASIN=0470467045&%23038;linkCode=as2&%23038;tag=danielmarceli-20). It's an interesting *oeuvre* for useRs of all stripes. The book brings lots of examples of bootstrapping applications, such as standard errors, confidence intervals, hypothesis testing, and bootstrap applied for time-series analysis. The showcases in the book draw upon libraries like the **boot** by Angelo Canty and Brian Ripley, which is a great package. However, I’d love to find in the book more examples on "how to do my own bootstrap program" instead, so I decided to write down these lines. Before starting any code, it might be a good idea to refresh what exactly bootstrap is, and why it is so relevant for data analysis nowadays.

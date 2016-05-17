@@ -4,6 +4,7 @@ title: "A Bit More Fragmented"
 date: 2014-10-06
 tags: [R]
 comments: true
+header-img: "img/website/spaghetti.png"
 ---
 
 The 2014 election gave rise to an even more fragmented lower house in Brazil. This is important because higher values of political fragmentation suggest a less stable political environment in comparison with previous years.

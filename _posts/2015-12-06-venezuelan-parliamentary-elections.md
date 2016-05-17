@@ -13,6 +13,7 @@ published: true
 status: publish
 comments: true
 header-img: ""
+header-img: "img/website/spaghetti.png"
 ---
 
 

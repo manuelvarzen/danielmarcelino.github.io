@@ -4,6 +4,7 @@ title: "Showing Explained Variance in Multilevel Models"
 date: 2011-10-03
 category: Viz
 tags: [R, Multilevel]
+header-img: "img/website/spaghetti.png"
 ---
 
 In this post I will show one way to display explained variance using a line chart. 
