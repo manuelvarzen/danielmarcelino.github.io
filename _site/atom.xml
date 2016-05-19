@@ -5,71 +5,13 @@
   <title type="text" xml:lang="en"></title>
     <link type="application/atom+xml" href="/atom.xml" rel="self"/>
     <link href="/"/>
-  <updated>2016-05-18T00:52:34Z</updated>
+  <updated>2016-05-19T11:55:22Z</updated>
   <id>/</id>
   <author>
     <name></name>
     <email></email>
   </author>
   <rights type="text">Copyright © 2016 . All rights reserved.</rights>
-  
-  <entry>
-    <title>Installing CRAN Archived Packages</title>
-    <link rel="alternate" type="text/html" href="/blog/2016/installing-CRAN-archived-packages.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=InstallingCRANArchivedPackages" />
-    <published>2016-05-18T00:00:00Z</published>
-    <updated>2016-05-18T00:00:00-03:00</updated>
-    <id>/blog/2016/installing-CRAN-archived-packages</id>
-    <content type="html"><![CDATA[ <h2 id="mortality">Mortality</h2>
-
-<p>While the number of packages is rising quickly, orphaned and archived package does so. CRAN packages with no active maintainer are very often archived due to important QC problems that prevent them to operate with new R releases. Indeed, such a decision may be fatal for many other CRAN and BioC packages being dependent on them, which will eventually need to archived alongside.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left">type</th>
-      <th style="text-align: center">N (June/2015)</th>
-      <th style="text-align: center">N (May/2016)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left">source</td>
-      <td style="text-align: center">6760</td>
-      <td style="text-align: center">8393</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">win.binary</td>
-      <td style="text-align: center">6712</td>
-      <td style="text-align: center">8340</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">mac.binary.mavericks</td>
-      <td style="text-align: center">4820</td>
-      <td style="text-align: center">8263</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">mac.binary</td>
-      <td style="text-align: center">4639</td>
-      <td style="text-align: center">8011</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Whenever I need to install an archived package, I like installing it right away using the R own interface, instead of manually downloading to install it later. For instance, since <code class="highlighter-rouge">lgtdl</code> was removed from CRAN repositories, I’ll demonstrate this process in two basic steps. First, download the package tarball from CRAN archive. Second, install it.</p>
-
-<p><strong>1) First step: download the package</strong></p>
-
-<figure class="highlight"><pre><code class="language-text" data-lang="text">download.file(url = "http://cran.r-project.org/src/contrib/Archive/lgtdl/lgtdl_1.1.1.tar.gz", destfile = "lgtdl_1.1.1.tar.gz")</code></pre></figure>
-
-<p><strong>2) Second step: proceed the installation</strong></p>
-
-<figure class="highlight"><pre><code class="language-text" data-lang="text">install.packages(pkgs="lgtdl_1.1.1.tar.gz", type="source", repos=NULL)
-unlink("lgtdl_1.1.1.tar.gz")</code></pre></figure>
-
-<hr />
-
- ]]></content>
-  </entry>
   
   <entry>
     <title>Everything Ends on Wednesday</title>
@@ -808,6 +750,39 @@ In case you want to read an influential paper on this matter, you can find it <a
 <h4 id="put-them-together">Put them together</h4>
 
 <figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">grid.arrange</span><span class="p">(</span><span class="n">gplot1</span><span class="p">,</span> <span class="n">gplot2</span><span class="p">)</span></code></pre></figure>
+ ]]></content>
+  </entry>
+  
+  <entry>
+    <title>A Talk About Campaign Finance in Brazil</title>
+    <link rel="alternate" type="text/html" href="/blog/2015/talk-about-campaign-finance.html/?utm_source=RSS&amp;utm_medium=RSS&amp;utm_campaign=ATalkAboutCampaignFinanceinBrazil" />
+    <published>2015-10-17T00:00:00Z</published>
+    <updated>2015-10-17T00:00:00-03:00</updated>
+    <id>/blog/2015/talk-about-campaign-finance</id>
+    <content type="html"><![CDATA[ <p>Comments on campaign finance in brazil.</p>
+
+<!--more-->
+
+<p>Last week, I delivered a talk at <a href="http://www.unb.br">University of Brasilia</a> about my past research on the topic of campaign finance. I didn’t know in advance about the existence of this seminar. Indeed, it was a big surprise receiving the invitation from Prof. Marcelo Pimentel, who is teaching on Fridays afternoon a class on this topic with more than 50 registered students. I became his fan after seeing his syllabus. He did managed to assemble a handful studies covering why, what, how, and when money affects politics and elections in Brazil.</p>
+
+<p>Though I covered a lot of factors in my talk, I think, I had the wrong pictures to show for a heterogeneous crowd. Instead of wasting time showing regression tables, and trying to solve understanding issues after showing them, I should have shown simple yet powerful pictures like the following ones, so to give the intuition about the relationship between money and votes, generally debated in the literature and media.</p>
+
+<p><img src="http://danielmarcelino.github.io/img/2015/linearSS.png" alt="Linear Relationship with SS" /></p>
+
+<p><img src="http://danielmarcelino.github.io/img/2015/u-shape.png" alt="U-Shape Relationship" /></p>
+
+<p>Of course, the biggest challenge of this scholarship is how to disentangle any existing confounders in this rather seemingly relationship: votes ~ money.</p>
+
+<p>Overall, we know the recipe, preparing the dishy is different  thing. Studies being conducted on this area try to find the “treatment effect” of money on votes: What would have happened if the candidate had spent only a fraction of his budget, or What would have happened if the candidate who spent only a fraction could spend more?</p>
+
+<p>The problem arises because we can see one condition, but never both at the same time. The suboptimal solution is to measure the average effect <code class="highlighter-rouge">(Y_1i - Y_0i)</code>, or the average of groups of candidates, such as incumbents vs non-incumbents. It turns out that comparisons of who spend more or less in elections are likely to be a poor measure of the causal effect of campaign spending simply because selection bias should be extremely high (Morton and Williams, 2010). It’s not trivial to argue that those who has more money to spend would have earned more votes anyway.</p>
+
+<p>As Angrist and Pischke point out in their 2009’s book, if selection bias is positive, the naïve comparison <code class="highlighter-rouge">E(Y_1i | c_i=1) - E(Y_0i | c_i=0)</code> can be a real problem, since the benefits of spending extra money is exaggerated.</p>
+
+<p><img src="http://danielmarcelino.github.io/img/2015/Angrist_Pischke_bias.png" alt="U-Shape Relationship" /></p>
+
+<p>It could be “easier” to provide causal inference on this if we run a randomized experiment. If the treatment of campaign spending levels is randomly assigned, selection bias would be zero. The experiment don’t need to be that large, if treated units are random selection from the population of candidates, then the impact on treated also applies to the population. Isn’t cool?</p>
+
  ]]></content>
   </entry>
   
