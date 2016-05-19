@@ -1,0 +1,13 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdftex 2016.1.31)  24 MAR 2016 11:21
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**/Users/daniel/danielmarcelino.github.io/talks/themesimple.tex
+
+! Emergency stop.
+<*> ...elmarcelino.github.io/talks/themesimple.tex
+                                                  
+*** (job aborted, file error in nonstop mode)
+
+!  ==> Fatal error occurred, no output PDF file produced!

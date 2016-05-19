@@ -1,11 +1,12 @@
 # Site settings
-title: EnfoRced Data Analysis
+title: "Data * Analysis + R"
 header-img: img/website/kombi.jpg
 avatar: img/daniel_rio.jpg
 favicon: favicon.ico
 email: dmarcelino@live.com
 copyright_name: Daniel Marcelino
-description: "Blog of Daniel Marcelino"
+description: "Blog of Daniel Marcelino" 
+#description: "Exploring the world of data with R"
 # baseurl: ""
 url: "http://danielmarcelino.github.io"
 twitter_username: dmarcelinobr

@@ -1,0 +1,6 @@
+\beamer@endinputifotherversion {3.36pt}
+\select@language {brazilian}
+\beamer@sectionintoc {1}{Introdu\IeC {\c c}\IeC {\~a}o}{2}{0}{1}
+\beamer@sectionintoc {2}{Metodologia}{5}{0}{2}
+\beamer@subsectionintoc {2}{1}{Survey}{7}{0}{2}
+\beamer@sectionintoc {3}{Desenho Amostral}{10}{0}{3}

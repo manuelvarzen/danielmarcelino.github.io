@@ -1,0 +1,199 @@
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{themesimple}[2012/10/01 Custom Package]
+
+% Copyright 2012 by Daniel Marcelino
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+
+% required packages
+\RequirePackage{transparent}
+\RequirePackage{pgfplots}
+\RequirePackage{amsmath}
+\RequirePackage{calc}
+\RequirePackage{booktabs}
+\RequirePackage{tabularx}
+\RequirePackage{rotating}
+\RequirePackage{subfigure}
+\RequirePackage[export]{adjustbox}
+\RequirePackage{tikz}
+\usetikzlibrary{shapes}
+\RequirePackage[none]{hyphenat}
+\RequirePackage{graphicx}
+\RequirePackage{upquote}
+\RequirePackage{listings}
+\RequirePackage{hyperref}
+\RequirePackage{color}
+\RequirePackage{multimedia}
+
+
+%\def\beamer@simplecolor{gris}
+%\DeclareOptionBeamer{color}{\beamer@simplecolor=#1}
+%\ExecuteOptionsBeamer{gris}
+%\ProcessOptionsBeamer
+
+% http://www.colorcombos.com/color-scheme-275.html
+\definecolor{darkgray}{HTML}{515151} 
+\definecolor{gray}{HTML}{797979}
+\definecolor{lightgray}{HTML}{e6e6e6}
+ 
+  
+\definecolor{pacificorange}{cmyk}{.15,.45,1,0}
+% approved Pacific colors 2010
+\definecolor{pacificgray}{cmyk}{0,.15,.35,.60}
+\definecolor{pacificlgray}{cmyk}{0,0,.2,.4}
+\definecolor{pacificcream}{cmyk}{.05,.05,.15,0}
+
+\definecolor{deepyellow}{cmyk}{0,.17,.80,0}
+\definecolor{lightblue}{cmyk}{.49,.01,0,0}
+\definecolor{lightbrown}{cmyk}{.09,.15,.34,0}
+\definecolor{deepviolet}{cmyk}{.79,1,0,.15}
+\definecolor{deeporange}{cmyk}{0,.59,1,18}
+\definecolor{dustyred}{cmyk}{0,.7,.45,.4}
+\definecolor{grassgreen}{RGB}{92,135,39}
+\definecolor{pacificblue}{RGB}{59,110,143}
+\definecolor{pacificgreen}{cmyk}{.15,0,.45,.30}
+\definecolor{deepblue}{cmyk}{1,.57,0,2}
+
+% define a bunch of colors
+\definecolor{turquoise}{RGB}{81,193,188}
+\definecolor{tomato}{RGB}{255,136,136}
+\definecolor{mandarina}{RGB}{229,169,25}
+\definecolor{foreground}{RGB}{81,141,193}
+\definecolor{background}{RGB}{246,244,240}
+\definecolor{highlight}{RGB}{229,169,25}
+\definecolor{lowlight}{RGB}{200,200,200}
+
+
+
+% By default all math in TikZ nodes are set in inline mode. I changed this to displaystyle so that I don't get small fractions.
+\tikzstyle{every picture}+=[remember picture]
+\everymath{\displaystyle}
+
+
+\usetikzlibrary{arrows,shapes,trees,positioning,fadings}
+
+\input xkeyval
+
+\newcommand<>{\includeoverlaygraphics}[2][]
+{
+  \begin{tikzpicture}
+    \alt#3{\node[opacity=1] {\includegraphics[#1]{#2}};}
+          {\node[opacity=.15] {\includegraphics[#1]{#2}};}
+  \end{tikzpicture}
+}
+
+% These define macros \KV@setwatermark@hoffset that take one argument
+% which is processed by the last piece of codes into braces
+\def\@hos{}
+\def\@vos{}
+\def\@alpha{} % This one does not work. Why?
+\define@key{setwatermark}{hoffset}[\def\@hos{.}]{\def\@hos{\hspace*{#1}}} 
+\define@key{setwatermark}{voffset}[\def\@vos{.}]{\def\@vos{\vspace*{#1}}} 
+\define@key{setwatermark}{alpha}[\def\@alpha{0.7}]{\def\@alpha{#1}} 
+
+\def\setwatermark{\@ifnextchar[\@setwatermark{\@setwatermark[]}}
+\def\@setwatermark[#1]#2{%
+  \setkeys{setwatermark}{#1}%
+  \def\@watermark{#2}
+}
+% \newcommand{\setwatermark}[1]{\def\@watermark{#1}}
+\setwatermark{}   % Empty initialization
+
+
+\mode<presentation>
+
+\newcommand{\bluebox}[2]{
+\setbeamercolor{upperblue}{fg=white,bg=pacificblue}
+\setbeamercolor{lowercol}{fg=black,bg=pacificcream}
+
+\begin{beamerboxesrounded}[upper=upperblue,lower=lowercol,shadow=true]{
+#1 }  #2
+\end{beamerboxesrounded}}
+
+
+% Block boxes and colors 
+\setbeamercolor{normal text}{bg=white,fg=gray}
+\setbeamercolor*{block title}{bg=lightgray,fg=darkgray}
+\setbeamercolor*{block body}{bg=lightgray,fg=gray}
+\setbeamercolor{alerted text}{fg=black}
+\setbeamercolor{section in toc}{fg=darkgray}
+\setbeamercolor{enumerate item}{fg=darkgray}
+\setbeamercolor{itemize item}{fg=darkgray}
+
+  
+\usetheme{default}
+%\usecolortheme[named=gris]{structure}
+\usecolortheme[named=darkgray]{structure}
+\usefonttheme{structurebold}
+ % caption
+\setbeamerfont{caption}{size=\footnotesize}
+
+
+
+
+% make the itemize bullets pixelated >
+%\setbeamertemplate{itemize item}{%
+%	\tikz{
+%		\draw[fill=darkgray,draw=none] (0, 0) rectangle(0.1, 0.1);
+%		\draw[fill=darkgray,draw=none] (0.1, 0.1) rectangle(0.2, 0.2);
+%		\draw[fill=darkgray,draw=none] (0, 0.2) rectangle(0.1, 0.3);
+%	}
+%}%
+
+
+% make the subitems also pixelated >, but a little smaller and red
+%\setbeamertemplate{itemize subitem}{
+%	\tikz{
+%		\draw[fill=darkgray,draw=none] (0, 0) rectangle(0.075, 0.075);
+%		\draw[fill=darkgray,draw=none] (0.075, 0.075) rectangle(0.15, 0.15);
+%		\draw[fill=darkgray,draw=none] (0, 0.15) rectangle(0.075, 0.225);
+%	}
+%}
+
+
+
+
+ % overlays semitransparentes
+ \setbeamercovered{transparent}
+  
+  % including slides counter
+  \setbeamertemplate{footline}[frame number]
+  
+  % eliminar íconos de nav.
+  \setbeamertemplate{navigation symbols}{}
+  
+  % blocks
+  \setbeamertemplate{blocks}[rounded][shadow=true]
+
+% disable "Figure:" in the captions
+\setbeamertemplate{caption}{\tiny\insertcaption}
+\setbeamertemplate{caption label separator}{}
+
+ % global specification for lists
+ % \beamerdefaultoverlayspecification{<+-| alert@+>}
+  
+  % margins
+  \setbeamersize{text margin left=0.4cm,text margin right=0.4cm}
+  
+  \setbeamertemplate{background}{
+  \parbox[c][\paperheight]{\paperwidth}{%
+    \vfill \hfill 
+    \begin{tikzpicture}
+      %\node[opacity=\@alpha]  % not working. why?
+      \node[opacity=.07]
+      {
+        \@watermark
+      };
+    \end{tikzpicture}
+    \@hos
+    
+    \@vos
+  }
+} 
+
+\mode
+<all>

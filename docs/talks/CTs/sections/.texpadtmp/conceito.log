@@ -1,0 +1,23 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdftex 2016.1.31)  23 MAR 2016 09:49
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**/Users/daniel/danielmarcelino.github.io/talks/CTs/sections/conceito.tex
+(/Users/daniel/danielmarcelino.github.io/talks/CTs/sections/conceito.tex
+/Users/daniel/danielmarcelino.github.io/talks/CTs/sections/conceito.tex:1: Undefined control sequence.
+l.1 \includegraphics
+                    {../figures/desenho}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+)
+! Emergency stop.
+<*> ...o.github.io/talks/CTs/sections/conceito.tex
+                                                  
+*** (job aborted, no legal \end found)
+
+!  ==> Fatal error occurred, no output PDF file produced!

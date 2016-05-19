@@ -1,0 +1,81 @@
+\documentclass{beamer}
+% load sty file
+\usepackage{themesimple}
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usetikzlibrary{shapes}
+\usepackage[export]{adjustbox}
+\usepackage[scale=2]{ccicons}
+\usepackage{xcolor}
+
+
+%\usepackage[table]{xcolor}
+%\usepackage{graphics}
+%\usepackage{multirow}
+%\usepackage{multicol}
+%\usepackage{adjustbox} % for \adjincludegraphics
+%\usepackage{etoolbox}
+%\usepackage[absolute,overlay]{textpos}
+%\usepackage{calc}
+%\usepackage{fancybox}
+%\usepackage{ctable}
+%\usepackage{changepage}
+
+
+\definecolor{hughesblue}{rgb}{.9,.9,1} 
+
+
+
+
+
+\renewcommand\lstlistingname{R}% Change language of section name
+
+\lstset{ % General setup for the package
+	language=R,
+	keepspaces=true, % keeps spaces in text
+	basicstyle=\small\sffamily,
+	numbers=left,
+ 	numberstyle=\tiny,
+ 	frame=tb,
+	tabsize=4,
+	columns=fixed,
+	showstringspaces=false,
+	showtabs=false,
+	keepspaces,
+	commentstyle=\color{red},
+	keywordstyle=\color{blue}
+}
+
+
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\secname\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+
+% Printing the Handout
+% \usepackage{pgfpages}
+% \pgfpagelayout{resize}[a4paper,border shrink=5mm,landscape]
+% This says resize all pages to landscape A4 pages, no what their original size was, but shrink the pages by 5mm, so that there is a bit of a border around everything. \pgfpagelayout{2 on 1}[a4paper,border shrink=5mm]
+
+% \usepackage{multimedia}
+% A stand-alone package that implements several commands for including external animation and sound
+%\setbeamertemplate{blocks}[rounded][shadow=true]
+
+\newcommand{\backupbegin}{%
+   \newcounter{framenumberappendix}
+   \setcounter{framenumberappendix}{\value{framenumber}}
+}%
+\newcommand{\backupend}{%
+   \addtocounter{framenumberappendix}{-\value{framenumber}}
+   \addtocounter{framenumber}{\value{framenumberappendix}}
+}%
+
+\setbeamercovered{invisible}
