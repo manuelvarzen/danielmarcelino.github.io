@@ -25,7 +25,7 @@ I gathered some log data from package downloads to produce the following figure.
 ![center]({{ site.url }}/img/2016/R-packages-growth-rate.png) 
 
 
-### Need packages
+##### Need packages
 {% highlight r %}
 library(ggplot2)
 library(grid)
@@ -36,7 +36,7 @@ library(SciencesPo)
 {% endhighlight %}
 
 
-### Data manipulation
+##### Data manipulation
 
 {% highlight r %}
 url <- "https://cran.r-project.org/web/packages/available_packages_by_date.html"
@@ -54,7 +54,7 @@ mutate(Date = as.Date(as.yearmon(Month))) -> pkgs
 {% endhighlight %}
 
 
-### The main plot
+##### The main plot
 {% highlight r %}
 gg <- ggplot(pkgs, aes(x = Date, y = published))
 gg <- gg + geom_line(size = 1.5)
@@ -81,7 +81,7 @@ pkgs %>%
 {% endhighlight %}
 
 
-### Small multiples plot
+##### Small multiples plot
 {% highlight r %}
 gg2 <- ggplot(new_pkgs, aes(x = Date, y = published))
 gg2 <- gg2 + geom_line(size = 1)
