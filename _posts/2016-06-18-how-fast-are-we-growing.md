@@ -25,7 +25,7 @@ I gathered some log data from package downloads to produce the following figure.
 ![center]({{ site.url }}/img/2016/R-packages-growth-rate.png) 
 
 
-##### Need packages
+##### Needed packages
 {% highlight r %}
 library(ggplot2)
 library(grid)
