@@ -66,7 +66,6 @@ gg <- gg + theme(panel.grid.major.x = element_blank())
 gg <- gg + geom_hline(yintercept = 0,
 size = 1, colour = "#535353")
 gg
-```
 {% endhighlight %}
 
 
