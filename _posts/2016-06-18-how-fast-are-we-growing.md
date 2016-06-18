@@ -81,7 +81,7 @@ pkgs %>%
 {% endhighlight %}
 
 
-##### Small multiples plot
+##### The small multiples plot
 {% highlight r %}
 gg2 <- ggplot(new_pkgs, aes(x = Date, y = published))
 gg2 <- gg2 + geom_line(size = 1)
