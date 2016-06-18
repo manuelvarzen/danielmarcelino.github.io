@@ -19,7 +19,7 @@ header-img: "img/website/spaghetti.png"
 I worked a bit over the weekend preparing my talk to be delivered at the seminar organized by [IBPAD](http://www.ibpad.com.br) this week at University of Brasilia, addressing the interfaces of Big Data and Society.
 I was invited to present the R package SciencesPo for an eclectic crowd. Eclectic in terms of background as well as familiarity with R, so, I thought it would be a fair introduction to call the audience's attention to the R ecosystem, particularly, the growing number of specialized packages made available through CRAN. 
 
-I gathered some log data from package downloads to produce the following figure. The main plot shows the number of published packages since 2005 (that are still available). Notice that the y-axis is in log scale. The small multiples inside also shows the count of packages published on CRAN, but only for packages submitted after 2013-01-01. It's an arbitrary date that makes my job of estimating a growth rate of package submission a lot easier. The red line represents the modeled growth rate estimated for the period with an approximation of 5.7%/month.  
+I gathered some log data from package downloads to produce the following figure. The main plot shows the number of published packages since 2005 (that are still available). Notice that the y-axis is in log scale. The small multiples inside also shows the count of packages published on CRAN, but only for packages submitted after 2013-01-01. It's an arbitrary date that makes my job of estimating a growth rate of package submission a lot easier. The red line represents the modeled growth rate estimated for the period with an approximation of 5.6%/month.  
 
 
 ![center]({{ site.url }}/img/2016/R-packages-growth-rate.png) 
