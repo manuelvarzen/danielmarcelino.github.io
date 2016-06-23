@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title: "What is reproducible research?"
@@ -14,6 +13,7 @@ status: published
 comments: true
 header-img: "img/website/rain-room.jpg"
 ---
+
 
 ![Science approach]({{ site.url }}/img/2016/science.jpg) 
 
