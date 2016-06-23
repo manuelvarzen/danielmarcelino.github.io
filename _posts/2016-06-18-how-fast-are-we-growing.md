@@ -9,9 +9,9 @@ output:
    toc: yes
 tags: [R, Films]
 published: true
-status: publish
+status: published
 comments: true
-header-img: "img/website/spaghetti.png"
+header-img: "img/website/sulphur-mountain.jpg"
 ---
 
 
