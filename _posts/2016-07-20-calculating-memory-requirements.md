@@ -7,12 +7,15 @@ output:
  html_document: 
    keep_md: yes
    toc: yes
-tags: [R]
+share: true
+tags: [R, rstats]
+excerpt: "A post about size and memory requirements that a computer must have to deal with a data frame."
 published: true
 status: published
 comments: true
 header-img: "img/website/rain-room.jpg"
 ---
+
 
 I had a conversation with people at the office about size and memory requirements that a computer must have to deal with a data frame. It started like this: suppose you have a data frame with 2,000,000 rows and 250 columns, all of which are numeric data  (2,000,000 × 250 × 8 bytes/numeric). Roughly saying, how much memory is required to store this data?
 

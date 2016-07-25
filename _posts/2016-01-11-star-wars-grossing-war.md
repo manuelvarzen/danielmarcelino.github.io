@@ -7,9 +7,10 @@ output:
  html_document: 
    keep_md: yes
    toc: yes
-tags: [R, Films]
+share: true
+tags: [R, rstats]
 published: true
-status: publish
+status: published
 comments: true
 header-img: "img/website/spaghetti.png"
 ---

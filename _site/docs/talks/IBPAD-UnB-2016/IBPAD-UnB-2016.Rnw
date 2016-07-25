@@ -1,0 +1,86 @@
+\include{beamer}
+
+\title{Ciência de Dados e Sociedade}
+\subtitle{Seminário IBPAD/UnB}
+\date{15 de junho, 2016}
+\author{Daniel Marcelino}
+%\institute{Instituto de Pesquisa Econômica Aplicada}
+
+
+\begin{document}
+ %\SweaveOpts{concordance=TRUE}
+ %\Sweave2knitr{concordance=TRUE}
+
+\begin{frame}[plain]
+\maketitle
+\end{frame}
+
+
+\begin{frame}[plain]{Apresentação}
+\tableofcontents
+\end{frame}
+
+\section{Introdução}
+% \input{Sections/Intro.tex}
+
+\input{Sections/Why-R.tex}
+
+%\input{Sections/SciencesPo-in-world.tex}
+
+
+\section{Conceito}
+%\input{Sections/Conceito.tex}
+
+
+% The Problem of (Weak) Priors
+\section{The Problem of (Weak) Priors}
+
+\begin{frame}
+\begin{exampleblock}{Example}
+Remember Rubin's question: What would you do if you had all the data?
+
+\end{exampleblock}
+
+\end{frame}
+
+\begin{frame}
+\begin{block}{Block}
+
+\end{block}
+
+\end{frame}
+
+\input{Sections/SciencesPo-EDA.tex}
+
+%\input{Sections/Themas.tex}
+
+
+%\input{Sections/GNU.tex}
+
+
+% \input{Sections/Simplify.tex}
+
+\bgroup
+\setbeamercolor{background canvas}{bg=black}
+\begin{frame}[plain]{}
+\includegraphics[width=1\textwidth, keepaspectratio]{figures/1000.jpg}
+\end{frame}
+\egroup
+
+\appendix
+
+\backupbegin
+
+\begin{frame}[fragile]
+
+\begin{lstlisting}
+require(SciencesPo)
+Crosstable(data, var1, var2, var3, row=TRUE)
+\end{lstlisting}
+
+\end{frame}
+
+\backupend
+
+\end{document}
+

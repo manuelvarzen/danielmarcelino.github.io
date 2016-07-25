@@ -1,30 +1,59 @@
-# Site settings
+# Site wide configuration
+
 title: Data * Analysis + R
-header-img: img/website/kombi.jpg
-avatar: img/daniel_rio.jpg
-favicon: favicon.ico
-email: dmarcelino@live.com
-copyright_name: Daniel Marcelino
+locale: en_US
 description: "Blog of Daniel Marcelino" 
-#description: "Exploring the world of data with R"
-# baseurl: ""
+favicon: favicon.ico
+logo: img/daniel_rio.jpg
+search: true
 url: "http://danielmarcelino.github.io"
-twitter_username: dmarcelinobr
-github_username:  danielmarcelino
-stackoverflow_username: "users/792000/daniel"
-linkedin_username: "daniel-marcelino-80968656"
-# facebook_username:  Daniel Marcelino
-email_username:  dmarcelino@live.com
-fb_app_id: "1529566150689415"
-google_analytics: "UA-24186657-1" 
-disqus_username: "@disqus_BWaSwvKMKm"
 
-# Build settings
-markdown: kramdown
-highlighter: rouge
-permalink: /blog/:year/:title.html
-paginate: 10
+# Jekyll configuration
+
+permalink:   /blog/:year/:title.html
 paginate_path: /page:num/
-exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
+markdown:    kramdown
+highlighter: rouge
+sass:
+  sass_dir: _sass
+  style: compressed
+gems:
+  - jekyll-sitemap
 
-gems: [jekyll-paginate, jekyll-feed]
+kramdown:
+  auto_ids: true
+  footnote_nr: 1
+  entity_output: as_char
+  toc_levels: 1..2
+  enable_coderay: false
+
+mathjax: true
+comments: true
+
+include: [".htaccess"]
+exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "*.sublime-project", "*.sublime-workspace", "test", "spec", "Gruntfile.js", "package.json", "node_modules", "Gemfile", "Gemfile.lock", "LICENSE", "README.md", "vendor"]
+
+
+# Site owner
+owner:
+  name: Daniel Marcelino
+  avatar: img/daniel_rio.jpg
+  email: dmarcelino@live.com
+  disqus-shortname: "@disqus_BWaSwvKMKm"
+  twitter: dmarcelinobr
+  facebook: 1529566150689415
+  github: danielmarcelino
+  stackexchange: "users/792000/daniel"
+  linkedin: "daniel-marcelino-80968656"
+  instagram: #username
+  flickr: #username
+  tumblr: #username
+  pinterest: #username
+  weibo: #userid
+  google:
+    plus: #username
+    analytics: UA-24186657-1
+    verify:
+    ad-client:
+    ad-slot:
+  bing-verify:

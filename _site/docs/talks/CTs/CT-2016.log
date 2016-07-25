@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.31)  27 MAR 2016 11:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.1.31)  2 JUN 2016 14:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -637,7 +637,7 @@ Package: beamerbasenavigation 2015/02/27  (rcs-revision 923f4bf87efa)
 y
 Package: beamerbasetheorems 2010/06/06  (rcs-revision 7e7cc5e53e9d)
  (/usr/local/texlive/2015basic/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2016/03/03 v2.15a AMS math features
+Package: amsmath 2016/03/10 v2.15b AMS math features
 \@mathmargin=\skip51
 
 For additional information on amsmath, use the `?' option.
@@ -654,7 +654,7 @@ Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen178
 )
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/amsmath/amsopn.sty
-Package: amsopn 1999/12/14 v2.01 operator names
+Package: amsopn 2016/03/08 v2.02 operator names
 )
 \inf@bad=\count140
 LaTeX Info: Redefining \frac on input line 199.
@@ -669,8 +669,8 @@ LaTeX Info: Redefining \cdots on input line 518.
 \Mathstrutbox@=\box51
 \strutbox@=\box52
 \big@size=\dimen179
-LaTeX Font Info:    Redeclaring font encoding OML on input line 630.
-LaTeX Font Info:    Redeclaring font encoding OMS on input line 631.
+LaTeX Font Info:    Redeclaring font encoding OML on input line 634.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 635.
 \macc@depth=\count145
 \c@MaxMatrixCols=\count146
 \dotsspace@=\muskip11
@@ -691,8 +691,8 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 631.
 \multlinegap=\skip52
 \multlinetaggap=\skip53
 \mathdisplay@stack=\toks36
-LaTeX Info: Redefining \[ on input line 2735.
-LaTeX Info: Redefining \] on input line 2736.
+LaTeX Info: Redefining \[ on input line 2739.
+LaTeX Info: Redefining \] on input line 2740.
 )
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/amscls/amsthm.sty
 Package: amsthm 2015/03/04 v2.20.2
@@ -976,7 +976,7 @@ Package: booktabs 2005/04/14 v1.61803 publication quality tables
 \@thisrulewidth=\dimen227
 )
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/tools/tabularx.sty
-Package: tabularx 2014/10/28 v2.10 `tabularx' package (DPC)
+Package: tabularx 2016/02/03 v2.11 `tabularx' package (DPC)
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/tools/array.sty
 Package: array 2014/10/28 v2.4c Tabular extension package (FMi)
@@ -1235,14 +1235,14 @@ Package: inputenc 2015/03/17 v1.2c Input encoding file
 \inpenc@posthook=\toks55
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/base/utf8.def
-File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
+File: utf8.def 2016/02/28 v1.1s UTF-8 support for inputenc
 Now handling font encoding OML ...
 ... no UTF-8 mapping file for font encoding OML
 Now handling font encoding T1 ...
 ... processing UTF-8 mapping file for font encoding T1
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/base/t1enc.dfu
-File: t1enc.dfu 2015/12/03 v1.1r UTF-8 support for inputenc
+File: t1enc.dfu 2016/02/28 v1.1s UTF-8 support for inputenc
    defining Unicode char U+00A0 (decimal 160)
    defining Unicode char U+00A1 (decimal 161)
    defining Unicode char U+00A3 (decimal 163)
@@ -1454,11 +1454,15 @@ File: t1enc.dfu 2015/12/03 v1.1r UTF-8 support for inputenc
    defining Unicode char U+0219 (decimal 537)
    defining Unicode char U+021A (decimal 538)
    defining Unicode char U+021B (decimal 539)
-   defining Unicode char U+01E02 (decimal 7682)
-   defining Unicode char U+01E03 (decimal 7683)
+   defining Unicode char U+1E02 (decimal 7682)
+   defining Unicode char U+1E03 (decimal 7683)
    defining Unicode char U+200C (decimal 8204)
+   defining Unicode char U+2010 (decimal 8208)
+   defining Unicode char U+2011 (decimal 8209)
+   defining Unicode char U+2012 (decimal 8210)
    defining Unicode char U+2013 (decimal 8211)
    defining Unicode char U+2014 (decimal 8212)
+   defining Unicode char U+2015 (decimal 8213)
    defining Unicode char U+2018 (decimal 8216)
    defining Unicode char U+2019 (decimal 8217)
    defining Unicode char U+201A (decimal 8218)
@@ -1475,7 +1479,7 @@ Now handling font encoding OT1 ...
 ... processing UTF-8 mapping file for font encoding OT1
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/base/ot1enc.dfu
-File: ot1enc.dfu 2015/12/03 v1.1r UTF-8 support for inputenc
+File: ot1enc.dfu 2016/02/28 v1.1s UTF-8 support for inputenc
    defining Unicode char U+00A0 (decimal 160)
    defining Unicode char U+00A1 (decimal 161)
    defining Unicode char U+00A3 (decimal 163)
@@ -1516,7 +1520,7 @@ Now handling font encoding OMS ...
 ... processing UTF-8 mapping file for font encoding OMS
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/base/omsenc.dfu
-File: omsenc.dfu 2015/12/03 v1.1r UTF-8 support for inputenc
+File: omsenc.dfu 2016/02/28 v1.1s UTF-8 support for inputenc
    defining Unicode char U+00A7 (decimal 167)
    defining Unicode char U+00B6 (decimal 182)
    defining Unicode char U+00B7 (decimal 183)
@@ -1597,65 +1601,44 @@ File: lstlang3.sty 2015/06/04 1.6 listings language file
 ))
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\\' on input line 6.
+(hyperref)                removing `\\' on input line 9.
 
-(./Sweave.sty
-Package: Sweave 
 
-(/usr/local/texlive/2015basic/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
-Package: fancyvrb 2008/02/07
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\\' on input line 9.
 
-Style option: `fancyvrb' v2.7a, with DG/SPQR fixes, and firstline=lastline fix 
-<2008/02/07> (tvz)
-\FV@CodeLineNo=\count194
-\FV@InFile=\read2
-\FV@TabBox=\box83
-\c@FancyVerbLine=\count195
-\FV@StepNumber=\count196
-\FV@OutFile=\write5
-)
-(/usr/local/texlive/2015basic/texmf-dist/tex/latex/base/fontenc.sty
-Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
 
-(/usr/local/texlive/2015basic/texmf-dist/tex/latex/base/t1enc.def
-File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
-LaTeX Font Info:    Redeclaring font encoding T1 on input line 48.
-))
-(/usr/local/texlive/2015basic/texmf-dist/tex/latex/ae/ae.sty
-Package: ae 2001/02/12 1.3 Almost European Computer Modern
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\\' on input line 9.
 
-(/usr/local/texlive/2015basic/texmf-dist/tex/latex/base/fontenc.sty
-Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
 
-(/usr/local/texlive/2015basic/texmf-dist/tex/latex/base/t1enc.def
-File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
-LaTeX Font Info:    Redeclaring font encoding T1 on input line 48.
-)
-LaTeX Font Info:    Try loading font information for T1+aer on input line 105.
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\\' on input line 9.
 
-(/usr/local/texlive/2015basic/texmf-dist/tex/latex/ae/t1aer.fd
-File: t1aer.fd 1997/11/16 Font definitions for T1/aer.
-))))
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\\' on input line 9.
+
 (./CT-2016.aux)
 \openout1 = `CT-2016.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 17.
-LaTeX Font Info:    ... okay on input line 17.
-LaTeX Font Info:    Try loading font information for T1+aess on input line 17.
- (/usr/local/texlive/2015basic/texmf-dist/tex/latex/ae/t1aess.fd
-File: t1aess.fd 1997/11/16 Font definitions for T1/aess.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Try loading font information for T1+lmss on input line 19.
+ (/usr/local/texlive/2015basic/texmf-dist/tex/latex/lm/t1lmss.fd
+File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1693,16 +1676,16 @@ File: t1aess.fd 1997/11/16 Font definitions for T1/aess.
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count197
+\scratchcounter=\count194
 \scratchdimen=\dimen273
-\scratchbox=\box84
-\nofMPsegments=\count198
-\nofMParguments=\count199
+\scratchbox=\box83
+\nofMPsegments=\count195
+\nofMParguments=\count196
 \everyMPshowfont=\toks56
-\MPscratchCnt=\count200
+\MPscratchCnt=\count197
 \MPscratchDim=\dimen274
-\MPnumerator=\count201
-\makeMPintoPDFobject=\count202
+\MPnumerator=\count198
+\makeMPintoPDFobject=\count199
 \everyMPtoPDFconversion=\toks57
 ) (/usr/local/texlive/2015basic/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
@@ -1718,8 +1701,8 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 )) ABD: EveryShipout initializing macros
-\AtBeginShipoutBox=\box85
-Package hyperref Info: Link coloring OFF on input line 17.
+\AtBeginShipoutBox=\box84
+Package hyperref Info: Link coloring OFF on input line 19.
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -1728,14 +1711,14 @@ Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 y
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count203
+\c@section@level=\count200
 )
-LaTeX Info: Redefining \ref on input line 17.
-LaTeX Info: Redefining \pageref on input line 17.
-LaTeX Info: Redefining \nameref on input line 17.
+LaTeX Info: Redefining \ref on input line 19.
+LaTeX Info: Redefining \pageref on input line 19.
+LaTeX Info: Redefining \nameref on input line 19.
  (./CT-2016.out) (./CT-2016.out)
-\@outlinefile=\write6
-\openout6 = `CT-2016.out'.
+\@outlinefile=\write5
+\openout5 = `CT-2016.out'.
 
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/beamer/translator/dicts/tran
@@ -1762,13 +1745,10 @@ Dictionary: translator-numbers-dictionary, Language: English
 slator-theorem-dictionary/translator-theorem-dictionary-English.dict
 Dictionary: translator-theorem-dictionary, Language: English 
 )
-LaTeX Info: Redefining \includegraphics on input line 17.
+LaTeX Info: Redefining \includegraphics on input line 19.
 
-
-Package pgfplots Warning: running in backwards compatibility mode (unsuitable t
-ick labels; missing features). Consider writing \pgfplotsset{compat=1.13} into 
-your preamble.
- on input line 17.
+Package pgfplots notification 'compat/show suggested version=true': you might b
+enefit from \pgfplotsset{compat=1.13} (current compat level: 1.11).
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/base/textcomp.sty
 Package: textcomp 2005/09/27 v1.99g Standard LaTeX package
@@ -1791,7 +1771,7 @@ Now handling font encoding TS1 ...
 ... processing UTF-8 mapping file for font encoding TS1
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/base/ts1enc.dfu
-File: ts1enc.dfu 2015/12/03 v1.1r UTF-8 support for inputenc
+File: ts1enc.dfu 2016/02/28 v1.1s UTF-8 support for inputenc
    defining Unicode char U+00A2 (decimal 162)
    defining Unicode char U+00A3 (decimal 163)
    defining Unicode char U+00A4 (decimal 164)
@@ -1926,52 +1906,50 @@ Package textcomp Info: Setting pplj sub-encoding to TS1/3 on input line 407.
 Package textcomp Info: Setting ptmx sub-encoding to TS1/4 on input line 408.
 Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 409.
 )
-\c@lstlisting=\count204
+\c@lstlisting=\count201
 
-(./CT-2016.nav) (./CT-2016-concordance.tex)
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 25.
-
-(/usr/local/texlive/2015basic/texmf-dist/tex/latex/lm/ot1lmr.fd
+(./CT-2016.nav)
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 28.
+ (/usr/local/texlive/2015basic/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 25.
-
-(/usr/local/texlive/2015basic/texmf-dist/tex/latex/lm/omllmm.fd
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 28.
+ (/usr/local/texlive/2015basic/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 25.
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 28.
 
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 25.
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 28.
 
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 25.
+(Font)              <10.95> on input line 28.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 25.
+(Font)              <8> on input line 28.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 25.
-LaTeX Font Info:    Try loading font information for U+msa on input line 25.
+(Font)              <6> on input line 28.
+LaTeX Font Info:    Try loading font information for U+msa on input line 28.
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 25.
+LaTeX Font Info:    Try loading font information for U+msb on input line 28.
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<figures/logo-ipea.png, id=59, 150.5625pt x 150.5625pt>
+<figures/logo-ipea.png, id=58, 150.5625pt x 150.5625pt>
 File: figures/logo-ipea.png Graphic file (type png)
 
 <use figures/logo-ipea.png>
-Package pdftex.def Info: figures/logo-ipea.png used on input line 25.
+Package pdftex.def Info: figures/logo-ipea.png used on input line 28.
 (pdftex.def)             Requested size: 28.45274pt x 28.45094pt.
  [1
 \pgfsyspdfmark {pgfid1}{23628727}{239180}
@@ -1982,7 +1960,7 @@ Package pdftex.def Info: figures/logo-ipea.png used on input line 25.
 figures/logo-ipea.png>] (./CT-2016.toc)
 File: figures/logo-ipea.png Graphic file (type png)
  <use figures/logo-ipea.png>
-Package pdftex.def Info: figures/logo-ipea.png used on input line 33.
+Package pdftex.def Info: figures/logo-ipea.png used on input line 36.
 (pdftex.def)             Requested size: 28.45274pt x 28.45094pt.
  [2
 \pgfsyspdfmark {pgfid5}{23628727}{239180}
@@ -1990,7 +1968,7 @@ Package pdftex.def Info: figures/logo-ipea.png used on input line 33.
 ]
 File: figures/logo-ipea.png Graphic file (type png)
  <use figures/logo-ipea.png>
-Package pdftex.def Info: figures/logo-ipea.png used on input line 39.
+Package pdftex.def Info: figures/logo-ipea.png used on input line 42.
 (pdftex.def)             Requested size: 28.45274pt x 28.45094pt.
  [3
 \pgfsyspdfmark {pgfid6}{23628727}{239180}
@@ -2001,7 +1979,7 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 )
 File: figures/logo-ipea.png Graphic file (type png)
  <use figures/logo-ipea.png>
-Package pdftex.def Info: figures/logo-ipea.png used on input line 42.
+Package pdftex.def Info: figures/logo-ipea.png used on input line 45.
 (pdftex.def)             Requested size: 28.45274pt x 28.45094pt.
  [4
 \pgfsyspdfmark {pgfid9}{23628727}{239180}
@@ -2009,7 +1987,7 @@ Package pdftex.def Info: figures/logo-ipea.png used on input line 42.
 ] (./sections/introducao.tex)
 File: figures/logo-ipea.png Graphic file (type png)
  <use figures/logo-ipea.png>
-Package pdftex.def Info: figures/logo-ipea.png used on input line 42.
+Package pdftex.def Info: figures/logo-ipea.png used on input line 45.
 (pdftex.def)             Requested size: 28.45274pt x 28.45094pt.
  [5
 \pgfsyspdfmark {pgfid12}{23628727}{239180}
@@ -2017,7 +1995,7 @@ Package pdftex.def Info: figures/logo-ipea.png used on input line 42.
 ] (./sections/introducao.tex)
 File: figures/logo-ipea.png Graphic file (type png)
  <use figures/logo-ipea.png>
-Package pdftex.def Info: figures/logo-ipea.png used on input line 42.
+Package pdftex.def Info: figures/logo-ipea.png used on input line 45.
 (pdftex.def)             Requested size: 28.45274pt x 28.45094pt.
  [6
 \pgfsyspdfmark {pgfid15}{23628727}{239180}
@@ -2025,16 +2003,16 @@ Package pdftex.def Info: figures/logo-ipea.png used on input line 42.
 ] (./sections/introducao.tex)
 File: figures/logo-ipea.png Graphic file (type png)
  <use figures/logo-ipea.png>
-Package pdftex.def Info: figures/logo-ipea.png used on input line 42.
+Package pdftex.def Info: figures/logo-ipea.png used on input line 45.
 (pdftex.def)             Requested size: 28.45274pt x 28.45094pt.
  [7
 \pgfsyspdfmark {pgfid18}{23628727}{239180}
 
-] <figures/mapa.pdf, id=115, 285.73642pt x 291.12814pt>
+] <figures/mapa.pdf, id=114, 285.73642pt x 291.12814pt>
 File: figures/mapa.pdf Graphic file (type pdf)
  <use figures/mapa.pdf>
-Package pdftex.def Info: figures/mapa.pdf used on input line 54.
-(pdftex.def)             Requested size: 217.88133pt x 221.99265pt.
+Package pdftex.def Info: figures/mapa.pdf used on input line 57.
+(pdftex.def)             Requested size: 217.93364pt x 222.04507pt.
 
 [8
 \pgfsyspdfmark {pgfid19}{23628727}{239180}
@@ -2042,7 +2020,7 @@ Package pdftex.def Info: figures/mapa.pdf used on input line 54.
  <./figures/mapa.pdf>]
 File: figures/logo-ipea.png Graphic file (type png)
  <use figures/logo-ipea.png>
-Package pdftex.def Info: figures/logo-ipea.png used on input line 59.
+Package pdftex.def Info: figures/logo-ipea.png used on input line 62.
 (pdftex.def)             Requested size: 28.45274pt x 28.45094pt.
  [9
 \pgfsyspdfmark {pgfid20}{23628727}{239180}
@@ -2050,7 +2028,7 @@ Package pdftex.def Info: figures/logo-ipea.png used on input line 59.
 ] (./sections/metodologia.tex)
 File: figures/logo-ipea.png Graphic file (type png)
  <use figures/logo-ipea.png>
-Package pdftex.def Info: figures/logo-ipea.png used on input line 62.
+Package pdftex.def Info: figures/logo-ipea.png used on input line 65.
 (pdftex.def)             Requested size: 28.45274pt x 28.45094pt.
  [10
 \pgfsyspdfmark {pgfid23}{23628727}{239180}
@@ -2058,7 +2036,7 @@ Package pdftex.def Info: figures/logo-ipea.png used on input line 62.
 ] (./sections/survey1.tex)
 File: figures/logo-ipea.png Graphic file (type png)
  <use figures/logo-ipea.png>
-Package pdftex.def Info: figures/logo-ipea.png used on input line 70.
+Package pdftex.def Info: figures/logo-ipea.png used on input line 73.
 (pdftex.def)             Requested size: 28.45274pt x 28.45094pt.
  [11
 \pgfsyspdfmark {pgfid27}{23628727}{239180}
@@ -2066,7 +2044,7 @@ Package pdftex.def Info: figures/logo-ipea.png used on input line 70.
 ] (./sections/survey2.tex)
 File: figures/logo-ipea.png Graphic file (type png)
  <use figures/logo-ipea.png>
-Package pdftex.def Info: figures/logo-ipea.png used on input line 76.
+Package pdftex.def Info: figures/logo-ipea.png used on input line 79.
 (pdftex.def)             Requested size: 28.45274pt x 28.45094pt.
  [12
 \pgfsyspdfmark {pgfid31}{23628727}{239180}
@@ -2074,7 +2052,7 @@ Package pdftex.def Info: figures/logo-ipea.png used on input line 76.
 ] (./sections/survey3.tex)
 File: figures/logo-ipea.png Graphic file (type png)
  <use figures/logo-ipea.png>
-Package pdftex.def Info: figures/logo-ipea.png used on input line 83.
+Package pdftex.def Info: figures/logo-ipea.png used on input line 86.
 (pdftex.def)             Requested size: 28.45274pt x 28.45094pt.
  [13
 \pgfsyspdfmark {pgfid35}{23628727}{239180}
@@ -2082,7 +2060,7 @@ Package pdftex.def Info: figures/logo-ipea.png used on input line 83.
 ]
 File: figures/logo-ipea.png Graphic file (type png)
  <use figures/logo-ipea.png>
-Package pdftex.def Info: figures/logo-ipea.png used on input line 88.
+Package pdftex.def Info: figures/logo-ipea.png used on input line 91.
 (pdftex.def)             Requested size: 28.45274pt x 28.45094pt.
  [14
 \pgfsyspdfmark {pgfid36}{23628727}{239180}
@@ -2090,7 +2068,7 @@ Package pdftex.def Info: figures/logo-ipea.png used on input line 88.
 ] (./sections/regic0.tex)
 File: figures/logo-ipea.png Graphic file (type png)
  <use figures/logo-ipea.png>
-Package pdftex.def Info: figures/logo-ipea.png used on input line 92.
+Package pdftex.def Info: figures/logo-ipea.png used on input line 95.
 (pdftex.def)             Requested size: 28.45274pt x 28.45094pt.
  [15
 \pgfsyspdfmark {pgfid39}{23628727}{239180}
@@ -2098,7 +2076,7 @@ Package pdftex.def Info: figures/logo-ipea.png used on input line 92.
 ] (./sections/regic1.tex)
 File: figures/logo-ipea.png Graphic file (type png)
  <use figures/logo-ipea.png>
-Package pdftex.def Info: figures/logo-ipea.png used on input line 99.
+Package pdftex.def Info: figures/logo-ipea.png used on input line 102.
 (pdftex.def)             Requested size: 28.45274pt x 28.45094pt.
  [16
 \pgfsyspdfmark {pgfid43}{23628727}{239180}
@@ -2106,7 +2084,7 @@ Package pdftex.def Info: figures/logo-ipea.png used on input line 99.
 ] (./sections/regic2.tex)
 File: figures/logo-ipea.png Graphic file (type png)
  <use figures/logo-ipea.png>
-Package pdftex.def Info: figures/logo-ipea.png used on input line 105.
+Package pdftex.def Info: figures/logo-ipea.png used on input line 108.
 (pdftex.def)             Requested size: 28.45274pt x 28.45094pt.
  [17
 \pgfsyspdfmark {pgfid44}{23628727}{239180}
@@ -2114,7 +2092,7 @@ Package pdftex.def Info: figures/logo-ipea.png used on input line 105.
 ] (./sections/regic3.tex)
 File: figures/logo-ipea.png Graphic file (type png)
  <use figures/logo-ipea.png>
-Package pdftex.def Info: figures/logo-ipea.png used on input line 111.
+Package pdftex.def Info: figures/logo-ipea.png used on input line 114.
 (pdftex.def)             Requested size: 28.45274pt x 28.45094pt.
  [18
 \pgfsyspdfmark {pgfid51}{23628727}{239180}
@@ -2122,20 +2100,20 @@ Package pdftex.def Info: figures/logo-ipea.png used on input line 111.
 ] (./sections/desenho.tex)
 File: figures/logo-ipea.png Graphic file (type png)
  <use figures/logo-ipea.png>
-Package pdftex.def Info: figures/logo-ipea.png used on input line 118.
+Package pdftex.def Info: figures/logo-ipea.png used on input line 121.
 (pdftex.def)             Requested size: 28.45274pt x 28.45094pt.
  [19
 \pgfsyspdfmark {pgfid52}{23628727}{239180}
 
-] <figures/desenho.png, id=191, 756.426pt x 262.581pt>
+] <figures/desenho.png, id=190, 756.426pt x 262.581pt>
 File: figures/desenho.png Graphic file (type png)
 
 <use figures/desenho.png>
-Package pdftex.def Info: figures/desenho.png used on input line 127.
+Package pdftex.def Info: figures/desenho.png used on input line 130.
 (pdftex.def)             Requested size: 341.43352pt x 118.52495pt.
 File: figures/logo-ipea.png Graphic file (type png)
  <use figures/logo-ipea.png>
-Package pdftex.def Info: figures/logo-ipea.png used on input line 127.
+Package pdftex.def Info: figures/logo-ipea.png used on input line 130.
 (pdftex.def)             Requested size: 28.45274pt x 28.45094pt.
  [20
 \pgfsyspdfmark {pgfid53}{23628727}{239180}
@@ -2143,7 +2121,7 @@ Package pdftex.def Info: figures/logo-ipea.png used on input line 127.
  <./figures/desenho.png>]
 File: figures/logo-ipea.png Graphic file (type png)
  <use figures/logo-ipea.png>
-Package pdftex.def Info: figures/logo-ipea.png used on input line 146.
+Package pdftex.def Info: figures/logo-ipea.png used on input line 149.
 (pdftex.def)             Requested size: 28.45274pt x 28.45094pt.
  [21
 \pgfsyspdfmark {pgfid54}{23628727}{239180}
@@ -2151,7 +2129,7 @@ Package pdftex.def Info: figures/logo-ipea.png used on input line 146.
 ]
 File: figures/logo-ipea.png Graphic file (type png)
  <use figures/logo-ipea.png>
-Package pdftex.def Info: figures/logo-ipea.png used on input line 146.
+Package pdftex.def Info: figures/logo-ipea.png used on input line 149.
 (pdftex.def)             Requested size: 28.45274pt x 28.45094pt.
  [22
 \pgfsyspdfmark {pgfid55}{23628727}{239180}
@@ -2159,7 +2137,7 @@ Package pdftex.def Info: figures/logo-ipea.png used on input line 146.
 ]
 File: figures/logo-ipea.png Graphic file (type png)
  <use figures/logo-ipea.png>
-Package pdftex.def Info: figures/logo-ipea.png used on input line 146.
+Package pdftex.def Info: figures/logo-ipea.png used on input line 149.
 (pdftex.def)             Requested size: 28.45274pt x 28.45094pt.
  [23
 \pgfsyspdfmark {pgfid56}{23628727}{239180}
@@ -2167,7 +2145,7 @@ Package pdftex.def Info: figures/logo-ipea.png used on input line 146.
 ]
 File: figures/logo-ipea.png Graphic file (type png)
  <use figures/logo-ipea.png>
-Package pdftex.def Info: figures/logo-ipea.png used on input line 146.
+Package pdftex.def Info: figures/logo-ipea.png used on input line 149.
 (pdftex.def)             Requested size: 28.45274pt x 28.45094pt.
  [24
 \pgfsyspdfmark {pgfid57}{23628727}{239180}
@@ -2175,7 +2153,7 @@ Package pdftex.def Info: figures/logo-ipea.png used on input line 146.
 ]
 File: figures/logo-ipea.png Graphic file (type png)
  <use figures/logo-ipea.png>
-Package pdftex.def Info: figures/logo-ipea.png used on input line 146.
+Package pdftex.def Info: figures/logo-ipea.png used on input line 149.
 (pdftex.def)             Requested size: 28.45274pt x 28.45094pt.
  [25
 \pgfsyspdfmark {pgfid58}{23628727}{239180}
@@ -2183,7 +2161,7 @@ Package pdftex.def Info: figures/logo-ipea.png used on input line 146.
 ]
 File: figures/logo-ipea.png Graphic file (type png)
  <use figures/logo-ipea.png>
-Package pdftex.def Info: figures/logo-ipea.png used on input line 146.
+Package pdftex.def Info: figures/logo-ipea.png used on input line 149.
 (pdftex.def)             Requested size: 28.45274pt x 28.45094pt.
  [26
 \pgfsyspdfmark {pgfid59}{23628727}{239180}
@@ -2191,7 +2169,7 @@ Package pdftex.def Info: figures/logo-ipea.png used on input line 146.
 ]
 File: figures/logo-ipea.png Graphic file (type png)
  <use figures/logo-ipea.png>
-Package pdftex.def Info: figures/logo-ipea.png used on input line 146.
+Package pdftex.def Info: figures/logo-ipea.png used on input line 149.
 (pdftex.def)             Requested size: 28.45274pt x 28.45094pt.
  [27
 \pgfsyspdfmark {pgfid60}{23628727}{239180}
@@ -2199,7 +2177,7 @@ Package pdftex.def Info: figures/logo-ipea.png used on input line 146.
 ]
 File: figures/logo-ipea.png Graphic file (type png)
  <use figures/logo-ipea.png>
-Package pdftex.def Info: figures/logo-ipea.png used on input line 146.
+Package pdftex.def Info: figures/logo-ipea.png used on input line 149.
 (pdftex.def)             Requested size: 28.45274pt x 28.45094pt.
  [28
 \pgfsyspdfmark {pgfid61}{23628727}{239180}
@@ -2207,7 +2185,7 @@ Package pdftex.def Info: figures/logo-ipea.png used on input line 146.
 ]
 File: figures/logo-ipea.png Graphic file (type png)
  <use figures/logo-ipea.png>
-Package pdftex.def Info: figures/logo-ipea.png used on input line 146.
+Package pdftex.def Info: figures/logo-ipea.png used on input line 149.
 (pdftex.def)             Requested size: 28.45274pt x 28.45094pt.
  [29
 \pgfsyspdfmark {pgfid62}{23628727}{239180}
@@ -2215,56 +2193,56 @@ Package pdftex.def Info: figures/logo-ipea.png used on input line 146.
 ]
 File: figures/logo-ipea.png Graphic file (type png)
  <use figures/logo-ipea.png>
-Package pdftex.def Info: figures/logo-ipea.png used on input line 195.
+Package pdftex.def Info: figures/logo-ipea.png used on input line 198.
 (pdftex.def)             Requested size: 28.45274pt x 28.45094pt.
  [30
 \pgfsyspdfmark {pgfid70}{23628727}{239180}
 
-\pgfsyspdfmark {pgfid63}{8384811}{12837173}
-\pgfsyspdfmark {pgfid64}{9501253}{9257765}
-\pgfsyspdfmark {pgfid65}{14113827}{9257765}
-\pgfsyspdfmark {pgfid66}{19317395}{9257765}
-\pgfsyspdfmark {pgfid67}{9543748}{7014432}
-\pgfsyspdfmark {pgfid68}{9500677}{5926534}
-\pgfsyspdfmark {pgfid69}{745860}{4482719}
+\pgfsyspdfmark {pgfid63}{8392534}{12838861}
+\pgfsyspdfmark {pgfid64}{9501253}{9259289}
+\pgfsyspdfmark {pgfid65}{14113827}{9259289}
+\pgfsyspdfmark {pgfid66}{19317395}{9259289}
+\pgfsyspdfmark {pgfid67}{9552643}{7009333}
+\pgfsyspdfmark {pgfid68}{9510804}{5921435}
+\pgfsyspdfmark {pgfid69}{745860}{4477456}
 ]
 File: figures/logo-ipea.png Graphic file (type png)
  <use figures/logo-ipea.png>
-Package pdftex.def Info: figures/logo-ipea.png used on input line 195.
+Package pdftex.def Info: figures/logo-ipea.png used on input line 198.
 (pdftex.def)             Requested size: 28.45274pt x 28.45094pt.
  [31
 \pgfsyspdfmark {pgfid78}{23628727}{239180}
 
-\pgfsyspdfmark {pgfid71}{8384811}{12837173}
-\pgfsyspdfmark {pgfid72}{9501253}{9257765}
-\pgfsyspdfmark {pgfid73}{14113827}{9257765}
-\pgfsyspdfmark {pgfid74}{19317395}{9257765}
-\pgfsyspdfmark {pgfid75}{9543748}{7014432}
-\pgfsyspdfmark {pgfid76}{9500677}{5926534}
-\pgfsyspdfmark {pgfid77}{745860}{4482719}
+\pgfsyspdfmark {pgfid71}{8392534}{12838861}
+\pgfsyspdfmark {pgfid72}{9501253}{9259289}
+\pgfsyspdfmark {pgfid73}{14113827}{9259289}
+\pgfsyspdfmark {pgfid74}{19317395}{9259289}
+\pgfsyspdfmark {pgfid75}{9552643}{7009333}
+\pgfsyspdfmark {pgfid76}{9510804}{5921435}
+\pgfsyspdfmark {pgfid77}{745860}{4477456}
 ]
 File: figures/logo-ipea.png Graphic file (type png)
  <use figures/logo-ipea.png>
-Package pdftex.def Info: figures/logo-ipea.png used on input line 195.
+Package pdftex.def Info: figures/logo-ipea.png used on input line 198.
 (pdftex.def)             Requested size: 28.45274pt x 28.45094pt.
  [32
 \pgfsyspdfmark {pgfid86}{23628727}{239180}
 
-\pgfsyspdfmark {pgfid79}{8384811}{12837173}
-\pgfsyspdfmark {pgfid80}{9501253}{9257765}
-\pgfsyspdfmark {pgfid81}{14113827}{9257765}
-\pgfsyspdfmark {pgfid82}{19317395}{9257765}
-\pgfsyspdfmark {pgfid83}{9543748}{7014432}
-\pgfsyspdfmark {pgfid84}{9500677}{5926534}
-\pgfsyspdfmark {pgfid85}{745860}{4482719}
+\pgfsyspdfmark {pgfid79}{8392534}{12838861}
+\pgfsyspdfmark {pgfid80}{9501253}{9259289}
+\pgfsyspdfmark {pgfid81}{14113827}{9259289}
+\pgfsyspdfmark {pgfid82}{19317395}{9259289}
+\pgfsyspdfmark {pgfid83}{9552643}{7009333}
+\pgfsyspdfmark {pgfid84}{9510804}{5921435}
+\pgfsyspdfmark {pgfid85}{745860}{4477456}
 ]
 File: figures/desenho.png Graphic file (type png)
  <use figures/desenho.png>
-Package pdftex.def Info: figures/desenho.png used on input line 202.
+Package pdftex.def Info: figures/desenho.png used on input line 205.
 (pdftex.def)             Requested size: 341.43352pt x 118.52495pt.
 File: figures/logo-ipea.png Graphic file (type png)
  <use figures/logo-ipea.png>
-Package pdftex.def Info: figures/logo-ipea.png used on input line 202.
+Package pdftex.def Info: figures/logo-ipea.png used on input line 205.
 (pdftex.def)             Requested size: 28.45274pt x 28.45094pt.
  [33
 \pgfsyspdfmark {pgfid87}{23628727}{239180}
@@ -2272,59 +2250,60 @@ Package pdftex.def Info: figures/logo-ipea.png used on input line 202.
 ]
 File: figures/logo-ipea.png Graphic file (type png)
  <use figures/logo-ipea.png>
-Package pdftex.def Info: figures/logo-ipea.png used on input line 210.
+Package pdftex.def Info: figures/logo-ipea.png used on input line 213.
 (pdftex.def)             Requested size: 28.45274pt x 28.45094pt.
  [34
 \pgfsyspdfmark {pgfid88}{23628727}{239180}
 
 ]
-\c@framenumberappendix=\count205
+\c@framenumberappendix=\count202
  [35
 \pgfsyspdfmark {pgfid89}{23628727}{239180}
 
 ]
-\tf@nav=\write7
-\openout7 = `CT-2016.nav'.
+\tf@nav=\write6
+\openout6 = `CT-2016.nav'.
 
-\tf@toc=\write8
-\openout8 = `CT-2016.toc'.
+\tf@toc=\write7
+\openout7 = `CT-2016.toc'.
 
-\tf@snm=\write9
-\openout9 = `CT-2016.snm'.
+\tf@snm=\write8
+\openout8 = `CT-2016.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 226.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 226.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 229.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 229.
  (./CT-2016.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 226.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 226.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 229.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 229.
 Package rerunfilecheck Info: File `CT-2016.out' has not changed.
 (rerunfilecheck)             Checksum: 551729346B942CB7BF8C32D1A0ED3A6D;248.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 226.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 229.
  ) 
 Here is how much of TeX's memory you used:
- 36423 strings out of 494501
- 852200 string characters out of 6167030
- 1047730 words of memory out of 5000000
- 38729 multiletter control sequences out of 15000+600000
- 46301 words of font info for 77 fonts, out of 8000000 for 9000
+ 35964 strings out of 494501
+ 844745 string characters out of 6167030
+ 1051151 words of memory out of 5000000
+ 38322 multiletter control sequences out of 15000+600000
+ 51741 words of font info for 49 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 71i,15n,85p,777b,827s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 71i,15n,86p,777b,823s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015basic/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/u
 sr/local/texlive/2015basic/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/
-texlive/2015basic/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}</usr/local/texli
-ve/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/t
-exlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/loca
-l/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></us
-r/local/texlive/2015basic/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/loc
-al/texlive/2015basic/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/tex
-live/2015basic/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2
-015basic/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2015basi
-c/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2015basic/tex
-mf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on CT-2016.pdf (35 pages, 368500 bytes).
+texlive/2015basic/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texli
+ve/2015basic/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</usr/local/texlive/2015ba
+sic/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texlive/2015basic/t
+exmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2015basic/texmf-d
+ist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2015basic/texmf-dist/fo
+nts/type1/public/lm/lmr8.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/typ
+e1/public/lm/lmss10.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/pu
+blic/lm/lmss8.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/l
+m/lmssbx10.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/lm/l
+msy10.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/
+symbols/msam10.pfb>
+Output written on CT-2016.pdf (35 pages, 397413 bytes).
 PDF statistics:
  334 PDF objects out of 1000 (max. 8388607)
- 249 compressed objects within 3 object streams
+ 250 compressed objects within 3 object streams
  77 named destinations out of 1000 (max. 500000)
- 226 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 222 words of extra memory for PDF output out of 10000 (max. 10000000)
 

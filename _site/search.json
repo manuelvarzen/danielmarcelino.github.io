@@ -1,0 +1,372 @@
+[
+
+  
+    {
+      "title"			: "Calculating Memory Requirements",
+      "link"			: "http://danielmarcelino.github.io/blog/2016/Calculating-Memory-Requirements.html",
+      "excerpt"		: "A post about size and memory requirements that a computer must have to deal with a data frame."
+    }
+  
+
+  
+    ,{
+      "title"			: "What is reproducible research?",
+      "link"			: "http://danielmarcelino.github.io/blog/2016/reproducible-research.html",
+      "excerpt"		: "<p>I was asked about my understanding of reproducible research, and how that applies to social research. 
+Here is how I see: Reproducible research is key to any scientific method, including applied social sciences. My minimalist understanding of reproducible research is quite simple: The capacity of repeating an experiment in any place with any person.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "R packaging industry close-up: How fast are we growing?",
+      "link"			: "http://danielmarcelino.github.io/blog/2016/how-fast-are-we-growing.html",
+      "excerpt"		: "<p>I worked a bit over the weekend preparing my talk to be delivered at the seminar organized by <a href="http://www.ibpad.com.br">IBPAD</a> this week at University of Brasilia, addressing the interfaces of Big Data and Society.
+I was invited to present the R package SciencesPo for an eclectic crowd. Eclectic in terms of background as well as familiarity with R, so, I thought it would be a fair introduction to call the audience’s attention to the R ecosystem, particularly, the growing number of specialized packages made available through CRAN.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Everything Ends on Wednesday",
+      "link"			: "http://danielmarcelino.github.io/blog/2016/Everything-Ends-on-Wednesday.html",
+      "excerpt"		: "<p>The Brazilian Carnival just ended this week, but for some people it is time to starting worry about crazy things that may have happened over the days of the flesh festival.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "The Star Wars Grossing War",
+      "link"			: "http://danielmarcelino.github.io/blog/2016/star-wars-grossing-war.html",
+      "excerpt"		: "<h1 id="motivation">Motivation</h1>
+<p>I finally made to the movies for watching the new <em>Star Wars</em> release this weekend. Although this episode wasn’t that spectacular, in my view, it did inspire some data seeking afterwards. I wanted to know how this film compares to others top movies in terms of worldwide grossing as well as within the <em>Star Wars</em> series.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Gender Effect in Conference Talks",
+      "link"			: "http://danielmarcelino.github.io/blog/2015/gender-effect-in-conference-talks.html",
+      "excerpt"		: "<p>I was searching in the arXiv repository for an interesting paper to read over the weekend, when I found this: <a href="http://arxiv.org/abs/1403.3091">“Studying Gender in Conference Talks – data from the 223rd meeting of the American Astronomical Society”</a>. The title and figures caught my attention more than the subject of the conference, I’ve to confess.</p>
+
+<p>The plot below, taken from the paper, displays the most significant finding from the analysis: <em>a strong dependence on session chair gender</em>. Overall, males ask more question than females, but there is a large difference in number of questions asked by males vis-à-vis number asked by females, given a male or female chair. I’m wondering if this also holds for other science fields where the gap between male and female researchers is that not abnormal.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Venezuelan Parliamentary Election: What do the Polls Say?",
+      "link"			: "http://danielmarcelino.github.io/blog/2015/venezuelan-parliamentary-elections.html",
+      "excerpt"		: "<p>There is not a huge population of opinion polls covering this parliamentary election in Venezuela, but all I’ve can be used to gauge the public opinion by the local polling houses. This posting begs an obvious question: how has the mood in Venezuela varied over time with respect to voting intentions for the two political blocs? Next, can we detect any biases among those publishing polls?</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Venezuela's 2015 Parliamentary Elections",
+      "link"			: "http://danielmarcelino.github.io/blog/2015/venezuelan-parliamentary-election-2015.html",
+      "excerpt"		: "<p>Next Sunday Venezuelans are heading to the polls once again with  international concerns about the clearness of the balloting. To get an idea about the political climate over there, I’ve collected some polls available on the internet. The surprising thing from those surveys is a tremendous variability from pollster to pollster about the single topic of voting intention. You may find national polls fielded in the same period with estimates varying as much as 20%, isn’t it dramatic? If you always wanted to see house bias operating in practice, the Venezuelan elections may provide you a good case then.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Retrieving Data from Google Books with `ngramr`",
+      "link"			: "http://danielmarcelino.github.io/blog/2015/retrieving-data-from-google-books-with-ngramr.html",
+      "excerpt"		: "<p><a href="https://en.wikipedia.org/wiki/Karl_Marx">Karl Marx</a> is the most famous founding fathers of modern sociology with a popularity peak in 1975-6, but declining ever since my little research using the <a href="https://books.google.com/ngrams">Google Ngram Viewer</a> suggests.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Competing views on Argentina's Frontrunner",
+      "link"			: "http://danielmarcelino.github.io/blog/2015/competing-views-in-argentina.html",
+      "excerpt"		: "<p>The last poll published today by <em>Polldata</em> put Scioli below 40%, with about 5% reporting being undecided.
+It might be too early to state anything solid, but the few polls prospecting the runoff election in Argentina seem to be telling two distinct histories. Polling houses <em>Hugo Haime</em> and <em>IPSOS</em> suggest that Daniel Scioli is going up while <em>Elypsis</em>  and <em>Polldata</em> say he’s actually sinking as the weeks go by. The last poll published today by <em>Polldata</em> puts Scioli below 40%, with about 5% reporting being undecided. My experience following  multiparty elections suggests that polls perform much better in the runoff than in primaries, meaning that the average of the polls now is much more close to the real vote preference than reported before.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "House Effects in Argentinian polling",
+      "link"			: "http://danielmarcelino.github.io/blog/2015/argentine-house-effects.html",
+      "excerpt"		: "<p>I’ve already <a href="http://danielmarcelino.com/r/08-2015/Argentine-general-election-2015/">posted</a> previously on “house effects”, the tendency of polling organizations to systematically vary in their results from one another. In this post, I look specifically at these house effects, and show which polling organizations over or under-estimate support for each candidate–compared to the average–in this presidential election in Argentina.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Paranormal Distribution",
+      "link"			: "http://danielmarcelino.github.io/blog/2015/paranormal-distribution.html",
+      "excerpt"		: "<p>What if, instead of a normal, you got a paranormal distribution?
+In case you want to read an influential paper on this matter, you can find it <a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2465539/">here</a>.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "A Talk About Campaign Finance in Brazil",
+      "link"			: "http://danielmarcelino.github.io/blog/2015/talk-about-campaign-finance.html",
+      "excerpt"		: "<p>Comments on campaign finance in brazil.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Understanding Margin of Error for Small Populations",
+      "link"			: "http://danielmarcelino.github.io/blog/2015/understanding-margin-of-error.html",
+      "excerpt"		: "<p>I got an email inquiring if the margin of sampling error reported in the newest poll by the Brazilian pollster Datafolha would be misleading. The polling firm often report surveys with regular sizes (1000/2400), so the margin of error calculated is in the range of +/-2% to +/-3%.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "The Butterfly Curve",
+      "link"			: "http://danielmarcelino.github.io/blog/2015/the-butterfly-curve.html",
+      "excerpt"		: "<p>Have you ever thought drawing your own butterfly?
+I came across the <a href="https://en.wikipedia.org/wiki/Butterfly_curve_%28transcendental%29">butterfly curve</a>, which was discovered by Temple Fay. The butterfly curve is produced by a parametric equation where:
+<mark>x = sin(t) * (e^cos(t)-2cos(λt)-sin(t/12)^5)</mark> and
+<mark>y = cos(t) * (e^cos(t)-2cos(λt)-sin(t/12)^5)</mark>.
+Where t stands for time and <code class="highlighter-rouge">λ</code> for a user input variable.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Isn't sad that all that matters in an election is the candidate's height?",
+      "link"			: "http://danielmarcelino.github.io/blog/2015/Isn't-sad-that-all-that-matters-in-an-election-is-the-candidate's-height.html",
+      "excerpt"		: "<p>A candidate’s stature may be more important in elections than we realized. I came across this claim in the US <a href="http://www.usnews.com/news/articles/2015/07/08/how-tall-are-the-2016-presidential-candidates">press</a> suggesting that the taller the candidate, the better his/her chances to succeed in the presidential elections.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "The Greek thing",
+      "link"			: "http://danielmarcelino.github.io/blog/2015/the-greek-thing.html",
+      "excerpt"		: "<p>Greeks have been quite volatile on their opinion whether they should accept or not a proposal by the country’s creditors for more austerity to keep aid flowing. The polls conducted over this week look like crazy, though that “belly” was likely provoked by the anxiety on what comes next after Greece not paying IMF back.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "R has a new consortium, should we celebrate?",
+      "link"			: "http://danielmarcelino.github.io/blog/2015/R-has-a-consortium-should-we-celebrate.html",
+      "excerpt"		: "<p>I was surprised by the news about the arising of a new organization for promoting R: the <a href="https://www.r-consortium.org">R Consortium</a>. It’s interesting that this new organization says it will do the same thing as the existing R Foundation.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Frente Amplio Winnability",
+      "link"			: "http://danielmarcelino.github.io/blog/2014/frente-amplio-winnability.html",
+      "excerpt"		: "<p>Uruguayan voters are about to give give <em>Frente Amplio</em> a third mandate this November 30th. The following graph shows how the outcome would look like if the election were held this week. The undecided voters were distributed accordingly to each party as by the election day. The picture draws the pdf’s for FA and PN vote support as published by 6 major polling houses. The script can de found here.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Runoff in Uruguay: FA is expected to win a third mandate",
+      "link"			: "http://danielmarcelino.github.io/blog/2014/Runoff-in-Uruguay-FA-is-expected-to-win-a-third-mandate.html",
+      "excerpt"		: "<p>Within 2 weeks, electors in Uruguay will vote for the runoff election between FA and PN. According to the polling data being published, it’s very likely Uruguayans will give FA a third mandate. I run the following forecast model which suggest that the difference between the two parties are huge; even greater than the number of undecided voters.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "A Bit More Fragmented",
+      "link"			: "http://danielmarcelino.github.io/blog/2014/A-bit-more-fragmented.html",
+      "excerpt"		: "<p>The 2014 election gave rise to an even more fragmented lower house in Brazil. This is important because higher values of political fragmentation suggest a less stable political environment in comparison with previous years.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Yep. He made it; country voted No",
+      "link"			: "http://danielmarcelino.github.io/blog/2014/yep-he-made-it-country-voted-no.html",
+      "excerpt"		: "<p>Yesterday, more Scots than ever since universal suffrage was introduced cast a ballot on the matter of independence.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Bayes says `don't worry` about Scotland's Referendum",
+      "link"			: "http://danielmarcelino.github.io/blog/2014/bayes-says-dont-worry-about-scotlands-referendum.html",
+      "excerpt"		: "<p>Just few hours before Scots head to the polls, there is not an overwhelming advantage of the anti-independence vote. Actually, the margin is shorter than last time <a href="http://danielmarcelino.com/what-are-the-odds-of-an-independent-scotland/">I looked at it</a>, but despite such a growing trend in favor of the “Yes” campaign in the last weeks, the “NO” side has an edge still. To frame this in terms of probabilities that \( \theta_{No} \) exceeds \( \theta_{Yes} \), I write a short function (replicated <a href="https://gist.github.com/danielmarcelino/9cab589e474dd09dadbc">here</a>) that will use simulation from the Dirichlet distributions to compute the posterior probability that “No” exceeds “Yes” shown in the lovely chart below.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Discontinuity Bayesian Forecasting",
+      "link"			: "http://danielmarcelino.github.io/blog/2014/discontinuity-bayesian-forecasting.html",
+      "excerpt"		: "<p>Maybe Bayesian linear filtering models are not enough to forecast Brazilian subnational elections.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Parallel computing in R",
+      "link"			: "http://danielmarcelino.github.io/blog/2014/Parallel-computing-in-R.html",
+      "excerpt"		: "<p>Parallel computing is incredibly useful, but not every thing worths distribute across as many cores as possible.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Do you believe in World Cup superstition?",
+      "link"			: "http://danielmarcelino.github.io/blog/2014/Do-you-believe-in-World-Cup-superstition.html",
+      "excerpt"		: "<p>If you believe in supernatural causality, you will love what the numbers of the World Cup have to say which team is going to win this Cup in Brazil. According to this numerology approach neither Brazil nor Germany or Netherlands will be the winner, but Uruguay. The table below shows my reason. This was produced using the googleVis Package. Script <a href="https://gist.github.com/danielmarcelino/83faf0e03c41fe6df857#file-superstition-r">here</a>.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Got Bootstrap?",
+      "link"			: "http://danielmarcelino.github.io/blog/2013/got-bootstrap.html",
+      "excerpt"		: "<p>I read a book by Michael Chernick and Robert LaBudde, <a href="http://www.amazon.com/gp/product/0470467045/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;%23038;creative=390957&amp;%23038;creativeASIN=0470467045&amp;%23038;linkCode=as2&amp;%23038;tag=danielmarceli-20">An Introduction to Bootstrap Methods with Applications to R</a>. It’s an interesting <em>oeuvre</em> for useRs of all stripes. The book brings lots of examples of bootstrapping applications, such as standard errors, confidence intervals, hypothesis testing, and bootstrap applied for time-series analysis. The showcases in the book draw upon libraries like the <strong>boot</strong> by Angelo Canty and Brian Ripley, which is a great package. However, I’d love to find in the book more examples on “how to do my own bootstrap program” instead, so I decided to write down these lines. Before starting any code, it might be a good idea to refresh what exactly bootstrap is, and why it is so relevant for data analysis nowadays.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Parallel Processing: When does it worth?",
+      "link"			: "http://danielmarcelino.github.io/blog/2013/parallel-processing-when-does-it-worth.html",
+      "excerpt"		: "<p>Parallel computing is incredibly useful, but not every thing worths distribute across as many cores as possible.</p>
+
+"
+    }
+  
+
+  
+    ,{
+      "title"			: "Showing Explained Variance in Multilevel Models",
+      "link"			: "http://danielmarcelino.github.io/blog/2011/explaining-variance-in-a-multilevel-model.html",
+      "excerpt"		: "<p>In this post I will show one way to display explained variance using a line chart.</p>
+
+"
+    }
+  
+
+
+
+  
+
+  
+
+  
+    ,{
+      "title"			: "Untitled",
+      "link"			: "http://danielmarcelino.github.io/docs/talks/WorldMap.Rmd",
+      "excerpt"		: ""
+    }
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    ,{
+      "title"			: "Theme Setup",
+      "link"			: "http://danielmarcelino.github.io/theme-setup/",
+      "excerpt"		: "Instructions on how to install and customize the Jekyll theme So Simple."
+    }
+  
+
+  
+    ,{
+      "title"			: "About Me",
+      "link"			: "http://danielmarcelino.github.io/about/",
+      "excerpt"		: ""
+    }
+  
+
+  
+
+  
+    ,{
+      "title"			: "Helpful Data Science Resources Elsewhere",
+      "link"			: "http://danielmarcelino.github.io/blogroll/",
+      "excerpt"		: ""
+    }
+  
+
+  
+    ,{
+      "title"			: "Current Interests",
+      "link"			: "http://danielmarcelino.github.io/interests/",
+      "excerpt"		: ""
+    }
+  
+
+  
+    ,{
+      "title"			: "Resume",
+      "link"			: "http://danielmarcelino.github.io/resume/",
+      "excerpt"		: ""
+    }
+  
+
+  
+
+  
+
+  
+
+]

@@ -1,0 +1,150 @@
+---
+title: "Untitled"
+author: "Daniel"
+date: "June 8, 2016"
+output: html_document
+---
+
+suppressPackageStartupMessages(library(dplyr))
+library(rvest)
+library(lubridate)
+library(ggplot2)
+library(scales)
+library(knitr)
+library(geonames)
+# you'll need to run the following line with your Geonames username
+# or put it in your .Rprofile
+# options(geonamesUsername = 'YOURUSERNAME')
+library(countrycode)
+library(sp)
+library(raster)
+library(rgeos)
+
+top_n(bigyear_by_day, 3, n) %>% 
+  inner_join(bigyear, by = 'date') %>% 
+  dplyr::select(day, date, country, n) %>% 
+  distinct %>% 
+  arrange(desc(n)) %>% 
+  kable
+  
+country_summ <- bigyear %>% 
+  group_by(continent_name, country, country_code) %>% 
+  summarize(n_species = n(), 
+            birding_days = n_distinct(day),
+            species_per_day = n_species / birding_days) %>% 
+  ungroup %>% 
+  mutate(country = factor(country),
+         country = reorder(country, n_species, max),
+         continent_name = factor(continent_name),
+         continent_name = reorder(continent_name, -n_species, min))
+
+ggplot(country_summ, aes(x = country, y = n_species, fill = continent_name)) + 
+  geom_bar(stat = 'identity') +
+  coord_flip() +
+  scale_fill_brewer(name='Continent', palette = 'Set1') +
+  labs(x = 'Country', y = '# new species seen')
+  
+  
+trend <- bigyear %>% 
+  group_by(date, continent_name) %>% 
+  summarize(n_species = max(species_num)) %>% 
+  ungroup %>% 
+  mutate(idx = (continent_name != lag(continent_name)),
+         continent_name = reorder(factor(continent_name), date, min))
+trend$grp <- c(1, which(trend$idx), nrow(trend) + 1) %>% 
+  diff %>% 
+  rep(1:length(.), .)
+
+ggplot(trend, aes(x = date, y = n_species, color = continent_name)) +
+  geom_line(aes(group = grp), size = .7) +
+  scale_x_date(labels = date_format("%b"),
+               breaks = date_breaks("month")) +
+  scale_y_continuous(breaks=1000 * (0:6),
+                     labels = comma) +
+  scale_color_brewer(name='Continent', palette = 'Set1') +
+  labs(x = 'Date', y = 'Cumulative number of species seen',
+       title = "Noah's Big Year: Species Accumulation by Continent")
+       
+       
+world_wgs <- shapefile('data/big-year/ne_110m_admin_0_countries.shp')
+bbox_wgs <- shapefile('data/big-year/ne_110m_wgs84_bounding_box.shp')
+grat_wgs <- shapefile('data/big-year/ne_110m_graticules_20.shp')
+
+
+
+This shapfile is more granular than I require, so I aggregate it so that each ISO alpha-2 code corresponds to a single polygon.
+
+world_wgs <- gUnaryUnion(world_wgs, id = world_wgs$iso_a2)
+
+
+These shapefiles are currently in unprojected coordinates (i.e. lat/long), so I project them to the Winkel tripel projection, a nice compromise projection for global maps, which is used by National Geographic. In addition, I convert the spatial objects to data frames to appease ggplot.
+
+world_wk_df <- spTransform(world_wgs, '+proj=wintri') %>% 
+  fortify
+bbox_wk_df <- spTransform(bbox_wgs, '+proj=wintri') %>% 
+  fortify
+grat_wk_df <- spTransform(grat_wgs, '+proj=wintri') %>% 
+  fortify
+
+
+Now I bring in the country-level sightings data.
+
+world_wk_df <- left_join(world_wk_df, country_summ, 
+                         by = c('id' = 'country_code'))
+Finally, I create the map:
+  
+  
+  
+```{r}
+
+  ggplot(bbox_wk_df, aes(long, lat, group = group)) +
+  geom_polygon(fill = 'light blue') +
+  geom_path(data = grat_wk_df, aes(long, lat, group = group, fill = NULL), 
+            linetype = 'dashed', color = 'grey70', size = 0.25) +
+  geom_polygon(data = world_wk_df, 
+               aes(long, lat, group = group, fill = n_species), 
+               color = 'white', size = 0.15) +
+  scale_fill_gradient(name = '# new species', limits = c(0, 500), 
+                      low = 'yellow', high = 'red') +
+  labs(title = "Noah's Big Year: New Species by Country") +
+  coord_equal() +
+  theme(axis.line = element_blank(),
+        axis.text.x = element_blank(), axis.text.y = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title.x = element_blank(), axis.title.y = element_blank(),
+        panel.background = element_blank(),
+        panel.border = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        plot.background = element_blank(),
+        legend.position = 'bottom',
+        legend.key.width = unit(1, "cm"))
+
+```
+
+
+```{r}
+
+ggplot(bbox_wk_df, aes(long, lat, group = group)) +
+  geom_polygon(fill = 'light blue') +
+  geom_path(data = grat_wk_df, aes(long, lat, group = group, fill = NULL), 
+            linetype = 'dashed', color = 'grey70', size = 0.25) +
+  geom_polygon(data = world_wk_df, 
+               aes(long, lat, group = group, fill = species_per_day), 
+               color = 'white', size = 0.15) +
+  scale_fill_gradient(name = 'Mean new species / day', limits = c(0, 40),
+                       low = 'yellow', high = 'red') +
+  labs(title = "Noah's Big Year: New Species per Day by Country") +
+  coord_equal() +
+  theme(axis.line = element_blank(),
+        axis.text.x = element_blank(), axis.text.y = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title.x = element_blank(), axis.title.y = element_blank(),
+        panel.background = element_blank(),
+        panel.border = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        plot.background = element_blank(),
+        legend.position = 'bottom',
+        legend.key.width = unit(1, "cm"))
+```        

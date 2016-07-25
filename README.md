@@ -1,32 +1,30 @@
-## About
+# So Simple Theme
 
-Scripts and data to recreate analyses published on my [personal site](http://danielmarcelino.com) and/or [http://danielmarcelino.github.io](http://danielmarcelino.github.io).
+Looking for a simple, responsive, theme for your Jekyll powered blog? Well look no further. Here be **So Simple Theme**, the followup to [**Minimal Mistakes**](http://mmistakes.github.io/minimal-mistakes/) -- by designer slash illustrator [Michael Rose](http://mademistakes.com).
 
-</hr>
-## Blog
-There's a TODO list of rough ideas (of varying quality) that I might try to do some day, but by all means beat me to them and share the result!
+[![Build Status](https://travis-ci.org/mmistakes/so-simple-theme.svg?branch=master)](https://travis-ci.org/mmistakes/so-simple-theme)
 
-Some of the scripts make use of *SciencesPo* which can be installed with: install.packages("SciencesPo"). Calls to theme_pub() or theme_538() can just be deleted or replaced with theme_bw() to avoid error message.
+## So Simple Theme is all about:
 
-</hr>
+* Responsive templates. Looking good on mobile, tablet, and desktop.
+* Gracefully degrading in older browsers. Compatible with Internet Explorer 9+ and all modern browsers.
+* Minimal embellishments and subtle animations.
+* Optional large feature images for posts and pages.
+* [Custom 404 page](http://mmistakes.github.io/so-simple-theme/404.html) to get you started.
+* Basic [search capabilities](https://github.com/mathaywarduk/jekyll-search)
+* Support for Disqus Comments
 
-## Contents
-1. Showing explained variance from multilevel models [Post](http://danielmarcelino.github.io/blog/2011/10/03/explaining-variance-in-a-multilevel-model.html)
+![screenshot of So Simple Theme](http://mmistakes.github.io/so-simple-theme/images/so-simple-theme-preview.jpg)
 
-2. ...
+See a [live version of So Simple](http://mmistakes.github.io/so-simple-theme/) hosted on GitHub.
 
-3. Venezuela's 2015 Parliamentary Elections [Post](http://danielmarcelino.github.io/blog/2015/12/04/venezuelan-parliamentary-election-2015.html)
-4. Venezuelan Parliamentary Election: What do the Polls Say? [Post](https://danielmarcelino.github.io/blog/2015/12/06/venezuelan-parliamentary-elections.html)
-5. [Gender Effect in Conference Talks](http://danielmarcelino.github.io/blog/2015/gender-effect-in-conference-talks.html)
-6. [The Star Wars Grossing War](http://danielmarcelino.github.io/blog/2016/star-wars-grossing-war.html)
-7.
-8.
-9.
+---
 
-</hr>
+## Getting Started
 
-## License
+So Simple takes advantage of Sass and data files to make customizing easier. These features require Jekyll 2.x and will not work with older versions of Jekyll.
 
-Unless otherwise noted, all content under a 
-[Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](http://creativecommons.org/licenses/by-nc-sa/4.0/) 
-license. If you do use something, a link back to [http://danielmarcelino.com](http://danielmarcelino.github.io) would be highly appreciated.
+To learn how to install and use this theme check out the [Setup Guide](http://mmistakes.github.io/so-simple-theme/theme-setup/) for more information.
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/mmistakes/so-simple-theme/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+

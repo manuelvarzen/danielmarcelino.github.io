@@ -1,157 +1,157 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
-
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
+<meta charset="utf-8">
+<title>Got Bootstrap? &#8211; Data * Analysis + R</title>
+<meta name="description" content="I read a book by Michael Chernick and Robert LaBudde, An Introduction to Bootstrap Methods with Applications to R. It’s an interesting oeuvre for useRs of all stripes. The book brings lots of examples of bootstrapping applications, such as standard errors, confidence intervals, hypothesis testing, and bootstrap applied for time-series analysis. The showcases in the book draw upon libraries like the boot by Angelo Canty and Brian Ripley, which is a great package. However, I’d love to find in the book more examples on “how to do my own bootstrap program” instead, so I decided to write down these lines. Before starting any code, it might be a good idea to refresh what exactly bootstrap is, and why it is so relevant for data analysis nowadays.
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Blog of Daniel Marcelino">
+">
+<meta name="keywords" content="R, Bootstrap">
 
-    <title>Got Bootstrap? - Data * Analysis + R</title>
 
-    <link rel="canonical" href="http://danielmarcelino.github.io/blog/2013/got-bootstrap.html">
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Got Bootstrap?">
+<meta name="twitter:description" content="I read a book by Michael Chernick and Robert LaBudde, An Introduction to Bootstrap Methods with Applications to R. It’s an interesting oeuvre for useRs of all stripes. The book brings lots of examples of bootstrapping applications, such as standard errors, confidence intervals, hypothesis testing, and bootstrap applied for time-series analysis. The showcases in the book draw upon libraries like the boot by Angelo Canty and Brian Ripley, which is a great package. However, I’d love to find in the book more examples on “how to do my own bootstrap program” instead, so I decided to write down these lines. Before starting any code, it might be a good idea to refresh what exactly bootstrap is, and why it is so relevant for data analysis nowadays.
 
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+">
+<meta name="twitter:site" content="@dmarcelinobr">
+<meta name="twitter:creator" content="@dmarcelinobr">
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/clean-blog.css">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://danielmarcelino.github.io/images/img/daniel_rio.jpg">
 
-    <!-- Pygments Github CSS -->
-    <link rel="stylesheet" href="/css/syntax.css">
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Got Bootstrap?">
+<meta property="og:description" content="I read a book by Michael Chernick and Robert LaBudde, An Introduction to Bootstrap Methods with Applications to R. It’s an interesting oeuvre for useRs of all stripes. The book brings lots of examples of bootstrapping applications, such as standard errors, confidence intervals, hypothesis testing, and bootstrap applied for time-series analysis. The showcases in the book draw upon libraries like the boot by Angelo Canty and Brian Ripley, which is a great package. However, I’d love to find in the book more examples on “how to do my own bootstrap program” instead, so I decided to write down these lines. Before starting any code, it might be a good idea to refresh what exactly bootstrap is, and why it is so relevant for data analysis nowadays.
 
-    <!-- Custom Fonts -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+">
+<meta property="og:url" content="http://danielmarcelino.github.io/blog/2013/got-bootstrap.html">
+<meta property="og:site_name" content="Data * Analysis + R">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 
-    <link type="application/atom+xml" rel="alternate" href="http://danielmarcelino.github.io/feed.xml" title="Data * Analysis + R" />
+
+
+
+<link rel="canonical" href="http://danielmarcelino.github.io/blog/2013/got-bootstrap.html">
+<link href="http://danielmarcelino.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Data * Analysis + R Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://danielmarcelino.github.io/assets/css/main.css">
+<!-- Webfonts -->
+<script src="https://use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+  <script src="http://danielmarcelino.github.io/assets/js/vendor/html5shiv.min.js"></script>
+  <script src="http://danielmarcelino.github.io/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="http://danielmarcelino.github.io/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+
+<!-- MathJax -->
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="http://danielmarcelino.github.io/favicon.ico?r=31241">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="http://danielmarcelino.github.io/favicon.png?r=31241">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="http://danielmarcelino.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://danielmarcelino.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://danielmarcelino.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://danielmarcelino.github.io/images/apple-touch-icon-144x144-precomposed.png">
 
 </head>
 
+<body id="post">
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+      
+		    
+		    <li><a href="http://danielmarcelino.github.io/home/" >Home</a></li>
+		  
+		    
+		    <li><a href="http://danielmarcelino.github.io/blog/" >Blog</a></li>
+		  
+		    
+		    <li><a href="http://danielmarcelino.github.io/interests/" >Interests</a></li>
+		  
+		    
+		    <li><a href="http://danielmarcelino.github.io/about/" >About</a></li>
+		  
+		    
+		    <li><a href="http://danielmarcelino.github.io/randomwalks/" >Random Walks</a></li>
+		  
+		    
+		    <li><a href="http://danielmarcelino.github.io/blogroll/" >Resources</a></li>
+		  
+		    
+		    <li><a href="http://danielmarcelino.github.io/search/" >Search</a></li>
+		  
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
 
-  ga('create', 'UA-24186657-1', 'danielmarcelino.github.io');
-  ga('send', 'pageview');
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
 
-</script>
+<header class="masthead">
+	<div class="wrap">
+      
+  		<a href="http://danielmarcelino.github.io/" class="site-logo" rel="home" title="Data * Analysis + R"><img src="http://danielmarcelino.github.io/images/img/daniel_rio.jpg" width="200" height="200" alt="Data * Analysis + R logo" class="animated fadeInDown"></a>
+      
+      <h1 class="site-title animated fadeIn"><a href="http://danielmarcelino.github.io/">Data * Analysis + R</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">Blog of Daniel Marcelino</h2>
+	</div>
+</header><!-- /.masthead -->
 
-<body>
-
-    <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <!-- <a class="navbar-brand" href="/">Data * Analysis + R</a> -->
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="/">Home</a>
-                </li>
-                <li>
-                    <a href="/blog/">Blog</a>
-                </li>
-                <li>
-                    <a href="/interests/">Interests</a>
-                </li>
-                <li>
-                    <a href="/randomwalks/">Random Walks</a>
-                </li>
-                  <li>
-                    <a href="/about/">About</a>
-                </li>
-		  		<li>
-		  		  <a href="/" class="nav-search-link" title="Search">
-		  		    <span class="fa fa-search nav-search-icon"></span>
-		  		  </a>
-		  		</li>
-		        </ul>
-                
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-</nav>
+<div class="js-menu-screen menu-screen"></div>
 
 
-    <script language="javascript">
-    function typeset() {
-        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
-    }
-
-    function disqus_config() {
-        this.callbacks.onNewComment = [typeset];
-        this.callbacks.onInit = [typeset];
-    }
-
-
-    if(window.MathJax===undefined){
-        var script = document.createElement("script");
-        script.type = "text/javascript";
-        script.src  = "http://cdn.mathjax.org/mathjax/latest/MathJax.js";
-        var config = 'MathJax.Hub.Config({' +
-                    'extensions: ["tex2jax.js"],' +
-                    'tex2jax: { inlineMath: [ ["$","$"]], displayMath: [["\$$","\$$"]], processEscapes: true },' +
-                    'jax: ["input/TeX","output/HTML-CSS"]' +
-                    '});' +
-                    'MathJax.Hub.Startup.onload();';
-        if (window.opera)
-            script.innerHTML = config;
-        else
-            script.text = config;
-        document.getElementsByTagName("head")[0].appendChild(script);
-    }
-</script>
-
-
-<!-- Post Header -->
-<header class="intro-header" style="background-image: url('/img/website/spaghetti.png')">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="post-heading">
-                    <h1>Got Bootstrap?</h1>
-                    
-                    <span class="meta">Posted by Data * Analysis + R on June 23, 2013</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
-				<p>I read a book by Michael Chernick and Robert LaBudde, <a href="http://www.amazon.com/gp/product/0470467045/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;%23038;creative=390957&amp;%23038;creativeASIN=0470467045&amp;%23038;linkCode=as2&amp;%23038;tag=danielmarceli-20">An Introduction to Bootstrap Methods with Applications to R</a>. It’s an interesting <em>oeuvre</em> for useRs of all stripes. The book brings lots of examples of bootstrapping applications, such as standard errors, confidence intervals, hypothesis testing, and bootstrap applied for time-series analysis. The showcases in the book draw upon libraries like the <strong>boot</strong> by Angelo Canty and Brian Ripley, which is a great package. However, I’d love to find in the book more examples on “how to do my own bootstrap program” instead, so I decided to write down these lines. Before starting any code, it might be a good idea to refresh what exactly bootstrap is, and why it is so relevant for data analysis nowadays.</p>
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <span class="entry-tags"><a href="http://danielmarcelino.github.io/tags/#R" title="Pages tagged R">R</a>&nbsp;&bull;&nbsp;<a href="http://danielmarcelino.github.io/tags/#Bootstrap" title="Pages tagged Bootstrap">Bootstrap</a></span>
+        
+          <h1 class="entry-title">Got Bootstrap?</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        
+        
+          <img src="http://danielmarcelino.github.io/images/img/daniel_rio.jpg" class="bio-photo" alt="Daniel Marcelino bio photo"></a>
+        
+        <span class="author vcard">By <span class="fn">Daniel Marcelino</span></span>
+        <span class="entry-date date published"><time datetime="2013-06-23T00:00:00-03:00"><i class="fa fa-calendar-o"></i> June 23, 2013</time></span>
+        
+        <span class="entry-comments"><i class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
+        
+        
+      </footer>
+      <div class="entry-content">
+        <p>I read a book by Michael Chernick and Robert LaBudde, <a href="http://www.amazon.com/gp/product/0470467045/ref=as_li_ss_tl?ie=UTF8&amp;camp=1789&amp;%23038;creative=390957&amp;%23038;creativeASIN=0470467045&amp;%23038;linkCode=as2&amp;%23038;tag=danielmarceli-20">An Introduction to Bootstrap Methods with Applications to R</a>. It’s an interesting <em>oeuvre</em> for useRs of all stripes. The book brings lots of examples of bootstrapping applications, such as standard errors, confidence intervals, hypothesis testing, and bootstrap applied for time-series analysis. The showcases in the book draw upon libraries like the <strong>boot</strong> by Angelo Canty and Brian Ripley, which is a great package. However, I’d love to find in the book more examples on “how to do my own bootstrap program” instead, so I decided to write down these lines. Before starting any code, it might be a good idea to refresh what exactly bootstrap is, and why it is so relevant for data analysis nowadays.</p>
 
 <p>The objective of bootstrapping is to provide an estimation of a parameter based on the data, such as standard deviation, mean, or median. The technique itself was introduced by Brad Efron in 1979. Third years before, however, Quenouille had introduced the jackknife method, and permutation tests were already described by Fisher in the early1930s. Hence, Efron’s resampling procedure build upon these pioneering methods and propose a simplification of them. Although, his original idea was a simple approximation of the jackknife method, depending on the context, computing a statistic from an estimator using bootstrap is as good as or even superior to jackknife method. Nonetheless, because the complexity to deal with big numbers $n^n$, for instance, a sample of size n=10 demands a huge computation: 10 billion, the bootstrapping—in practice—relies on Monte Carlo approximation rather than analytically computation.</p>
 
@@ -163,181 +163,185 @@
 
 <p>To apply the bootstrap, in the following example I’m going to use data (NLS-Y) from Griliches (1976) about the impact of years of schooling on individual revenues. These data are used in many econometric books, including one by Hayashi (2000), and are replicated in the SciencePo package, for educational reason, so you can easily get them by using the following commands:</p>
 
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">require</span><span class="p">(</span><span class="s1">'SciencePo'</span><span class="p">))</span> <span class="n">install.packages</span><span class="p">(</span><span class="s1">'SciencePo'</span><span class="p">)</span>
-<span class="n">data</span><span class="p">(</span><span class="n">griliches76</span><span class="p">,</span> <span class="n">package</span><span class="o">=</span><span class="s2">"SciencePo"</span><span class="p">)</span>
-<span class="n">detail</span><span class="p">(</span><span class="n">griliches76</span><span class="p">)</span>
-<span class="n">summary</span><span class="p">(</span><span class="n">lm</span><span class="p">(</span><span class="n">lw</span><span class="o">~</span><span class="n">s</span><span class="o">+</span><span class="n">age</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">griliches76</span><span class="p">))</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">require</span><span class="p">(</span><span class="s1">'SciencePo'</span><span class="p">))</span><span class="w"> </span><span class="n">install.packages</span><span class="p">(</span><span class="s1">'SciencePo'</span><span class="p">)</span><span class="w">
+</span><span class="n">data</span><span class="p">(</span><span class="n">griliches76</span><span class="p">,</span><span class="w"> </span><span class="n">package</span><span class="o">=</span><span class="s2">"SciencePo"</span><span class="p">)</span><span class="w">
+</span><span class="n">detail</span><span class="p">(</span><span class="n">griliches76</span><span class="p">)</span><span class="w">
+</span><span class="n">summary</span><span class="p">(</span><span class="n">lm</span><span class="p">(</span><span class="n">lw</span><span class="o">~</span><span class="n">s</span><span class="o">+</span><span class="n">age</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">griliches76</span><span class="p">))</span></code></pre></figure>
 
 <p>To apply the bootstrap on the estimates, I used years of schooling “s” and IQ score “iq” to estimate the individual log wage rate “lw”—the dependent variable; therefore, the OLS equation is simply “lw = s + iq”. Which yield for the following statistics:</p>
 
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">Call</span><span class="o">:</span>
-<span class="n">lm</span><span class="p">(</span><span class="n">formula</span> <span class="o">=</span> <span class="n">lw</span> <span class="o">~</span> <span class="n">s</span> <span class="o">+</span> <span class="n">iq</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">griliches76</span><span class="p">)</span>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">Call</span><span class="o">:</span><span class="w">
+</span><span class="n">lm</span><span class="p">(</span><span class="n">formula</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lw</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">iq</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">griliches76</span><span class="p">)</span><span class="w">
 
-<span class="n">Residuals</span><span class="o">:</span>
-    <span class="n">Min</span>      <span class="m">1</span><span class="n">Q</span>  <span class="n">Median</span>      <span class="m">3</span><span class="n">Q</span>     <span class="n">Max</span> 
-<span class="m">-1.2817</span> <span class="m">-0.2436</span>  <span class="m">0.0009</span>  <span class="m">0.2424</span>  <span class="m">1.1050</span> 
+</span><span class="n">Residuals</span><span class="o">:</span><span class="w">
+    </span><span class="n">Min</span><span class="w">      </span><span class="m">1</span><span class="n">Q</span><span class="w">  </span><span class="n">Median</span><span class="w">      </span><span class="m">3</span><span class="n">Q</span><span class="w">     </span><span class="n">Max</span><span class="w"> 
+</span><span class="m">-1.2817</span><span class="w"> </span><span class="m">-0.2436</span><span class="w">  </span><span class="m">0.0009</span><span class="w">  </span><span class="m">0.2424</span><span class="w">  </span><span class="m">1.1050</span><span class="w"> 
 
-<span class="n">Coefficients</span><span class="o">:</span>
-            <span class="n">Estimate</span> <span class="n">Std.</span> <span class="n">Error</span> <span class="n">t</span> <span class="n">value</span> <span class="n">Pr</span><span class="p">(</span><span class="o">&gt;|</span><span class="n">t</span><span class="o">|</span><span class="p">)</span>
-<span class="p">(</span><span class="n">Intercept</span><span class="p">)</span>  <span class="m">4.15573</span>    <span class="m">0.10810</span>   <span class="m">38.44</span>  <span class="o">&lt;</span> <span class="m">2e-16</span>
-<span class="n">s</span>            <span class="m">0.08470</span>    <span class="m">0.00699</span>   <span class="m">12.11</span>  <span class="o">&lt;</span> <span class="m">2e-16</span>
-<span class="n">iq</span>           <span class="m">0.00381</span>    <span class="m">0.00115</span>    <span class="m">3.32</span>  <span class="m">0.00093</span>
+</span><span class="n">Coefficients</span><span class="o">:</span><span class="w">
+            </span><span class="n">Estimate</span><span class="w"> </span><span class="n">Std.</span><span class="w"> </span><span class="n">Error</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">Pr</span><span class="p">(</span><span class="o">&gt;|</span><span class="n">t</span><span class="o">|</span><span class="p">)</span><span class="w">
+</span><span class="p">(</span><span class="n">Intercept</span><span class="p">)</span><span class="w">  </span><span class="m">4.15573</span><span class="w">    </span><span class="m">0.10810</span><span class="w">   </span><span class="m">38.44</span><span class="w">  </span><span class="o">&lt;</span><span class="w"> </span><span class="m">2e-16</span><span class="w">
+</span><span class="n">s</span><span class="w">            </span><span class="m">0.08470</span><span class="w">    </span><span class="m">0.00699</span><span class="w">   </span><span class="m">12.11</span><span class="w">  </span><span class="o">&lt;</span><span class="w"> </span><span class="m">2e-16</span><span class="w">
+</span><span class="n">iq</span><span class="w">           </span><span class="m">0.00381</span><span class="w">    </span><span class="m">0.00115</span><span class="w">    </span><span class="m">3.32</span><span class="w">  </span><span class="m">0.00093</span><span class="w">
 
-<span class="n">Residual</span> <span class="n">standard</span> <span class="n">error</span><span class="o">:</span> <span class="m">0.369</span> <span class="n">on</span> <span class="m">755</span> <span class="n">degrees</span> <span class="n">of</span> <span class="n">freedom</span>
-<span class="n">Multiple</span> <span class="n">R</span><span class="o">-</span><span class="n">squared</span><span class="o">:</span>  <span class="m">0.264</span><span class="p">,</span>    <span class="n">Adjusted</span> <span class="n">R</span><span class="o">-</span><span class="n">squared</span><span class="o">:</span>  <span class="m">0.262</span> 
-<span class="n">F</span><span class="o">-</span><span class="n">statistic</span><span class="o">:</span>  <span class="m">135</span> <span class="n">on</span> <span class="m">2</span> <span class="n">and</span> <span class="m">755</span> <span class="n">DF</span><span class="p">,</span>  <span class="n">p</span><span class="o">-</span><span class="n">value</span><span class="o">:</span> <span class="o">&lt;</span><span class="m">2e-16</span></code></pre></figure>
+</span><span class="n">Residual</span><span class="w"> </span><span class="n">standard</span><span class="w"> </span><span class="n">error</span><span class="o">:</span><span class="w"> </span><span class="m">0.369</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="m">755</span><span class="w"> </span><span class="n">degrees</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">freedom</span><span class="w">
+</span><span class="n">Multiple</span><span class="w"> </span><span class="n">R</span><span class="o">-</span><span class="n">squared</span><span class="o">:</span><span class="w">  </span><span class="m">0.264</span><span class="p">,</span><span class="w">    </span><span class="n">Adjusted</span><span class="w"> </span><span class="n">R</span><span class="o">-</span><span class="n">squared</span><span class="o">:</span><span class="w">  </span><span class="m">0.262</span><span class="w"> 
+</span><span class="nb">F</span><span class="o">-</span><span class="n">statistic</span><span class="o">:</span><span class="w">  </span><span class="m">135</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="m">755</span><span class="w"> </span><span class="n">DF</span><span class="p">,</span><span class="w">  </span><span class="n">p</span><span class="o">-</span><span class="n">value</span><span class="o">:</span><span class="w"> </span><span class="o">&lt;</span><span class="m">2e-16</span></code></pre></figure>
 
 <p>Based on these estimates, we can see that “s” has a standard error six times greater that of “iq” parameter. Now, for the sake of the doubt, let’s say you want to bootstrap the estimates and calculate the standard deviation of 10 thousands resamples on the fly. Because the standard deviation shows how much variation or dispersion exists from the average. A low standard deviation for the estimates (intercept, “s”, and “iq”) indicates that the data points tend to be very close to the mean.</p>
 
 <p>As you will learn, building such an exercise in R is incredible straightforward. First, you want to draw a function that takes data and the estimators for generating standard deviations for each variable. Second, you want to draw a function to bootstrap the standard deviation, as in the following.</p>
 
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">myboot</span><span class="o">&lt;-</span><span class="k">function</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">stat</span><span class="p">,</span> <span class="n">nreps</span><span class="p">,</span> <span class="n">hist</span> <span class="o">=</span> <span class="n">TRUE</span><span class="p">)</span> <span class="p">{</span>
-<span class="n">estimates</span><span class="o">&lt;-</span><span class="n">get</span><span class="p">(</span><span class="n">stat</span><span class="p">)(</span><span class="n">data</span><span class="p">)</span>
-<span class="n">len</span><span class="o">&lt;-</span><span class="n">length</span><span class="p">(</span><span class="n">estimates</span><span class="p">)</span> 
-<span class="n">container</span><span class="o">&lt;-</span><span class="n">matrix</span><span class="p">(</span><span class="n">NA</span><span class="p">,</span> <span class="n">ncol</span> <span class="o">=</span> <span class="n">len</span> <span class="p">,</span> <span class="n">nrow</span> <span class="o">=</span> <span class="n">nreps</span><span class="p">)</span> 
-<span class="n">nobs</span><span class="o">&lt;-</span><span class="n">nrow</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="k">in</span> <span class="m">1</span><span class="o">:</span><span class="n">nreps</span><span class="p">)</span> <span class="p">{</span> 
-<span class="n">posdraws</span><span class="o">&lt;-</span><span class="n">ceiling</span><span class="p">(</span><span class="n">runif</span><span class="p">(</span><span class="n">nobs</span><span class="p">)</span><span class="o">*</span><span class="n">nobs</span><span class="p">)</span>
-<span class="n">resample</span><span class="o">&lt;-</span><span class="n">data</span><span class="p">[</span><span class="n">posdraws</span><span class="p">,]</span> 
-<span class="n">container</span><span class="p">[</span><span class="n">i</span><span class="p">,]</span><span class="o">&lt;-</span><span class="n">get</span><span class="p">(</span><span class="n">stat</span><span class="p">)(</span><span class="n">resample</span><span class="p">)</span>
-<span class="p">}</span>
-  <span class="n">ads</span><span class="o">&lt;-</span><span class="n">apply</span><span class="p">(</span><span class="n">container</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="n">sd</span><span class="p">)</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">hist</span><span class="o">==</span><span class="n">T</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">mfrow</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">)</span>
-    <span class="n">frame</span><span class="p">()</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">len</span><span class="o">&lt;=</span> <span class="m">3</span><span class="p">)</span> <span class="n">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="n">len</span><span class="p">,</span><span class="m">1</span><span class="p">))</span>
-    <span class="k">if</span><span class="p">((</span><span class="n">len</span><span class="o">&gt;</span> <span class="m">3</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">len</span><span class="o">&lt;=</span> <span class="m">6</span><span class="p">))</span> <span class="n">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
-    <span class="k">for</span><span class="p">(</span><span class="n">j</span> <span class="k">in</span> <span class="m">1</span><span class="o">:</span><span class="n">len</span><span class="p">)</span> <span class="n">hist</span><span class="p">(</span><span class="n">container</span><span class="p">[,</span><span class="n">j</span><span class="p">],</span> 
-    <span class="n">main</span><span class="o">=</span><span class="n">paste</span><span class="p">(</span><span class="s2">"Estimates for "</span><span class="p">,</span> <span class="n">names</span><span class="p">(</span><span class="n">estimates</span><span class="p">)[</span><span class="n">j</span><span class="p">]),</span> <span class="n">xlab</span><span class="o">=</span><span class="s2">""</span><span class="p">)</span>
-  <span class="p">}</span>  
-  <span class="n">print</span><span class="p">(</span><span class="n">rbind</span><span class="p">(</span><span class="n">estimates</span><span class="p">,</span><span class="n">ads</span><span class="p">))</span>
-  <span class="k">return</span><span class="p">(</span><span class="n">list</span><span class="p">(</span><span class="n">estimation</span><span class="o">=</span><span class="n">container</span><span class="p">,</span> <span class="n">sds</span><span class="o">=</span><span class="n">sds</span><span class="p">))</span>
-<span class="p">}</span>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">myboot</span><span class="o">&lt;-</span><span class="k">function</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">stat</span><span class="p">,</span><span class="w"> </span><span class="n">nreps</span><span class="p">,</span><span class="w"> </span><span class="n">hist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="n">estimates</span><span class="o">&lt;-</span><span class="n">get</span><span class="p">(</span><span class="n">stat</span><span class="p">)(</span><span class="n">data</span><span class="p">)</span><span class="w">
+</span><span class="n">len</span><span class="o">&lt;-</span><span class="nf">length</span><span class="p">(</span><span class="n">estimates</span><span class="p">)</span><span class="w"> 
+</span><span class="n">container</span><span class="o">&lt;-</span><span class="n">matrix</span><span class="p">(</span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="n">ncol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">len</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">nrow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nreps</span><span class="p">)</span><span class="w"> 
+</span><span class="n">nobs</span><span class="o">&lt;-</span><span class="n">nrow</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="w">
+</span><span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">nreps</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> 
+</span><span class="n">posdraws</span><span class="o">&lt;-</span><span class="nf">ceiling</span><span class="p">(</span><span class="n">runif</span><span class="p">(</span><span class="n">nobs</span><span class="p">)</span><span class="o">*</span><span class="n">nobs</span><span class="p">)</span><span class="w">
+</span><span class="n">resample</span><span class="o">&lt;-</span><span class="n">data</span><span class="p">[</span><span class="n">posdraws</span><span class="p">,]</span><span class="w"> 
+</span><span class="n">container</span><span class="p">[</span><span class="n">i</span><span class="p">,]</span><span class="o">&lt;-</span><span class="n">get</span><span class="p">(</span><span class="n">stat</span><span class="p">)(</span><span class="n">resample</span><span class="p">)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+  </span><span class="n">ads</span><span class="o">&lt;-</span><span class="n">apply</span><span class="p">(</span><span class="n">container</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="n">sd</span><span class="p">)</span><span class="w">
+  </span><span class="k">if</span><span class="p">(</span><span class="n">hist</span><span class="o">==</span><span class="nb">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">1</span><span class="p">)</span><span class="w">
+    </span><span class="n">frame</span><span class="p">()</span><span class="w">
+    </span><span class="k">if</span><span class="p">(</span><span class="n">len</span><span class="o">&lt;=</span><span class="w"> </span><span class="m">3</span><span class="p">)</span><span class="w"> </span><span class="n">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="n">len</span><span class="p">,</span><span class="m">1</span><span class="p">))</span><span class="w">
+    </span><span class="k">if</span><span class="p">((</span><span class="n">len</span><span class="o">&gt;</span><span class="w"> </span><span class="m">3</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">len</span><span class="o">&lt;=</span><span class="w"> </span><span class="m">6</span><span class="p">))</span><span class="w"> </span><span class="n">par</span><span class="p">(</span><span class="n">mfrow</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span><span class="m">2</span><span class="p">))</span><span class="w">
+    </span><span class="k">for</span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="m">1</span><span class="o">:</span><span class="n">len</span><span class="p">)</span><span class="w"> </span><span class="n">hist</span><span class="p">(</span><span class="n">container</span><span class="p">[,</span><span class="n">j</span><span class="p">],</span><span class="w"> 
+    </span><span class="n">main</span><span class="o">=</span><span class="n">paste</span><span class="p">(</span><span class="s2">"Estimates for "</span><span class="p">,</span><span class="w"> </span><span class="nf">names</span><span class="p">(</span><span class="n">estimates</span><span class="p">)[</span><span class="n">j</span><span class="p">]),</span><span class="w"> </span><span class="n">xlab</span><span class="o">=</span><span class="s2">""</span><span class="p">)</span><span class="w">
+  </span><span class="p">}</span><span class="w">  
+  </span><span class="n">print</span><span class="p">(</span><span class="n">rbind</span><span class="p">(</span><span class="n">estimates</span><span class="p">,</span><span class="n">ads</span><span class="p">))</span><span class="w">
+  </span><span class="nf">return</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">estimation</span><span class="o">=</span><span class="n">container</span><span class="p">,</span><span class="w"> </span><span class="n">sds</span><span class="o">=</span><span class="n">sds</span><span class="p">))</span><span class="w">
+</span><span class="p">}</span><span class="w">
 
-<span class="c1">### 2 ###
-</span><span class="n">mod</span><span class="o">&lt;-</span><span class="k">function</span><span class="p">(</span><span class="n">griliches76</span><span class="p">)</span><span class="n">lm</span><span class="p">(</span><span class="n">lw</span><span class="o">~</span><span class="n">s</span><span class="o">+</span><span class="n">iq</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">griliches76</span><span class="p">)[[</span><span class="m">1</span><span class="p">]]</span>
+</span><span class="c1">### 2 ###
+</span><span class="n">mod</span><span class="o">&lt;-</span><span class="k">function</span><span class="p">(</span><span class="n">griliches76</span><span class="p">)</span><span class="n">lm</span><span class="p">(</span><span class="n">lw</span><span class="o">~</span><span class="n">s</span><span class="o">+</span><span class="n">iq</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">griliches76</span><span class="p">)[[</span><span class="m">1</span><span class="p">]]</span><span class="w">
 
-<span class="n">mod1.res</span><span class="o">&lt;-</span><span class="n">myboot</span><span class="p">(</span><span class="n">griliches76</span><span class="p">,</span> <span class="s2">"mod"</span><span class="p">,</span> <span class="m">10000</span><span class="p">,</span> <span class="n">hist</span><span class="o">=</span><span class="n">T</span><span class="p">)</span></code></pre></figure>
+</span><span class="n">mod1.res</span><span class="o">&lt;-</span><span class="n">myboot</span><span class="p">(</span><span class="n">griliches76</span><span class="p">,</span><span class="w"> </span><span class="s2">"mod"</span><span class="p">,</span><span class="w"> </span><span class="m">10000</span><span class="p">,</span><span class="w"> </span><span class="n">hist</span><span class="o">=</span><span class="nb">T</span><span class="p">)</span></code></pre></figure>
 
 <p>An annotated version of the program above can be found <a href="http://gist.github.com/danielmarcelino/5800912">here</a>.
 Having completed the bootstrap algorithm and the function to generate the standard deviation, you can finally perform the routine to get the results.</p>
 
-<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">mod1</span> <span class="o">&lt;-</span> <span class="k">function</span><span class="p">(</span><span class="n">griliches76</span><span class="p">)</span><span class="n">lm</span><span class="p">(</span><span class="n">lw</span><span class="o">~</span><span class="n">s</span><span class="o">+</span><span class="n">iq</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">griliches76</span><span class="p">)[[</span><span class="m">1</span><span class="p">]]</span>
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">mod1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="k">function</span><span class="p">(</span><span class="n">griliches76</span><span class="p">)</span><span class="n">lm</span><span class="p">(</span><span class="n">lw</span><span class="o">~</span><span class="n">s</span><span class="o">+</span><span class="n">iq</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">=</span><span class="n">griliches76</span><span class="p">)[[</span><span class="m">1</span><span class="p">]]</span><span class="w">
 
-<span class="n">mod1.sds</span> <span class="o">&lt;-</span> <span class="n">myboot</span><span class="p">(</span><span class="n">griliches76</span><span class="p">,</span> <span class="s2">"mod1"</span><span class="p">,</span> <span class="m">10000</span><span class="p">,</span> <span class="n">hist</span><span class="o">=</span><span class="n">TRUE</span><span class="p">)</span>
+</span><span class="n">mod1.sds</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">myboot</span><span class="p">(</span><span class="n">griliches76</span><span class="p">,</span><span class="w"> </span><span class="s2">"mod1"</span><span class="p">,</span><span class="w"> </span><span class="m">10000</span><span class="p">,</span><span class="w"> </span><span class="n">hist</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
 
-         <span class="p">(</span><span class="n">Intercept</span><span class="p">)</span>      <span class="n">s</span>       <span class="n">iq</span>
-<span class="n">estimates</span>      <span class="m">4.1557</span> <span class="m">0.084696</span> <span class="m">0.003810</span>
-<span class="n">sds</span>            <span class="m">0.1123</span> <span class="m">0.007351</span> <span class="m">0.001159</span></code></pre></figure>
+         </span><span class="p">(</span><span class="n">Intercept</span><span class="p">)</span><span class="w">      </span><span class="n">s</span><span class="w">       </span><span class="n">iq</span><span class="w">
+</span><span class="n">estimates</span><span class="w">      </span><span class="m">4.1557</span><span class="w"> </span><span class="m">0.084696</span><span class="w"> </span><span class="m">0.003810</span><span class="w">
+</span><span class="n">sds</span><span class="w">            </span><span class="m">0.1123</span><span class="w"> </span><span class="m">0.007351</span><span class="w"> </span><span class="m">0.001159</span></code></pre></figure>
 
 <p>Not only the values displayed in the prompt are informative, but the histogram of the distribution. The above histogram tells us about the distribution of the bootstrap estimates. By comparing these estimates with those obtained from the naïve OLS, we can guarantee that the OLS estimates are rather robust, since they are contained in the distribution of standard deviations produced by 10 thousands sampling simulations.</p>
 
 <p><img src="http://danielmarcelino.github.io/img/2013/boot_histograms.jpeg" alt="Histograms" /></p>
 
+        
+          <div id="disqus_thread"></div><!-- /#disqus_thread -->
+          
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = '@disqus_BWaSwvKMKm'; // required: replace example with your forum shortname
 
-                <hr>
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
 
-                <ul class="pager">
-                    
-                    <li class="previous">
-                        <a href="/blog/2013/parallel-processing-when-does-it-worth.html" data-toggle="tooltip" data-placement="top" title="Parallel Processing: When does it worth?">&larr; Previous Post</a>
-                    </li>
-                    
-                    
-                    <li class="next">
-                        <a href="/blog/2014/Do-you-believe-in-World-Cup-superstition.html" data-toggle="tooltip" data-placement="top" title="Do you believe in World Cup superstition?">Next Post &rarr;</a>
-                    </li>
-                    
-                </ul>
-		  	  
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
-            </div>
-        </div>
-    </div>
-</article>
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="http://danielmarcelino.github.io/blog/2013/parallel-processing-when-does-it-worth.html" class="btn" title="Parallel Processing: When does it worth?">Previous</a>
+      
+      
+        <a href="http://danielmarcelino.github.io/blog/2014/Do-you-believe-in-World-Cup-superstition.html" class="btn" title="Do you believe in World Cup superstition?">Next</a>
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
 
-<hr>
-
-
+<div class="footer-wrapper">
+  <footer role="contentinfo" class="entry-wrapper">
     
 
+<span>&copy; 2016 Daniel Marcelino</span>
+<div class="social-icons">
+	<a href="https://twitter.com/dmarcelinobr" title="Daniel Marcelino on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+	<a href="https://facebook.com/1529566150689415" title="Daniel Marcelino on Facebook" target="_blank"><i class="fa fa-facebook-square fa-2x"></i></a>
+	
+	<a href="https://linkedin.com/in/daniel-marcelino-80968656" title="Daniel Marcelino on LinkedIn" target="_blank"><i class="fa fa-linkedin-square fa-2x"></i></a>
+	<a href="users/792000/daniel" title="Daniel Marcelino on StackExchange" target="_blank"><i class="fa fa-stack-exchange fa-2x"></i></a>
+	
+	
+	<a href="https://github.com/danielmarcelino" title="Daniel Marcelino on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
+	
+  
+	
+  <a href="http://danielmarcelino.github.io/feed.xml" title="Atom/RSS feed"><i class="fa fa-rss-square fa-2x"></i></a>
+</div><!-- /.social-icons -->
 
-    <!-- Footer -->
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <ul class="list-inline text-center">
-                    <li>
-                        <a href="/feed.xml">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
-                    <li>
-                        <a href="https://twitter.com/dmarcelinobr">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
-                    
-                    
-                    <li>
-                        <a href="https://github.com/danielmarcelino">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
-		            
+  </footer>
+</div><!-- /.footer-wrapper -->
 
-		            
-                    
-                    <li>
-                        <a href="mailto:dmarcelino@live.com">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                    
-                </ul>
-                <p class="syndicated text-center footer-links">
-                 Some contents of this blog are contributed to <a  href="http://www.statsblogs.com">Statsblogs</a> and 
-<a href="http://www.r-bloggers.com">R-Bloggers</a>, the largest blog aggregator for R related content. 
-<br/>
-</p>
-        <p class="copyright text-muted">
-          &copy; Daniel Marcelino
-          &nbsp;&bull;&nbsp;
-          2016 
-&nbsp;&bull;&nbsp;
-<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">(CC) BY-NC-SA</a>
-        </p>
-            </div>
-        </div>
-    </div>
-</footer>
+<script type="text/javascript">
+  var BASE_URL = 'http://danielmarcelino.github.io';
+</script>
 
-<!-- jQuery -->
-<script src="/js/jquery.min.js "></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://danielmarcelino.github.io/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://danielmarcelino.github.io/assets/js/scripts.min.js"></script>
 
-<!-- Bootstrap Core JavaScript -->
-<script src="/js/bootstrap.min.js "></script>
 
-<!-- Custom Theme JavaScript -->
-<script src="/js/clean-blog.min.js "></script>
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl =
+ 'https://www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-24186657-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = 'https://stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-24186657-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+<!-- htmlwidgets dependencies --> 
+<script src="/htmlwidgets_deps/htmlwidgets-0.5/htmlwidgets.js"></script>
+<script src="/htmlwidgets_deps/d3-3.5.3/d3.min.js"></script>
+<link href="/htmlwidgets_deps/colorbrewer-1/colorbrewer.css" rel="stylesheet" />
+<script src="/htmlwidgets_deps/colorbrewer-1/colorbrewer.js"></script>
+<link href="/htmlwidgets_deps/streamgraph-1/streamgraph.css" rel="stylesheet" />
+<script src="/htmlwidgets_deps/streamgraph-binding-0.8.1/streamgraph.js"></script>
 
 
 </body>
-
 </html>

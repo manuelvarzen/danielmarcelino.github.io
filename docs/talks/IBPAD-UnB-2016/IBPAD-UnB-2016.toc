@@ -1,0 +1,6 @@
+\beamer@endinputifotherversion {3.36pt}
+\select@language {brazilian}
+\beamer@sectionintoc {1}{Introdu\IeC {\c c}\IeC {\~a}o}{3}{0}{1}
+\beamer@subsectionintoc {1}{1}{Por que usar R?}{4}{0}{1}
+\beamer@sectionintoc {2}{Conceito}{8}{0}{2}
+\beamer@sectionintoc {3}{The Problem of (Weak) Priors}{9}{0}{3}

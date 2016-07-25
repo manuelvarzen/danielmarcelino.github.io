@@ -1,0 +1,52 @@
+\begin{frame}{Índices}
+
+- Proporcionalidade
+- Disproporcionalidade
+- Concentração
+- Fragmentação
+- Abundância
+- Segregação
+
+\end{frame}
+
+
+\begin{frame}{Índices}
+\begin{tabular}{l|cc}
+  Índice &  Fórmula& \\
+  \hline
+  Rae & 1 -  & \\
+  & &
+\end{tabular}
+
+\end{frame}
+
+
+An important political consequence of the electoral systems is the effect on the proportionality or disproportionality of the electoral outcomes. Disproportionality means the deviation of the parties’ seats shares from their votes shares. Perfect proportionality is the situation in which every party receives exactly the same share of seats with the share of votes it receives. 
+
+
+These systems can be included in the category of PR systems, which means that they try to minimize the disproportionality and to produce an outcome that is close to perfect proportionality, as possible. It is obvious that, although these systems ‘seek’ for proportional results, the situation of perfect proportionality is impossible. Some systems achieve more proportional results than other systems.
+
+
+# Three measures of electoral disproportionality
+
+
+Most political scientists, however, prefer the Gallagher index over the Loosemore-Hanby index. There are several reasons for this, but probably the most important is a concern that Loosemore-Hanby gives the same weight to a large number of tiny vote–seat deviations as to a small number of larger deviations. The Gallagher index overcomes this by giving greater weight to larger deviations (those who want the full details can seek them out
+
+
+The intuition here seems to be that what matters is not the absolute deviation of seat shares from vote shares – the starting point of both Loosemore-Hanby and Gallagher – but rather the relative deviation: the deviation in proportion to the party’s support. To take a further example, Loosemore-Hanby and Gallagher both see as much disproportionality if a party with 30 per cent of the vote gets 25 per cent of the seats as if a party with 5.1 per cent of the vote win 0.1 per cent of the seats. Most people find that odd.
+
+The Sainte-Laguë index captures this intuition by looking at vote–seat deviations in proportion to each party’s size. Again, readers wanting the details of how it does this can refer to the longer version of this post.
+
+Which measure is best?
+
+
+Size is relative
+
+It seems to me that, in fact, if we are concerned about disproportionality in itself, then only a relative measure can do. We think of something as “big” or “small” in relation to the size we would expect it to have: a big mouse would be a very small human being. So with vote–seat deviations, whether a given gap is big or small depends on how big the party is. The Sainte-Laguë index – though rarely used – seems to me therefore to be the best embodiment of what we think of as disproportionality in itself. It measures the degree to which an election outcome over- or under-represents particular parties and their voters.
+
+The Loosemore-Hanby and Gallagher indices, by contrast, seem to be getting more at how electoral disproportionalities affect governance after the election: for this, it seems reasonable to argue that vote–seat deviations unadjusted for party size are likely to matter more. In particular, they give more weight than does Sainte-Laguë to the over-representation of the largest party, which often generates a majority of seats for one party in UK elections. They do this in slightly different ways to each other, and they both do it imperfectly: indeed, trying to capture how disproportionalities influence the next several years of government in a single index seems to me like trying to do much more than any single index can do. Nevertheless, they probably do it a bit better than does Sainte-Laguë.
+
+
+
+
+# calculates the index for all data sets in  d.segdata <- matrix(NA, nrow = 3, ncol = 8)  for (i in 1:8) {    idx <- 2 * i    tmp <- deseg(grd.sp, segdata[,(idx-1):idx])    d.segdata[,i] <- as(tmp, "vector")}  # presents the results as a bar chart  barplot(d.segdata, names.arg = LETTERS[1:8], main = "segdata",          legend.text = c(expression(italic(paste("S"[L]))),                          expression(italic(paste("S"[C]))),                          expression(italic(paste("S"[Q])))),          args.legend = list(x = "topright", horiz = TRUE))  ## End(Not run)

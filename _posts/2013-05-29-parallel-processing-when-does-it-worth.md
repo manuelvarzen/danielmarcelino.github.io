@@ -2,9 +2,14 @@
 layout: post
 title: "Parallel Processing: When does it worth?"
 date: 2013-05-29
-tags: [R]
+output:
+  html_document
+share: true
+categories: blog
+tags: [R, rstats]
 header-img: "img/website/spaghetti.png"
 ---
+
 
 Parallel computing is incredibly useful, but not every thing worths distribute across as many cores as possible.
 
