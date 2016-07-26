@@ -1,6 +1,11 @@
 ---
 layout: page
 title: Data Science Resources
+permalink: /resources/
+image:
+  feature: rain-room.jpg
+  credit: 
+  creditlink: 
 ---
 
 # Blogroll

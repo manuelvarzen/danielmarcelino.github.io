@@ -2,6 +2,10 @@
 layout: page
 title: "Random Walks"
 permalink: /randomwalks/
+image:
+  feature: andes-santiago.jpg
+  credit: 
+  creditlink: 
 ---
 
 

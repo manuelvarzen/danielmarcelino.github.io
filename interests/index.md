@@ -2,7 +2,10 @@
 layout: page
 title: "Current Interests"
 permalink: /interests/
-header-img: "img/website/Congresso.jpg"
+image:
+  feature: Congresso.jpg
+  credit: 
+  creditlink: 
 ---
 
 ## Elections
