@@ -2,9 +2,17 @@
 layout: post
 title: "The Butterfly Curve"
 date: 2015-10-07
-tags: [R, Viz]
+toutput:
+ html_document: 
+   keep_md: yes
+   toc: yes
+share: true
+category: blog
+tags: [R, rstats, parallel]
+excerpt: "This post shows parallel computing is incredibly useful, but not every thing worths being distributed across as many cores as possible."
+published: true
 comments: true
-header-img: "img/website/spaghetti.png"
+header-img: "img/website/rain-room.jpg"
 ---
 
 Have you ever thought drawing your own butterfly?

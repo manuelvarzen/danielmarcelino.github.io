@@ -2,10 +2,17 @@
 layout: post
 title: "Isn't sad that all that matters in an election is the candidate's height?"
 date: 2015-09-15
-category: [Viz, Analysis]
-tags: [R, Elections]
+output:
+ html_document: 
+   keep_md: yes
+   toc: yes
+share: true
+category: blog
+tags: [R, rstats]
+excerpt: "This post discusses the importance of candidates' stature in US presidential elections."
+published: true
 comments: true
-header-img: "img/website/spaghetti.png"
+header-img: "img/website/rain-room.jpg"
 ---
 
 A candidate's stature may be more important in elections than we realized. I came across this claim in the US [press](http://www.usnews.com/news/articles/2015/07/08/how-tall-are-the-2016-presidential-candidates) suggesting that the taller the candidate, the better his/her chances to succeed in the presidential elections. 

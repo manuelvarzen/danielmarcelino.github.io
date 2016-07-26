@@ -2,10 +2,17 @@
 layout: post
 title: "Understanding Margin of Error for Small Populations"
 date: 2015-10-13
-category: Discussion
-tags: [R, Polls]
+output:
+ html_document: 
+   keep_md: yes
+   toc: yes
+share: true
+category: blog
+tags: [R, rstats, polls]
+excerpt: "This post discusses margin of error, gives some theoretical reasons and apply them to a real poll."
+published: true
 comments: true
-header-img: "img/website/spaghetti.png"
+header-img: "img/website/rain-room.jpg"
 ---
 
 I got an email inquiring if the margin of sampling error reported in the newest poll by the Brazilian pollster Datafolha would be misleading. The polling firm often report surveys with regular sizes (1000/2400), so the margin of error calculated is in the range of +/-2% to +/-3%. 

@@ -1,13 +1,18 @@
 ---
 layout: post
 title: "R has a new consortium, should we celebrate?"
-author: "Daniel Marcelino"
 date: 2015-07-02
-tags: [R]
+output:
+ html_document: 
+   keep_md: yes
+   toc: yes
+share: true
+category: blog
+tags: [R, rstats]
+excerpt: "This post presents some ideas about the new R Consortium."
 published: true
-status: publish
 comments: true
-header-img: "img/website/spaghetti.png"
+header-img: "img/website/rain-room.jpg"
 ---
 
 I was surprised by the news about the arising of a new organization for promoting R: the [R Consortium](https://www.r-consortium.org). It's interesting that this new organization says it will do the same thing as the existing R Foundation. 

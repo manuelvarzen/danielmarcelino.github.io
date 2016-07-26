@@ -2,9 +2,17 @@
 layout: post
 title: "Paranormal Distribution"
 date: 2015-10-20
-tags: [R]
+output:
+ html_document: 
+   keep_md: yes
+   toc: yes
+share: true
+category: blog
+tags: [R, rstats, polls]
+excerpt: "This is funny."
+published: true
 comments: true
-header-img: "img/website/spaghetti.png"
+header-img: "img/website/rain-room.jpg"
 ---
 
 What if, instead of a normal, you got a paranormal distribution?
