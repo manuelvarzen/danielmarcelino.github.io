@@ -37,7 +37,7 @@ exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.
 # Site owner
 owner:
   name: Daniel Marcelino
-  avatar: avatar.jpg
+  avatar: DSC02844.jpg
   email: dmarcelino@live.com
   disqus-shortname: "daniel-marcelino"
   twitter: "dmarcelinobr"
