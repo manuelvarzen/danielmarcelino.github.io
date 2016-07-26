@@ -1,10 +1,17 @@
 ---
 layout: post
-section-type: post
 title: "Retrieving Data from Google Books with `ngramr`"
 date: 2015-11-15
-category:
-tags: [R, Viz]
+output:
+ html_document: 
+   keep_md: yes
+   toc: yes
+share: true
+category: blog
+tags: [R, rstats]
+excerpt: "The post explores the Google Ngram Viewer service requested from."
+published: true
+comments: true
 header-img: "img/website/spaghetti.png"
 fb-img: "http://danielmarcelino.github.io/img/code-2015-11-15-retrieving-data-from-google-books-with-ngramr/sociologists-1.png"
 ---

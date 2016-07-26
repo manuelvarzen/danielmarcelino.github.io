@@ -1,18 +1,17 @@
 ---
 layout: post
 title: "Venezuelan Parliamentary Election: What do the Polls Say?"
-author: "Daniel Marcelino"
 date: 2015-12-06
 output:
  html_document: 
    keep_md: yes
    toc: yes
-category: Analysis
-tags: [R, Polls, Elections]
+share: true
+category: blog
+tags: [R, rstats, polls]
+excerpt: "This entry explores the coming legislative election in Venezuela: Government is about to lose the majority."
 published: true
-status: publish
 comments: true
-header-img: ""
 header-img: "img/website/spaghetti.png"
 ---
 

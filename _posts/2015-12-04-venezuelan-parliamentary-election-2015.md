@@ -7,12 +7,16 @@ output:
  html_document: 
    keep_md: yes
    toc: yes
-tags: [R, Polls, Elections]
+share: true
+category: blog
+tags: [R, rstats, polls]
+excerpt: "This post shows the tremendous variability from pollster to pollster about the voting intention among Venezuelans."
+published: true
 comments: true
 header-img: "img/website/spaghetti.png"
 ---
 
-Next Sunday Venezuelans are heading to the polls once again with  international concerns about the clearness of the balloting. To get an idea about the political climate over there, I've collected some polls available on the internet. The surprising thing from those surveys is a tremendous variability from pollster to pollster about the single topic of voting intention. You may find national polls fielded in the same period with estimates varying as much as 20%, isn't it dramatic? If you always wanted to see house bias operating in practice, the Venezuelan elections may provide you a good case then.   
+Next Sunday Venezuelans are heading to the polls once again with international concerns about the clearness of the balloting. To get an idea about the political climate over there, I've collected some polls available on the internet. The surprising thing from those surveys is a tremendous variability from pollster to pollster about the single topic of voting intention. You may find national polls fielded in the same period with estimates varying as much as 20%, isn't it dramatic? If you always wanted to see house bias operating in practice, the Venezuelan elections may provide you a good case then.   
 
 ![center]({{ site.url }}/img/2015/venezuela1.png) 
 

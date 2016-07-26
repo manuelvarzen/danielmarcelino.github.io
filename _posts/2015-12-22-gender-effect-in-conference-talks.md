@@ -1,16 +1,16 @@
 ---
 layout: post
 title: "Gender Effect in Conference Talks"
-author: "Daniel Marcelino"
 date: 2015-12-22
 output:
  html_document: 
    keep_md: yes
    toc: yes
 share: true
+category: blog
 tags: [R, rstats]
+excerpt: "The entry discuss a study that finds strong gender effects in conference talks"
 published: true
-status: published
 comments: true
 header-img: "img/website/spaghetti.png"
 ---
