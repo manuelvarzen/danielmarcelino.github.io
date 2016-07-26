@@ -2,15 +2,18 @@
 layout: post
 title: "A Talk About Campaign Finance in Brazil"
 date: 2015-10-17
-category: Discussion
-tags: [R, Campaign-finance]
+output:
+ html_document: 
+   keep_md: yes
+   toc: yes
+share: true
+category: blog
+tags: [R, rstats]
+excerpt: "This post provides some unsolicited comments on the campaign finance issue."
+published: true
 comments: true
-header-img: "img/website/spaghetti.png"
+header-img: "img/website/rain-room.jpg"
 ---
-
-Comments on campaign finance in brazil.
-
-<!--more-->
 
 Last week, I delivered a talk at [University of Brasilia](http://www.unb.br) about my past research on the topic of campaign finance. I didn't know in advance about the existence of this seminar. Indeed, it was a big surprise receiving the invitation from Prof. Marcelo Pimentel, who is teaching on Fridays afternoon a class on this topic with more than 50 registered students. I became his fan after seeing his syllabus. He did managed to assemble a handful studies covering why, what, how, and when money affects politics and elections in Brazil.
 

@@ -2,14 +2,14 @@
 layout: post
 title: "The Butterfly Curve"
 date: 2015-10-07
-toutput:
+output:
  html_document: 
    keep_md: yes
    toc: yes
 share: true
 category: blog
-tags: [R, rstats, parallel]
-excerpt: "This post shows parallel computing is incredibly useful, but not every thing worths being distributed across as many cores as possible."
+tags: [R, rstats, viz]
+excerpt: "This post shows the implementation of the butterfly curve equation in R, and its output plot produced with ggplot2."
 published: true
 comments: true
 header-img: "img/website/rain-room.jpg"

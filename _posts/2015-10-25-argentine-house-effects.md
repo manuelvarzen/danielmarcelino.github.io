@@ -1,12 +1,18 @@
 ---
 layout: post
-section-type: post
 title: "House Effects in Argentinian polling"
 date: 2015-10-25
-category: Viz
-tags: [R, Polls, Elections]
+output:
+ html_document: 
+   keep_md: yes
+   toc: yes
+share: true
+category: blog
+tags: [R, rstats, viz]
+excerpt: "This post presents the estimated house effects for the main presidential candidates in Argentina, considering more than 115 polls since 2014."
+published: true
 comments: true
-header-img: "img/website/spaghetti.png"
+header-img: "img/website/rain-room.jpg"
 ---
 
 I've already [posted](http://danielmarcelino.com/r/08-2015/Argentine-general-election-2015/) previously on "house effects", the tendency of polling organizations to systematically vary in their results from one another. In this post, I look specifically at these house effects, and show which polling organizations over or under-estimate support for each candidate--compared to the average--in this presidential election in Argentina.
