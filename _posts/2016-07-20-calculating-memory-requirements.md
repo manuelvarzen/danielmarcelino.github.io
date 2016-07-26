@@ -8,6 +8,7 @@ output:
    keep_md: yes
    toc: yes
 share: true
+category: blog
 tags: [R, rstats]
 excerpt: "A post about size and memory requirements that a computer must have to deal with a data frame."
 published: true

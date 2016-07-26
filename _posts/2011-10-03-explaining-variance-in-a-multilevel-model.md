@@ -2,12 +2,20 @@
 layout: post
 title: "Showing Explained Variance in Multilevel Models" 
 date: 2011-10-03
-category: Viz
-tags: [R, Multilevel]
+output:
+ html_document: 
+   keep_md: yes
+   toc: yes
+share: true
+category: blog
+tags: [R, rstats, Viz]
+excerpt: "The post shows a way of displaying explained variance of multilevel models using line chart."
+published: true
+status: published
 header-img: "img/website/spaghetti.png"
 ---
 
-In this post I will show one way to display explained variance using a line chart. 
+In this post I shows a quite intuitive manner of displaying explained variance of multilevel models using line charts. 
 
 For the best of my knowledge, there is no a default plot for displaying the effect of a factor on the deviance of multilevel models; so this is going to be a tentative for showing such a statistic in my ongoing dissertation. 
 
