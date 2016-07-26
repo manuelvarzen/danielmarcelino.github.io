@@ -2,16 +2,18 @@
 layout: post
 title: "Everything Ends on Wednesday"
 subtitle: "HIV testing after Carnival"
-author: "Daniel Marcelino"
 date: 2016-02-12
 output:
  html_document: 
    keep_md: yes
    toc: yes
 share: true
+category: blog
 tags: [R, rstats]
+excerpt: "This post approaches HIV incidence rate among Brazilians and simulates several levels of HIV infection."
 published: true
 status: published
+comments: true
 header-img: "img/website/spaghetti.png"
 ---
 
@@ -39,7 +41,7 @@ Suppose the incidence of HIV in the population being tested is denoted by p . Re
 
 $$P(HIV~positive~|~positive~ELISA) = p * .977~/~(p * .977 + (1-p) * .074)$$
 
-Here is the output and R code  computing this for various values of p with a 25 interval.
+Here is the output and R code computing this for various values of p with a 25 interval.
 
 
 ![center]({{ site.url }}/img/2016/Sensitivity.png)
