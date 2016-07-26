@@ -3,7 +3,7 @@ layout: page
 title: About Me, and this Website
 permalink: /about/
 image:
-  feature: daniel_rio.jpg
+  feature: rain-room.jpg
   credit: Annika Fredén
   creditlink: 
 ---
