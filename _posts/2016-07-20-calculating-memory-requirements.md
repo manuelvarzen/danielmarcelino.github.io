@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "Calculating Memory Requirements"
-author: "Daniel Marcelino"
 date: 2016-07-20
 output:
  html_document: 
