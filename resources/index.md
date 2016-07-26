@@ -3,8 +3,8 @@ layout: page
 title: Data Science Resources
 permalink: /resources/
 image:
-  feature: rain-room.jpg
-  credit: 
+  feature: blogheader.png
+  credit: Daniel Marcelino
   creditlink: 
 ---
 
