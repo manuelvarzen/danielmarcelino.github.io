@@ -2,10 +2,17 @@
 layout: post
 title: "Bayes says `don't worry` about Scotland's Referendum" 
 date: 2014-09-17
-category: Analysis
-tags: [R, Polls]
+output:
+ html_document: 
+   keep_md: yes
+   toc: yes
+share: true
+category: blog
+tags: [R, rstats, polls]
+excerpt: "This post uses Bayesian methods to show the anti-independence vote has an overwhelming advantage over the pro-independence side."
+published: true
 comments: true
-header-img: "img/website/spaghetti.png"
+header-img: "img/website/rain-room.jpg"
 ---
 
 

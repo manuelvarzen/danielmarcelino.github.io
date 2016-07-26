@@ -2,9 +2,17 @@
 layout: post
 title: "A Bit More Fragmented" 
 date: 2014-10-06
-tags: [R]
+output:
+ html_document: 
+   keep_md: yes
+   toc: yes
+share: true
+category: blog
+tags: [R, rstats, polls]
+excerpt: "This entry discusses the legislative elections in Brazil, which turned out to produce one of the most fragmented parliament in the world."
+published: true
 comments: true
-header-img: "img/website/spaghetti.png"
+header-img: "img/website/rain-room.jpg"
 ---
 
 The 2014 election gave rise to an even more fragmented lower house in Brazil. This is important because higher values of political fragmentation suggest a less stable political environment in comparison with previous years.

@@ -2,9 +2,17 @@
 layout: post
 title: "Yep. He made it; country voted No" 
 date: 2014-09-19
-tags: [R, Polls]
+output:
+ html_document: 
+   keep_md: yes
+   toc: yes
+share: true
+category: blog
+tags: [R, rstats, polls]
+excerpt: "This post talks big about my last predictions for the Referendum in Scotland."
+published: true
 comments: true
-header-img: "img/website/spaghetti.png"
+header-img: "img/website/rain-room.jpg"
 ---
 
 Yesterday, more Scots than ever since universal suffrage was introduced cast a ballot on the matter of independence. 

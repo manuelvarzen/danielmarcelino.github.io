@@ -1,7 +1,9 @@
 ---
 layout: page
-title: Data Science Resources Elsewhere
+title: Data Science Resources
 ---
+
+# Blogroll
 
 [R Bloggers](http://www.r-bloggers.com)
 
@@ -13,3 +15,5 @@ title: Data Science Resources Elsewhere
 
 [David Robinson](http://varianceexplained.org)
 
+
+# Tutorials 
