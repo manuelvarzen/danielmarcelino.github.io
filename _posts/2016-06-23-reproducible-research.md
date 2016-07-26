@@ -1,13 +1,15 @@
 ---
 layout: post
 title: "What is reproducible research?"
-author: "Daniel Marcelino"
 date: 2016-06-23
 output:
  html_document: 
    keep_md: yes
    toc: yes
-tags: [R]
+share: true
+category: blog
+tags: [R, rstats]
+excerpt: "This entry states a minimalist view of reproducible research: The capacity of repeating an experiment in any place with any person."
 published: true
 status: published
 comments: true

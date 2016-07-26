@@ -8,7 +8,7 @@ output:
    toc: yes
 share: true
 category: blog
-tags: [R, rstats]
+tags: [R, rstats, parallel]
 excerpt: "This post shows parallel computing is incredibly useful, but not every thing worths being distributed across as many cores as possible."
 published: true
 status: published

@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "R packaging industry close-up: How fast are we growing?"
-author: "Daniel Marcelino"
 date: 2016-06-18
 output:
  html_document: 
    keep_md: yes
    toc: yes
 share: true
+category: blog
 tags: [R, rstats]
+excerpt: "This entry brings in a quick analysis of the rate R packages have been published in the official repository (CRAN)."
 published: true
 status: published
 comments: true

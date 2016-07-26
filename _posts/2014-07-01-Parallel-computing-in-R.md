@@ -2,13 +2,20 @@
 layout: post
 title: "Parallel computing in R"
 date: 2014-07-01
-category: [Analysis, Coding]
-tags: [R]
-image: parallel.png
-header-img: "img/website/spaghetti.png"
+output:
+ html_document: 
+   keep_md: yes
+   toc: yes
+share: true
+category: blog
+tags: [R, rstats, parallel]
+excerpt: "This post shows parallel computing is incredibly useful, but not every thing worths being distributed across as many cores as possible."
+published: true
+status: published
+comments: true
+header-img: "img/website/rain-room.jpg"
 ---
 
-Parallel computing is incredibly useful, but not every thing worths distribute across as many cores as possible.
 
 Roughly a year ago I published an article about parallel computing in R [here](http://danielmarcelino.com/r/05-2013/parallel-processing-when-does-it-worth/), in which I compared computation performance among 4 packages that provide R with parallel features once R is essentially a single-thread task package.
 
