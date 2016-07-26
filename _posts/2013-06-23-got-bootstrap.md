@@ -2,7 +2,17 @@
 layout: post
 title: "Got Bootstrap?" 
 date: 2013-06-23
-tags: [R, Bootstrap]
+output:
+ html_document: 
+   keep_md: yes
+   toc: yes
+share: true
+category: blog
+tags: [R, rstats, Bootstrap]
+excerpt: "This post discuss some of the techniques of bootstrapping in R, presented in the new book by Michael Chernick and Robert LaBudde."
+published: true
+status: published
+comments: true
 header-img: "img/website/spaghetti.png"
 ---
 

@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Helpful Data Science Resources Elsewhere
+title: Data Science Resources Elsewhere
 ---
 
 [R Bloggers](http://www.r-bloggers.com)

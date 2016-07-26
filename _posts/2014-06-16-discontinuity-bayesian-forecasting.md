@@ -2,8 +2,16 @@
 layout: post
 title: Discontinuity Bayesian Forecasting
 date: 2014-07-16
-category: Analysis 
-tags: [R, Elections, Bayesian, Polls]
+output:
+ html_document: 
+   keep_md: yes
+   toc: yes
+share: true
+category: blog
+tags: [R, rstats, bayesian, elections, polls]
+excerpt: "The post presents some ideas of a more robust Bayesian linear filtering models to forecast Brazilian subnational elections."
+published: true
+status: published
 comments: true
 header-img: "img/website/spaghetti.png"
 ---
