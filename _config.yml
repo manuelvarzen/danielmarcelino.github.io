@@ -4,7 +4,7 @@ title: Data * Analysis + R
 locale: en_US
 description: "Blog of Daniel Marcelino" 
 favicon: favicon.ico
-logo: img/daniel_rio.jpg
+logo: favicon.png
 search: true
 url: "http://danielmarcelino.github.io"
 
@@ -37,7 +37,7 @@ exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.
 # Site owner
 owner:
   name: Daniel Marcelino
-  avatar: img/daniel_rio.jpg
+  avatar: img/avatar.jpg
   email: dmarcelino@live.com
   disqus-shortname: "daniel-marcelino"
   twitter: "dmarcelinobr"
