@@ -3,7 +3,7 @@ layout: page
 title: About Me, and this Website
 permalink: /about/
 image:
-  feature: rain-room.jpg
+  feature: DSC02845.jpg
   credit: Annika Fredén
   creditlink: 
 ---
