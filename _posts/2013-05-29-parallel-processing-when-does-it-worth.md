@@ -3,15 +3,20 @@ layout: post
 title: "Parallel Processing: When does it worth?"
 date: 2013-05-29
 output:
-  html_document
+ html_document: 
+   keep_md: yes
+   toc: yes
 share: true
-categories: blog
+category: blog
 tags: [R, rstats]
-header-img: "img/website/spaghetti.png"
+excerpt: "This post shows parallel computing is incredibly useful, but not every thing worths being distributed across as many cores as possible."
+published: true
+status: published
+comments: true
+header-img: "img/website/rain-room.jpg"
 ---
 
-
-Parallel computing is incredibly useful, but not every thing worths distribute across as many cores as possible.
+This post shows parallel computing is incredibly useful, but not every thing worths being distributed across as many cores as possible.
 
 Most computers nowadays have few cores that incredibly help us with our daily computing duties. However, when statistical softwares do use parallelization for analyzing data faster? R, my preferred analytical software, does not take too much advantage of multicore processing by default. 
 
