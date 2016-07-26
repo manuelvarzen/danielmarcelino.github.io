@@ -9,7 +9,7 @@ output:
 share: true
 category: blog
 tags: [R, rstats]
-excerpt: "This post shows how to scrap data from <boxofficemojo.com>, then to clean and visualize the data."
+excerpt: "This post shows how to scrap data from 'boxofficemojo.com', then to clean and visualize the data."
 published: true
 comments: true
 header-img: "img/website/spaghetti.png"
