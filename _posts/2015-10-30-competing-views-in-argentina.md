@@ -2,8 +2,17 @@
 layout: post
 title: "Competing views on Argentina's Frontrunner"
 date: 2015-10-30
-tags: [R, Polls, Elections]
-header-img: "img/website/spaghetti.png"
+output:
+ html_document: 
+   keep_md: yes
+   toc: yes
+share: true
+category: blog
+tags: [R, rstats, polls]
+excerpt: "This post analyze the very few polls published so far on the Argentina's runoff election. Overall, polls seem to be telling two distinct histories."
+published: true
+comments: true
+header-img: "img/website/rain-room.jpg"
 ---
 
 The last poll published today by *Polldata* put Scioli below 40%, with about 5% reporting being undecided.
