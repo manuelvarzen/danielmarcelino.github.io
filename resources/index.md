@@ -4,7 +4,7 @@ title: Data Science Resources
 permalink: /resources/
 image:
   feature: blogheader2.png
-  credit: 
+  credit: "Daniel Marcelino"
   creditlink: 
 ---
 

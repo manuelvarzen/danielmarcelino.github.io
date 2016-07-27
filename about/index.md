@@ -4,7 +4,7 @@ title: About Me, and this Website
 permalink: /about/
 image:
   feature: DSC02845.jpg
-  credit: Annika Fredén
+  credit: "Annika Fredén"
   creditlink: 
 ---
 
