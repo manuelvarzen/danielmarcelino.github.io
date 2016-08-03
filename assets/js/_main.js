@@ -7,7 +7,7 @@ var navigation = responsiveNav("#site-nav", { // Selector: The ID of the wrapper
   label: "<i class='fa fa-bars'></i> Menu", // String: Label for the navigation toggle
   insert: "before", // String: Insert the toggle before or after the navigation
   customToggle: "", // Selector: Specify the ID of a custom toggle
-  openPos: "static", // String: Position of the opened nav, relative or static
+  openPos: "relative", // String: Position of the opened nav, relative or static
   jsClass: "js", // String: 'JS enabled' class which is added to <html> el
   init: function(){}, // Function: Init callback
   open: function(){}, // Function: Open callback
