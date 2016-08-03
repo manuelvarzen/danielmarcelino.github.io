@@ -1,0 +1,139 @@
+
+Top 20 R Machine Learning and Data Science packages
+
+
+
+We list out the top 20 popular Machine Learning R packages by analysing the most downloaded R packages from Jan-May 2015.
+
+The CRAN Package repository features 6778 active packages. Which of these should you know? Here is an analysis. See also link to the raw data at the bottom of the post.
+
+
+Most of these R packages are favorites of Kagglers, endorsed by many authors, rated based on one package's dependency on other packages. They are also rated & reviewed by users as a crowdsourced solution by Crantastic.org. However, these user ratings are too few to be based on for analysis. 
+
+Let us explore how many machine learning packages are being downloaded from Jan to May by analysing CRAN daily downloads. 
+
+e1071 Functions for latent class analysis, short time Fourier transform, fuzzy clustering, support vector machines, shortest path computation, bagged clustering, naive Bayes classifier etc (142479 downloads) 
+rpart Recursive Partitioning and Regression Trees. (135390)
+igraph A collection of network analysis tools. (122930)
+nnet Feed-forward Neural Networks and Multinomial Log-Linear Models. (108298)
+randomForest Breiman and Cutler's random forests for classification and regression. (105375)
+caret package (short for Classification And REgression Training) is a set of functions that attempt to streamline the process for creating predictive models. (87151)
+kernlab Kernel-based Machine Learning Lab. (62064)
+glmnet Lasso and elastic-net regularized generalized linear models. (56948)
+ROCR Visualizing the performance of scoring classifiers. (51323)
+gbm Generalized Boosted Regression Models. (44760)
+party A Laboratory for Recursive Partitioning. (43290)
+arules Mining Association Rules and Frequent Itemsets. (39654)
+tree Classification and regression trees. (27882)
+klaR Classification and visualization. (27828)
+RWeka R/Weka interface. (26973)
+ipred Improved Predictors. (22358)
+lars Least Angle Regression, Lasso and Forward Stagewise. (19691)
+earth Multivariate Adaptive Regression Spline Models. (15901)
+CORElearn Classification, regression, feature evaluation and ordinal evaluation. (13856)
+mboost Model-Based Boosting. (13078)
+It is interesting to note that some open source R tools are gaining popularity such as Rattle, a GUI for data mining using R (35539 downloads), and fastcluster, fast hierarchical clustering routines for R and Python (14214 downloads). 
+
+Did we miss your favorites? Light up this space and contribute to the community by letting us know which R packages you use!! 
+
+
+Hello! This data is based on daily downloads analysis from http://cran-logs.rstudio.com/ . From Jan - May 2015. 
+Yes. Here is the list of all CRAN mirrors http://cran.r-project.org/mirr... and this analysis can be performed on each one.
+
+
+Actually, it can't -- RStudio is the only mirror that publishes its logs.
+
+You can't assume that RStudio's downloaders represent the R population at large.
+
+
+Yes Agree! This analysis is on a sample of R users who download from this mirror. It does not represent the R community at large who download from other mirrors or github/external download sources. Also does not account for users who already have certain packages & download only new packages. Nevertheless the download numbers (refer excel link) are too high for certain packages and hence this analysis is specific from Jan-May 2015 to get an idea.
+
+
+
+
+https://cran.r-project.org/web/views/MachineLearning.html
+
+
+ahaz
+arules
+BayesTree
+bigRR
+bmrm
+Boruta
+bst
+C50
+caret
+CORElearn
+CoxBoost
+Cubist
+e1071 (core)
+earth
+elasticnet
+ElemStatLearn
+evclass
+evtree
+FCNN4R
+frbs
+GAMBoost
+gamboostLSS
+gbm (core)
+glmnet
+glmpath
+GMMBoost
+grplasso
+grpreg
+h2o
+hda
+hdi
+hdm
+ipred
+kernlab (core)
+klaR
+lars
+lasso2
+LiblineaR
+LogicForest
+LogicReg
+maptree
+mboost (core)
+mlr
+ncvreg
+nnet (core)
+oblique.tree
+OneR
+pamr
+party
+partykit
+penalized
+penalizedLDA
+penalizedSVM
+quantregForest
+randomForest (core)
+randomForestSRC
+ranger
+rattle
+Rborist
+rda
+rdetools
+REEMtree
+relaxo
+rgenoud
+rgp
+Rmalschains
+rminer
+ROCR
+RoughSets
+rpart (core)
+RPMM
+RSNNS
+RWeka
+RXshrink
+sda
+SIS
+stabs
+SuperLearner
+svmpath
+tgp
+tree
+varSelRF
+vcrpart

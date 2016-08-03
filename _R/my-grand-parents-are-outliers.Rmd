@@ -9,13 +9,15 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
-
-Population pyramids in ggplot
-	
-
+# Motivation
+Today is the birthday of my grandfather, XX, who is celebrating 97 years old. What a wonderfull live nearly 100 year as he still rides bike, and not long ago used to carry my grandmother in his bicycle. How they compares to the rest of population?
 I have downloaded the data on resident population by age and sex from Demo ISTAT . Here is an example made using 2015 data from a North-Western Italian village of 2587 souls, Caltignaga, famous for its Roman aqueduct:
 
+I realized that my grand parents are pretty much outliers compared to the overall population distribution in my home country.
+
+
+
+Population pyramids in ggplot
 
 ggplot(data=dt) +
 geom_bar(aes(age,value,group=sex,fill=sex), stat = "identity",subset(dt1,dt1$sex=="females")) +
@@ -39,6 +41,8 @@ How do you create an explanatory graph?
 
     geom_segment using no aesthetics to avoid double legends;
      annotate to add text where you want inside the graph space;
+
+
 
 
 
