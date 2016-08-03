@@ -8,12 +8,15 @@
   <meta name="CocoaVersion" content="1348.17">
   <style type="text/css">
     p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000}
-    p.p2 {margin: 0.0px 0.0px 12.0px 0.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 12.0px 0.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000}
     span.s1 {font-kerning: none}
   </style>
 </head>
 <body>
 <p class="p1"><span class="s1">{% if site.owner.google.ad-client and site.owner.google.ad-slot %}{% include ad-footer.html %}{% endif %}</span></p>
-<p class="p2"><span class="s1">© {{ site.time | date: '%Y' }} {{ site.owner.name }} {% if site.owner.twitter %}{% endif %} {% if site.owner.facebook %}{% endif %} {% if site.owner.google.plus %}{% endif %} {% if site.owner.linkedin %}{% endif %} {% if site.owner.stackexchange %}{% endif %} {% if site.owner.instagram %}{% endif %} {% if site.owner.flickr %}{% endif %} {% if site.owner.github %}{% endif %} {% if site.owner.tumblr %}{% endif %} {% if site.owner.pinterest %}{% endif %} {% if site.owner.weibo %}{% endif %}<span class="Apple-converted-space"> </span></span></p>
+<p class="p2"><span class="s1"></span><br></p>
+<p class="p3"><span class="s1">© {{ site.time | date: '%Y' }} {{ site.owner.name }} {% if site.owner.twitter %}{% endif %}<span class="Apple-converted-space"> </span></span></p>
+<p class="p3"><span class="s1">{% if site.owner.facebook %}{% endif %} {% if site.owner.google.plus %}{% endif %} {% if site.owner.linkedin %}{% endif %} {% if site.owner.stackexchange %}{% endif %} {% if site.owner.instagram %}{% endif %} {% if site.owner.flickr %}{% endif %} {% if site.owner.github %}{% endif %} {% if site.owner.tumblr %}{% endif %} {% if site.owner.pinterest %}{% endif %} {% if site.owner.weibo %}{% endif %}</span></p>
 </body>
 </html>
