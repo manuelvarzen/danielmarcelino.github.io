@@ -19,7 +19,7 @@ comments: true
 
 Ah, the numbers! The Olympic Games are back in high style in Rio. Despite Brazil's sluggish economy and unfulfilled promises for this Summer Olympic Games, I'd say, my expectations were met yesterday with such a beautiful opening ceremony. Let's follow the competition over the next few days--the pressure to perform has only just begun. 
 
-One interesting aspect about the Olympic games is the way people around the globe cover it. In fact, several news houses are quite excited about telling predictions and showing medals rankings of all sort, starting soon today. Surprisingly, my eyes just catch a stacked bar chart by [NBC](http://www.nbcolympics.com/) with a really bad visualization taste. It's so inaccurate that it deserves the title of *Worst Olympic Chart*. 
+One interesting aspect about the Olympic games is the way people around the globe cover it. In fact, several news houses are quite excited about telling predictions and showing medals rankings of all sort, starting soon today. Surprisingly, yesterday my eyes catch a stacked bar chart by [NBC](http://www.nbcolympics.com/) with a really bad visualization taste. It's so inaccurate that it deserves the title of *Worst Olympic Chart*. 
 
 <img src="/img/08-06-2016-yet-the-worst-olympic-chart/NBC-olympic-medals.PNG" title="center" alt="center" style="display: block; margin: auto;" />
 
