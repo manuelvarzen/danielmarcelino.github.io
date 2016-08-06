@@ -13,7 +13,7 @@ KnitPost <- function(input, outfile, figsfolder, cachefolder, base.url="/") {
         opts_knit$set(base.url = base.url)
         fig.path <- paste0(figsfolder, sub(".Rmd$", "", basename(input)), "/")
         cache.path <- file.path(cachefolder, sub(".Rmd$", "", basename(input)), "/")
-        
+
         opts_chunk$set(fig.path = fig.path)
         opts_chunk$set(cache.path = cache.path)
         opts_chunk$set(fig.cap = "center")
@@ -29,7 +29,7 @@ knit_folder <- function(infolder, outfolder, figsfolder, cachefolder) {
                 # folder = ifelse(grepl(pattern, infile), outfolder, "pages")
                 outfile = paste0(outfolder, "/", sub(".Rmd$", ".md", basename(infile)))
                 print(outfile)
-                
+
                 # knit only if the input file is the last one modified
                 if (!file.exists(outfile) |
                     file.info(infile)$mtime > file.info(outfile)$mtime) {
@@ -38,5 +38,7 @@ knit_folder <- function(infolder, outfolder, figsfolder, cachefolder) {
         }
 }
 
+08-06-2016-yet-the-worst-olympic-chart.Rmd
+# setwd("/Users/daniel/danielmarcelino.github.io")
 knit_folder("_R", "_posts", "figs/", "_caches/")
 #knit_folder("_R/drafts", "_drafts", "figs/drafts/")

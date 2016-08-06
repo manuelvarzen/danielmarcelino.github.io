@@ -13,7 +13,6 @@ excerpt: "A post about size and memory requirements that a computer must have to
 published: true
 status: published
 comments: true
-header-img: "img/website/rain-room.jpg"
 ---
 
 

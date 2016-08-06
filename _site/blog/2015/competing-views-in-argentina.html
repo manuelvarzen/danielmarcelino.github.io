@@ -6,33 +6,24 @@
 <head>
 <meta charset="utf-8">
 <title>Competing views on Argentina's Frontrunner &#8211; Data * Analysis + R</title>
-<meta name="description" content="The last poll published today by Polldata put Scioli below 40%, with about 5% reporting being undecided.
-It might be too early to state anything solid, but the few polls prospecting the runoff election in Argentina seem to be telling two distinct histories. Polling houses Hugo Haime and IPSOS suggest that Daniel Scioli is going up while Elypsis  and Polldata say he’s actually sinking as the weeks go by. The last poll published today by Polldata puts Scioli below 40%, with about 5% reporting being undecided. My experience following  multiparty elections suggests that polls perform much better in the runoff than in primaries, meaning that the average of the polls now is much more close to the real vote preference than reported before.
-
-">
-<meta name="keywords" content="R, Polls, Elections">
+<meta name="description" content="This post analyze the very few polls published so far on the Argentina's runoff election. Overall, polls seem to be telling two distinct histories.">
+<meta name="keywords" content="R, rstats, polls">
 
 
 <!-- Twitter Cards -->
 <meta name="twitter:title" content="Competing views on Argentina's Frontrunner">
-<meta name="twitter:description" content="The last poll published today by Polldata put Scioli below 40%, with about 5% reporting being undecided.
-It might be too early to state anything solid, but the few polls prospecting the runoff election in Argentina seem to be telling two distinct histories. Polling houses Hugo Haime and IPSOS suggest that Daniel Scioli is going up while Elypsis  and Polldata say he’s actually sinking as the weeks go by. The last poll published today by Polldata puts Scioli below 40%, with about 5% reporting being undecided. My experience following  multiparty elections suggests that polls perform much better in the runoff than in primaries, meaning that the average of the polls now is much more close to the real vote preference than reported before.
-
-">
+<meta name="twitter:description" content="This post analyze the very few polls published so far on the Argentina's runoff election. Overall, polls seem to be telling two distinct histories.">
 <meta name="twitter:site" content="@dmarcelinobr">
 <meta name="twitter:creator" content="@dmarcelinobr">
 
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://danielmarcelino.github.io/images/img/daniel_rio.jpg">
+<meta name="twitter:image" content="http://danielmarcelino.github.io/images/">
 
 <!-- Open Graph -->
 <meta property="og:locale" content="en_US">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Competing views on Argentina's Frontrunner">
-<meta property="og:description" content="The last poll published today by Polldata put Scioli below 40%, with about 5% reporting being undecided.
-It might be too early to state anything solid, but the few polls prospecting the runoff election in Argentina seem to be telling two distinct histories. Polling houses Hugo Haime and IPSOS suggest that Daniel Scioli is going up while Elypsis  and Polldata say he’s actually sinking as the weeks go by. The last poll published today by Polldata puts Scioli below 40%, with about 5% reporting being undecided. My experience following  multiparty elections suggests that polls perform much better in the runoff than in primaries, meaning that the average of the polls now is much more close to the real vote preference than reported before.
-
-">
+<meta property="og:description" content="This post analyze the very few polls published so far on the Argentina's runoff election. Overall, polls seem to be telling two distinct histories.">
 <meta property="og:url" content="http://danielmarcelino.github.io/blog/2015/competing-views-in-argentina.html">
 <meta property="og:site_name" content="Data * Analysis + R">
 
@@ -92,9 +83,6 @@ It might be too early to state anything solid, but the few polls prospecting the
 	    <ul>
       
 		    
-		    <li><a href="http://danielmarcelino.github.io/home/" >Home</a></li>
-		  
-		    
 		    <li><a href="http://danielmarcelino.github.io/blog/" >Blog</a></li>
 		  
 		    
@@ -107,7 +95,7 @@ It might be too early to state anything solid, but the few polls prospecting the
 		    <li><a href="http://danielmarcelino.github.io/randomwalks/" >Random Walks</a></li>
 		  
 		    
-		    <li><a href="http://danielmarcelino.github.io/blogroll/" >Resources</a></li>
+		    <li><a href="http://danielmarcelino.github.io/resources/" >Resources</a></li>
 		  
 		    
 		    <li><a href="http://danielmarcelino.github.io/search/" >Search</a></li>
@@ -120,8 +108,6 @@ It might be too early to state anything solid, but the few polls prospecting the
 
 <header class="masthead">
 	<div class="wrap">
-      
-  		<a href="http://danielmarcelino.github.io/" class="site-logo" rel="home" title="Data * Analysis + R"><img src="http://danielmarcelino.github.io/images/img/daniel_rio.jpg" width="200" height="200" alt="Data * Analysis + R logo" class="animated fadeInDown"></a>
       
       <h1 class="site-title animated fadeIn"><a href="http://danielmarcelino.github.io/">Data * Analysis + R</a></h1>
 		<h2 class="site-description animated fadeIn" itemprop="description">Blog of Daniel Marcelino</h2>
@@ -136,7 +122,7 @@ It might be too early to state anything solid, but the few polls prospecting the
     
     <div class="entry-wrapper">
       <header class="entry-header">
-        <span class="entry-tags"><a href="http://danielmarcelino.github.io/tags/#R" title="Pages tagged R">R</a>&nbsp;&bull;&nbsp;<a href="http://danielmarcelino.github.io/tags/#Polls" title="Pages tagged Polls">Polls</a>&nbsp;&bull;&nbsp;<a href="http://danielmarcelino.github.io/tags/#Elections" title="Pages tagged Elections">Elections</a></span>
+        <span class="entry-tags"><a href="http://danielmarcelino.github.io/tags/#R" title="Pages tagged R">R</a>&nbsp;&bull;&nbsp;<a href="http://danielmarcelino.github.io/tags/#rstats" title="Pages tagged rstats">rstats</a>&nbsp;&bull;&nbsp;<a href="http://danielmarcelino.github.io/tags/#polls" title="Pages tagged polls">polls</a></span>
         
           <h1 class="entry-title">Competing views on Argentina's Frontrunner</h1>
         
@@ -144,13 +130,22 @@ It might be too early to state anything solid, but the few polls prospecting the
       <footer class="entry-meta">
         
         
-          <img src="http://danielmarcelino.github.io/images/img/daniel_rio.jpg" class="bio-photo" alt="Daniel Marcelino bio photo"></a>
+          <img src="http://danielmarcelino.github.io/img/DSC02844.jpg" class="bio-photo" alt="Daniel Marcelino bio photo"></a>
         
         <span class="author vcard">By <span class="fn">Daniel Marcelino</span></span>
         <span class="entry-date date published"><time datetime="2015-10-30T00:00:00-02:00"><i class="fa fa-calendar-o"></i> October 30, 2015</time></span>
         
         <span class="entry-comments"><i class="fa fa-comment-o"></i> <a href="#disqus_thread">Comment</a></span>
-        
+        <span class="social-share-twitter">
+  <a href="https://twitter.com/intent/tweet?hashtags=R,rstats,polls&amp;text=Competing%20views%20on%20Argentina&#39;s%20Frontrunner&amp;url=http://danielmarcelino.github.io/blog/2015/competing-views-in-argentina.html&amp;via=dmarcelinobr" title="Share on Twitter" itemprop="Twitter"><i class="fa fa-twitter-square"></i> Tweet</a>
+</span>
+<span class="social-share-facebook">
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http://danielmarcelino.github.io/blog/2015/competing-views-in-argentina.html" title="Share on Facebook" itemprop="Facebook"><i class="fa fa-facebook-square"></i> Like</a>
+</span>
+<span class="social-share-googleplus">
+  <a href="https://plus.google.com/share?url=http://danielmarcelino.github.io/blog/2015/competing-views-in-argentina.html" title="Share on Google Plus" itemprop="GooglePlus"><i class="fa fa-google-plus-square"></i> +1</a>
+</span>
+<!-- /.social-share -->
         
       </footer>
       <div class="entry-content">
@@ -165,7 +160,7 @@ It might be too early to state anything solid, but the few polls prospecting the
           
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-    var disqus_shortname = '@disqus_BWaSwvKMKm'; // required: replace example with your forum shortname
+    var disqus_shortname = 'daniel-marcelino'; // required: replace example with your forum shortname
 
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {
@@ -206,11 +201,11 @@ It might be too early to state anything solid, but the few polls prospecting the
 <span>&copy; 2016 Daniel Marcelino</span>
 <div class="social-icons">
 	<a href="https://twitter.com/dmarcelinobr" title="Daniel Marcelino on Twitter" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
-	<a href="https://facebook.com/1529566150689415" title="Daniel Marcelino on Facebook" target="_blank"><i class="fa fa-facebook-square fa-2x"></i></a>
+	<a href="https://facebook.com/daniel.marcelino.796" title="Daniel Marcelino on Facebook" target="_blank"><i class="fa fa-facebook-square fa-2x"></i></a>
 	
 	<a href="https://linkedin.com/in/daniel-marcelino-80968656" title="Daniel Marcelino on LinkedIn" target="_blank"><i class="fa fa-linkedin-square fa-2x"></i></a>
-	<a href="users/792000/daniel" title="Daniel Marcelino on StackExchange" target="_blank"><i class="fa fa-stack-exchange fa-2x"></i></a>
-	
+	<a href="http://stackoverflow.com/users/792000/daniel" title="Daniel Marcelino on StackExchange" target="_blank"><i class="fa fa-stack-exchange fa-2x"></i></a>
+	<a href="https://instagram.com/dmarcelinobr" title="Daniel Marcelino on Instagram" target="_blank"><i class="fa fa-instagram fa-2x"></i></a>
 	
 	<a href="https://github.com/danielmarcelino" title="Daniel Marcelino on Github" target="_blank"><i class="fa fa-github-square fa-2x"></i></a>
 	

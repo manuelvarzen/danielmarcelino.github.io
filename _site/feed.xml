@@ -4,7 +4,7 @@
 <generator uri="https://github.com/jekyll/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://danielmarcelino.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="http://danielmarcelino.github.io" />
-<updated>2016-07-25T16:20:23-03:00</updated>
+<updated>2016-08-06T18:08:43-03:00</updated>
 <id>http://danielmarcelino.github.io/</id>
 <author>
   <name>Daniel Marcelino</name>
@@ -14,15 +14,79 @@
 
 
 <entry>
+  <title type="html"><![CDATA[Yet the Worst Olympic Chart]]></title>
+  <link rel="alternate" type="text/html" href="http://danielmarcelino.github.io/blog/2016/yet-the-worst-olympic-chart.html" />
+  <id>http://danielmarcelino.github.io/blog/2016/yet-the-worst-olympic-chart</id>
+  <published>2016-08-06T00:00:00-03:00</published>
+  <updated>2016-08-06T00:00:00-03:00</updated>
+  <author>
+    <name>Daniel Marcelino</name>
+    <uri>http://danielmarcelino.github.io</uri>
+    <email>dmarcelino@live.com</email>
+  </author>
+  <content type="html">
+    &lt;p&gt;Ah, the numbers! The Olympic Games are back in high style in Rio. Despite Brazil’s sluggish economy and unfulfilled promises for this Summer Olympic Games, I’d say, my expectations were met yesterday with such a beautiful opening ceremony. Let’s follow the competition over the next few days–the pressure to perform has only just begun.&lt;/p&gt;
+
+&lt;p&gt;One interesting aspect about the Olympic games is the way people around the globe cover it. In fact, several news houses are quite excited about telling predictions and showing medals rankings of all sort, starting soon today. Surprisingly, my eyes just catch a stacked bar chart by &lt;a href=&quot;http://www.nbcolympics.com/&quot;&gt;NBC&lt;/a&gt; with a really bad visualization taste. It’s so inaccurate that it deserves the title of &lt;em&gt;Worst Olympic Chart&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/08-06-2016-yet-the-worst-olympic-chart/NBC-olympic-medals.PNG&quot; title=&quot;center&quot; alt=&quot;center&quot; style=&quot;display: block; margin: auto;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The colors are fine, but the dimensions are simply misleading. How have the 976 USA Olympic gold medals been given less length in the plot than  797 Russia’s medals (silver and bronze), or all 777.5 medals of Great Britain? Yep, that’s right. One can get half a medal by tying for a placement. Anyway, I believe it shouldn’t be that difficult to make a decent-looking, yet accurate plot for readers. Perhaps, the worst is yet to come.&lt;/p&gt;
+
+&lt;h3 id=&quot;top-3-all-time-olympic-medals&quot;&gt;Top-3 all-time Olympic medals&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/08-06-2016-yet-the-worst-olympic-chart/unnamed-chunk-2-1.png&quot; title=&quot;center&quot; alt=&quot;center&quot; style=&quot;display: block; margin: auto;&quot; /&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;n&quot;&gt;country&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;rep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;US&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;rep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;RUS&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;rep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;GB&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Medal&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;rep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Gold&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Silver&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Bronze&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;976.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;759.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;668.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;440.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;357.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;326.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;233.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;272.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;271.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Olympics&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;as.data.frame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cbind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;country&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Medal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Olympics&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;as.numeric&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;levels&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Olympics&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Olympics&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Olympics&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Medal&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;factor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Olympics&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Medal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;levels&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Gold&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Silver&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Bronze&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pos&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;numeric&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)){&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;+2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;cumsum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Olympics&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;+2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)])&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Olympics&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;+2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dplyr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ggplot2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;library&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SciencesPo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# for the theme.
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Olympics&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Olympics&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; 
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group_by&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;country&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; 
+  &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mutate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mid_y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;cumsum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0.5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; 
+
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ggplot&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Olympics&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;aes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;country&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fill&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Medal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; 
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geom_bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stat&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;identity&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scale_fill_manual&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;#FFD700&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;#C0C0C0&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;#CD7F32&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; 
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scale_y_continuous&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;limits&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;geom_text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;aes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;label&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;counts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mid_y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;labs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Number of Medals&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Olympic Medals&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;coord_flip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theme_scipo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;base_size&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;13&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;no_y_gridlines&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;g&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+
+    &lt;p&gt;&lt;a href=&quot;http://danielmarcelino.github.io/blog/2016/yet-the-worst-olympic-chart.html&quot;&gt;Yet the Worst Olympic Chart&lt;/a&gt; was originally published by Daniel Marcelino at &lt;a href=&quot;http://danielmarcelino.github.io&quot;&gt;Data * Analysis + R&lt;/a&gt; on August 06, 2016.&lt;/p&gt;
+  </content>
+</entry>
+
+
+<entry>
   <title type="html"><![CDATA[Calculating Memory Requirements]]></title>
   <link rel="alternate" type="text/html" href="http://danielmarcelino.github.io/blog/2016/Calculating-Memory-Requirements.html" />
   <id>http://danielmarcelino.github.io/blog/2016/Calculating-Memory-Requirements</id>
   <published>2016-07-20T00:00:00-03:00</published>
   <updated>2016-07-20T00:00:00-03:00</updated>
   <author>
-    <name></name>
+    <name>Daniel Marcelino</name>
     <uri>http://danielmarcelino.github.io</uri>
-    
+    <email>dmarcelino@live.com</email>
   </author>
   <content type="html">
     &lt;p&gt;I had a conversation with people at the office about size and memory requirements that a computer must have to deal with a data frame. It started like this: suppose you have a data frame with 2,000,000 rows and 250 columns, all of which are numeric data  (2,000,000 × 250 × 8 bytes/numeric). Roughly saying, how much memory is required to store this data?&lt;/p&gt;
@@ -61,9 +125,9 @@
   <published>2016-06-23T00:00:00-03:00</published>
   <updated>2016-06-23T00:00:00-03:00</updated>
   <author>
-    <name></name>
+    <name>Daniel Marcelino</name>
     <uri>http://danielmarcelino.github.io</uri>
-    
+    <email>dmarcelino@live.com</email>
   </author>
   <content type="html">
     &lt;p&gt;I was asked about my understanding of reproducible research, and how that applies to social research. 
@@ -92,9 +156,9 @@ Here is how I see: Reproducible research is key to any scientific method, includ
   <published>2016-06-18T00:00:00-03:00</published>
   <updated>2016-06-18T00:00:00-03:00</updated>
   <author>
-    <name></name>
+    <name>Daniel Marcelino</name>
     <uri>http://danielmarcelino.github.io</uri>
-    
+    <email>dmarcelino@live.com</email>
   </author>
   <content type="html">
     &lt;p&gt;I worked a bit over the weekend preparing my talk to be delivered at the seminar organized by &lt;a href=&quot;http://www.ibpad.com.br&quot;&gt;IBPAD&lt;/a&gt; this week at University of Brasilia, addressing the interfaces of Big Data and Society.
@@ -177,9 +241,9 @@ I was invited to present the R package SciencesPo for an eclectic crowd. Eclecti
   <published>2016-02-12T00:00:00-02:00</published>
   <updated>2016-02-12T00:00:00-02:00</updated>
   <author>
-    <name></name>
+    <name>Daniel Marcelino</name>
     <uri>http://danielmarcelino.github.io</uri>
-    
+    <email>dmarcelino@live.com</email>
   </author>
   <content type="html">
     &lt;p&gt;The Brazilian Carnival just ended this week, but for some people it is time to starting worry about crazy things that may have happened over the days of the flesh festival.&lt;/p&gt;
@@ -206,7 +270,7 @@ I was invited to present the R package SciencesPo for an eclectic crowd. Eclecti
 
 &lt;script type=&quot;math/tex; mode=display&quot;&gt;P(HIV~positive~|~positive~ELISA) = p * .977~/~(p * .977 + (1-p) * .074)&lt;/script&gt;
 
-&lt;p&gt;Here is the output and R code  computing this for various values of p with a 25 interval.&lt;/p&gt;
+&lt;p&gt;Here is the output and R code computing this for various values of p with a 25 interval.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;http://danielmarcelino.github.io/img/2016/Sensitivity.png&quot; alt=&quot;center&quot; /&gt;&lt;/p&gt;
 
@@ -250,9 +314,9 @@ I was invited to present the R package SciencesPo for an eclectic crowd. Eclecti
   <published>2016-01-11T00:00:00-02:00</published>
   <updated>2016-01-11T00:00:00-02:00</updated>
   <author>
-    <name></name>
+    <name>Daniel Marcelino</name>
     <uri>http://danielmarcelino.github.io</uri>
-    
+    <email>dmarcelino@live.com</email>
   </author>
   <content type="html">
     &lt;h1 id=&quot;motivation&quot;&gt;Motivation&lt;/h1&gt;
@@ -384,9 +448,9 @@ I was invited to present the R package SciencesPo for an eclectic crowd. Eclecti
   <published>2015-12-22T00:00:00-02:00</published>
   <updated>2015-12-22T00:00:00-02:00</updated>
   <author>
-    <name></name>
+    <name>Daniel Marcelino</name>
     <uri>http://danielmarcelino.github.io</uri>
-    
+    <email>dmarcelino@live.com</email>
   </author>
   <content type="html">
     &lt;p&gt;I was searching in the arXiv repository for an interesting paper to read over the weekend, when I found this: &lt;a href=&quot;http://arxiv.org/abs/1403.3091&quot;&gt;“Studying Gender in Conference Talks – data from the 223rd meeting of the American Astronomical Society”&lt;/a&gt;. The title and figures caught my attention more than the subject of the conference, I’ve to confess.&lt;/p&gt;
@@ -469,9 +533,9 @@ MC      |Obs Freq        |         90|        359|        449|
   <published>2015-12-06T00:00:00-02:00</published>
   <updated>2015-12-06T00:00:00-02:00</updated>
   <author>
-    <name></name>
+    <name>Daniel Marcelino</name>
     <uri>http://danielmarcelino.github.io</uri>
-    
+    <email>dmarcelino@live.com</email>
   </author>
   <content type="html">
     &lt;p&gt;There is not a huge population of opinion polls covering this parliamentary election in Venezuela, but all I’ve can be used to gauge the public opinion by the local polling houses. This posting begs an obvious question: how has the mood in Venezuela varied over time with respect to voting intentions for the two political blocs? Next, can we detect any biases among those publishing polls?&lt;/p&gt;
@@ -696,7 +760,7 @@ In fact, it might be really difficult to set forth a range of winning seats as t
     
   </author>
   <content type="html">
-    &lt;p&gt;Next Sunday Venezuelans are heading to the polls once again with  international concerns about the clearness of the balloting. To get an idea about the political climate over there, I’ve collected some polls available on the internet. The surprising thing from those surveys is a tremendous variability from pollster to pollster about the single topic of voting intention. You may find national polls fielded in the same period with estimates varying as much as 20%, isn’t it dramatic? If you always wanted to see house bias operating in practice, the Venezuelan elections may provide you a good case then.&lt;/p&gt;
+    &lt;p&gt;Next Sunday Venezuelans are heading to the polls once again with international concerns about the clearness of the balloting. To get an idea about the political climate over there, I’ve collected some polls available on the internet. The surprising thing from those surveys is a tremendous variability from pollster to pollster about the single topic of voting intention. You may find national polls fielded in the same period with estimates varying as much as 20%, isn’t it dramatic? If you always wanted to see house bias operating in practice, the Venezuelan elections may provide you a good case then.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;http://danielmarcelino.github.io/img/2015/venezuela1.png&quot; alt=&quot;center&quot; /&gt;&lt;/p&gt;
 
@@ -1003,11 +1067,7 @@ In case you want to read an influential paper on this matter, you can find it &l
     <email>dmarcelino@live.com</email>
   </author>
   <content type="html">
-    &lt;p&gt;Comments on campaign finance in brazil.&lt;/p&gt;
-
-&lt;!--more--&gt;
-
-&lt;p&gt;Last week, I delivered a talk at &lt;a href=&quot;http://www.unb.br&quot;&gt;University of Brasilia&lt;/a&gt; about my past research on the topic of campaign finance. I didn’t know in advance about the existence of this seminar. Indeed, it was a big surprise receiving the invitation from Prof. Marcelo Pimentel, who is teaching on Fridays afternoon a class on this topic with more than 50 registered students. I became his fan after seeing his syllabus. He did managed to assemble a handful studies covering why, what, how, and when money affects politics and elections in Brazil.&lt;/p&gt;
+    &lt;p&gt;Last week, I delivered a talk at &lt;a href=&quot;http://www.unb.br&quot;&gt;University of Brasilia&lt;/a&gt; about my past research on the topic of campaign finance. I didn’t know in advance about the existence of this seminar. Indeed, it was a big surprise receiving the invitation from Prof. Marcelo Pimentel, who is teaching on Fridays afternoon a class on this topic with more than 50 registered students. I became his fan after seeing his syllabus. He did managed to assemble a handful studies covering why, what, how, and when money affects politics and elections in Brazil.&lt;/p&gt;
 
 &lt;p&gt;Though I covered a lot of factors in my talk, I think, I had the wrong pictures to show for a heterogeneous crowd. Instead of wasting time showing regression tables, and trying to solve understanding issues after showing them, I should have shown simple yet powerful pictures like the following ones, so to give the intuition about the relationship between money and votes, generally debated in the literature and media.&lt;/p&gt;
 
@@ -1224,9 +1284,9 @@ Where t stands for time and &lt;code class=&quot;highlighter-rouge&quot;&gt;λ&l
   <published>2015-07-02T00:00:00-03:00</published>
   <updated>2015-07-02T00:00:00-03:00</updated>
   <author>
-    <name></name>
+    <name>Daniel Marcelino</name>
     <uri>http://danielmarcelino.github.io</uri>
-    
+    <email>dmarcelino@live.com</email>
   </author>
   <content type="html">
     &lt;p&gt;I was surprised by the news about the arising of a new organization for promoting R: the &lt;a href=&quot;https://www.r-consortium.org&quot;&gt;R Consortium&lt;/a&gt;. It’s interesting that this new organization says it will do the same thing as the existing R Foundation.&lt;/p&gt;
@@ -1259,35 +1319,6 @@ Where t stands for time and &lt;code class=&quot;highlighter-rouge&quot;&gt;λ&l
 
 
     &lt;p&gt;&lt;a href=&quot;http://danielmarcelino.github.io/blog/2014/frente-amplio-winnability.html&quot;&gt;Frente Amplio Winnability&lt;/a&gt; was originally published by Daniel Marcelino at &lt;a href=&quot;http://danielmarcelino.github.io&quot;&gt;Data * Analysis + R&lt;/a&gt; on November 14, 2014.&lt;/p&gt;
-  </content>
-</entry>
-
-
-<entry>
-  <title type="html"><![CDATA[Runoff in Uruguay: FA is expected to win a third mandate]]></title>
-  <link rel="alternate" type="text/html" href="http://danielmarcelino.github.io/blog/2014/Runoff-in-Uruguay-FA-is-expected-to-win-a-third-mandate.html" />
-  <id>http://danielmarcelino.github.io/blog/2014/Runoff-in-Uruguay-FA-is-expected-to-win-a-third-mandate</id>
-  <published>2014-11-14T00:00:00-02:00</published>
-  <updated>2014-11-14T00:00:00-02:00</updated>
-  <author>
-    <name>Daniel Marcelino</name>
-    <uri>http://danielmarcelino.github.io</uri>
-    <email>dmarcelino@live.com</email>
-  </author>
-  <content type="html">
-    &lt;p&gt;Within 2 weeks, electors in Uruguay will vote for the runoff election between FA and PN. According to the polling data being published, it’s very likely Uruguayans will give FA a third mandate. I run the following forecast model which suggest that the difference between the two parties are huge; even greater than the number of undecided voters.&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/danielmarcelino/8e018efcf13a6287f9b8.js&quot;&gt;&lt;/script&gt;
-
-&lt;h4 id=&quot;tabar-vzquez--frente-amplio&quot;&gt;Tabaré Vázquez – Frente Amplio:&lt;/h4&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://danielmarcelino.github.io/img/2014/Frente_Amplio.png&quot; alt=&quot;Tabaré Vázquez&quot; /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;luis-lacalle-pou--partido-nacional&quot;&gt;Luis Lacalle Pou – Partido Nacional:&lt;/h4&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://danielmarcelino.github.io/img/2014/Partido_Nacional.jpeg&quot; alt=&quot;Luis Lacalle Pou&quot; /&gt;&lt;/p&gt;
-
-    &lt;p&gt;&lt;a href=&quot;http://danielmarcelino.github.io/blog/2014/Runoff-in-Uruguay-FA-is-expected-to-win-a-third-mandate.html&quot;&gt;Runoff in Uruguay: FA is expected to win a third mandate&lt;/a&gt; was originally published by Daniel Marcelino at &lt;a href=&quot;http://danielmarcelino.github.io&quot;&gt;Data * Analysis + R&lt;/a&gt; on November 14, 2014.&lt;/p&gt;
   </content>
 </entry>
 
