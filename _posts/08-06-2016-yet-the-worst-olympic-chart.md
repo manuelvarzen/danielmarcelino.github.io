@@ -42,11 +42,6 @@ Olympics = as.data.frame(
 
 Olympics$counts = as.numeric(levels(Olympics$counts))[Olympics$counts]
 Olympics$Medal <- factor(Olympics$Medal,levels = c('Gold','Silver','Bronze'))
-
-pos = numeric(9)
-for(i in c(1,4,7)){
-  pos[i:(i+2)] = cumsum(Olympics$counts[i:(i+2)]) - 0.5*Olympics$counts[i:(i+2)]
-}
 {% endhighlight %}
 
 
