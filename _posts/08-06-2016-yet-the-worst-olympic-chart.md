@@ -25,12 +25,16 @@ One interesting aspect about the Olympic games is the way people around the glob
 
 The colors are fine, but the dimensions are simply misleading. How have the 976 USA Olympic gold medals been given less length in the plot than  797 Russia's medals (silver and bronze), or all 777.5 medals of Great Britain? Yep, that's right. One can get half a medal by tying for a placement. Anyway, I believe it shouldn't be that difficult to make a decent-looking, yet accurate plot for readers. Perhaps, the worst is yet to come.
 
-### Top-3 all-time Olympic medals 
+#### Top-3 all-time Olympic medals 
 
 <img src="/img/08-06-2016-yet-the-worst-olympic-chart/unnamed-chunk-2-1.png" title="center" alt="center" style="display: block; margin: auto;" />
 
 
+#### The data points
+
 {% highlight r %}
+library(dplyr)
+
 country = c(rep('US',3),rep('RUS',3),rep('GB',3))
 Medal = rep(c('Gold','Silver','Bronze'),3)
 counts = c(976.0, 759.5, 668.5, 440.0, 357.0,326.0, 233.5, 272.5, 271.5)
@@ -42,17 +46,19 @@ Olympics = as.data.frame(
 
 Olympics$counts = as.numeric(levels(Olympics$counts))[Olympics$counts]
 Olympics$Medal <- factor(Olympics$Medal,levels = c('Gold','Silver','Bronze'))
+
+Olympics <- Olympics %>% 
+  group_by(country) %>% 
+  mutate(mid_y=cumsum(counts) - 0.5*counts)
 {% endhighlight %}
 
 
+#### Do the plot
 
 {% highlight r %}
-library(dplyr)
 library(ggplot2)
 library(SciencesPo) # for the theme.
-Olympics <- Olympics %>% 
-  group_by(country) %>% 
-  mutate(mid_y=cumsum(counts) - 0.5*counts) 
+
 
 g <- ggplot(Olympics,aes(x = country, y=counts, fill = Medal)) 
 g <- g + geom_bar(stat = 'identity')
