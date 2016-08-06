@@ -18,6 +18,8 @@ The colors are fine, but the dimensions are simply misleading. How have the 976 
 # Top-3 all-time Olympic medals 
 
 ```{r}
+library(dplyr)
+
 country = c(rep('US',3),rep('RUS',3),rep('GB',3))
 Medal = rep(c('Gold','Silver','Bronze'),3)
 counts = c(976.0, 759.5, 668.5, 440.0, 357.0,326.0, 233.5, 272.5, 271.5)
@@ -29,16 +31,17 @@ Olympics = as.data.frame(
 
 Olympics$counts = as.numeric(levels(Olympics$counts))[Olympics$counts]
 Olympics$Medal <- factor(Olympics$Medal,levels = c('Gold','Silver','Bronze'))
+
+Olympics <- Olympics %>% 
+  group_by(country) %>% 
+  mutate(mid_y=cumsum(counts) - 0.5*counts)
+
 ```
 
 
 ```{r}
-library(dplyr)
 library(ggplot2)
 library(SciencesPo) # for the theme.
-Olympics <- Olympics %>% 
-  group_by(country) %>% 
-  mutate(mid_y=cumsum(counts) - 0.5*counts) 
 
 g <- ggplot(Olympics,aes(x = country, y=counts, fill = Medal)) 
 g <- g + geom_bar(stat = 'identity')
