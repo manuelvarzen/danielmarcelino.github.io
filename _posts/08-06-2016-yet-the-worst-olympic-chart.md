@@ -23,7 +23,7 @@ One interesting aspect about the Olympic games is the way people around the glob
 
 <img src="/img/08-06-2016-yet-the-worst-olympic-chart/NBC-olympic-medals.PNG" title="center" alt="center" style="display: block; margin: auto;" />
 
-The colors are fine, but the dimensions are simply misleading. How have the 976 USA Olympic gold medals been given less length in the plot than  797 Russia's medals (silver and bronze), or all 777.5 medals of Great Britain? Yep, that's right. One can get half a medal by tying for a placement. Anyway, I believe it shouldn't be that difficult to make a decent-looking, yet accurate plot for readers. Perhaps, the worst is yet to come.
+The colors are fine, but the dimensions are simply misleading. How have the 976 USA Olympic gold medals been given less length in the plot than  797 Russia's medals (silver and bronze), or all 777.5 medals of Great Britain? Yep, that's right; one can get half a medal by tying for a placement. Anyway, I believe it shouldn't be that difficult to make a decent-looking, yet accurate plot for readers. But perhaps the worst is yet to come.
 
 #### Top-3 all-time Olympic medals 
 
@@ -54,10 +54,11 @@ Olympics <- Olympics %>%
 
 
 #### Do the plot
-
+Updated: to work properly, please install the ggplot2 development version, otherwise delete the theme setting line.
 {% highlight r %}
-library(ggplot2)
-library(SciencesPo) # for the theme.
+
+library(ggplot2) # devtools::install_github('haddley/ggplot2')
+library(SciencesPo) # for the theme: devtools::install_github('danielmarcelino/SciencesPo')
 
 
 g <- ggplot(Olympics,aes(x = country, y=counts, fill = Medal)) 
@@ -66,7 +67,8 @@ g <- g + scale_fill_manual(values = c('#FFD700','#C0C0C0','#CD7F32'))
 g <- g + scale_y_continuous(limits = c(0, 2500))
 g <- g + geom_text(aes(label=counts, y = mid_y), size = 3)
 g <- g + labs(x='',y='Number of Medals', title='Olympic Medals')
-g <- g + coord_flip() + theme_scipo(base_size = 13)
+g <- g + coord_flip() 
+g <- g + theme_scipo(base_size = 13)
 g <- g + no_y_gridlines()
 print(g)
 {% endhighlight %}
