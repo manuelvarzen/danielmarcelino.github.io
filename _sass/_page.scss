@@ -20,10 +20,10 @@
 /* feature image */
 
 .entry-feature-image {
-	margin: 0 0 0 0;
+	margin: 0px 0 0;
 	width: 100%;
 	@include media($medium) {
-		margin-top: -75px; /* move up to be overlapped by site logo */
+		margin-top: 0px; /* move up to be overlapped by site logo */
 	}
 	@include media($large) {
 		margin-top: -145px; /* move up further to be overlapped by site logo */
@@ -58,7 +58,7 @@ span + .entry-title {
 .entry-title {
 	font-family: $alt-font;
 	font-style: italic;
-	@include font-size(32,yes,32);
+	@include font-size(30,yes,30);
 	font-weight: 350;
 	line-height: 1;
 	letter-spacing: -3px;
