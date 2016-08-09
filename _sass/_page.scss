@@ -201,12 +201,6 @@ span + .entry-title {
 	.entry-title {
 		text-align: center;
 		max-width: 100%;
-		font-family: $alt-font;
-		font-style: italic;
-		@include font-size(30,yes,30);
-		font-weight: 350;
-		line-height: 1;
-		letter-spacing: -3px;
 	}
 	.entry-content {
 		@include span-columns(12);
