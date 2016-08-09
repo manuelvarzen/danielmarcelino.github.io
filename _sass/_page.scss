@@ -59,7 +59,7 @@ span + .entry-title {
 	font-family: $alt-font;
 	font-style: italic;
 	@include font-size(36,yes,36);
-	font-weight: 400;
+	font-weight: 350;
 	line-height: 1;
 	letter-spacing: -3px;
 	a {
@@ -127,7 +127,7 @@ span + .entry-title {
 
 .image-credit {
   margin: 0 auto;
-  max-width: 350px;
+  max-width: 450px;
   padding-top: 5px;
   padding-right: 20px;
   padding-left: 20px;
