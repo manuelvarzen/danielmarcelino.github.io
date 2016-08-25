@@ -3,8 +3,8 @@ layout: page
 title: Data Science Resources
 permalink: /resources/
 image:
-  feature: blogheader.png
-  credit: "Daniel Marcelino"
+  feature: blogheader3.jpeg
+  credit: 
   creditlink: 
 ---
 
