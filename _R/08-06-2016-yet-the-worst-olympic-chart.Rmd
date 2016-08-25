@@ -1,6 +1,6 @@
 ---
 title: "Yet the Worst Olympic Chart"
-author: "Daniel Marcelino"
+author: "Daniel Marcelino (@dmarcelinobr)"
 date: "August 6, 2016"
 output: html_document
 ---
@@ -54,3 +54,6 @@ g <- g + no_y_gridlines()
 print(g)
 ```
 
+
+
+`#reproducible`
