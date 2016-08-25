@@ -3,7 +3,7 @@ layout: page
 title: "Current Interests"
 permalink: /interests/
 image:
-  feature: Congresso.jpg
+  feature: blogheader3.jpeg
   credit: 
   creditlink: 
 ---
