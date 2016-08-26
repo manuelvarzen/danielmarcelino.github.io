@@ -1,5 +1,4 @@
 # Site wide configuration
-
 title: Data * Analysis + R
 locale: en_US
 description: "Blog of Daniel Marcelino" 
@@ -10,7 +9,7 @@ url: "http://danielmarcelino.github.io"
 
 # Jekyll configuration
 
-permalink:   /blog/:year/:title.html
+permalink: /blog/:year/:title.html
 paginate_path: /page:num/
 markdown:    kramdown
 highlighter: rouge
