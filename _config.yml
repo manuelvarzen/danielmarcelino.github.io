@@ -1,7 +1,7 @@
 # Site wide configuration
 title: Data * Analysis + R
 locale: en_US
-description: "Blog of Daniel Marcelino" 
+description: "Blog of Daniel Marcelino"
 favicon: favicon.ico
 logo: null
 search: true
