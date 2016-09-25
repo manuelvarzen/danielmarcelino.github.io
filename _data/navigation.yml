@@ -1,13 +1,13 @@
 # Site navigation links
 
+- title: About
+  url: /about/
+
 - title: Blog
   url: /blog/
 
 - title: Interests
   url: /interests/
-
-- title: About
-  url: /about/
 
 - title: Random Walks
   url: /randomwalks/
