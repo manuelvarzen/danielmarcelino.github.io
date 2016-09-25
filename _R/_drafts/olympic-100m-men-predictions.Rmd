@@ -1,0 +1,57 @@
+---
+title: "Olympic 100m Men Final Predictions"
+author: "Daniel Marcelino"
+date: "August 7, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+http://sportsdemo1.gracenote.com/documentation/vmt#demo
+
+https://www.iaaf.org/records/by-discipline/sprints/100-metres/outdoor/men
+
+
+Usain Bolt 'will not win Rio 2016 100m final'. So who will?
+
+suggests the United States will once again lead the way, ahead of China, while Britain suffers a spectacular slump -- and Bolt misses out on men's 100m gold for the first time since 2004.
+
+Jamaican legend Bolt, 28, is predicted to miss out on Olympic 100m gold next year.
+"We've got Bolt second at the moment, behind Justin Gatlin," says Gleave.
+Gatlin, the American who served a four-year drugs ban between 2006 and 2010, won bronze at London 2012 -- where Bolt completed his second successive Olympic treble, winning 100m, 200m and 4x100m relay gold meals.
+Bolt has dominated the 100m for the better part of a decade, winning the world titles in 2009 and 2013 alongside his two Olympic gold medals. Only in 2011, when he false-started, has he missed out.
+
+```{r}
+df <- data.frame(
+"Year", "Official results"
+1908	10.8
+1912	10.8
+1920	10.8
+1924	10.6
+1928	10.8
+1932	10.3
+1936	10.3
+1948	10.3
+1952	10.4
+1956	10.5
+1960	10.2
+1964	10
+1968	9.95
+1972	10.14
+1976	10.06
+1980	10.25
+1984	9.99
+1988	9.92
+1992	9.96
+1996	9.84
+2000	9.87
+2004	9.85
+2008	9.69
+2012	9.63
+2016	
+2020	
+)
+```
+

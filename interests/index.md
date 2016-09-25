@@ -2,10 +2,6 @@
 layout: page
 title: "Current Interests"
 permalink: /interests/
-image:
-  feature: blogheader3.jpeg
-  credit: 
-  creditlink: 
 ---
 
 ## Elections

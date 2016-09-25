@@ -1,0 +1,29 @@
+---
+layout: post
+category : statistics
+excerpt: "Share the results-producing methodology"
+title: "Analytic Review: Just share it"
+comments: true
+tags : [psychology]
+---
+
+
+[Sakaluk, Williams and Biernat](http://pps.sagepub.com/content/9/6/652.full) write:
+
+>"[Analytic Review] requires authors submitting manuscripts for publication to also submit the data file and syntax used during analyses."
+
+In their article, they propose ("Analytic Review") that the data and code that was used to analyze the data should be open for peer-review.
+
+At this stage, it strikes me as odd that we are not already doing that. I can immediately think of two reasons for not posting data:  
+
+1. It adds extra work to an already busy schedule.
+
+Well, if its a part of the review process, there would presumably be just another "upload" button to click.
+
+2. The researcher wants to use the data/code to produce more publications.
+
+Great. Data should be looked at from multiple angles, but one researcher probably can't think of all the possible routes to discovery. The worry then is that someone is going to "scoop" me by using my own data! That would be a shame, and I'm not sure how "scooping" could be completely prevented. Here's a solution: Be nice. Collaborate. Be open about what you're doing.
+
+Clearly, some data sets can't be shared due to ethical reasons; but apart from that, perhaps it's time to set the data free.
+
+[These people think](https://agendaforopenresearch.org/) that the time has come to urge reviewers to require open practices. It's certainly an interesting idea...

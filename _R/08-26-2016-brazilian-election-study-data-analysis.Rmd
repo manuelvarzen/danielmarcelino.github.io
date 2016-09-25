@@ -1,0 +1,145 @@
+---
+title: "Brazilian Election Study Data Analysis"
+author: "Daniel Marcelino"
+date: "September 18, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Few days ago Peter [published this](http://ellisp.github.io/blog/2016/09/18/nzes1) interesting post on the New Zeland Election Study, which made me remmenber of a dataset resting in my disk for few months now after a consulting project I made few months ago. That time, I couldn't use the data to write something nice, because the data wasn't made available for the public. 
+The New Zealand Election Study makes available data on nine general elections (back to 1990) and looks to be a great resource. Some time in the last half dozen years they took a decision to publish it all pro-actively with minimal (nearly zero) gate-keeping, which is a great thing.
+
+
+How to get the data
+The data are available from the New Zealand Election Study website in SPSS format. There is a brief online form to fill in so they can keep track of who is using their data. Because of this, I’m not planning on publishing a copy of the data or incorporating it into the nzelect R package. The download is straightforward with a minimum of red tape (just the one form, no credentials or gate-keeping). To get it into R, the code below will work with just the necessary tweak to wherever the zip file containing the 2014 data has been saved.
+
+devtools::install_github("hadley/ggplot2") # for dev version with subtitles and captions
+library(ggplot2)
+library(foreign)
+library(survey)
+library(dplyr)
+library(tidyr)
+library(forcats)
+library(gridExtra)
+
+
+# Data downloaded from http://www.nzes.org/exec/show/data and because
+# they want you to fill in a form to know who is using the data, I
+# won't re-publish it myself
+unzip("D:/Downloads/NZES2014GeneralReleaseApril16.sav.zip")
+
+nzes <- read.spss("NZES2014GeneralReleaseApril16.sav", 
+                  to.data.frame = TRUE, trim.factor.names = TRUE)
+
+varlab <- cbind(attributes(nzes)$variable.labels)
+The data have 2,835 rows and 438 columns. The column names are the variable names from the original SPSS file. In the code above, I extract the more verbose “variable labels” that each column refers to and store them in a data frame with a single column, varlab. The entries in varlab can now be referred to by their row name, for example:
+
+> varlab["dredincome",]
+
+
+There’s an exciting range of questions in here, and when I’ve got my head around them I’ll be doing some interesting analysis; particularly once I get efficient code to join it up with the Census data in my nzcensus package. I think that much of the analysis by others to date has been with SPSS, so I’ll publish any useful R code I develop for others to use too.
+
+Weights
+The data have weights to correct for:
+
+deliberate over-sampling (I think of Maori, although I haven’t yet tracked down a definitive description of the sample design)
+accidental (ie from response rate) disproportionate sampling by age, gender and education
+disproportionate representation of voters and non-voters
+I’m pretty sure the correct final weight to use is the column dwtfin.
+
+Note – the weight column sums to the sample size (not to the population). This minimises the chance of an SPSS-related disaster. Unless the specialist complex surveys module is paid for and used, SPSS interprets weights as frequencies, and hence will give completely wrong standard errors and confidence intervals if the weights add up to anything other than sample size. I think that they are still wrong when the weights add up to sample size, but not by an order of magnitude! (SPSS’ limitations in this regard were an important reason in moving to R at my work in 2011, but I digress.)
+
+Here’s my prep code before doing further analysis. When I get into this for real, this is likely to be much bigger, and I’ll develop special script/s specifically to do data cleaning and tidying. For now, all I do is make a summary variable that groups party vote for some of the smaller parties into an “other party” category; and set up the data with a survey design object using Thomas Lumley’s survey package, which is the go-to point for anyone studying complex (ie weighted) surveys in R.
+
+# Main parties, in rough sequence of conservative to progressive.  Don't complain to me if you don't like the ordering.
+mainparties <- c("No Vote", "Conservative", "National", "NZ First", "Labour", "Green", "Internet?Mana Party", "Other party")
+nzes <- nzes %>%
+   mutate(vpartysum = ifelse(nzes$dvpartyvote %in% mainparties, as.character(nzes$dvpartyvote), "Other party"),
+          vpartysum = factor(vpartysum, levels = mainparties),
+          vpartysum = fct_recode(vpartysum, "Internet /\nMana Party" = "Internet?Mana Party"))
+
+# create a survey design object for easy of analysing with correct weights, etc - 
+# this is particularly important if doing modelling down the track
+nzes_svy <- svydesign(~1, data = nzes, weights = ~dwtfin)
+New Zealanders in particularly will be interested in the answer to this question, presumably asked as a proxy of how closely people follow politics:
+
+> varlab["dfinance", ]
+
+
+Here’s the code to make this graphic.
+
+#-------------Example analayis - attitudes to the Dirty Politics book---------------
+dirtypol <- svytable(~ vpartysum + ddirtypol, nzes_svy)
+
+# Mosaic plot.  Difficult for non-specialists to interpret
+mosaicplot(dirtypol[ ,-5], shade = TRUE, las = 2, 
+           ylab = varlab["ddirtypol", ], 
+           xlab = "Party vote", main = "")
+           
+           
+           
+# party colours taken from https://en.wikipedia.org/wiki/List_of_political_parties_in_New_Zealand
+# except for "other or no vote" which matches "don't know" in p3 plot
+party_cols <- c("grey90", "#00AEEF", "#00529F", "black", "#d82a20", "#098137", "#770808", "grey80", "#770808", 
+                brewer.pal(5, "PuRd")[1])
+names(party_cols) <- c(mainparties, "Internet /\nMana Party", "Other or no vote")
+
+total1 <- dirtypol %>%
+   as.data.frame() %>%
+   group_by(ddirtypol) %>%
+   summarise(Freq = sum(Freq)) %>%
+   mutate(vpartysum = "TOTAL\nregardless of party")
+
+p3 <- dirtypol %>%
+   as.data.frame() %>%
+   rbind(total1) %>%
+   group_by(vpartysum) %>%
+   mutate(ddirtypol = fct_rev(ddirtypol)) %>%
+   mutate(prop = Freq / sum(Freq)) %>%
+   mutate(ddirtypol = fct_relevel(ddirtypol, levels(ddirtypol)[2:5])) %>%
+   ggplot(aes(x = vpartysum, weight = prop, fill = ddirtypol)) +
+   geom_bar(position = "stack", width = 0.75) +
+   geom_vline(xintercept = 9, colour = "grey60", size = 14, alpha = 0.3) +
+   geom_bar(position = "stack", width = 0.75) +
+   theme(legend.position = "right") +
+   scale_fill_brewer("", palette = "PuRd", direction = -1, guide = guide_legend(reverse = FALSE)) +
+   scale_y_continuous("", label = percent) +
+   labs(x = "") +
+   coord_flip() +
+   ggtitle("Voter views on 'How much truth in Nicky Hager's Dirty Politics book'",
+           subtitle = "Compared to party vote in the 2014 General Election\n\n
+           Views about Mr Hagar's book, within each group of party voters") +
+   theme(legend.margin = unit(.80, "lines")) 
+  
+total2 <- dirtypol %>%
+   as.data.frame() %>%
+   group_by(vpartysum) %>%
+   summarise(Freq = sum(Freq)) %>%
+   mutate(ddirtypol = "TOTAL regardless\nof views on book") 
+
+p4 <- dirtypol %>%
+   as.data.frame() %>%
+   rbind(total2) %>%
+   mutate(vpartysum = fct_collapse(vpartysum, "Other or no vote" = c("Other party", "No Vote"))) %>%
+   mutate(vpartysum = fct_relevel(vpartysum, levels(vpartysum)[2:7])) %>%
+   group_by(vpartysum, ddirtypol) %>%
+   summarise(Freq = sum(Freq)) %>%
+   group_by(ddirtypol) %>%
+   mutate(prop = Freq / sum(Freq)) %>%
+   ggplot(aes(x = ddirtypol, weight = prop, fill = vpartysum)) +
+   geom_bar(position = "stack", width = 0.8) +
+   geom_vline(xintercept = 6, colour = "grey60", size = 38, alpha = 0.3) +
+   geom_bar(position = "stack", width = 0.8) +
+   theme(legend.position = "right") +
+   scale_fill_manual("Party vote", values = party_cols, guide = guide_legend(reverse = TRUE)) +
+   scale_y_continuous("\n\n\n\nProportion voting for each party\n", label = percent) +
+   labs(x = "", caption = "Source: New Zealand Election Study, analysed in http://ellisp.github.io") +
+   ggtitle("",
+           subtitle = "             Party votes, within each category of views about Mr Hagar's book")
+
+   
+grid.arrange(p3, p4, ncol = 1)
+

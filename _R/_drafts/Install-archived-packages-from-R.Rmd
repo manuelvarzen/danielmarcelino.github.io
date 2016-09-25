@@ -1,0 +1,34 @@
+---
+title: "Untitled"
+author: "Daniel"
+date: "May 10, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Mortality 
+
+Not only CRAN package submission rate is rising quickly, but the orphaned and archived rate do so.
+Several orphaned CRAN packages are about to be archived due to outstanding QC problems, but have CRAN and BioC packages depending on them which would be broken by the archival (and hence need archiving alongside).
+
+To install those archived packages we usually have to manually download them, then install. 
+In this simplory posting, I show an alternative and clean way of intalling archived packages right way in R.
+
+
+Since epicalc was removed from the CRAN repos and replaced (seems to) by epiDisplay.(see http://stackoverflow.com/questions/32316360/why-was-package-epicalc-removed-from-cran) 
+
+The process is divide in two basic steps. First, download package tarball from CRAN archive. Second, install it.
+
+```{r download, echo=FALSE}
+download.file(url = "http://cran.r-project.org/src/contrib/Archive/epicalc/epicalc_2.15.1.0.tar.gz", destfile = "epicalc_2.15.1.0.tar.gz")
+```
+
+http://cran.r-project.org/src/contrib/Archive/lgtdl/lgtdl_1.1.1.tar.gz
+
+```{r install, echo=FALSE}
+install.packages(pkgs="epicalc_2.15.1.0.tar.gz", type="source", repos=NULL)
+    unlink("epicalc_2.15.1.0.tar.gz")
+```    

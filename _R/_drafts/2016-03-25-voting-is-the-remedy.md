@@ -1,0 +1,20 @@
+Voting
+March 13th, 2016
+
+Many people are dissatisfied with the current situation. They feel that politics favors rich people; that their lives get harder; that big companies profit from political decisions.
+
+Their reaction: Not voting / voting blank / voting invalid.
+
+This is an awful idea because of the following reasons:
+
+    Blank votes and invalid votes are treated just the same way as not voting, although the number might get counted (source).
+    If you’re not voting, the people who vote get more influence with their votes.
+    This means by not voting, you’re effectively voting for the current situation.
+
+What are your alternatives? Get active.
+
+    Have a closer look at the parties. On wahl-o-mat.de you can see 22 parties with some elected positions. You don’t have to agree 100% for all questions. You only have to find a party which is “good enough”.
+    Speaking to parties and demanding certain positions. I guess all mayor parties are mainly doing what they think their segment of voters likes. If enough people demand a certain position, they might change.
+    Make your own party. This is always a possibility. Find other people who think the same way.
+
+Not voting, blank voting and invalid voting is just stupid and lazy. It shows your support of the current situation / the parties which are currently strong.

@@ -2,10 +2,6 @@
 layout: page
 title: Data Science Resources
 permalink: /resources/
-image:
-  feature: blogheader3.jpeg
-  credit: 
-  creditlink: 
 ---
 
 # Blogroll
