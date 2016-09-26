@@ -17,4 +17,7 @@ permalink: /resources/
 [David Robinson](http://varianceexplained.org)
 
 
-# Tutorials 
+# Classes and Tutorials 
+
+[Analytics (EN)](http://varianceexplained.org)
+[Analytics (PT)](http://varianceexplained.org)
