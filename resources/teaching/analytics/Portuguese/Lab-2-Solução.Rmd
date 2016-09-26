@@ -1,0 +1,125 @@
+---
+title: "Lab - 2 (Soluções)"
+author: "Daniel Marcelino"
+date: "`r Sys.Date()`"
+output: SciencesPo:::Markdown
+---
+
+
+# Dicas de como importar base de dados 
+
+| Dados                       | Tipo            | Função       | Pacote           |
+|-----------------------------+-----------------+--------------+------------------|
+| separado por vírgula        |  (.csv)         | read.csv()   | utils (default)  |
+| outros formatos delimitados | ";", "\t" , etc | read.table() | utils (default)  |
+| Stata version 7-12          | (.dta)          | read.dta()   | foreign          | 		
+| Stata version 13-14         | (.dta)          | readdta()    | haven            |
+| SPSS                        | (.sav)          | read.spss(), read_spss()  | foreign, haven           |
+| SAS                         | (.sas7bdat)     | read.sas7bdat(), read_sas() | sas7bdat, haven       |
+| Excel                       | (.xls, .xlsx)   | read_excel() | readxl           |
+
+# Exercícios 
+
+<div id="exercise">
+**Exercício 1**: 
+Importe a base de dados "school.sav" do diretório `data`.
+</div>
+```{r}
+library(haven)
+school <- read_spss("https://github.com/danielmarcelino/Datasets/raw/master/Hox2000/school.sav")
+```
+
+
+
+<div id="exercise">
+**Exercício 2**: Explore a estrutura dos dados.
+</div>
+
+```{r}
+str(school)
+```
+
+```{r}
+summary(school)
+```
+
+- Apresente as primeiras linhas do data frame para entender sua estrutura
+
+```{r}
+head(school)
+```
+
+
+<div id="exercise">
+**Exercício 3**: Use a função `attach()` para deixar as variáveis da base de dados facilmente acessíveis
+</div>
+
+```{r}
+attach(school)
+```
+
+
+<div id="exercise">
+**Exercício 4**: Produza algumas estatísticas descritivas da variável SCORE para cada sexo PUPILSEX. Vamos produzir médias (mean), medianas (median), desvios (sd), intervalo dos dados (range), variâncias (var) e quartis (quantile)
+</div>
+
+
+```{r}
+aggregate(SCORE ~ PUPILSEX, FUN = "mean")
+```
+
+
+```{r}
+# ou usando tapply
+tapply(SCORE, list(PUPILSEX), FUN = "mean")
+```
+
+
+```{r}
+aggregate(SCORE ~ PUPILSEX, FUN = "median")
+```
+
+
+```{r}
+aggregate(SCORE ~ PUPILSEX, FUN = "sd")
+
+```
+
+```{r}
+aggregate(SCORE ~ PUPILSEX, FUN = "var")
+```
+
+```{r}
+aggregate(SCORE ~  PUPILSEX, FUN = "range")
+```
+
+```{r}
+aggregate(SCORE ~ PUPILSEX, FUN = "quantile")
+
+```
+
+
+<div id="exercise">
+**Exercício 5**: Substitua os valores da variável PUPILSEX de modo que '0' torne 'F' e '1' torne 'M'.
+</div>
+
+
+
+# Usando ifelse (minha preferida)
+```{r, cache=FALSE}
+
+PUPILSEX = ifelse(PUPILSEX == 0, "F", "M")
+
+table(PUPILSEX)
+```
+
+# Ou usando replace 
+
+```{r, cache=FALSE}
+PUPILSEX <- replace(PUPILSEX, which(PUPILSEX==0), "F")
+
+PUPILSEX <- replace(PUPILSEX, which(PUPILSEX==1), "M")
+
+table(PUPILSEX)
+```
+

@@ -1,0 +1,5 @@
+\beamer@endinputifotherversion {3.36pt}
+\select@language {brazilian}
+\beamer@sectionintoc {1}{The Need for Bayesian Methods}{3}{0}{1}
+\beamer@sectionintoc {2}{Questionably Bayesian Factors}{16}{0}{2}
+\beamer@sectionintoc {3}{The Problem of (Weak) Priors}{22}{0}{3}

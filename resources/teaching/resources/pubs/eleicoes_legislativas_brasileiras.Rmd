@@ -1,0 +1,185 @@
+---
+title: "Eleições Legislativas no Brasil"
+author: "Daniel Marcelino"
+date: "March 9, 2014"
+output: ioslides_presentation
+runtime: shiny
+---
+
+## Basics
+
+Taxa de retenção parlamentar = (reeleitos / total de deputados)
+Taxa de reapresentação parlamentar = (candidatos à reeleição / total de deputados)
+Taxa de insucesso eleitoral = (não-reeleitos / candidatos à reeleição)
+
+
+```{r, echo=FALSE}
+
+```
+
+ano=c(1986, 1990, 1994, 1998, 2002, 2006, 2010)
+
+reapresentacao = c(66, 70, 72, 75, 78, NA, NA)
+retencao = c(39, 42, 50, 51, 50, NA,NA)
+insucesso = c(49, 50, 48, 50, 60, NA , NA)
+institucionalizacao <- data.frame(ano, retencao, reapresentacao,insucesso)
+
+require(reshape2) 
+newdf = melt(institucionalizacao, id = c("ano"), measure.vars = c("reapresentacao","retencao","insucesso"), variable.name = "group", value.name = "value")
+
+## Graphing 
+
+YBreaks <- seq(0,100, by=20)
+YTickLabels<- as.character(YBreaks)
+# 511
+p <- ggplot() + 
+  geom_point(data = newdf, aes(x=ano, y=value, colour = group ), size = I(7)) + 
+  geom_line(data = newdf, aes(x=ano, y=value, colour = group), size = I(5)) + labs(list(x="Eleições",y="Taxa de retenção \n reapresentação e insucesso")) +
+  scale_y_continuous(limits=RangeY, breaks=YBreaks, labels=YTickLabels, expand=c(0,0)) + 
+  scale_x_continuous(breaks = round(seq(min(institucionalizacao$ano), max(institucionalizacao$ano), by = 4),1)) +
+  theme_minimal(base_size = 17, base_family = "") +
+  theme(legend.position="bottom")
+
+p <- p + scale_color_manual(name  =" ",
+                       values=c("retencao"=        "grey45", 
+                                "reapresentacao"=  "grey10",
+                                "insucesso"=       "grey80"))
+print(p)
+
+#### Campos ideológicos  ####
+esquerda = c(18,25, 25,26,38, 36, 39 )
+centro = c(48,27,32,32, 26, 30, 26 )
+direita = c(34,48,43,42,36 , 30, 28 )
+ideologia <- data.frame(ano, esquerda, centro, direita)
+
+## graphing ##
+Yrange <-c(0,100)
+Ybreaks <- seq(0,100, by=25)
+Yticks<- as.character(Ybreaks)
+
+newdata = melt(ideologia, id = c("ano"), measure.vars = c("esquerda","centro","direita"), variable.name = "group", value.name = "value")
+
+p <- ggplot() + 
+geom_point(data = newdata, aes(x=ano, y=value, colour = group ), size = I(7)) + 
+geom_line(data = newdata, aes(x=ano, y=value, colour = group), size = I(5)) + labs(list(x="Eleições",y="Percentual de votos")) +
+scale_y_continuous(limits=Yrange, breaks=Ybreaks, labels=Yticks, expand=c(0,0)) + 
+scale_x_continuous(breaks = round(seq(min(ideologia$ano), max(ideologia$ano), by = 4),1)) +
+theme_minimal(base_size = 17, base_family = "") +
+theme(legend.position="bottom")
+
+p <- p + scale_color_manual(name  ="",
+                            values=c("esquerda"= "#F8766D", 
+                                     "centro"=  "#00BA38",
+                                     "direita"= "#00B0F6"))
+
+
+#### Volatilidade eleitoral ####
+vol = c(.354,.349,.159, .129, .147, .102, .110 )
+volatilidade <- data.frame(ano, vol)
+
+## graphing ##
+Yrange <-c(0,1)
+Ybreaks <- seq(0,1, by=.25)
+Yticks<- as.character(Ybreaks)
+# 511
+p <-qplot(volatilidade$ano, volatilidade$vol, xlab = "Eleições", ylab = "Volatilidade eleitoral")
+p <- p + geom_point(colour="grey10", size = I(7))
+p <- p + geom_line(size = I(5), colour = "grey10")
+p <- p + theme_minimal(base_size = 17, base_family = "")
+p <- p + scale_y_continuous(limits=Yrange , breaks=Ybreaks, labels=Yticks, expand=c(0,0))
+p <- p + scale_x_continuous(breaks = round(seq(min(volatilidade$ano), max(volatilidade$ano), by = 4),1))
+print(p)
+
+# p <- p + scale_y_continuous(breaks = c(seq(0, 1, by = .25)))
+                   
+#### Numero efetivo de partidos ####
+cam <- c(7,8,9,8,9,10.6,11.3)
+nep <- data.frame(ano, cam)
+
+## graphing ##
+# 511
+RangeY <-c(0,25)
+YBreaks <- seq(0,25, by=5)
+YTickLabels<- as.character(YBreaks)
+
+p <-qplot(nep$ano, nep$cam, xlab = "Eleições",ylab = "No. efetivo de partidos") +
+geom_point(colour="grey10", size = I(7)) +
+geom_line(size = I(5), colour = "grey10") +
+theme_minimal(base_size = 17, base_family = "") +
+scale_y_continuous(limits=RangeY, breaks=YBreaks, labels=YTickLabels, expand=c(0,0)) +
+scale_x_continuous(breaks = round(seq(min(nep$ano), max(nep$ano), by = 4),1))
+print(p)
+
+
+### Propaganda eleitoral #####
+partidos = c("#FF0000","#130950", "#FF7800","#198FFF","#30ACA4","#0269BD","#9DAE3B","#E73F00","#FFD5C3","#FF4550","#AD0000", "#193532","#175B0E", "#007FF9", "#FF5991","#A8FBA5","#CFF2FB", "#B69D89","#8FAEB9")
+partidos = c("#FF7800", "#FF0000","#198FFF", "#130950","#FFFF00","#E73F00","#FFD5C3","#0269BD","#FF4550","#9DAE3B","#175B0E","#AD0000", "#B69D89", "#E6D0FF","#560100", "#CFF2FB", "#9867E7","#193532","#00B8F2","#55655A", "#F5AC9C")
+
+partidos = c("#FF0000","#FF7800","#198FFF", "#130950","#FFFF00","#9DAE3B","#E73F00","#FFD5C3","#9DAE3B","#B69D89","#175B0E","#AD0000","#FF4550","#F5AC9C", "#CFF2FB", "#55655A", "#560100","#9867E7","#385162","#66525B","#A8FBA5","#E6D0FF")
+
+#250000 =PSTU
+# 2002
+partidos = c("PT","PFL", "PMDB","PSDB","PPB","PL","PTB","PSB","PDT","PPS","PC do B", "PRONA","PV", "PSD", "PST","PSL","PMN", "PSC","PSDC")
+eleicao = c(91,84,76,70,48,26,26,22,21,15,12,6,5,4,3,1,1,1,1)
+
+# 2006
+partidos = c("PMDB", "PT","PSDB", "PFL","PP","PSB","PDT","PL","PPS","PTB","PV","PC do B", "PSC", "PTC","PSOL", "PMN", "PHS","PRONA","PAN","PT do B", "PRB")
+eleicao = c(89, 83, 66, 65, 41, 27,24,23,22,22,13,13,9,3,3,3,2,2,1,1,1)
+
+
+#### Representação ####
+
+partidos = c("PT","PMDB","PSDB", "DEM","PR","PP","PSB","PDT","PTB","PSC","PV","PC do B","PPS","PRB", "PMN", "PT do B", "PSOL","PHS","PRTB","PRP","PSL","PTC")
+
+cadeiras = c(88,79,53,43,41,41,34,28,21,17,15,15,12,8,4,3,3,2,2,2,1,1)
+votos = c(13813587,11692384,9421347,6932420,7050274,5987670,6553345,4478736,3808646,2981714,2886633,2545279,2376475,1659973,1026220,605768, 968475,719611,283047,232530,457490,563145)
+composicao <- data.frame(partidos, cadeiras)
+composicao$r <- composicao$cadeiras/513
+
+#### Intenção de votos ####
+d <- ggplot(df, aes(x=x, y=value, group=variable, colour=variable ) ) + geom_line(size=2)
+d + scale_color_manual(values=c("#CC6666", "#9999CC"))
+
+dd + theme(legend.position = c(0.8, 0.8))  # centered here where x, y in (0, 1)
+
+
+## Shiny Presentation
+
+
+This R Markdown presentation is made interactive using Shiny. The viewers of the presentation can change the assumptions underlying what's presented and see the results immediately. 
+
+To learn more, see [Interactive Documents](http://rmarkdown.rstudio.com/authoring_shiny.html).
+
+## Slide with Interactive Plot
+
+```{r, echo=FALSE}
+inputPanel(
+  selectInput("n_breaks", label = "Number of bins:",
+              choices = c(10, 20, 35, 50), selected = 20),
+  
+  sliderInput("bw_adjust", label = "Bandwidth adjustment:",
+              min = 0.2, max = 2, value = 1, step = 0.2)
+)
+
+renderPlot({
+  hist(faithful$eruptions, probability = TRUE, breaks = as.numeric(input$n_breaks),
+       xlab = "Duration (minutes)", main = "Geyser eruption duration")
+  
+  dens <- density(faithful$eruptions, adjust = input$bw_adjust)
+  lines(dens, col = "blue")
+})
+```
+
+## Slide with Bullets
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+## Slide with R Code and Output
+
+```{r}
+summary(cars)
+```
+
+

@@ -1,0 +1,251 @@
+---
+title: "Tipos de Objetos de Dados no R"
+author: "Daniel Marcelino"
+date: "`r sub(' 0', ' ', format(Sys.Date(), format='%B %d, %Y'))`"
+# runtime: shiny
+output:
+  ioslides_presentation:
+    widescreen: true
+    css: https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css
+    # logo: https://github.com/danielmarcelino/SciencesPo/raw/master/inst/doc/SciencesPo_R_logo.png
+    highlight: pygments
+    transition: slower
+    beamer_presentation: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message=FALSE, warning=FALSE, comment=NA, fig.align='center', fig.keep='last')
+
+knitr::knit_hooks$set(mysize = function(before, options, envir) {
+  if (before) 
+    return(options$size)
+})
+
+setwd("~/danielmarcelino.github.io/resources/teaching/analytics/Portuguese")
+```
+
+## Agenda
+- Tipos de objetos de dados no R
+
+#### Objetivo:
+Ao final desta aula, você deverá saber: 
+  - Tipos de vetores mais usados
+  - Reconhecer os diferentes tipos de objetos mais comuns do R.
+
+
+## Vetores
+
+```{r}
+a <- c(1, 2, 5.3, 6, -2, 4) # numeric
+
+b <- c("um", "dois", "três") # character 
+
+c <- c(TRUE, TRUE, TRUE, FALSE, TRUE, FALSE) # logical
+```
+
+## Matrizes
+
+```{r}
+y <- matrix(1:20, nrow = 5, ncol = 4)
+
+print(y)
+```
+
+## Data frames
+- O data frame lembra uma matriz
+- É o tipo de conjunto de vetores mais usado para bancos de dados.
+
+```{r}
+d <- c(1, 2, 3, 4);
+e <- c("azul", "verde", "branco", NA);
+f <- c(TRUE, TRUE, TRUE, FALSE);
+df <- data.frame(d, e, f);
+
+names(df) <- c("ID","Cor","Aprovado") # nomes das variáveis
+
+```
+
+## Ver o data frame
+```{r}
+print(df)
+```
+
+## Listas
+- Uma coleção de diferentes tipos de vetores/objetos.
+- Exemplo de uma lista com 4 componentes (uma string, um vetor numérico, uma matriz e um valor escalar):
+```{r}
+w <- list(nome = "Daniel", números = a, matriz = y, idade = 30.5)
+```
+
+
+## Listas
+
+```{r}
+w
+```
+
+## Listas
+- Podem conter diferentes formas de vetores;
+- Podem ser aninhads (nested) 
+
+```{r}
+l <- list("a" = c(1,2,3), "bla", list(c(TRUE,FALSE), c(1L, 3L))); l
+```
+
+----
+
+### Listas: selecionando elementos
+
+```{r}
+l[[1]]
+```
+
+### Selecting a list containing an element - preserve structure
+
+```{r}
+l[2]
+```
+
+----
+
+### Selecting a named element
+
+```{r}
+l$a
+```
+
+### Addressing nested elements
+
+```{r}
+l[[3]][[2]]
+```
+
+
+
+## Classes (factors)
+### Diz ao R que a variável é nominal
+```{r}
+# variável sexo com 20 entradas "masculino" e
+# 30 entradas "feminino" 
+sexo <- c(rep("masculino",20), rep("feminino", 30))
+sexo <- factor(sexo)
+summary(sexo) 
+
+```
+
+- Guarda *sexo* como 20 1s e 30 2s e associa internamente 1=feminino, 2=masculino (seguindo a ordem alfabética)
+- R agora tratará sexo como variável nominal
+
+## Classes (factors)
+Diz ao R que o fator é ordinal
+```{r}
+# variável rating codificada como "grande", "médio", "pequeno'
+rating <- c("grande", "médio", "médio", "pequeno", "grande")
+
+rating <- ordered(rating, c("pequeno","médio", "grande"))
+
+rating
+```
+
+- Guarda *rating* como 1,2,3 e associa internamente 1=grande, 2=médio, 3=pequeno.
+
+- O R agora irá tratar *rating* como ordinal 
+
+## Classes (factors)
+  - Diz ao R qual é o fator de referência
+```{r}
+
+```
+
+
+
+# { .fullpage }
+
+<div class="fullpage width">
+```{r, echo=FALSE, dev='svg'}
+par(mar = c(5, 4, 1, 2) + 0.1)
+pairs(iris[1:4], pch = 21,
+      bg = c("red", "green3", "blue")[unclass(iris$Species)])
+```
+</div>
+
+
+
+
+# Gráficos com ggplot2
+
+
+## Gráficos com ggplot2
+
+Para exemplificar os gráficos com esse pacote, utilizaremos a base de dados diamonds, disponível no pacote ggplot2
+
+```{r}
+# Instalar o pacote ggplot2
+library(ggplot2)
+
+# ?mtcars
+str(mtcars)
+```
+
+- Documentação do pacote: [http://docs.ggplot2.org/current/](http://docs.ggplot2.org/current/)
+- Livro sobre o pacote: Hadley Wickham - ggplot2 Elegant Graphics for Data Analysis. Editora Springer
+
+## Gráficos com ggplot2
+
+- Por que usar esse pacote se eu já sei fazer gráficos e perder ainda mais o meu tempo?
+
+- Porque os gráficos ficam bonitinhos...
+
+## Gráficos com ggplot2
+
+
+```{r}
+qplot(mpg, wt, data = mtcars)
+```
+
+
+```{r}
+qplot(mpg, wt, data = mtcars, colour = cyl)
+```
+
+
+```{r}
+qplot(mpg, wt, data = mtcars, facets = vs ~ am)
+
+```
+
+## Gráficos com ggplot2
+
+```{r}
+mod <- lm(mpg ~ wt, data = mtcars)
+
+qplot(resid(mod), fitted(mod))
+```
+
+
+## Gráficos com ggplot2
+
+
+```{r}
+qplot(mpg, data = mtcars,
+  geom = "histogram", binwidth = 0.1)
+```
+
+```{r}
+qplot(factor(cyl), wt, data = mtcars, geom = c("boxplot", "jitter"))
+
+```
+
+
+```{r}
+qplot(mpg, wt, data = mtcars, geom = "path")
+```
+
+
+## Gráficos com ggplot2
+
+```{r}
+qplot(carat, data = diamonds,
+  geom = "histogram", binwidth = 0.01)
+```
+

@@ -1,0 +1,151 @@
+---
+title: "Manipulando dados, listas, funções e comandos if-else"
+author: "Daniel Marcelino"
+date: "`r sub(' 0', ' ', format(Sys.Date(), format='%B %d, %Y'))`"
+email: "dmarcelino@live.com"
+output: 
+  ioslides_presentation:
+    css: https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css
+    logo: https://github.com/danielmarcelino/SciencesPo/raw/master/inst/doc/SciencesPo_R_logo.png
+    highlight: pygments
+    transition: slower
+    beamer_presentation: default
+#bibliography: main.bib
+---
+
+## Agenda
+
+- Mais sobre data frames
+
+
+## Um pouco mais sobre data frames
+```{r}
+data(mtcars)
+
+head(mtcars, 3)
+```
+
+## Adicionando uma coluna 
+
+- O comando `transform()` retorna uma novo data frame com colunas modificadas ou adicionadas como especificado pela função.
+
+```{r}
+
+mtcars.metric <- transform(mtcars, kmpl = 0.425 * mpg, 
+                           hpcyl = hp/cyl)
+
+tail(names(mtcars.metric))
+```
+
+- O data frame tem agora duas novas colunas, estimando o consumo de combustível em km/litro e cavalos por cilindros.
+
+## Outra abordagem 
+
+```{r}
+kmpl2 = 0.425 * mtcars$mpg
+
+mtcars.metric$kmpl2  <- kmpl2 # cria uma nova coluna chamada kmpl2
+
+tail(names(mtcars.metric))
+```
+
+- Vamos comparar se as duas abordagens produziram o mesmo resultado:
+
+```{r}
+identical(mtcars.metric$kmpl, mtcars.metric$kmpl2)
+```
+
+
+## Mudando níveis de um fator
+
+```{r}
+dados <- data.frame(
+partido = rep(c("PSDB", "PT", "PMDB"), times = 5),
+satisfação = c("ruim","bom",
+               "ruim","bom",
+               "ótimo","ótimo",
+               "regular","regular",
+               "ruim","ótimo",
+               "bom","ruim",
+               "ótimo","ótimo","ótimo"),
+aprovação = c(35,40,50,55,45,35,65,43,32,63,61,15,70,29,68),
+firma = rep(c(1, 2, 3), times = 5))
+
+str(dados)
+```
+
+## Mudando níveis de um fator
+
+```{r}
+# install.packages("plyr")
+
+library(plyr)
+
+satisfação <- dados$satisfação
+
+head(satisfação, 5)
+```
+
+## Mudando níveis de um fator
+
+```{r}
+satisfação.agreg <- mapvalues(satisfação,
+                              c("ruim", 
+                               "regular"), 
+                              rep("insatisfeito", 2))
+
+dados$satisfação.agreg <- satisfação.agreg
+
+str(dados)
+```
+
+## Gerando fatores a partir de números inteiros
+
+  - Várias bases de dados vêm com números inteiros que indicam ordem/níveis ou categorias.
+
+  - Você quer converter os números inteiros em valores que sejam mais intuitivos para o propósito da sua análise.
+  
+  - Vamos imaginar que em nossos dados, "firma" foi codificada de modo a representar 1 = Ibope, 2 = Datafolha, 3 = Sensus
+
+```{r}
+head(dados, 4)
+```
+
+## Gerando fatores a partir de números inteiros
+
+- Uma maneira de realizar essa tarefa é por meio da combinação das funções: `transform()`, `as.factor()` e `mapvalues()`:
+
+```{r}
+dados <- transform(dados, 
+                   firma = as.factor(
+                     mapvalues(firma, 
+                               c(1, 2, 3), 
+                               c("Ibope", "Datafolha", "Sensus"))))
+
+head(dados)
+```
+
+
+## Alguma coisa mais sobre data frames: a função `table()`
+
+- A função `table()` constrói **tabelas de contingência** mostrando a frequência de cada combinação dos níveis de um ou mais fatores.
+
+```{r}
+table(dados$firma)
+```
+
+## Alguma coisa mais sobre data frames: a função `table()`
+
+```{r}
+table(dados$satisfação.agreg, dados$firma)
+```
+
+- Posteriormente, iremos ver como fazer um teste de hipóteses usando dados como estes.
+
+## Sintaxe alternativa
+
+```{r}
+head(dados[c("satisfação.agreg", "aprovação")], 3)
+
+table(dados[c("satisfação.agreg", "firma")])
+```

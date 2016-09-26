@@ -1,0 +1,96 @@
+---
+title: "Lab - 2"
+author: ""
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Dicas de como importar base de dados 
+
+| Dados                       | Tipo            | Função       | Pacote           |
+|-----------------------------+-----------------+--------------+------------------|
+| separado por vírgula        |  (.csv)         | read.csv()   | utils (default)  |
+| outros formatos delimitados | ";", "\t" , etc | read.table() | utils (default)  |
+| Stata version 7-12          | (.dta)          | read.dta()   | foreign          | 		
+| Stata version 13-14         | (.dta)          | readdta()    | haven            |
+| SPSS                        | (.sav)          | read.spss(), read_spss()  | foreign, haven           |
+| SAS                         | (.sas7bdat)     | read.sas7bdat(), read_sas() | sas7bdat, haven       |
+| Excel                       | (.xls, .xlsx)   | read_excel() | readxl           |
+
+
+
+### Exercício 1
+Importe a base de dados "school.sav" do diretório `data`.
+
+```{r}
+
+```
+
+
+### Exercício 2
+
+- Explore a estrutura dos dados 
+
+```{r}
+
+```
+
+- Apresente as primeiras linhas do data frame para entender sua estrutura
+```{r}
+
+```
+
+
+### Exercício 3
+
+Use a função `attach()` para deixar as variáveis da base de dados facilmente acessíveis
+
+```{r}
+```
+
+
+### Exercise 4
+
+Produza algumas estatísticas descritivas da variável SCORE para cada sexo PUPILSEX. Vamos produzir médias (mean), medianas (median), desvios (sd), intervalo dos dados (range), variâncias (var) e quartis (quantile)
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+
+```{r}
+
+```
+
+
+### Exercício 5
+
+Substitua os valores da variável PUPILSEX de modo que '0' torne 'F' e '1' torne 'M'.
+
+```{r}
+
+```

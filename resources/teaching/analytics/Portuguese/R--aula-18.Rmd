@@ -1,0 +1,173 @@
+---
+title: "Untitled"
+author: "Daniel Marcelino"
+date: "September 25, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Logit model
+## Getting sample data
+
+
+```{r}
+library(foreign)
+mydata <- read.dta("http://dss.princeton.edu/training/Panel101.dta")
+
+```
+
+```{r}
+# Running a logit model
+logit <- glm(y_bin ~ x1 + x2 + x3, family=binomial(link="logit"), data=mydata)
+
+
+summary(logit)
+```
+
+
+- The Pr(>|z|) column shows the two-tailed p-values testing the null hypothesis that the coefficient is equal to zero (i.e. no significant effect). The usual value is 0.05, by this measure none of the coefficients have a significant effect on the log-odds ratio of the dependent variable. The coefficient for x3 is significant at 10% (<0.10).
+
+- The z value also tests the null that the coefficient is equal to zero. For a 5% significance, the z-value should fall outside the ±1.96.
+
+- The Estimate column shows the coefficients in log-odds form. When x3 increase by one unit, the expected change in the log odds is 0.7512. What you get from this column is whether the effect of the predictors is positive or negative. See next page for an extended explanation.
+
+
+## Logit model: odds ratio
+
+- Odds ratio interpretation (OR): Based on the output below, when x3 increases by one unit, the odds of y = 1 increase by 112% -(2.12-1)*100-. Or, the odds of y =1 are 2.12 times higher when x3 increases by one unit (keeping all other predictors constant). To get the odds ratio, you need explonentiate the logit coefficient.
+
+```{r}
+# Estimating the odds ratio by hand cbind(Estimate=round(coef(logit),4),
+OR=round(exp(coef(logit)),4))
+```
+
+- The Estimate column shows the coefficients in log-odds form. When x3 increase by one unit, the expected change in the log odds is 0.7512. Lets hold x1 and x2 constant at their means, and vary x3 with values 1, 2, and 3, to get the predicted log-odds given each of the three values of x3:
+
+
+```{r}
+
+r1 <- logit$coeff[1] + logit$coeff[2]*mean(mydata$x1) +
+      logit$coeff[3]*mean(mydata$x2) +
+      logit$coeff[4]*1
+
+r2 <- logit$coeff[1] + logit$coeff[2]*mean(mydata$x1) +
+      logit$coeff[3]*mean(mydata$x2) + 
+      logit$coeff[4]*2
+
+r3 <- logit$coeff[1] + logit$coeff[2]*mean(mydata$x1) +
+      logit$coeff[3]*mean(mydata$x2) +
+      logit$coeff[4]*3
+
+
+# When x3 increases from 1 to 2, the log-odds increases:
+r2-r1
+# When x3 increases from 2 to 3, the log-odds increases:
+r3-r2 
+# Which corresponds to the estimate for x3 above.
+
+# The odds ratio, is the exponentiation of the difference of the log-odds
+exp(r2-r1)
+
+# Or, the ratio of the exponentiation of each of the log-odds
+
+exp(r2)/exp(r1)
+#  Which corresponds to the OR value for x3 above
+
+```
+
+## Logit model: predicted probabilities
+- To estimate the predicted probabilities, we need to set the initial conditions.
+
+- Getting predicted probabilities holding all predictors or independent variables to their means. 
+```{r}
+allmean <- data.frame(x1=mean(mydata$x1),
+                       x2=mean(mydata$x2),
+                       x3=mean(mydata$x3))
+￼￼allmean
+```
+
+
+- After estimating the logit model and creating the dataset with the mean values of the predictors, you can use the predict() function to estimate the predicted probabilities (for help/details type ?predict.glm), and add them to the allmean dataset.
+```{r}
+allmean$pred.prob <- predict(logit, newdata=allmean, type="response")
+
+allmean
+
+# When all predictor values are hold to their means, the probability of y = 1 is 83%.
+```
+
+
+
+## Marginal effects
+
+```{r}
+install.packages("mfx")
+library(mfx)
+
+logitmfx(y_bin ~ x1+x2+x3, data=mydata)
+```
+
+
+Marginal effects show the change in probability when the predictor or independent variable increases by one unit. For continuous variables this represents the instantaneous change given that the ‘unit’ may be very small. For binary variables, the change is from 0 to 1, so one ‘unit’ as it is usually thought.
+
+
+## Ordinal logit model
+
+```{r}
+library(MASS)
+
+# Running the ordered logit model
+m1 <- polr(opinion ~ x1 + x2 + x3, data=mydata, Hess=TRUE)
+```
+
+## Ordinal logit model
+### Getting coefficients and p-values
+
+```{r}
+
+m1.coef <- data.frame(coef(summary(m1)))
+
+m1.coef$pval = round((pnorm(abs(m1.coef$t.value), lower.tail = FALSE) * 2),2) m1.coef
+```
+
+## Ordinal logit model
+### Predicted probabilities
+```{r}
+# Use "probs" for predicted probabilities
+m1.pred <- predict(m1, type="probs") summary(m1.pred)
+```
+
+###  At specific values 
+```{r}
+# At specific values, example x1 and x2 at their means, and x3 = 1 and x3 = 2. # Use "probs" for predicted probabilities given specific predictors
+
+setup1 <- data.frame(
+  x1=rep(mean(mydata$x1),2),
+  x2=rep(mean(mydata$x2),2), 
+  x3=c(1,2))
+setup1
+```
+
+
+```{r}
+setup1[, c("pred.prob")] <- predict(m1, newdata=setup1, type="probs") setup1
+```
+
+
+```{r}
+# Use "class" for the predicted category
+setup1[, c("pred.prob")] <- predict(m1, newdata=setup1, type="class") setup1
+```
+
+
+### marginal effects
+```{r}
+# Load package "erer", use function ocMe() for marginal effects
+library(erer)
+x <- ocME(m1, x.mean=TRUE)
+x
+```
+

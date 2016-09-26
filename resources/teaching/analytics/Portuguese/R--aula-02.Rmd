@@ -1,0 +1,540 @@
+---
+title: "Importando Dados"
+author: "Daniel Marcelino"
+date: "`r Sys.Date()`"
+email: "dmarcelino@live.com"
+output: 
+   ioslides_presentation:
+      css: https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css
+      logo: https://github.com/danielmarcelino/SciencesPo/blob/master/inst/doc/SciencesPo_logo.jpg
+   highlight: pygments
+   transition: slower
+   beamer_presentation: default
+   ratio: 8x10
+#bibliography: main.bib
+---
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = TRUE, 
+                      cache = TRUE, 
+                      message=FALSE, 
+                      warning=FALSE, 
+                      comment=NA, 
+                      fig.align='center', 
+                      fig.keep='last')
+
+knitr::knit_hooks$set(mysize = function(before, options, envir) {
+  if (before) 
+    return(options$size)
+})
+
+setwd("~/danielmarcelino.github.io/resources/teaching/analytics/Portuguese/")
+```
+
+## Agenda
+
+  - Demonstração do uso do RStudio e R Markdown
+
+  - Entrada de dados
+
+  - Importar dados
+
+  - Sumários simples de dados (categóricos e contínuos)
+
+  - Lab 2
+  
+
+## Demonstração 
+
+1. Iniciando um arquivo R Markdown (Rmd)
+
+2. Imprimindo (Knitting) para HTML
+
+3. Editando blocos de código
+
+4. Enviando códigos para o console
+
+
+## Entrando dados manualmente
+
+```{r}
+papai_noel <- data.frame(crença = c('Não acredita', 'Não acredita',
+                            'Não acredita', 'Não acredita',
+                            'Acredita', 'Acredita', 'Acredita', 
+                            'Acredita', 'Acredita', 'Acredita',
+                            'Não acredita', 'Não acredita',
+                            'Acredita', 'Acredita', 
+                            'Não acredita', 'Não acredita'), 
+                         irmãos = c('Irmão', 'Irmão', 'Irmão',
+                                  'Irmã', 'Sem', 'Sem', 'Sem',
+                                  'Irmã', 'Irmão', 'Irmã',
+                                  'Irmão', 'Irmã', 'Sem', 
+                                  'Irmã', 'Irmão', 'Sem'))
+```
+
+----
+
+```{r}
+papai_noel2 <- data.frame(crença = c(rep('Não acredita', 4),
+                                     rep('Acredita', 6), 
+                                     rep('Não acredita', 2),
+                                     rep('Acredita', 2), 
+                                     rep('Não acredita', 2)),
+                          irmãos = c(rep('Irmão', 3), 'Irmã',
+                                   rep('Sem', 3),'Irmã', 'Irmão',
+                                   'Irmã', 'Irmão', 'Irmã',
+                                   'Sem', 'Irmã', 'Irmão', 'Sem'))
+```
+
+
+```{r}
+rep('Irmão', 3)
+c('Irmão', 'Irmã','Sem')
+```
+
+
+## Explorando objetos
+
+```{r}
+all.equal(papai_noel, papai_noel2) # comparando objetos
+```
+
+```{r}
+dim(papai_noel) # dimensão do objeto
+```
+
+```{r}
+nrow(papai_noel) # número de linhas 
+```
+
+```{r}
+ncol(papai_noel) # número de colunas 
+```
+
+## Explorando objetos
+
+```{r}
+ summary(papai_noel)
+```
+
+
+```{r}
+# Estrutura do objeto
+ str(papai_noel)
+```
+
+----
+
+### Para ver as primeiras/últimas linhas 
+
+```{r}
+head(papai_noel)
+```
+
+```{r}
+tail(papai_noel, 3)
+```
+
+## Tabelas simples
+
+```{r}
+tab1 = table(papai_noel$crença, papai_noel$irmãos)
+ 
+tab1
+```
+
+
+```{r}
+ with(papai_noel, table(crença, irmãos))
+```
+
+----
+
+```{r}
+mosaicplot(tab1, 
+           main = "Irmão Mais Velho Reduz Crença em Papai Noel", 
+           xlab = "Acredita em Papai Noel", 
+           ylab = "Tipo de irmãos mais velhos?", 
+           col = c(2, 3, 4))
+```			  
+
+
+## Entrando dados (Matriz)
+
+```{r}
+covs <- matrix(c(
+  1, 0, 0, 0, 0,
+  0, 1, 0, 0, 0,
+  0, 0, 1, 0, 0,
+  0, 0, 0, 1, 0,
+  0, 0, 0, 0, 1), nrow = 5)
+
+colnames(covs) <- rownames(covs) <- paste("x", 1:5, sep = "")
+
+covs
+```
+
+
+## Localizando seus dados
+
+```{r, eval=FALSE}
+
+getwd()
+
+setwd("<localização dos seus dados>")
+
+setwd("..") # configura a área de trabalho para a próxima pasta, 
+            # imediatamente acima
+
+list.files("data") 
+
+file.choose()
+```
+
+
+## Importando dados 
+
+| Dados                       | Tipo            | Função       | Pacote           |
+|-----------------------------+-----------------+--------------+------------------|
+| separado por vírgula        |  (.csv)         | read.csv()   | utils (default)  |
+| outros formatos delimitados | ";", "\t" , etc | read.table() | utils (default)  |
+| Stata version 7-12          | (.dta)          | read.dta()   | foreign          | 		
+| Stata version 13-14         | (.dta)          | readdta()    | haven            |
+| SPSS                        | (.sav)          | read.spss()  | foreign          |
+| SAS                         | (.sas7bdat)     | read.sas7bdat() | sas7bdat      |
+| Excel                       | (.xls, .xlsx)   | read_excel() | readxl           |
+
+## Importando dados 
+
+```{r, eval=FALSE}
+?read.table
+
+read.table(file, header = FALSE, sep = "", quote = "\"'",
+           dec = ".", 
+           numerals = c("allow.loss", "warn.loss", "no.loss"),
+           row.names, col.names, as.is = !stringsAsFactors,
+           na.strings = "NA", colClasses = NA, nrows = -1,
+           skip = 0, check.names = TRUE, fill = !blank.lines.skip,
+           strip.white = FALSE, blank.lines.skip = TRUE,
+           comment.char = "#", allowEscapes = FALSE, 
+           flush = FALSE, 
+           stringsAsFactors = default.stringsAsFactors(), 
+           fileEncoding = "", encoding = "unknown", text, 
+           skipNul = FALSE)
+
+```
+
+
+## Importando dados 
+
+```{r, eval=FALSE}
+
+?read.csv
+
+read.csv(file, header = TRUE, sep = ",", quote = "\"",
+         dec = ".", fill = TRUE, comment.char = "", ...)
+```
+
+
+
+```{r, eval=FALSE}
+
+?read.csv2
+
+read.csv2(file, header = TRUE, sep = ";", quote = "\"",
+          dec = ",", fill = TRUE, comment.char = "", ...)
+          
+```
+
+
+## Importando dados 
+
+```{r, eval=FALSE}
+# Tabela 9.5 (syntax) + Tabela 9.7 (results)
+# Conduzindo CFA com dados contínuos não normais, usando 
+# robust maximum likelihood 
+
+data9.7 <- read.table("http://people.bu.edu/tabrown/Ch9/NONML.DAT",
+                    nrows = 870)
+
+names(data9.7) <- c("x1", "x2", "x3", "x4", "x5")
+
+```
+
+
+## Importando dados (Missings)
+
+```{r, eval=FALSE}
+# Estimação do modelo CFA com dados ausentes usando 
+# métodos de imputação múltipla 
+
+data9.2 <- read.table("http://people.bu.edu/tabrown/Ch9/cfamiss.dat",
+                      na.strings = "9")
+
+names(data9.2) <- c("subject", "s1", "s2", "s3", "s4")
+```
+
+
+## Importando dados (largura da coluna fixa)
+
+```{r, eval=FALSE}
+## Table 9.9 (syntax) + Table 9.10 (results)
+
+data9.9 <- read.fwf("http://people.bu.edu/tabrown/Ch9/BINARY.DAT", 
+                 width = c(1,1,1,1,1,1), n = 750)
+
+names(data9.9) <- c(paste("y", 1:6, sep = ""))
+```
+
+
+## Importando dados (Excel)
+
+```{r, eval=FALSE}
+ 
+read_excel(path, sheet = 1, col_names = TRUE, 
+            col_types = NULL, na = "", skip = 0)
+
+```
+
+
+```{r, eval=FALSE}
+install.packages("readxl")
+
+# library(xlsx)
+# library(XLConnect)
+# library(openxlsx)
+library(readxl)  
+
+dados_xlsx  = read_excel("dados.xlsx")
+```
+
+
+## Importando dados (SPSS)
+
+```{r, eval=FALSE}
+read.spss(file, use.value.labels = TRUE, to.data.frame = FALSE,
+          max.value.labels = Inf, trim.factor.names = FALSE,
+          trim_values = TRUE, reencode = NA, 
+          use.missings = to.data.frame)
+```
+
+
+```{r, eval=FALSE}
+install.packages("foreign")
+# require(foreign)
+library(foreign) 
+
+dados_spss = read.spss(file.choose(),  
+                       to.data.frame=TRUE,
+                        use.value.labels=FALSE)
+```
+
+
+## Importando dados (Stata)
+
+```{r, eval=FALSE}
+?read.dta
+?write.dta
+
+read.dta(file, convert.dates = TRUE, convert.factors = TRUE,
+         missing.type = FALSE,
+         convert.underscore = FALSE, warn.missing.labels = TRUE)
+```
+
+
+```{r, eval=FALSE}
+library(foreign) 
+
+dados_stata = read.dta("dados.dta")
+```
+
+
+## Importando dados (SAS)
+
+```{r, eval=FALSE}
+??read.sas7bdat
+
+read.sas7bdat(file, debug=FALSE)
+```
+
+
+```{r, eval=FALSE}
+install.packages("sas7bdat")
+
+library(sas7bdat)
+
+dados_sas <- read.sas7bdat("dados.sas7bdat")
+```
+
+
+## Importando dados (JSON)
+
+```{r, eval=FALSE}
+install.packages("rjson")
+
+library(rjson)
+
+dados_json <- fromJSON(file = "dados.json" )
+```
+
+
+
+## Importando dados (pacote 'rio')
+
+A tarefa de importar dados é realizada com apenas uma função, **`import()`**:
+```{r, eval=FALSE}
+install.packages("rio")
+
+library("rio")
+
+x <- import("dados.csv")
+y <- import("dados.rds")
+z <- import("dados.sav")
+```
+
+E a tarefa de exportar dados, com a função, **`export()`**:
+```{r, eval=FALSE}
+export(mtcars, "mtcars.csv") # valores separados por vírgula
+export(mtcars, "mtcars.rds") # R serializado
+export(mtcars, "mtcars.sav") # SPSS
+```
+
+
+```{r, eval=FALSE, include=FALSE}
+install.packages("ggmap")
+
+library(ggmap)
+
+café <- geocode("SCLN 202 Norte, Brasília - DF, 70832-515",
+                source = "google") 
+
+
+ggmap(get_map("Brasília, DF", zoom = 14)) +
+  geom_point(data=café, size = 7, shape = 13, color = "red")
+```
+
+
+## Análise descritiva
+### Dados
+```{r}
+library(readxl) 
+Prefeitos  = read_excel("data/Prefeitos.xlsx")
+```
+
+### Média 
+```{r}
+mean(Prefeitos$Idade, na.rm = TRUE)
+```
+
+## Análise descritiva
+### Desvio Padrão 
+```{r}
+sd(Prefeitos$Idade, na.rm = TRUE)
+```
+
+### Somar/contar casos
+```{r}
+sum(Prefeitos$Idade <= 25, na.rm = TRUE)
+```
+
+
+## Utilizando funções *ad-hoc* 
+
+```{r}
+# Função porcentagem
+
+Porcentagem <- function(var){
+  a  <- round(prop.table(table(var)),3)*100
+  print(cbind(sort(a, decreasing = TRUE)))
+}
+```
+
+
+----
+
+```{r }
+Porcentagem(Prefeitos$Sexo)
+```
+
+
+```{r}
+Porcentagem(Prefeitos$Escolaridade)
+```
+
+
+## Manipulação básica: indexação dos dados
+
+```{r, eval=FALSE}
+Prefeitos_sub  <- subset(Prefeitos,
+                         Exercício == "Sim")
+
+```
+
+
+```{r, eval=FALSE}
+Prefeitos_sub  <- subset(Prefeitos, 
+                         Exercício == "Sim" & Idade >= 35)
+```
+
+----
+
+### Selecionar uma única linha (a primeira)
+```{r, eval=FALSE}
+Prefeitos[1, ]
+```
+
+### Selecionar coluna (3a)
+
+```{r, eval=FALSE}
+# Prefeitos[["Sexo"]]  
+# Prefeitos$Sexo 
+
+Prefeitos[, 3]
+```
+
+### Selecionar coluna (2a, 3a, 4a)
+
+```{r, eval=FALSE}
+Prefeitos[, 2:4]
+```
+
+
+```{r, eval=FALSE}
+Prefeitos[c("Exercício", "Sexo", "Idade")]
+```
+
+----
+
+### Selecionar tudo, menos "Pós-graduação"
+
+```{r, eval=FALSE}
+Prefeitos[Prefeitos$Escolaridade != "Pós-graduação", ]
+```
+
+
+----
+
+### Indexando multiplas colunas
+
+```{r, eval=FALSE}
+head(Prefeitos[,c(4,5)]) 
+
+head(Prefeitos[c("Idade", "Escolaridade")]) 
+```
+
+
+## Gráfico de barras (dados categóricos)
+
+```{r}
+# plot(Prefeitos$Sexo) #Erro: a função está esperando fatores
+
+plot(as.factor(Prefeitos$Sexo))
+```
+
+## Histograma (dados contínuos)
+
+```{r}
+hist(Prefeitos$Idade, col="lightgray")
+```

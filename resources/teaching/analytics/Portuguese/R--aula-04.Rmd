@@ -1,0 +1,520 @@
+---
+title: "Manipulando dados, data frames e listas "
+author: "Daniel Marcelino"
+date: "`r Sys.Date()`"
+email: "dmarcelino@live.com"
+output: 
+   ioslides_presentation:
+      css: https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css
+    #  logo: https://raw.githubusercontent.com/christophergandrud/Hertie_Collab_Data_Science/master/img/HertieCollaborativeDataLogo_v1.png
+      highlight: pygments
+      transition: slower
+      beamer_presentation: default
+      ratio: 8x10
+#bibliography: main.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, 
+                      message = FALSE, 
+                      comment = NA, 
+                      warning = FALSE)
+
+knitr::knit_hooks$set(mysize = function(before, options, envir) {
+  if (before) 
+ return(options$size)
+})
+
+options(width = 116, scipen = 10)
+
+setwd("~/danielmarcelino.github.io/resources/teaching/analytics/Portuguese/")
+```
+
+
+## Agenda
+
+- Selecionando e removendo subconjuntos de dados
+- `within()` 
+- `with()` para especificar o escopo
+- `tapply()`, `by()`, `aggregate()`
+- `attach()` para especificar o caminho da base de dados 
+
+
+## Selecionando colunas/variáveis
+### Gerando um pequeno data frame
+```{r}
+data.frame(x=LETTERS[1:6], a=1:6, b=2:7, c=3:8, 
+                 d=4:9, e=5:10, z = rep(c(1,2),3)) -> df
+
+df
+```
+
+----
+
+### Seleciona apenas as colunas `x` e `b`
+```{r}
+subset(df, select = c(x,b))
+```
+
+----
+
+### Seleciona tudo, menos (-) as colunas `x` e `b`
+```{r}
+subset(df, select = -c(x,b) )
+```
+
+----
+
+### Seleciona tudo, menos (-) as colunas `x` e `b`
+```{r}
+# Mais complexo, ou mais intuitivo?
+excluir <- c("x","b")
+df[ , !(names(df) %in% excluir)]
+```
+
+
+```{r}
+reter <- "e"
+df[ , reter, drop = FALSE]
+```
+
+----
+
+#### Qual é a lógica?
+```{r}
+a <- c("A", "C", "Z")
+b <- c("A", "B", "C", "D", "E", "Z")
+
+b %in% a
+```
+
+
+----
+
+### Seleciona tudo, menos (-) as colunas nas posições `1` a `2` e `4`
+
+```{r}
+# df[ linhas , colunas ]
+
+df[ -c(1:2,4) ]
+```
+
+- Observe que falta uma vírgula `df[, -c(1:2,4) ]`. Ainda assim, o R vai avaliar essa expressão corretamente, excluindo as colunas.
+
+----
+
+### Removendo colunas passando `NULL`
+
+```{r}
+df$x <- NULL
+df
+```
+
+
+----
+
+### Removendo colunas passando `NULL`
+
+```{r}
+df[,c("x","a")] <- NULL
+
+df
+```
+
+
+----
+
+### Removendo colunas usando `within()` e função `rm()`
+
+- `within()` é uma função usada para avaliar o ambiente dos dados, depois de ter executado `expr` (expressão), tentando aplicar as modificações no data frame. 
+- Podemos pensar em `within()` como uma função alternativa à `transform()`.
+
+```{r}
+within(df, rm(d, b))
+```
+
+
+## Selecionando casos
+### Selecionando apenas casos em que `z == 1`
+```{r, include=FALSE}
+
+data.frame(x=LETTERS[1:6], a=1:6, b=2:7, c=3:8, 
+                 d=4:9, e=5:10, z = rep(c(1,2),3)) -> df
+```
+
+```{r}
+(df2 <- subset(df, z==1))
+```
+
+
+```{r}
+# Mesmo resultado como com a função 'subset' acima
+ df[ df$z == 1, ]
+```
+
+## Selecionando casos e variáveis ao mesmo tempo
+### Selecionando tudo, menos (-) z, para casos em que `z == 1`
+```{r}
+# subset(df, z == 1, select = c(x:e))
+
+df2 <- subset(df, z == 1, select = -z)
+df2
+```
+
+----
+
+```{r}
+df[ df$z==1 , c(1:6) ]
+```
+
+
+## Exemplos de uso da função `with()`
+
+- Até o momento, nós temos basicamnete digitado o nome do data frame toda vez que queremos utilizar algumas de suas colunas/variáveis
+
+- Isso é necessário porque as variáveis (colunas) não existem no ambiente de trabalho. 
+
+- Usando **with**`(dados, expr)` nos permite especificar que a `expr` (expressão) a seguir precisa ser avaliada em um ambiente que contenha os elementos de `dados` como variáveis.
+
+
+```{r, include=FALSE}
+
+library(readxl, quietly = TRUE)
+endereço = "./data/Prefeitos.xlsx"
+prefeitos <- data.frame(read_excel(endereço))
+
+```
+
+## Exemplos de uso da função `with()`
+
+```{r}
+with(prefeitos, table(Exercício, Sexo))
+```
+
+```{r}
+any(prefeitos$Exercício == "Sim" & prefeitos$Idade <= 25)
+with(prefeitos, any(Exercício == "Sim" & Idade <= 25)) #mesmo efeito
+```
+
+----
+
+### Exemplos de uso da função `with()` com `tapply()`
+
+```{r, eval=FALSE}
+# ?tapply
+tapply(X, INDEX, FUN = NULL, ..., simplify = TRUE)
+```
+
+- Executa uma função (mean, sum, median, count etc) para cada conjunto (não vazio) de valores dado por uma combinação única dos níveis de certos fatores. Pense em `tapply()` como uma forma generalizada da funcão `table()`.
+
+- Usando nossos dados (prefeitos), vamos calcular a média de `Idade` por `Sexo`
+
+```{r}
+with(prefeitos, tapply(Idade, INDEX = list(Sexo),
+                       FUN=mean, na.rm=TRUE))
+```
+
+----
+
+```{r}
+with(prefeitos, tapply(Idade, INDEX = list(Sexo, Exercício), 
+                       FUN=mean, na.rm=TRUE))
+```
+
+----
+
+### Exemplos de uso da função `with()` com `by()`
+
+- `by()` é um *atalho* da função `tapply()` applicado à data frames.
+
+```{r, eval=FALSE}
+# ?by
+by(data, INDICES, FUN, ..., simplify = TRUE)
+```
+
+
+```{r}
+with(prefeitos, by(Idade, INDICES = list(Sexo), 
+                   FUN=mean, na.rm=TRUE))
+```
+
+----
+
+### Exemplos de uso da função `with()` com `aggregate()`
+
+```{r, eval=FALSE}
+# ?aggregate
+aggregate(x, by, FUN, ..., simplify = TRUE, drop = TRUE)
+```
+
+- Divide seus dados em subconjuntos, calcula sumários estatísticos para cada, retornando o resultado em um formato conveniente.
+- fórmula: `y ~ x + ... z` -> list(x, z)
+
+```{r}
+with(prefeitos,  aggregate(Idade ~ Sexo, 
+        FUN = mean))
+```
+
+----
+
+### Observe o parâmetro `data`, usado para indicar o nome do data frame
+```{r}
+aggregate(Idade ~ Sexo, data = prefeitos, 
+          FUN = mean, na.rm=TRUE)
+```
+
+- Nos casos em que a função possui um parâmetro que você possa indicar o objeto de dados, usualmente `data`, `.data`, `df`, você não precisará usar `with()` ou `attach()`.
+
+## Função `attach()` e `detach()` para data frames
+
+- O uso da função `with()` deixa a programação mais simples e fácil de ler. No entando, se você preferir ter os dados disponíveis no mesmo ambiente em que executa o trabalho, a função que você precisa é `attach()`.
+
+```{r}
+attach(prefeitos)
+# Não é necessário informar o nome dos dados 
+aggregate(Idade ~ Sexo, FUN = mean, na.rm = TRUE)
+```
+
+----
+
+### Exemplos de uso da função `attach()`
+
+```{r}
+attach(prefeitos)
+table(Exercício, Sexo)
+```
+
+
+### Retirando uma base de dados do caminho
+
+```{r}
+detach(prefeitos)
+```
+
+## Retirando objetos do ambiente de trabalho
+
+```{r echo=TRUE}
+## Onde o R procura por objetos
+search()
+```
+
+```{r echo=TRUE}
+ls() # objetos no chamado Global Environment (Workspace)
+```
+
+```{r}
+ls(pos=2) # objects in package 'foreign'
+```
+
+----
+
+```{r echo=TRUE}
+# rm(list = ls())
+
+rm(prefeitos)
+```
+
+
+```{r echo=TRUE}
+ls()
+```
+
+
+```{r echo=TRUE}
+rm(list=ls())
+```
+
+
+```{r echo=TRUE}
+ls()
+```
+
+
+## Gerando categorias com a função `cut()`
+### Obtendo alguns dados
+
+```{r}
+library(readxl, quietly = TRUE)
+endereço = "./data/Prefeitos.xlsx"
+prefeitos <- data.frame(read_excel(endereço))
+
+head(prefeitos, 3)
+```
+
+----
+
+### Fatiando dados numéricos em categorias (factors)
+```{r}
+ prefeitos$Idade.cat <- cut(prefeitos$Idade, 
+                      c(-Inf, 25, 35, 45, 55, 65, Inf),
+                      labels=c('<=25', '25-35', '35-45', 
+                      '45-55', '55-65', '65=>'))
+```
+
+```{r}
+head(prefeitos[,-1])
+```
+
+----
+
+### `cut()` no ambiente da funcão `transform()`
+
+```{r}
+prefeitos <- transform(prefeitos,
+                      Idade.cat2 = cut(Idade, 
+                      c(-Inf, 25, 35, 45, 55, 65, Inf),
+                      labels=c('<=25', '25-35', '35-45', 
+                      '45-55', '55-65', '65=>')))
+
+head(prefeitos[,-c(1,2)])
+```
+
+----
+
+### Resultados
+
+```{r}
+with(prefeitos, table(Idade.cat))
+```
+
+- Proportions table `prop.table()`
+```{r}
+with(prefeitos, prop.table(table(Idade.cat)))
+```
+
+----
+
+```{r}
+tab <- with(prefeitos, table(Idade.cat))
+
+barplot(tab)
+```
+
+
+## Declarações condicionais `if()/ifelse()`
+
+- Frequentemente, queremos que o nosso código seja executado de forma diferente, dependendo dos atributos disponíveis.
+
+- Exemplo: Calcular a menção de um estudante, dependendo da somatória de seus pontos.
+  - `if` nota >= 90, atribuir A
+  - Ou, `if` nota >= 80, atribuir B
+  - Ou, `if` nota >= 70, atribuir C
+  - Para todo o resto, `else`, atribuir F
+
+- Para programar coisas como estas, usamos testes lógicos `if-else`. 
+
+## Seleção condicional de elementos 
+### Se menor ou igual a 25, TRUE, FALSE
+```{r }
+prefeitos$Jovens <- ifelse(prefeitos$Idade <= 25, 1, 0)
+
+head(prefeitos[,-c(1,2,3)])
+```
+
+----
+
+### Se menor ou igual a 25, TRUE, FALSE (Character)
+
+```{r }
+prefeitos$Jovens <- ifelse(prefeitos$Idade <= 25, "Sim", "Não" )
+
+head(prefeitos[,-c(1,2,3)])
+```
+
+----
+
+### `ifelse()` no ambiente da funcão `transform()`
+```{r }
+prefeitos <- transform(prefeitos,
+  Superior = ifelse(
+  Escolaridade == "Pós-graduação" |
+  Escolaridade == "Ensino superior completo", 1, 0),
+  Exercício = as.factor(Exercício))
+  
+head(prefeitos[,-c(1,2,3,4)])
+```
+
+
+## Recodificação básica com a função `replace()`
+
+```{r}
+x <- c(1, 2, NA, 2, 1, 10)
+x
+```
+
+
+```{r}
+x == 2
+which(x==2)
+```
+
+### Ou seja, pegue 'x' e substitua valores iguais 2 por 20
+```{r}
+y <-replace(x, which(x==2), 20)
+y
+```
+
+
+## Dados ausentes (missing)
+### O símbolo do R para dados ausentes é NA (Not Available)
+##### NA é um elemento de 'x'?
+```{r}
+x
+is.na(x)
+```
+
+----
+
+##### `!` significa "não"
+```{r}
+!is.na(x)
+```
+
+##### substituir NA por 99
+```{r}
+replace(x, which(is.na(x)), 99) -> v; v
+```
+
+##### substituir 1 por NA
+```{r}
+replace(x, which(x==1), NA) -> z; z
+```
+
+----
+
+#### Retorne apenas valores válidos (e informação extra sobre o objeto) 
+#### Informa a posição da ocorrência
+```{r}
+x; na.omit(x)
+```
+
+
+## Substituindo valores de um data frame 
+```{r}
+prefeitos <- transform(prefeitos,
+        Exercício = replace(Exercício, which(Exercício == "Recusa"), NA),
+        Sexo = replace(Sexo, which(Sexo == "Recusa"), NA),
+        Idade = replace(Idade, which(Idade == "Recusa"), NA),
+        Partido = replace(Partido, which(Partido == "Recusa"), NA),
+        Escolaridade = replace(Escolaridade,
+                               which(Escolaridade == "Recusa"), NA))
+
+table(is.na(prefeitos))
+```
+
+## Gráfico de barras
+```{r}
+tab <- with(prefeitos, table(Exercício, Sexo));
+
+barplot(tab, main = "Prefeitos em excercício por sexo", 
+legend.text = c("Sim", "Não"), args.legend = list(x = "topleft"))
+```
+
+
+## Gráfico de densidade condicional
+```{r}
+cdplot(Exercício ~ Idade, data=prefeitos,
+       main = "Probabilidades da categoria Exercício")
+```
+- Descreve como a distribuição condicional de uma variável categórica (fator) varia vis-à-vis uma variável númerica
+

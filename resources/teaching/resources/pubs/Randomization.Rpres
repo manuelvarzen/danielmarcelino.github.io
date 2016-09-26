@@ -1,0 +1,188 @@
+```{r setup, include=FALSE}
+opts_chunk$set(cache=TRUE)
+```
+
+
+Randomization and Intent-to-treat Analysis
+========================================================
+author: Daniel Marcelino
+date: March 15, 2015
+font-import: http://fonts.googleapis.com/css?family=Verdana
+font-family: 'Verdana'
+transition: rotate
+
+
+Outline
+========================================================
+id: slide1
+
+- Origin of Randomization
+- Randomization in Clinical Trials
+- Intention-to-Treat Analysis
+- Pragmatic vs. Explanatory Analyses
+- Compliance with Treatment
+- Withdrawal from Trial
+
+
+Origin of Randomization
+========================================================
+left: 60%
+
+![](/images/website/Fisher.jpg)
+
+
+***
+- Randomization for experimental studies was established by R.A. Fisher in 1923
+
+- Statistician at the Rothamsted agricultural experimental station
+
+Origin of Randomization
+========================================================
+incremental: true
+
+- The problem was to compare the effect of different fertilizers on potato yield
+- Old method was
+  - Apply each fertilizer to an entire field
+  - Compare yields between fields
+- But, some fields (and parts of each field) are more fertile than others
+
+Origin of Randomization
+========================================================
+left: 70%
+
+![](/images/website/latin_saquare.jpg)
+
+***
+- Fisher's method
+- Divide fields into small plots and rows within plots
+- Apply fertilizers by row within plots
+- Randomly assign fertilizers to rows
+
+Origin of Randomization
+========================================================
+incremental: true
+
+- Randomization destroys any connection between soil fertility and treatment
+- Randomization allows experimental results to be analyzed by permutation test
+  - Treats outcomes as fixed
+  - Treatment assignments are source of randomness in the
+analysis
+  - Standard statistical tests (t-test, F-test, etc) approximate permutation test results
+
+
+
+
+Origin of Randomization
+========================================================
+incremental: true
+
+- Randomization plays 2 key roles
+- Produces groups that are not systematically different with regard to known and unknown prognostic factors
+- Permits a valid analysis
+  - Permutation test is justified by randomization
+  - Standard analyses are valid approximations of the correct permutation test
+
+
+
+Randomization in Political Science Experiments
+========================================================
+incremental: true
+- Fisher's method is the foundation of randomized experimental social sciences
+- However, unlike rows of plants, people sometimes
+  - Fail to comply with randomly assigned policies
+  - Do not complete the trial
+
+
+
+Randomization in Political Science Experiments
+========================================================
+incremental: true
+- Randomization provides a time point when the two groups start to diverge in ways that might be unpredictable
+
+
+
+
+========================================================
+[Go to slide 1](#/slide1)
+
+
+
+========================================================
+In our example, randomization equally distributes the unmotivated patients between the two
+PP = per protocol, ITT = intention-to-treat, and R = randomization.
+
+
+
+
+
+========================================================
+
+Randomized controlled trials often suffer from two major complications, i.e., noncompliance and missing outcomes. One potential solution to this problem is a statistical concept called intention-to-treat (ITT) analysis. ITT analysis includes every subject who is randomized according to randomized treatment assignment. It ignores noncompliance, protocol deviations, withdrawal, and anything that happens after randomization. ITT analysis maintains prognostic balance generated from the original random treatment allocation. In ITT analysis, estimate of treatment effect is generally conservative
+
+According to Fisher et al. (1990), the ITT analysis includes all randomized patients in the groups to which they were randomly assigned, regardless of their adherence with the entry criteria, regardless of the treatment they actually received, and regardless of subsequent withdrawal from treatment or deviation from the protocol.[1]
+
+In other words, ITT analysis includes every subject who is randomized according to randomized treatment assignment. It ignores noncompliance, protocol deviations, withdrawal, and anything that happens after randomization.[2–5] ITT analysis is usually described as “once randomized, always analyzed”.[6,7]
+
+
+
+
+
+
+Pros of Using ITT Analysis
+========================================================
+
+ITT is better regarded as a complete trial strategy for design, conduct and analysis rather than as an approach to analysis alone.[9,12] Full reporting of any deviations from random allocation and missing response is essential in the assessment of the necessity and appropriateness of an ITT approach, as emphasized in the Consolidated Standards of Reporting Trials (CONSORT) guidelines on the reporting of RCTs.[12] The CONSORT statement for improving the quality of reports of RCTs states that number of participants in each group should be analyzed by “intention-to-treat” principle.[13]
+
+ITT analysis reflects the practical clinical scenario because it admits noncompliance and protocol deviations. ITT analysis maintains prognostic balance generated from the original random treatment allocation. It gives an unbiased estimate of treatment effect.[3,4,14] If noncompliant subjects and dropouts are excluded from the final analysis, it might create important prognostic differences among treatment groups. Moreover, subjects may be noncompliant or may drop out from the study due to their response of treatment.[3]
+
+ITT analysis preserves the sample size because if noncompliant subjects and dropouts are excluded from the final analysis, it might significantly reduce the sample size, leading to reduced statistical power.[3]
+
+ITT analysis limits inferences based on arbitrary or ad hoc subgroups of patients in the trial and emphasizes greater accountability for all patients enrolled in the study. Also, it minimizes type I error due to cautious approach and allows for the greatest generalizability.[15]
+
+
+
+Cons of Using ITT Analysis
+========================================================
+Many arguments against ITT analysis appear valid. To begin with, if a subject who actually did not receive any treatment is included as a subject who received treatment, then it indicates very little about the efficacy of the treatment. In ITT analysis, estimate of treatment effect is generally conservative because of dilution due to noncompliance. Also, heterogeneity might be introduced if noncompliants, dropouts and compliant subjects are mixed together in the final analysis. Moreover, end-point data will differ markedly among noncompliant, dropouts and compliant subjects, and interpretation might become difficult if a large proportion of participants cross over to opposite treatment arms.[3,4,12,16,17] ITT analysis has been criticized for being too cautious and thus being more susceptible to type II error.[12,15]
+
+
+
+
+
+
+========================================================
+
+
+
+
+
+
+========================================================
+
+
+
+
+
+
+
+Conclusion
+========================================================
+Randomization in clinical trials reduces bias. Its intent is to generate groups of patients that are comparable with each other before starting a study. As a result, both known and unknown patient factors that may affect the outcome under investigation are balanced between the treatment groups, minimizing the risk of differences between the two groups at the onset of the trial. This helps to ensure that differences in outcomes observed between the groups are the result of the intervention. Anything that compromises the balance of these factors may introduce bias into the results1,2. If an imbalance between the groups skews the results in favor of one intervention over the other, this can lead to a biased study. Therefore, a randomized, double-blinded, placebo-controlled (when appropriate) trial with intention-to-treat analysis is considered to be the highest level of evidence in clinical research. This provides the clearest insight into the effect of the intervention being studied by controlling for as many factors as possible.
+
+Intention-to-treat analysis compares study groups in terms of the treatment to which they were randomly allocated, irrespective of the treatment they actually received2-4. If subjects do not receive the treatment to which they were originally randomized, they are in violation of the study protocol. There are several examples of protocol violation, including crossover from one treatment group to another, patients lost to follow-up, and inclusion of patients who should not have been included. Regardless of protocol violation, intention-to-treat analysis is done according to the originally assigned treatment groups because this helps to preserve the value of randomization.
+
+
+
+
+
+References
+========================================================
+Fisher LD, Dixon DO, et al. Intention-to-Treat in clinical trials, in KE Peace (Ed.), Statistical Issues in Drug Research and Development. Marcel Dekker, 1990
+
+Enikolopov, R., Korovkin, V., Petrova, M., Sonin, K., & Zakharov, A. (2013). Field experiment estimate of electoral fraud in Russian parliamentary elections. Proceedings of the National Academy of Sciences of the United States of America, 110(2), 448–452. http://doi.org/10.1073/pnas.1206770110
+
+https://www.google.com.br/url?sa=t&rct=j&q=&esrc=s&source=web&cd=7&cad=rja&uact=8&ved=0CEUQFjAGahUKEwi_h53KhoTJAhXEhpAKHTyTBoU&url=http%3A%2F%2Fwww.vhpharmsci.com%2Fdecisionmaking%2FTherapeutic_Decision_Making%2FFundamentals_files%2FIntention-to-treat%2520principle-CMAJ.pdf&usg=AFQjCNFyb2p1A9YNR6CjgkMhGVGfhQElAg&sig2=BGepyLYWVL7mXPWR1kEmmg
+
+http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3545790/
+
+http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3159210/

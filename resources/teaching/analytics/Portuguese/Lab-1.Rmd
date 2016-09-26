@@ -1,0 +1,67 @@
+---
+title: "Lab - 1"
+author: ""
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Instruções 
+<div id="boxedtext">
+Antes de começar, execute o código a seguir:
+
+`dados <- mtcars`
+</div>
+
+```{r}
+dados <- mtcars
+```
+
+
+# Exercícios 
+<div id="exercise">
+**Exercício 1**: Use operadores lógicos/Booleanos para obter um resultado em que apenas as linhas onde a coluna `mpg` possui valores entre 15 e 20 (excluíndo 15 e 20).
+</div>
+
+```{r}
+
+```
+
+<div id="exercise">
+**Exercício 2**: Use operadores lógicos/Booleanos mais uma vez para obter aquelas linhas em que os valor na coluna `cyl` é igual a 6 e diferente de 0 na coluna `am`.
+</div>
+
+```{r}
+
+
+```
+
+<div id="exercise">
+**Exercício 3**: Use operadores lógicos para extrair dos dados aquelas linhas onde a coluna `gear` ou `carb` tem valor 4.
+</div>
+
+```{r}
+
+```
+
+<div id="exercise">
+**Exercício 4**: Obtenha apenas as linhas dos dados em que as colunas  `vs`  e  `am`  têm o mesmo valor 1, tente resolver essa programação sem usar o operador `==`.
+</div>
+
+
+```{r}
+
+```
+
+<div id="exercise">
+**Exercício 5**: Extraia apenas aquelas linhas em que ao menos uma das as colunas `vs`  ou `am` possui o valor 1, tente resolver essa programação sem usar `==`  ou  `!=`.
+</div>
+
+
+```{r}
+
+```
+
