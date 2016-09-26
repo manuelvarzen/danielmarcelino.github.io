@@ -20,4 +20,5 @@ permalink: /resources/
 # Classes and Tutorials 
 
 [Analytics (EN)](http://varianceexplained.org)
+
 [Analytics (PT)](http://varianceexplained.org)
