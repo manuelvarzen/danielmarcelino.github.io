@@ -19,6 +19,6 @@ permalink: /resources/
 
 # Classes and Tutorials 
 
-[Analytics (EN)](http://varianceexplained.org)
+[Analytics (EN)](http://danielmarcelino.github.io/resources/analytics/English)
 
-[Analytics (PT)](http://varianceexplained.org)
+[Analytics (PT)](http://danielmarcelino.github.io/resources/analytics/Portuguese/)
