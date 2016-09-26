@@ -1,20 +1,27 @@
 ---
 layout: page
-title: Análise de dados em R
+title: Análise de Dados com R
 ---
 ## Apresentações
 <hr class="margin" />
 
-- [Introdução ao R](/work/webdata/getting_web_data_r1_introduction.pdf)
-- [Reading Files from the Web](/work/webdata/getting_web_data_r2_reading_files.pdf)
-- [Basics of XML and HTML](/work/webdata/getting_web_data_r3_basics_xml_html.pdf)
-- [Parsing XML and HTML content](/work/webdata/getting_web_data_r4_parsing_xml_html.pdf)
-- [Handling JSON Data](/work/webdata/getting_web_data_r5_json_data.pdf)
-- [HTTP Basics and RCurl Package](/work/webdata/getting_web_data_r6_http_rcurl.pdf)
-- [Getting Data via Web Forms](/work/webdata/getting_web_data_r7_web_forms.pdf)
-- [Getting Data via Web APIs](/work/webdata/getting_web_data_r8_web_apis.pdf)
+- [Introdução ao R](/resources/analytics/Portuguese/R--aula-01.html)
+- [Reading Files from the Web](/resources/analytics/Portuguese/)
+- [Basics of XML and HTML](/resources/analytics/Portuguese/)
+- [Parsing XML and HTML content](/resources/analytics/Portuguese/)
+- [Handling JSON Data](/resources/analytics/Portuguese/)
+- [HTTP Basics and RCurl Package](/resources/analytics/Portuguese/)
+- [Getting Data via Web Forms](/resources/analytics/Portuguese/)
+- [Getting Data via Web APIs](/resources/analytics/Portuguese/)
 
 ## Atividades de laboratório
+<hr class="margin" />
+- [Lab 1](/resources/analytics/Portuguese/Lab-1.html)
+- [Lab 2](/resources/analytics/Portuguese/Lab-2.html)
+
 
 ## Soluções das atividades
+<hr class="margin" />
 
+- [Sol-Lab 1](/resources/analytics/Portuguese/Lab-1-Solução.html)
+- [Sol-Lab 2](/resources/analytics/Portuguese/Lab-2-Solução.html)
