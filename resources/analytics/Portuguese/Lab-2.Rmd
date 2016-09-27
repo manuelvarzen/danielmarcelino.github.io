@@ -2,14 +2,23 @@
 title: "Lab - 2"
 author: ""
 date: "`r Sys.Date()`"
-output: html_document
+output: SciencesPo:::Markdown
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-### Dicas de como importar base de dados 
+  > "Finding the question is often more important than finding the answer."
+<br> John Tukey
+
+
+# Instruções 
+<div id="boxedtext">
+Para realização desta atividade será preciso estar conectado à internet para que possa importar os dados.
+</div>
+ 
+# Pacotes e funções para importar base de dados via console 
 
 | Dados                       | Tipo            | Função       | Pacote           |
 |-----------------------------+-----------------+--------------+------------------|
@@ -21,76 +30,125 @@ knitr::opts_chunk$set(echo = TRUE)
 | SAS                         | (.sas7bdat)     | read.sas7bdat(), read_sas() | sas7bdat, haven       |
 | Excel                       | (.xls, .xlsx)   | read_excel() | readxl           |
 
+# Exercícios 
+
+<div id="exercise">
+**Exercício 1**: 
+Importe a base de dados sobre rendimento escolar "school.sav" (SPSS) do diretório **data** ou diretamente do endereço web:
+
+<https://github.com/danielmarcelino/Datasets/raw/master/Hox2000/school.sav>
+
+</div>
+```{r}
+
+```
 
 
-### Exercício 1
-Importe a base de dados "school.sav" do diretório `data`.
+
+<div id="exercise">
+**Exercício 2**: Explore a estrutura dos dados.
+</div>
+
+```{r}
+
+```
+
+- Peça um sumário descritivo de todas as variáveis.
+```{r}
+
+```
+
+- Apresente as primeiras linhas do data frame para entender melhor o que ele contém.
 
 ```{r}
 
 ```
 
 
-### Exercício 2
-
-- Explore a estrutura dos dados 
-
-```{r}
-
-```
-
-- Apresente as primeiras linhas do data frame para entender sua estrutura
-```{r}
-
-```
-
-
-### Exercício 3
-
-Use a função `attach()` para deixar as variáveis da base de dados facilmente acessíveis
-
-```{r}
-```
-
-
-### Exercise 4
-
-Produza algumas estatísticas descritivas da variável SCORE para cada sexo PUPILSEX. Vamos produzir médias (mean), medianas (median), desvios (sd), intervalo dos dados (range), variâncias (var) e quartis (quantile)
+<div id="exercise">
+**Exercício 3**: Use a função `attach()` para deixar as variáveis da base de dados facilmente acessíveis.
+</div>
 
 ```{r}
 
 ```
 
+# Principais funções para descrição de dados
 
+Comando       | Descrição
+--------------|-------------------------------------------------
+`sum(vec)`     | soma (total) todos os elementos de `vec` 
+`mean(vec)`    | média dos elementos de `vec`
+`median(vec)`  | median de  `vec`
+`min(vec), max(vec)` | o menor ou maior elemente de `vec`
+`sd(vec), var(vec)` | desvio padronizado e variância de `vec`
+`range(vec)`     | intervalo dos valores de `vec`
+`quantile(vec)`  | quartis ou separatrizes que dividem os dados em `vec` em 4 partes iguais
+`length(vec)`  | retorna o número de elementos em `vec`
+`summary(vec)`  | apresenta um sumário contendo cinco estatísticas básicas (five-numbers).  
+
+
+<div id="exercise">
+**Exercício 4**: Produza algumas estatísticas descritivas para a variável **CLASSIZE**. Queremos descobrir:
+</div>
+
+- Qual é a média para *CLASSIZE* encontrada na amostra?
+  
 ```{r}
 
 ```
 
-
+- Qual é a mediana para *CLASSIZE* encontrada na amostra?
 ```{r}
 
 ```
 
-
+ - Qual é o menor valor para *CLASSIZE* encontrado na amostra?
 ```{r}
 
 ```
 
+ - Qual é o maior valor para *CLASSIZE* encontrado na amostra?
+```{r}
 
+```
+  
+ - Qual é o desvio padrão de *CLASSIZE* encontrado na amostra?
+```{r}
+
+```
+ 
+ - Qual é variância de *CLASSIZE* encontrada na amostra?
 ```{r}
 
 ```
 
+ - Qual é o intervalo dos valores de *CLASSIZE* encontrado na amostra?
+```{r}
+
+```
+  
+- Quais são os 25º e 75º percentis para o tamanho da classe (CLASSIZE) encontrados na amostra?
 
 ```{r}
+```
+
+
+<div id="exercise">
+**Exercício 5**: Substitua os valores da variável **PUPILSEX** de modo que '0' se torne 'F' e '1' se torne 'M'.
+</div>
+
+```{r, cache=FALSE}
 
 ```
 
 
-### Exercício 5
+<div id="exercise">
+**Exercício 6**: Como você poderia substituir os valores da variável **PUPILSEX** como no exercício anterior, mas sem que o data frame estivesse disponível (sem usar `attach()`)?
+</div>
 
-Substitua os valores da variável PUPILSEX de modo que '0' torne 'F' e '1' torne 'M'.
 
-```{r}
+```{r, cache=FALSE}
+
 
 ```

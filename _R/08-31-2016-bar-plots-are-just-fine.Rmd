@@ -1,0 +1,44 @@
+---
+title: "Bar Plots are Just Fine"
+author: "Daniel Marcelino"
+date: "August 30, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+Kaiser Fung who writes the [Junk Charts is](http://junkcharts.typepad.com/junk_charts/) got an eye on the [US News](http://www.usnews.com/news/articles/2016-07-19/the-declining-influence-of-white-christian-america-in-charts) chart comparing Clinton and Trump support among different religious groups demographics. The orignal chart is indeed awful, but not the whole idea, I think. 
+
+if the idea was to compare different support (bars) between the two candidates, no confusion; go for side bars instead of facet bars. 
+Although the number of bars is 2 * 6 = 12, it produces a much more easy-to-understand what the data is telling us.
+
+I consider myself a fevor advocate of bar plots. So one could rehabilitate the US News original vizualization as the following:
+
+```{r}
+df <- structure(list(demografics = structure(c(1L, 2L, 3L, 4L, 5L, 6L, 1L, 2L, 3L, 4L, 5L, 6L), .Label=c("White Evangelical Prot.", "White Mainline Prot.", "Black Protestant", "White Catholic", "Hispanic Catholic", "Unaffiliated"), class = "factor"), value = c(78, 50, 8, 50, 16, 23, 17, 39, 89, 46, 77, 67), candidate = structure(c(1L,1L,1L, 1L,1L,1L,2L, 2L, 2L, 2L, 2L, 2L), .Label=c("Trump", "Clinton"), class = "factor")), .Names = c("demografics","value", "candidate"), class = "data.frame", row.names = c(NA, 
+-12L))
+```
+
+```{r}
+library(SciencesPo)
+library(ggplot)
+
+
+ggplot(df, aes(x=demografics, 
+               y=value, fill = candidate)) + 
+geom_bar(stat = "identity", position = "dodge") +
+geom_text(aes(x=demografics, y=value, label = paste0(value,"%")), size=5, fontface="bold", hjust=-.10, position = position_dodge(width = 0.9)) +
+scale_y_continuous(limits = c(0,100), breaks = seq(0, 100, 25)) + 
+coord_flip() + 
+  labs(x=NULL, y=NULL) +
+theme_pub() +
+  move_legend("bottom") +
+  no_legend_title() +
+  scale_fill_pub("fte") 
+
+```
+

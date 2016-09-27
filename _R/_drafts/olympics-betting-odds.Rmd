@@ -1,0 +1,49 @@
+---
+title: "Betting Odds"
+author: "Daniel Marcelino"
+date: "August 7, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+http://www.zerohedge.com/news/2016-08-05/goldman-predicts-usa-will-win-106-olympic-medals-less-golds-london
+http://www.si.com/olympics/2016/08/01/rio-2016-olympics-medal-picks-predictions-projected-medal-count
+http://www.usatoday.com/story/sports/olympics/2016/07/30/2016-rio-olympics-medal-projections/87778564/
+http://www.self.com/trending/2016/08/here-are-the-predictions-for-the-2016-olympics-medal-count/
+
+http://www.medalspercapita.com
+
+Which country will top the medal table in Rio?
+
+There is a nearly consensus in the markets that the States will win the Olympics considering the overall number of medals.
+The narratives changed a bit last years when China overthrew the United States in terms of gold medals, so the US came to the view that what really matters is not the numbe rof gold medals anole, but the overall table of medals. 
+
+BETTING ODDS
+
+https://mmwebhandler.aff-online.com/c/35459?sr=1243599
+
+888sport runs you through the favourites to top the overall medal table.
+
+USA are priced at 1/6     
+China are priced at 4/1  
+Great Britain are priced at 33/1     
+Russia are priced at 60/1      
+Australia are priced at 66/1    
+Germany are priced at 66/1
+Brazil are priced at 75/1
+France are priced at 75/1     
+Japan are priced at 75/1      
+Kenya are priced at 75/1
+Korea are priced at 100/1
+Netherlands are priced at 100/1
+Hungary are priced at 150/1
+Italy are priced at 150/1
+Spain are priced at 150/1
+Denmark are priced at 250/1
+Poland are priced at 250/1
+Sweden are priced at 300/1
+Romania are priced at 400/1
+Finaland are priced at 750/1
+Norway are priced at 750/1

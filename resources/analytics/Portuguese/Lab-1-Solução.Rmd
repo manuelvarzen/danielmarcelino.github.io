@@ -7,7 +7,7 @@ output: SciencesPo:::Markdown
 
 # Instruções 
 <div id="boxedtext">
-Antes de começar, execute o código a seguir:
+Antes de começar, execute o código a seguir para criar uma cópia de `mtcars` em `dados`:
 
 `dados <- mtcars`
 </div>
@@ -18,8 +18,9 @@ dados <- mtcars
 
 
 # Exercícios 
+
 <div id="exercise">
-**Exercício 1**: Use operadores lógicos/Booleanos para obter um resultado em que apenas as linhas onde a coluna `mpg` possui valores entre 15 e 20 (excluíndo 15 e 20).
+**Exercício 1**: Use operadores lógicos/Booleanos para obter um resultado em que apenas as linhas onde a coluna `mpg` possua valores entre 15 e 20 (excluíndo 15 e 20).
 </div>
 
 ```{r}
@@ -27,7 +28,7 @@ dados[dados$mpg > 15 & dados$mpg < 20,]
 ```
 
 <div id="exercise">
-**Exercício 2**: Use operadores lógicos/Booleanos mais uma vez para obter aquelas linhas em que os valor na coluna `cyl` é igual a 6 e diferente de 0 na coluna `am`.
+**Exercício 2**: Use operadores lógicos/Booleanos mais uma vez para obter aquelas linhas em que os valor da coluna `cyl` sejam iguais a 6 e diferentes de 0 na coluna `am`.
 </div>
 
 ```{r}
@@ -36,7 +37,7 @@ dados[dados$cyl == 6 & dados$am != 0,]
 ```
 
 <div id="exercise">
-**Exercício 3**: Use operadores lógicos para extrair dos dados aquelas linhas onde a coluna `gear` ou `carb` tem valor 4.
+**Exercício 3**: Use operadores lógicos/Booleanos para extrair dos dados apenas aquelas observações em que a coluna `gear` ou `carb` apresentem valor igual a 4.
 </div>
 
 ```{r}
@@ -44,7 +45,7 @@ dados[dados$gear == 4 | dados$carb == 4,]
 ```
 
 <div id="exercise">
-**Exercício 4**: Obtenha apenas as linhas dos dados em que as colunas  `vs`  e  `am`  têm o mesmo valor 1, tente resolver essa programação sem usar o operador `==`.
+**Exercício 4**: Obtenha apenas as observações em que as colunas  `vs`  e  `am`  tenham o mesmo valor 1, tente resolver essa programação sem usar o operador `==`.
 </div>
 
 
@@ -53,7 +54,7 @@ dados[dados$vs & dados$am,]
 ```
 
 <div id="exercise">
-**Exercício 5**: Extraia apenas aquelas linhas em que ao menos uma das as colunas `vs`  ou `am` possui o valor 1, tente resolver essa programação sem usar `==`  ou  `!=`.
+**Exercício 5**: Extraia apenas aquelas linhas em que ao menos uma das colunas `vs`  ou `am` possua o valor 1, tente resolver essa programação sem usar `==`  ou  `!=`.
 </div>
 
 

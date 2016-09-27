@@ -1,0 +1,39 @@
+---
+title: "Untitled"
+author: "Daniel Marcelino"
+date: "August 27, 2016"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+ Using genderize.io to infer gender in a LinkedIn network
+A month or so ago, I got to wondering whether there was any way to determine the gender of my LinkedIn network. Surprisingly, LinkedIn doesn't even ask for gender on sign-up, so I couldn't just pull the info directly from LinkedIn. And I didn't need a 100% accurate solution – I just wanted a directionally-useful metric.
+
+After doing a bit of Googling, I found genderize.io, a nice little API that gives you a best guess for a gender if you give it a name. If you send it this string:
+
+    https://api.genderize.io/?name=richard
+
+you get back this result:
+
+    {"name":"richard","gender":"male","probability":"1.00","count":4381} 
+
+In other words, genderize.io believes with 100% confidence that "richard" is a male name. (From Genderize's documentation, the count "represents the number of data entries examined in order to calculate the response.")
+
+I have more than 2,300 connections on LinkedIn, so getting a breakdown of everyone's gender was going to be too time-consuming. Instead of doing the names one at a time, I signed up for a developer account and paid for up to 100,000 queries/month. (For more than a handful of queries, Genderize.io will rate-limit you; with a developer account, you get an access token that bypasses the rate limits.)
+
+With an access token, here are the steps I used to get a breakdown of my LinkedIn network's gender split:
+
+    Export LinkedIn connections
+    Import the file into a Google Sheet
+    Delete everything but the first name field ("Given Name")
+    In a separate column, create a a URL string that appends the contents of the Given Name column to a tokenized URL that includes your Genderize.io access token. For me this looked like:
+    =CONCATENATE("https://api.genderize.io/?apikey=ACCESSTOKEN&name=",B2)
+    In a new column, use Google Sheets's "ImportHTML" function to execute the query represented in the adjacent column:
+    =importdata(C2)
+    Step 5 creates several columns, as Google Sheets will bring in the Genderize.io query results into the spreadsheet; unfortunately, it does not properly split the gender result into its own columns. Create a new column and use the "Split" command to break the string [gender:"female"] into separate cells, then use "CountIF" to count how many times the word "female" appears in your worksheet. Divide that number by the total number of rows in your spreadsheet, and you have your % of female contacts.
+
+(If I was a better programmer, I could have built a simple Python script using Genderize.io's API to do this automatically. Maybe someone who reads this will want to build it? Let me know!)

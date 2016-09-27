@@ -1,0 +1,25 @@
+---
+title: "R Graphical Tools: manipulate"
+author: "Daniel"
+date: "July 26, 2014"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Manipulate
+
+```{r packages}
+library(manipulate)
+
+```
+
+```{r}
+manipulate(plot(cars, xlim = c(0, x.max), type = type, ann = label), x.max = slider(10, 
+    25, step = 5, initial = 25), type = picker(Points = "p", Line = "l", Step = "s"), 
+    label = checkbox(TRUE, "Draw Labels"))
+```
+

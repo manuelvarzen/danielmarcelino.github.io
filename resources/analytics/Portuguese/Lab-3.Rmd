@@ -1,0 +1,149 @@
+---
+title: "Lab - 3"
+author: ""
+date: "`r Sys.Date()`"
+output: SciencesPo:::Markdown
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+  > "Finding the question is often more important than finding the answer."
+<br> John Tukey
+
+
+# Instruções 
+<div id="boxedtext">
+Para realização desta atividade será preciso estar conectado à internet para que possa importar os dados.
+</div>
+
+
+<div id="exercise">
+**Exercício 1**: 
+Comece importando a base de dados sobre rendimento escolar "school.sav" (SPSS) do diretório **data** ou diretamente do endereço web:
+
+<https://github.com/danielmarcelino/Datasets/raw/master/Hox2000/school.sav>
+
+</div>
+
+```{r}
+library(haven)
+
+endereço = "https://github.com/danielmarcelino/Datasets/raw/master/Hox2000/school.sav"
+
+school <- read_spss(endereço)
+```
+
+
+<div id="exercise">
+**Exercício 2**: Explore os atributos das seguintes variáveis:
+- SCORE
+
+- PUPILSEX
+
+- PUPILSES
+
+</div>
+
+```{r}
+attr(school$SCORE, "label") # Variable label
+attr(school$SCORE, "labels") # Value labels
+```
+
+
+```{r}
+attr(school$PUPILSEX, "label") 
+attr(school$PUPILSEX, "labels")
+```
+
+
+```{r}
+attr(school$PUPILSES, "label") 
+attr(school$PUPILSES, "labels")
+```
+
+
+<div id="exercise">
+**Exercício 3**: Para melhor a compreensão dos resultados, você precisará 
+</div>
+
+```{r}
+
+```
+
+
+<div id="exercise">
+**Exercício 4**: Produza estatísticas descritivas da variável **SCORE** por sexo e **PUPILSEX**). Vamos olhar as médias, medianas e desvios padronizados.
+</div>
+
+```{r}
+aggregate(SCORE ~ PUPILSEX, data = school, FUN = "mean")
+```
+
+
+```{r}
+aggregate(SCORE ~ PUPILSEX, data = school, FUN = "median")
+```
+
+
+```{r}
+aggregate(SCORE ~ PUPILSEX, data = school, FUN = "sd")
+```
+
+
+- Como você poderia produzir o mesmo resultado usando a função `tapply()`?
+
+```{r}
+# ou usando tapply
+with(school, tapply(SCORE, list(PUPILSEX), FUN = "mean"))
+```
+
+
+
+<div id="exercise">
+**Exercício 5**: Produza algumas estatísticas descritivas da variável **SCORE** para cada NSE--nível socioeconômico (**PUPILSES**) e sexo (**PUPILSEX**). Vamos produzir também  médias, medianas e desvios padronizados.
+</div>
+
+
+```{r}
+aggregate(SCORE ~ PUPILSES + PUPILSEX,
+           data = school, FUN = mean)
+```
+
+
+```{r}
+aggregate(SCORE ~ PUPILSES + PUPILSEX,
+           data = school, FUN = "median")
+```
+
+
+```{r}
+aggregate(SCORE ~ PUPILSES + PUPILSEX,
+           data = school, FUN = "sd")
+```
+
+
+- Como você poderia produzir o mesmo resultado usando a função `tapply()`?
+
+```{r}
+# ou usando tapply
+with(school, tapply(SCORE, list(PUPILSES, PUPILSEX),
+       FUN = mean, na.rm=TRUE))
+```
+
+
+<div id="exercise">
+**Exercício 6**: 
+</div>
+
+
+<div id="exercise">
+**Exercício 7**: 
+</div>
+
+```{r}
+
+```
+

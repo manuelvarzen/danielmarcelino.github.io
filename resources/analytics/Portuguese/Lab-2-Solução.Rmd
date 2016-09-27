@@ -5,8 +5,15 @@ date: "`r Sys.Date()`"
 output: SciencesPo:::Markdown
 ---
 
+  > "Finding the question is often more important than finding the answer."
+<br> John Tukey
 
-# Dicas de como importar base de dados 
+# Instruções 
+<div id="boxedtext">
+Para realização desta atividade será preciso estar conectado à internet para que possa importar os dados.
+</div>
+
+# Pacotes e funções para importar base de dados via console 
 
 | Dados                       | Tipo            | Função       | Pacote           |
 |-----------------------------+-----------------+--------------+------------------|
@@ -22,11 +29,17 @@ output: SciencesPo:::Markdown
 
 <div id="exercise">
 **Exercício 1**: 
-Importe a base de dados "school.sav" do diretório `data`.
+Importe a base de dados sobre rendimento escolar "school.sav" (SPSS) do diretório **data** ou diretamente do endereço web:
+
+<https://github.com/danielmarcelino/Datasets/raw/master/Hox2000/school.sav>
+
 </div>
 ```{r}
 library(haven)
-school <- read_spss("https://github.com/danielmarcelino/Datasets/raw/master/Hox2000/school.sav")
+
+endereço = "https://github.com/danielmarcelino/Datasets/raw/master/Hox2000/school.sav"
+
+school <- read_spss(endereço)
 ```
 
 
@@ -39,11 +52,20 @@ school <- read_spss("https://github.com/danielmarcelino/Datasets/raw/master/Hox2
 str(school)
 ```
 
+- Os atributos das variáveis podem ser acessados assim:
+
+```{r}
+attr(school$PUPILSEX, "label") # Variable label
+
+attr(school$PUPILSEX, "labels") # Value labels
+```
+
+- Peça um sumário descritivo de todas as variáveis.
 ```{r}
 summary(school)
 ```
 
-- Apresente as primeiras linhas do data frame para entender sua estrutura
+- Apresente as primeiras linhas do data frame para entender melhor o que ele contém.
 
 ```{r}
 head(school)
@@ -51,7 +73,7 @@ head(school)
 
 
 <div id="exercise">
-**Exercício 3**: Use a função `attach()` para deixar as variáveis da base de dados facilmente acessíveis
+**Exercício 3**: Use a função `attach()` para deixar as variáveis da base de dados facilmente acessíveis.
 </div>
 
 ```{r}
@@ -59,53 +81,75 @@ attach(school)
 ```
 
 
-<div id="exercise">
-**Exercício 4**: Produza algumas estatísticas descritivas da variável SCORE para cada sexo PUPILSEX. Vamos produzir médias (mean), medianas (median), desvios (sd), intervalo dos dados (range), variâncias (var) e quartis (quantile)
-</div>
+# Principais funções para descrição de dados
 
-
-```{r}
-aggregate(SCORE ~ PUPILSEX, FUN = "mean")
-```
-
-
-```{r}
-# ou usando tapply
-tapply(SCORE, list(PUPILSEX), FUN = "mean")
-```
-
-
-```{r}
-aggregate(SCORE ~ PUPILSEX, FUN = "median")
-```
-
-
-```{r}
-aggregate(SCORE ~ PUPILSEX, FUN = "sd")
-
-```
-
-```{r}
-aggregate(SCORE ~ PUPILSEX, FUN = "var")
-```
-
-```{r}
-aggregate(SCORE ~  PUPILSEX, FUN = "range")
-```
-
-```{r}
-aggregate(SCORE ~ PUPILSEX, FUN = "quantile")
-
-```
+Comando       | Descrição
+--------------|-------------------------------------------------
+`sum(vec)`     | soma (total) todos os elementos de `vec` 
+`mean(vec)`    | média dos elementos de `vec`
+`median(vec)`  | median de  `vec`
+`min(vec), max(vec)` | o menor ou maior elemente de `vec`
+`sd(vec), var(vec)` | desvio padronizado e variância de `vec`
+`range(vec)`     | intervalo dos valores de `vec`
+`quantile(vec)`  | quartis ou separatrizes que dividem os dados em `vec` em 4 partes iguais
+`length(vec)`  | retorna o número de elementos em `vec`
+`summary(vec)`  | apresenta um sumário contendo cinco estatísticas básicas (five-numbers).  
 
 
 <div id="exercise">
-**Exercício 5**: Substitua os valores da variável PUPILSEX de modo que '0' torne 'F' e '1' torne 'M'.
+**Exercício 4**: Produza algumas estatísticas descritivas para a variável **CLASSIZE**. Queremos descobrir:
 </div>
 
+- Qual é a média para *CLASSIZE* encontrada na amostra?
+  
+```{r}
+mean(CLASSIZE, na.rm=TRUE);
+```
+
+- Qual é a mediana para *CLASSIZE* encontrada na amostra?
+```{r}
+median(CLASSIZE, na.rm=TRUE);
+```
+
+ - Qual é o menor valor para *CLASSIZE* encontrado na amostra?
+```{r}
+min(CLASSIZE, na.rm=TRUE);
+```
+
+ - Qual é o maior valor para *CLASSIZE* encontrado na amostra?
+```{r}
+max(CLASSIZE, na.rm=TRUE);
+```
+  
+ - Qual é o desvio padrão de *CLASSIZE* encontrado na amostra?
+```{r}
+sd(CLASSIZE, na.rm=TRUE);
+```
+ 
+ - Qual é variância de *CLASSIZE* encontrada na amostra?
+```{r}
+var(CLASSIZE, na.rm=TRUE);
+```
+
+ - Qual é o intervalo dos valores de *CLASSIZE* encontrado na amostra?
+```{r}
+range(CLASSIZE, na.rm=TRUE);
+```
+  
+- Quais são os 25º e 75º percentis para o tamanho da classe (CLASSIZE) encontrados na amostra?
+
+```{r}
+quantile(CLASSIZE, na.rm=TRUE);
+
+quantile(CLASSIZE, c(0.25, 0.75)); 
+```
 
 
-# Usando ifelse (minha preferida)
+<div id="exercise">
+**Exercício 5**: Substitua os valores da variável **PUPILSEX** de modo que '0' se torne 'F' e '1' se torne 'M'.
+</div>
+
+**Usando ifelse**
 ```{r, cache=FALSE}
 
 PUPILSEX = ifelse(PUPILSEX == 0, "F", "M")
@@ -113,7 +157,7 @@ PUPILSEX = ifelse(PUPILSEX == 0, "F", "M")
 table(PUPILSEX)
 ```
 
-# Ou usando replace 
+**Usando a combinação de replace com which**
 
 ```{r, cache=FALSE}
 PUPILSEX <- replace(PUPILSEX, which(PUPILSEX==0), "F")
@@ -121,5 +165,30 @@ PUPILSEX <- replace(PUPILSEX, which(PUPILSEX==0), "F")
 PUPILSEX <- replace(PUPILSEX, which(PUPILSEX==1), "M")
 
 table(PUPILSEX)
+```
+
+
+<div id="exercise">
+**Exercício 6**: Como você poderia substituir os valores da variável **PUPILSEX** como no exercício anterior, mas sem que o data frame estivesse disponível (sem usar `attach()`)?
+</div>
+
+
+**Usando ifelse**
+```{r, cache=FALSE}
+
+school$PUPILSEX <- with(school, ifelse(PUPILSEX == 0, "F", "M"))
+
+table(school$PUPILSEX)
+```
+
+
+**Usando a combinação de replace com which**
+```{r, cache=FALSE}
+
+PUPILSEX <- with(school, replace(PUPILSEX, which(PUPILSEX==0), "F"))
+
+PUPILSEX <- with(school, replace(PUPILSEX, which(PUPILSEX==1), "M"))
+
+with(school, table(PUPILSEX))
 ```
 

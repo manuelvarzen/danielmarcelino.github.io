@@ -1,0 +1,51 @@
+#---
+#layout: post
+#title: "Will this Super Tuesday be the end of the road for anyone?"
+#date: 2016-02-29
+#category: Elections
+#tags: [R]
+# comments: true
+#image: 
+#---
+
+As "Super Tuesday" nears, it's often useful to recast who got what so far before this week's flood of primaries. 
+What makes Super Tuesday so super is not just because the number of states conducting primaries in a single day, it has also been known to be decisive. However, the Super Tuesday this year will likely produce no clear cut effect because many states allot delegates proportionally, making candidate like Marco Rubio and John Kasich to wait until 15 March when large winner-take-all states such as Florida and Ohio vote. The same thing might happen on the Democratic side, with Mr Sanders staying in the race even if Mrs Clinton wins big.
+
+The chart below shows counties labels given the share of vote of each major candidate.
+
+
+```{r setup, include=FALSE}
+library(ggplot2)
+library(scales)
+library(readr)
+library(tidyr)
+```
+
+```{r}
+primaries <- read_csv("https://github.com/danielmarcelino/Tables/raw/master/primaries.csv")
+primaries <- spread(primaries[c("state", "county", "candidate", "vote_share")], candidate, vote_share)
+# strip white space
+names(primaries) <- gsub("\\s", "", names(primaries))
+```
+
+
+```{r}
+ggplot(primaries, aes(x=HillaryClinton, y=DonaldTrump, label=county, colour=state)) +
+  geom_point() +
+  geom_label() +
+  scale_x_continuous(labels = percent) + 
+  scale_y_continuous(labels = percent) + 
+  theme_pub(base_size=12, legend = "top") 
+  
+```
+
+
+
+```{r}
+ggplot(primaries, aes(x=HillaryClinton, y=BernieSanders, label=county, colour=state)) +
+  geom_point() +
+  geom_label() +
+  scale_x_continuous(labels = percent) + 
+  scale_y_continuous(labels = percent) + 
+  theme_pub(base_size=12,legend = "top")
+```
