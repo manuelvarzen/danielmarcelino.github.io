@@ -5,6 +5,10 @@ date: "`r Sys.Date()`"
 output: SciencesPo:::Markdown
 ---
 
+ > "Torture the data, and it will confess to anything."
+<br>  Ronald Coase
+
+
 # Instruções 
 <div id="boxedtext">
 Antes de começar, execute o código a seguir para criar uma cópia de `mtcars` em `dados`:

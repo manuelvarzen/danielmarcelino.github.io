@@ -10,8 +10,8 @@ output: SciencesPo:::Markdown
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-  > "Finding the question is often more important than finding the answer."
-<br> John Tukey
+  > "The goal is to turn data into information, and information into insight."
+<br> Carly Fiorina
 
 
 # Instruções 
@@ -19,6 +19,7 @@ knitr::opts_chunk$set(echo = TRUE)
 Para realização desta atividade será preciso estar conectado à internet para que possa importar os dados.
 </div>
 
+# Exercícios
 
 <div id="exercise">
 **Exercício 1**: 
@@ -36,6 +37,7 @@ endereço = "https://github.com/danielmarcelino/Datasets/raw/master/Hox2000/scho
 school <- read_spss(endereço)
 ```
 
+## Explorando atributos de dados com rótulos (labelled data frame)
 
 <div id="exercise">
 **Exercício 2**: Explore os atributos das seguintes variáveis:
@@ -74,22 +76,30 @@ attr(school$PUPILSES, "labels")
 ```
 
 
+## Estimativas agregadas por grupos
+
 <div id="exercise">
 **Exercício 4**: Produza estatísticas descritivas da variável **SCORE** por sexo e **PUPILSEX**). Vamos olhar as médias, medianas e desvios padronizados.
 </div>
 
 ```{r}
-aggregate(SCORE ~ PUPILSEX, data = school, FUN = "mean")
+aggregate(formula = SCORE ~ PUPILSEX, 
+          data = school, 
+          FUN = "mean")
 ```
 
 
 ```{r}
-aggregate(SCORE ~ PUPILSEX, data = school, FUN = "median")
+aggregate(formula = SCORE ~ PUPILSEX, 
+          data = school, 
+          FUN = "median")
 ```
 
 
 ```{r}
-aggregate(SCORE ~ PUPILSEX, data = school, FUN = "sd")
+aggregate(formula = SCORE ~ PUPILSEX,
+          data = school, 
+          FUN = "sd")
 ```
 
 
@@ -108,20 +118,23 @@ with(school, tapply(SCORE, list(PUPILSEX), FUN = "mean"))
 
 
 ```{r}
-aggregate(SCORE ~ PUPILSES + PUPILSEX,
-           data = school, FUN = mean)
+aggregate(formula = SCORE ~ PUPILSES + PUPILSEX,
+           data = school, 
+           FUN = mean)
 ```
 
 
 ```{r}
-aggregate(SCORE ~ PUPILSES + PUPILSEX,
-           data = school, FUN = "median")
+aggregate(formula = SCORE ~ PUPILSES + PUPILSEX,
+           data = school, 
+          FUN = "median")
 ```
 
 
 ```{r}
-aggregate(SCORE ~ PUPILSES + PUPILSEX,
-           data = school, FUN = "sd")
+aggregate(formula = SCORE ~ PUPILSES + PUPILSEX,
+          data = school, 
+          FUN = "sd")
 ```
 
 

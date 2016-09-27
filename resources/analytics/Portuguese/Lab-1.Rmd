@@ -9,6 +9,9 @@ output: SciencesPo:::Markdown
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+ > "Torture the data, and it will confess to anything."
+<br>  Ronald Coase
+
 
 # Instruções 
 <div id="boxedtext">

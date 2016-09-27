@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Análise de Dados com R Aplicada às Ciências Sociais
+title: Análise de Dados com R
 ---
 
 ## Apresentações

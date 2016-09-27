@@ -265,13 +265,19 @@ div.tocify {
 </div>
 
 
+<blockquote>
+<p>“Finding the question is often more important than finding the answer.” <br> John Tukey</p>
+</blockquote>
 <div id="instrucoes" class="section level1">
 <h1><span class="header-section-number">1</span> Instruções</h1>
 <div id="boxedtext">
 <p>Para realização desta atividade será preciso estar conectado à internet para que possa importar os dados.</p>
 </div>
+</div>
+<div id="exercicios" class="section level1">
+<h1><span class="header-section-number">2</span> Exercícios</h1>
 <div id="exercise">
-<p><strong>Exercício 1</strong>: Importe a base de dados “school.sav” do diretório <strong>data</strong> ou diretamente do endereço web:</p>
+<p><strong>Exercício 1</strong>: Comece importando a base de dados sobre rendimento escolar “school.sav” (SPSS) do diretório <strong>data</strong> ou diretamente do endereço web:</p>
 <p><a href="https://github.com/danielmarcelino/Datasets/raw/master/Hox2000/school.sav" class="uri">https://github.com/danielmarcelino/Datasets/raw/master/Hox2000/school.sav</a></p>
 </div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(haven)
@@ -279,6 +285,8 @@ div.tocify {
 endereço =<span class="st"> &quot;https://github.com/danielmarcelino/Datasets/raw/master/Hox2000/school.sav&quot;</span>
 
 school &lt;-<span class="st"> </span><span class="kw">read_spss</span>(endereço)</code></pre></div>
+<div id="explorando-atributos-de-dados-com-rotulos-labelled-data-frame" class="section level2">
+<h2><span class="header-section-number">2.1</span> Explorando atributos de dados com rótulos (labelled data frame)</h2>
 <div id="exercise">
 <p><strong>Exercício 2</strong>: Explore os atributos das seguintes variáveis: - SCORE</p>
 <ul>
@@ -302,29 +310,45 @@ school &lt;-<span class="st"> </span><span class="kw">read_spss</span>(endereço
 <pre><code>##  lowest highest 
 ##       1       6</code></pre>
 <div id="exercise">
-<p><strong>Exercício 3</strong>: Produza estatísticas descritivas da variável <strong>SCORE</strong> por sexo e <strong>PUPILSEX</strong>). Vamos olhar as médias, medianas e desvios padronizados.</p>
+<p><strong>Exercício 3</strong>: Para melhor a compreensão dos resultados, você precisará</p>
 </div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">aggregate</span>(SCORE ~<span class="st"> </span>PUPILSEX, <span class="dt">data =</span> school, <span class="dt">FUN =</span> <span class="st">&quot;mean&quot;</span>)</code></pre></div>
+</div>
+<div id="estimativas-agregadas-por-grupos" class="section level2">
+<h2><span class="header-section-number">2.2</span> Estimativas agregadas por grupos</h2>
+<div id="exercise">
+<p><strong>Exercício 4</strong>: Produza estatísticas descritivas da variável <strong>SCORE</strong> por sexo e <strong>PUPILSEX</strong>). Vamos olhar as médias, medianas e desvios padronizados.</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">aggregate</span>(<span class="dt">formula =</span> SCORE ~<span class="st"> </span>PUPILSEX, 
+          <span class="dt">data =</span> school, 
+          <span class="dt">FUN =</span> <span class="st">&quot;mean&quot;</span>)</code></pre></div>
 <pre><code>##   PUPILSEX    SCORE
 ## 1        0 49.91701
 ## 2        1 49.10463</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">aggregate</span>(<span class="dt">formula =</span> SCORE ~<span class="st"> </span>PUPILSEX, 
+          <span class="dt">data =</span> school, 
+          <span class="dt">FUN =</span> <span class="st">&quot;median&quot;</span>)</code></pre></div>
+<pre><code>##   PUPILSEX SCORE
+## 1        0    45
+## 2        1    45</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">aggregate</span>(<span class="dt">formula =</span> SCORE ~<span class="st"> </span>PUPILSEX,
+          <span class="dt">data =</span> school, 
+          <span class="dt">FUN =</span> <span class="st">&quot;sd&quot;</span>)</code></pre></div>
+<pre><code>##   PUPILSEX    SCORE
+## 1        0 10.50163
+## 2        1 10.49448</code></pre>
+<ul>
+<li>Como você poderia produzir o mesmo resultado usando a função <code>tapply()</code>?</li>
+</ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ou usando tapply</span>
 <span class="kw">with</span>(school, <span class="kw">tapply</span>(SCORE, <span class="kw">list</span>(PUPILSEX), <span class="dt">FUN =</span> <span class="st">&quot;mean&quot;</span>))</code></pre></div>
 <pre><code>##        0        1 
 ## 49.91701 49.10463</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">aggregate</span>(SCORE ~<span class="st"> </span>PUPILSEX, <span class="dt">data =</span> school, <span class="dt">FUN =</span> <span class="st">&quot;median&quot;</span>)</code></pre></div>
-<pre><code>##   PUPILSEX SCORE
-## 1        0    45
-## 2        1    45</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">aggregate</span>(SCORE ~<span class="st"> </span>PUPILSEX, <span class="dt">data =</span> school, <span class="dt">FUN =</span> <span class="st">&quot;sd&quot;</span>)</code></pre></div>
-<pre><code>##   PUPILSEX    SCORE
-## 1        0 10.50163
-## 2        1 10.49448</code></pre>
 <div id="exercise">
-<p><strong>Exercício 4</strong>: Produza algumas estatísticas descritivas da variável <strong>SCORE</strong> para cada NSE–nível socioeconômico (<strong>PUPILSES</strong>) e sexo (<strong>PUPILSEX</strong>). Vamos produzir também médias, medianas e desvios padronizados.</p>
+<p><strong>Exercício 5</strong>: Produza algumas estatísticas descritivas da variável <strong>SCORE</strong> para cada NSE–nível socioeconômico (<strong>PUPILSES</strong>) e sexo (<strong>PUPILSEX</strong>). Vamos produzir também médias, medianas e desvios padronizados.</p>
 </div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">aggregate</span>(SCORE ~<span class="st"> </span>PUPILSES +<span class="st"> </span>PUPILSEX,
-           <span class="dt">data =</span> school, <span class="dt">FUN =</span> mean)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">aggregate</span>(<span class="dt">formula =</span> SCORE ~<span class="st"> </span>PUPILSES +<span class="st"> </span>PUPILSEX,
+           <span class="dt">data =</span> school, 
+           <span class="dt">FUN =</span> mean)</code></pre></div>
 <pre><code>##    PUPILSES PUPILSEX    SCORE
 ## 1         1        0 25.00000
 ## 2         2        0 35.40000
@@ -337,18 +361,9 @@ school &lt;-<span class="st"> </span><span class="kw">read_spss</span>(endereço
 ## 9         4        1 50.25253
 ## 10        5        1 60.87500
 ## 11        6        1 72.64706</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ou usando tapply</span>
-<span class="kw">with</span>(school, <span class="kw">tapply</span>(SCORE, <span class="kw">list</span>(PUPILSES, PUPILSEX),
-       <span class="dt">FUN =</span> mean, <span class="dt">na.rm=</span><span class="ot">TRUE</span>))</code></pre></div>
-<pre><code>##          0        1
-## 1 25.00000       NA
-## 2 35.40000 35.00000
-## 3 42.92135 42.52941
-## 4 51.30058 50.25253
-## 5 62.17391 60.87500
-## 6 70.38462 72.64706</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">aggregate</span>(SCORE ~<span class="st"> </span>PUPILSES +<span class="st"> </span>PUPILSEX,
-           <span class="dt">data =</span> school, <span class="dt">FUN =</span> <span class="st">&quot;median&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">aggregate</span>(<span class="dt">formula =</span> SCORE ~<span class="st"> </span>PUPILSES +<span class="st"> </span>PUPILSEX,
+           <span class="dt">data =</span> school, 
+          <span class="dt">FUN =</span> <span class="st">&quot;median&quot;</span>)</code></pre></div>
 <pre><code>##    PUPILSES PUPILSEX SCORE
 ## 1         1        0    25
 ## 2         2        0    35
@@ -361,8 +376,9 @@ school &lt;-<span class="st"> </span><span class="kw">read_spss</span>(endereço
 ## 9         4        1    55
 ## 10        5        1    65
 ## 11        6        1    65</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">aggregate</span>(SCORE ~<span class="st"> </span>PUPILSES +<span class="st"> </span>PUPILSEX,
-           <span class="dt">data =</span> school, <span class="dt">FUN =</span> <span class="st">&quot;sd&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">aggregate</span>(<span class="dt">formula =</span> SCORE ~<span class="st"> </span>PUPILSES +<span class="st"> </span>PUPILSEX,
+          <span class="dt">data =</span> school, 
+          <span class="dt">FUN =</span> <span class="st">&quot;sd&quot;</span>)</code></pre></div>
 <pre><code>##    PUPILSES PUPILSEX     SCORE
 ## 1         1        0        NA
 ## 2         2        0  3.511885
@@ -375,6 +391,26 @@ school &lt;-<span class="st"> </span><span class="kw">read_spss</span>(endereço
 ## 9         4        1  6.659741
 ## 10        5        1  8.065201
 ## 11        6        1  9.034249</code></pre>
+<ul>
+<li>Como você poderia produzir o mesmo resultado usando a função <code>tapply()</code>?</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ou usando tapply</span>
+<span class="kw">with</span>(school, <span class="kw">tapply</span>(SCORE, <span class="kw">list</span>(PUPILSES, PUPILSEX),
+       <span class="dt">FUN =</span> mean, <span class="dt">na.rm=</span><span class="ot">TRUE</span>))</code></pre></div>
+<pre><code>##          0        1
+## 1 25.00000       NA
+## 2 35.40000 35.00000
+## 3 42.92135 42.52941
+## 4 51.30058 50.25253
+## 5 62.17391 60.87500
+## 6 70.38462 72.64706</code></pre>
+<div id="exercise">
+<p><strong>Exercício 6</strong>:</p>
+</div>
+<div id="exercise">
+<p><strong>Exercício 7</strong>:</p>
+</div>
+</div>
 </div>
 
 
