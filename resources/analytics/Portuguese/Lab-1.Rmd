@@ -19,6 +19,7 @@ Antes de começar, execute o código a seguir para criar uma cópia de **mtcars*
 
 `dados <- mtcars`
 
+As respostas para estes exercícios estão disponíveis [aqui](http://danielmarcelino.github.io/resources/analytics/Portuguese/Lab-1-Solução.html).
 </div>
 
 

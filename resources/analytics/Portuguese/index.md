@@ -5,9 +5,21 @@ title: Análise de Dados com R
 
 ## Apresentações
 <hr class="margin" />
-
+Descriptive statistics
 - [Introdução ao R](/resources/analytics/Portuguese/R--aula-01.html)
 
+- [Estatísticas Descritivas](/resources/analytics/Portuguese/R--aula-04.html)
+- [Gráficos Básicos](/resources/analytics/Portuguese/R--aula-05.html)
+- [Gráficos Avançados](/resources/analytics/Portuguese/R--aula-06.html)
+- [Tabelas Cruzadas](/resources/analytics/Portuguese/R--aula-07.html)
+- [Regressão Linear](/resources/analytics/Portuguese/R--aula-08.html)
+- 
+- [Regressão Logística](/resources/analytics/Portuguese/R--aula-09.html)
+- 
+- [Distribuições](/resources/analytics/Portuguese/R--aula-10.html)
+- [Ponderação](/resources/analytics/Portuguese/.html)
+- [Amostras Complexas](/resources/analytics/Portuguese/.html)
+- [Aprendizado de Máquina](/resources/analytics/Portuguese/.html)
 
 ## Atividades (R by night)
 <hr class="margin" />

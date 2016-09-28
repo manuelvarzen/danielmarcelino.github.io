@@ -16,6 +16,8 @@ knitr::opts_chunk$set(echo = TRUE)
 # Instruções 
 <div id="boxedtext">
 Para realização desta atividade será preciso estar conectado à internet para que possa importar os dados.
+
+As respostas para estes exercícios estão disponíveis [aqui](http://danielmarcelino.github.io/resources/analytics/Portuguese/Lab-2-Solução.html).
 </div>
  
 # Pacotes e funções para importar base de dados via console 

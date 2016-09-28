@@ -17,8 +17,6 @@ knitr::opts_chunk$set(echo = TRUE)
 # Instruções 
 <div id="boxedtext">
 Para realização desta atividade será preciso estar conectado à internet para que possa importar os dados.
-
-As respostas para estes exercícios estão disponíveis [aqui](http://danielmarcelino.github.io/resources/analytics/Portuguese/Lab-3-Solução.html).
 </div>
 
 # Exercícios
@@ -32,7 +30,11 @@ Comece importando a base de dados sobre rendimento escolar "school.sav" (SPSS) d
 </div>
 
 ```{r}
+library(haven)
 
+endereço = "https://github.com/danielmarcelino/Datasets/raw/master/Hox2000/school.sav"
+
+school <- read_spss(endereço)
 ```
 
 ## Explorando atributos de dados com rótulos (labelled data frame)
@@ -49,17 +51,20 @@ Comece importando a base de dados sobre rendimento escolar "school.sav" (SPSS) d
 </div>
 
 ```{r}
-
+attr(school$SCORE, "label") # Variable label
+attr(school$SCORE, "labels") # Value labels
 ```
 
 
 ```{r}
-
+attr(school$PUPILSEX, "label") 
+attr(school$PUPILSEX, "labels")
 ```
 
 
 ```{r}
-
+attr(school$PUPILSES, "label") 
+attr(school$PUPILSES, "labels")
 ```
 
 
@@ -68,7 +73,11 @@ Comece importando a base de dados sobre rendimento escolar "school.sav" (SPSS) d
 </div>
 
 ```{r}
-
+school <- transform(school, 
+                    PUPILSEX2 = factor(PUPILSEX, levels=c(0,1),
+                            labels=c("Feminino", "Masculino")))
+                  
+levels(school$PUPILSEX2)
 ```
 
 
@@ -79,19 +88,24 @@ Comece importando a base de dados sobre rendimento escolar "school.sav" (SPSS) d
 </div>
 
 ```{r}
-
+aggregate(formula = SCORE ~ PUPILSEX2, 
+          data = school, 
+          FUN = "mean")
 ```
 
 
 ```{r}
-
+aggregate(formula = SCORE ~ PUPILSEX2,
+          data = school, 
+          FUN = "sd")
 ```
 
 
 - Como você poderia produzir o mesmo resultado usando a função `tapply()`?
 
 ```{r}
-
+# ou usando tapply
+with(school, tapply(SCORE, list(PUPILSEX2), FUN = "mean"))
 ```
 
 
@@ -102,19 +116,25 @@ Comece importando a base de dados sobre rendimento escolar "school.sav" (SPSS) d
 
 
 ```{r}
-
+aggregate(formula = SCORE ~ PUPILSES + PUPILSEX2,
+           data = school, 
+           FUN = mean)
 ```
 
 
 ```{r}
-
+aggregate(formula = SCORE ~ PUPILSES + PUPILSEX2,
+          data = school, 
+          FUN = "sd")
 ```
 
 
 - Como você poderia produzir o mesmo resultado usando a função `tapply()`?
 
 ```{r}
-
+# ou usando tapply
+with(school, tapply(SCORE, list(PUPILSES, PUPILSEX2),
+       FUN = mean, na.rm=TRUE))
 ```
 
 
@@ -125,7 +145,13 @@ Apresente uma tabela dos resultados.
 </div>
 
 ```{r}
+# school$SEScat <- cut(school$PUPILSES, breaks = c(0,3,5,6))
 
+school$SEScat <- ifelse(school$PUPILSES <=2, 1,
+                        ifelse(school$PUPILSES >= 3 &
+                                 school$PUPILSES < 5,2, 3 ))
+
+with(school, table(PUPILSES, SEScat))
 ```
 
 
@@ -134,7 +160,12 @@ Apresente uma tabela dos resultados.
 </div>
 
 ```{r}
+school[ , c("PUPILSEX2", "SEScat" )] <- NULL
 
+# Outro atalho é:
+# school$PUPILSEX2 <- school$SEScat <- NULL
+
+names(school)
 ```
 
 

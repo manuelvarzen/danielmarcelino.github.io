@@ -1,0 +1,115 @@
+
+
+
+```{r}
+install.packages("tidyverse")
+
+tidyverse_conflicts()
+
+tidyverse_update()
+
+```
+
+
+
+```{r}
+library(foreign)
+
+db = file.choose()
+
+dataset = read.spss("C:\\PathToFile\\MyDataFile.sav", to.data.frame=TRUE)
+
+dataset = read.spss(db, to.data.frame=TRUE)
+```
+
+
+# general syntax is:
+# d[  rows , columns ]
+
+# rows and columns should be
+# numeric vectors of r/c numbers
+# character vectors r/c names
+# logical vectors (if TRUE corresponding r/c is selected)
+# nothing - omitting a coordinate includes all values
+
+d[ 1, 1 ]
+d[ 1, ]
+d[ , 1]
+d[ c(1,3,6) , c(2,3) ]
+d[ c(1,3,5), c("in5a", "in5i") ]
+
+d$in5a == 1000
+d[ d$in5a==1000 , c(1,2) ]
+
+
+#============================================================================ 
+# Descriptive statistics (1)
+
+# household income
+hincome <- pgss$q135
+str(hincome)
+
+# unique values
+unique(hincome)
+
+# sorted
+# NOTE: NAs are removed by default when sorting
+sort( unique(hincome) )
+
+table(hincome)
+
+# Most computations on vectors/data that include NAs will return NA
+mean(hincome)
+mean(hincome, na.rm=TRUE)
+var(hincome, na.rm=TRUE)
+sd(hincome, na.rm=TRUE)
+
+# inequality coefficient: standard deviation divided by mean
+sd(hincome, na.rm=TRUE) / mean(hincome, na.rm=TRUE)
+
+
+# compute per capita household income
+hincomepc <- pgss$q135 / pgss$hompop
+str(hincomepc)
+
+# "factoring-out" reference to data frame
+hincomepc <- with( pgss,   q135 / hompop )
+
+# replace NA with mean income from valid cases
+hincomepc <- replace(  hincomepc, which(is.na(hincomepc)),  mean(hincomepc, na.rm=TRUE) )
+
+# adding variable to a data frame 'pgss'
+pgss$hincomepc <- hincomepc
+
+summary(pgss$hincomepc)
+
+# histogram
+hist(pgss$hincomepc,
+     main="",
+     xlab="Household income per capita")
+
+# density function estimate
+# NOTE expects data without missings
+plot( density( na.omit(pgss$hincomepc) ),
+      main="Household income per capita",
+      xlab="Income per capita")
+
+# mean and median pc hincome
+mean(pgss$hincome)
+median(pgss$hincome)
+
+# quantiles
+quantile(pgss$hincome)
+quantile(pgss$hincome, probs=.5)
+terciles <- quantile(pgss$hincome, probs=c(1/3, 2/3))
+terciles
+
+abline(v=terciles, col="gray")
+
+
+# distribution of income with lines for mean and median, and a legend
+plot(density(na.omit(pgss$hincomepc)))
+m <- with(pgss, c(mean(hincomepc), median(hincomepc)))
+m
+abline(v=m, col=c("blue", "red"))
+legend("topright", legend=c("mean", "median"), lty=1, col=c("blue", "red"))
