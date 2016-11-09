@@ -12,12 +12,11 @@ tags: [R, rstats]
 excerpt: "This post discusses the importance of candidates' stature in US presidential elections."
 published: true
 comments: true
-header-img: "img/website/rain-room.jpg"
 ---
 
-A candidate's stature may be more important in elections than we realized. I came across this claim in the US [press](http://www.usnews.com/news/articles/2015/07/08/how-tall-are-the-2016-presidential-candidates) suggesting that the taller the candidate, the better his/her chances to succeed in the presidential elections. 
+A candidate's stature may be more important in elections than we 've realized. I came across this claim in the US [press](http://www.usnews.com/news/articles/2015/07/08/how-tall-are-the-2016-presidential-candidates) suggesting that the taller the candidate, the better his/her chances to succeed in the presidential elections. 
 
-After a little search, I found this [Wikipedia](https://en.wikipedia.org/wiki/Heights_of_presidents_and_presidential_candidates_of_the_United_States) entry, and even some academic research on the issue, mainly relating this phenomenon to some sort of evolutionary instinctual preference (positive selection). At least in the US, it does make sense to ask how tall is your favorite presidential candidate. The plot below presents the evidence. 
+After a little search, I found this [Wikipedia](https://en.wikipedia.org/wiki/Heights_of_presidents_and_presidential_candidates_of_the_United_States) entry, and even some academic research on this topic [here](http://onlinelibrary.wiley.com/doi/10.1111/j.1540-6237.2011.00815.x/full) and [here](http://www.sciencedirect.com/science/article/pii/S1048984312000884), mainly relating this phenomenon to some sort of evolutionary instinctual preference (positive selection). At least in the US, it does make sense to ask how tall is your favorite presidential candidate. The plot below presents the evidence. 
 
 ![Linear Regression]({{ site.url }}/img/2015/Presidentsheight.png)
 
