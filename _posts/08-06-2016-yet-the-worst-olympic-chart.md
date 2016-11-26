@@ -2,7 +2,13 @@
 title: "Yet the Worst Olympic Chart"
 author: "Daniel Marcelino (@dmarcelinobr)"
 date: "August 6, 2016"
-output: html_document
+output:
+ html_document: 
+   keep_md: yes
+   toc: yes
+share: true
+category: blog
+tags: [R, rstats, Viz]
 ---
 
 

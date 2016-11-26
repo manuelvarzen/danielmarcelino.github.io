@@ -2,10 +2,14 @@
 title: "The Effective Number of Parties in the Electorate by Year and Region"
 author: "Daniel Marcelino (@dmarcelinobr)"
 date: "November 27, 2016"
-output: html_document
+output:
+ html_document: 
+   keep_md: yes
+   toc: yes
+share: true
+category: blog
+tags: [R, rstats, Viz]
 ---
-
-
 
 
 ## Tasks: Compute the Effective Number of Parties by year and region
