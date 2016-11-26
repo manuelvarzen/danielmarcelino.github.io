@@ -76,13 +76,13 @@ ENPpid3 <- ANES %>%
 group_by(Year, Region) %>%
   summarise(invHHI = sum(table(PID3))^2 / sum(table(PID3)^2)) %>%
 filter(!is.na(Region))
-
-ENPpid3
 {% endhighlight %}
 
 
 
 {% highlight text %}
+print(ENPpid3)
+
 Source: local data frame [112 x 3]
 Groups: Year [28]
 
@@ -108,10 +108,12 @@ Groups: Year [28]
 {% highlight r %}
 gg <- ggplot(ENPpid3)
 gg <- gg + geom_line(aes(x = Year, y = invHHI, colour = Region), size=1.1)
-gg <- gg + scale_x_continuous(limits=c(1952, 2012), breaks =  round(seq(1952, 2012, by = 4),1)) 
+gg <- gg + scale_x_continuous(limits=c(1952, 2012), 
+breaks =  round(seq(1952, 2012, by = 4),1)) 
 gg <- gg + scale_y_continuous(limits=c(1, 3))
 gg <- gg + theme_pub()
-gg <- gg + labs(title="Effective Number of Parties-in-the-Electorate", x="Year of the survey", y="Index")
+gg <- gg + labs(title = "Effective Number of Parties-in-the-Electorate", 
+x = "Year of the survey", y = "Index")
 gg
 {% endhighlight %}
 
