@@ -104,6 +104,10 @@ Groups: Year [28]
 
 
 ## The plot
+The index takes into consideration the relative size distribution of the parties (actually, declared partisanship) in an electorate. It approaches 1 when the distribution of preferences in a region is concentrated around only one party. Conversely, the index increases when the number of parties favored in the region increases.
+
+The analysis suggests a highly concentrated political market in-the-electorate in the South states, around 1 and a half party in the 50s, but then regressing towards the national mean (invHHI = 2.349) after the 60s.
+
 
 {% highlight r %}
 gg <- ggplot(ENPpid3)
@@ -118,9 +122,6 @@ gg
 {% endhighlight %}
 
 <img src="/img/11-26-2016-effective-number-of-parties/plot-1-1.png" title="center" alt="center" style="display: block; margin: auto;" />
-
-The index takes into consideration the relative size distribution of the parties (actually, declared partisanship) in an electorate. It approaches 1 when the distribution of preferences in a region is concentrated around only one party. Conversely, the index increases when the number of parties favored in the region increases.
-The analysis suggests a highly concentrated political market in-the-electorate in the South states, around 1 and a half party in the 50s, but then regressing towards the national mean (invHHI = 2.349) after the 60s.
 
 It’s true that majority plurality (single ballot) electoral systems tend to have a low number of effective parties compared to majority second ballot systems and to proportional representation systems. With an average count of effective parties in-the-electorate around 2, there is not much room for a third political force to emerge; and this seems to be quite consolidated among regions.
 
