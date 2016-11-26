@@ -77,6 +77,8 @@ setwd("~/danielmarcelino.github.io/resources/teaching/analytics/Portuguese")
 
 - Grátis (open-source)
 
+- [Artigo no New York Times discutindo como R está se tornando a língua franca entre analistas de dados em todas as áreas](http://www.nytimes.com/2009/01/07/technology/business-computing/07program.html?_r=1&em)
+ 
 
 ## R via Console
 - A interação básica com o R é via **console**, **terminal** ou **linha de comando**

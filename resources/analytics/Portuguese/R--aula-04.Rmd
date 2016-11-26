@@ -1,16 +1,16 @@
 ---
-title: "Manipulando dados, data frames e listas "
+title: "Manipulando dados, data frames e listas"
 author: "Daniel Marcelino"
-date: "`r Sys.Date()`"
+date: "`r sub(' 0', ' ', format(Sys.Date(), format='%B %d, %Y'))`"
 email: "dmarcelino@live.com"
-output: 
-   ioslides_presentation:
-      css: https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css
-    #  logo: https://raw.githubusercontent.com/christophergandrud/Hertie_Collab_Data_Science/master/img/HertieCollaborativeDataLogo_v1.png
-      highlight: pygments
-      transition: slower
-      beamer_presentation: default
-      ratio: 8x10
+#runtime: shiny
+output:
+  ioslides_presentation:
+    css: https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css
+    logo: https://github.com/danielmarcelino/SciencesPo/raw/master/inst/doc/SciencesPo_R_logo.png
+    highlight: pygments
+    transition: slower
+  beamer_presentation: default
 #bibliography: main.bib
 ---
 

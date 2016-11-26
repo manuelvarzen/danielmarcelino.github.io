@@ -1,0 +1,355 @@
+---
+title: "Untitled"
+author: "Daniel Marcelino"
+date: "9/29/2016"
+output: html_document
+---
+Séance 3 : Analyses bivariées
+M. Le Texier
+
+5 Octobre 2016
+
+true
+Ce cours a pour visée de vous apprendre à réaliser des analyses bivariées sous R.
+
+Durant cette séance, nous allons travailler à partir de la base de données communales de l’INSEE issue du recensement de 2013 (fichier “DonneeINSEE_RP2013_Communes.csv”), de la base de données de la Caisse Nationale des Allocations familiales (fichier “CNAF_Communes.csv”) et de la base de données renseignant sur les secteurs psychatriques “Secteur2013.csv”). A la fin de la séance, il vous sera demander de produire vos propres analyses à partir de ces bases de données, afin de répondre aux hypothèses de recherche que vous avez développées dans le cadre du projet tutoré.
+
+Après vous être assurés que votre espace de travail était situé dans le bon répertoire et était nettoyé, chargez les bases de données susmentionnées comme vu la semaine passée.
+
+1 - Analyses descriptives de la relation entre deux variables quantitatives
+Nous souhaitons savoir si les communes qui abritent le plus grand nombre d’allocataires (A) sont aussi celles qui abritent le plus grand nombre de familles monoparentales (AM).
+
+Pour répondre à cette question, il nous faut :
+
+déterminer s’il existe une relation entre la variable A et la variable AM,
+caractériser la forme de cette relation (positive ou négative, linéaire ou non linéaire, monotone ou non monotone),
+quantifier l’intensité de la liaison, et
+estimer la significativité statistique de ce résultat.
+En effet, de nombreuses formes de relation peuvent exister entre deux variables quantitatives (cf. Figure 1 - Source : Ricco Rakotomalala, 2015).
+
+
+
+Il existe donc différentes mesures de la relation entre des variables, en fonction de la forme de leur relation (linéaire, non-linéaire, monotone, non-monotone). Dans ce cours, nous étudierons deux de ces méthodes : la corrélation de Pearson (relation monotone et linéaire) et la corrélation de Spearman (relation monotone, linéaire ou non).
+
+1.1 - Analyse graphique des variables et de leurs relations
+Dans un premier temps, nous allons procéder à une analyse graphique de la relation. La représentation du “nuage de points” permet en effet d’obtenir une information visuelle sur la forme de la relation, son intensité, sa régularité (existence d’individus atypiques ou de subdivisions du nuage de points qui laisseraient envisager qu’une troisième variable agit sur la relation observée).
+
+La fonction plot() permet de représenter un nuage de points : chaque point correspond à un individu statistique. La position du point sur le plan dépend des valeurs que prend l’individu pour les variables A et AM, représentées sur l’axe des abscisse (horizontal) et l’axe des ordonnées (vertical).
+
+Quelle est la forme de la relation entre le nombre de bénéficiaires des allocations familiales et le nombre de familles monoparentales des communes de Seine Maritime? Quelles sont les deux communes où le nombre d’allocataires et de familles monoparentales sont les plus élevés? A quoi correspondent les paramètres pch=, cex= et pos=?
+
+# Création du nuage de points
+plot(CNAF_Communes$A~CNAF_Communes$AM, 
+     xlab="Nombre de familles monoparentales", 
+     ylab="Nombre d'allocataires", 
+     main="Monoparentalité et allocations familiales dans les communes de Seine Maritime",
+     col = "blue",
+     pch = 19,
+     cex = 1 )
+
+# Affichage du code commune sur le graphique
+text(CNAF_Communes$AM, CNAF_Communes$A, labels=CNAF_Communes$dc, cex= 0.7 pos=3)
+
+# Noms des communes pour lesquelles
+CNAF_Communes$nom[CNAF_Communes$dc==76351]
+CNAF_Communes$nom[CNAF_Communes$dc==76540]
+
+# Réalisation du graphique sans les communes du Havre et de Rouen
+
+rowRLH <- c(which(CNAF_Communes$dc==76351),which(CNAF_Communes$dc==76540))
+
+plot(CNAF_Communes$A[-rowRLH]~CNAF_Communes$AM[-rowRLH], 
+     xlab="Nombre de familles monoparentales", 
+     ylab="Nombre d'allocataires", 
+     col = "blue",
+     pch = 19,
+     cex = 1,
+     main="Monoparentalité et allocations familiales",
+     sub = "Communes de Seine Maritime, hors Rouen et Le Havre",
+     col.sub = "blue")
+
+# Ajout d'une droite de "régression" linéaire (droite des moindres carrés) au graphique
+abline(lm(CNAF_Communes$A[-rowRLH] ~ CNAF_Communes$AM[-rowRLH]), col="red") 
+1.2 - Test de corrélation de Pearson (relation monotone et linéaire entre valeurs)
+Le calcul de la corrélation linéaire entre deux variables quantitatives (qui décrivent le même ensemble d’individus statistiques) se fonde sur la mesure de leur covariance. Le test de corrélation de Pearson permet d’en mesurer la “significativité” statistique, c’est-à-dire de vérifier que la relation observée n’est pas le fruit du simple hasard.
+
+Calcul de la covariance
+
+La covariance est la moyenne du produit des écarts à la moyenne.
+
+Elle mesure la tendance des deux variables à être simultanément au dessus ou en dessous de leurs moyennes respectives.
+
+Elle modélise une liaison monotone (tendance unique).
+
+Théoriquement, elle peut varier entre moins l’infini et plus l’infini (c’est-à-dire dans l’ensemble des nombres réels). Plus elle se rapproche de l’infini (et donc plus elle s’éloigne de zéro), plus la relation entre les deux variables est forte.
+
+Quelle est la valeur de la covariance entre le nombre d’allocataires de la CAF et le nombre de familles monoparentales dans les communes de Seine Maritime? Que nous apprend cette valeur sur leur relation?
+
+# Nombre moyen d'allocataires CAF par communes
+mean(CNAF_Communes$A)
+mean_A <- mean(CNAF_Communes$A, na.rm = TRUE)
+
+# Nombre moyen de familles monoparentales par communes
+mean_AM <- mean(CNAF_Communes$AM, na.rm = TRUE)
+
+# Ecarts communaux au nombre moyen d'allocataires CAF
+ECmean_A <- CNAF_Communes$A - mean_A
+
+# Ecarts communaux au nombre moyen de familles monoparentales
+ECmean_AM <- CNAF_Communes$AM - mean_AM
+
+# Nombre d'individus pour lesquels au moins une des deux valeurs est inconnue
+which(is.na(ECmean_A))
+which(is.na(ECmean_AM))
+which(is.na(ECmean_A) | is.na(ECmean_AM))
+
+nb_na <- sum(is.na(ECmean_A) | is.na(ECmean_AM))
+
+# Calcul de la covariance entre les deux phénomènes
+cov_A_AM <- sum(ECmean_A * ECmean_AM, na.rm=TRUE) / (nrow(CNAF_Communes) - nb_na)
+Coefficient de corrélation linéaire
+
+L’interprétation de la valeur de la covariance entre deux variables est difficile car nous ne savons pas quelle est la limite (valeur maximale qu’elle pourrait prendre, si la covariance était totale).
+
+La valeur de la covariance dépend également des unités de mesures originales : les écarts à la moyenne seront plus élevés pour la taille des populations communales que dans le cas de la taille des individus de cette commune.
+
+Nous ne pouvons donc pas comparer les valeurs des covariances entre différents couples de variables.
+
+On préfèrera donc l’utilisation du coefficient de corrélation linéaire, qui est “normalisé” (autrement dit, il tient compte de l’étendue de la dispersion des variables dans la mesure des écarts à la moyenne).
+
+En effet, celui-ci est égal à la valeur de la covariance entre deux variables divisée par le produit de leurs écarts-types.
+
+La valeur du coefficient de corrélation varie dans l’intervalle -1 à +1 : on peut donc facilement l’interpréter et comparer les valeurs de différents coefficients de corrélation entre eux.
+
+Une valeur négative du coefficient de corrélation signifie que lorsque l’une des deux variables tend à décroître, l’autre tend à augmenter : les variables sont corrélées négativement.
+
+A l’inverse, une valeur positive du coefficient de corrélation signifie que lorsque l’une de ces deux variables tend à croître, l’autre tend également à augmenter : les deux variables sont corrélées positivement.
+
+Plus la valeur du coefficient de corrélation est proche de zéro, moins forte est la relation entre les deux variables.
+
+Comment interprétez-vous le signe et la valeur du coefficient de corrélation linéaire?.
+
+# Ecart-type du nombre d'allocataires CAF par communes
+sd_A <- sd(CNAF_Communes$A, na.rm = TRUE)
+
+# Ecart-type du nombre de familles monoparentales par communes
+sd_AM <- sd(CNAF_Communes$AM, na.rm = TRUE)
+
+# Coefficient de corrélation linéaire entre les deux phénomènes
+coefCor_A_AM <-  cov_A_AM / (sd_A * sd_AM)
+Le calcul de la valeur du coefficient de corrélation peut se faire plus directement en utilisant la fonction cor().
+
+Comparer la valeur du coefficient de corrélation obtenu précédemment avec celui calculé par la fonction cor(). Quel est le type de corrélation par défaut que calcule cette fonction?
+
+# Calcul du coefficient de corrélation linéaire
+cor(CNAF_Communes$A, CNAF_Communes$AM, use="pairwise.complete.obs")
+Significativité du coefficient de corrélation linéaire
+
+Afin d’évaluer le degré de confiance que l’on doit attribuer au résultat, il est important de vérifier que la relation observée n’est pas le fruit du hasard.
+
+On va donc chercher à savoir, par le biais d’un test statistique, si la valeur du coefficient de corrélation est “significative”. On compare pour cela la valeur absolue du coefficient de corrélation à une valeur critique donnée dans une table statistique.
+
+Cette table indique la probabilité que la valeur absolue du coefficient de corrélation égale ou dépasse une valeur critique définie en fonction du nombre de degrés de liberté (c’est-à-dire du nombre d’individus statistiques - 1).
+
+La valeur du degré de significativité statistique de la relation peut-être obtenu en utilisant la fonction cor.test().
+
+Elle renvoit une liste contenant :
+
+la valeur du test statistique t,
+le nombre de degrés de liberté df,
+la valeur du seuil de significativité p,
+les bornes inférieure et supérieure de l’intervalle de confiance pour un certain degré d’erreur acceptée et,
+la valeur du coefficient de corrélation cor.
+Interprétez les différents éléments issus du test de corrélation de Pearson. Que se passe-t-il lorsque l’on choisit un intervalle de confiance plus étendu? moins étendu? Utilisez pour répondre à cette question l’option conf.int de la fonction cor.test().
+
+# Calcul du coefficient de corrélation linéaire
+cor.test(CNAF_Communes$A, CNAF_Communes$AM, method="pearson", conf.level = 0.95)
+cor.test(CNAF_Communes$A, CNAF_Communes$AM, method="pearson", conf.level = 0.99)
+1.3 - Test de corrélation de Spearman (comparaison de rangs)
+Lorsque l’examen du nuage de points a montré une relation monotone (à une seule tendance) entre les deux variables, et quelque soit la forme de cette relation (linéaire, loglinéaire, exponentielle, …) il est possible de mesurer le sens, l’intensité et la significativité de cette relation en comparant le rang qu’occupent les individus relativement à ces deux variables.
+
+Le coefficient de corrélation de rang permet aussi de mesurer la relation entre deux variables quantitatives en présence de valeurs atypiques, lorsque la distribution des variables est disymétrique, ou suit une loi puissance ou exponentielle.
+
+L’association entre les deux variables est donc mesurée sur une échelle ordinale, et l’on calcule la différence entre le rang obtenu par chacun des individus sur les deux variables.
+
+Selon que l’on choisisse de soustraire une variable à une autre (par exemple la variable A à la variable AM ou à l’inverse la variable AM à la variable A), le signe de la différence s’inverse (positif ou négatif).
+
+C’est pourquoi l’on préfèrera calculer la somme de chacune de ces différences prises au carré, plutôt que leur simple somme (compensation entre les valeurs négatives et les valeurs positives).
+
+Sa formule est relativement compliquée, on la note :
+
+
+
+A l’aide la fonction cor.test(), calculez la valeur du coefficient de corrélation de Spearman. Vous utiliserez le paramètre exact= afin de gérer la présence d’égalité dans les rangs.
+
+1.4 - Comparaison des deux tests de corrélation
+Le fait que la valeur du coefficient de Spearman soit positive confirme les résultats précédents (plus les communes abritent un nombre important de familles monoparentales, plus elles abritent un nombre important d’allocataires de la CAF).
+
+La comparaison des degrés de significativité associés aux coefficients de corrélation obtenus avec l’une et l’autre des méthodes permet de mieux cerner la relation entre les deux variables.
+
+Si signif(Pearson) > signif(Spearman), alors la valeur du coefficient de Pearson est surévaluée du fait de la présence de valeurs exceptionnelles (ici Rouen et Le Havre). Le coefficient de Spearman n’est, quant-à-lui, pas sensible à la présence de valeurs exceptionnellement petites ou grandes, puisque seuls les ordres sont pris en compte.
+
+Si signif(Spearman) > signif(Pearson), alors la relation entre les deux variables n’est pas linéaire : leurs valeurs ne croissent ou ne décroissent pas proportionnellement. Toutefois, si le coefficient de Spearman est significativement éloigné de zéro, alors les deux variables sont bien corrélées : elles varient de manière interdépendante.
+
+2 - Analyses descriptives de la relation entre deux variables qualitatives
+Nous souhaitons à présent savoir si les classes de population communale se répartissent de façon homogène entre les différents secteurs psychatriques.
+
+Nous avons vu la semaine passée que la variable décrivant les populations communales en 2012 suivait une distribution log-normale : il existe un très grand nombre de petites villes, et un très petit nombre de grandes villes.
+
+Nous devons donc prendre compte la spécificité de la forme de la distribution des populations communales dans l’étude de leur répartition par secteurs.
+
+Pour cela, nous allons définir les classes de population de façon géométrique : l’étendue de la première classe sera deux fois plus petite que l’étendue de la seconde classe, et ainsi de suite.
+
+Le choix du nombre de classes peut-être défini en fonction d’un objectif thématique, ou bien en fonction du nombre d’individus statistiques. Plusieurs méthodes permettent de définir cet “optimal” (méthode de Brooks-Carruthers, d’Huntsberger, etc.).
+
+Dans le cadre de ce diagnostique territorial, nous fixerons le nombre de classes à 7. Nous définissons les bornes de classe suivantes : 0, 200, 400, 800, 1600, 3200, 6400, >6400 habitants (discrétisation suivant une progression géométrique).
+
+Vous utiliserez le paramètre labels= de la fonction cut() afin de nommer vos classes de façon intelligible.
+
+# Rattachement des données communales de la base INSEE à la base de données secteurs
+Secteur2013_INSEE <- merge(Secteur2013, 
+                           DonneeINSEE_RP2013_Communes, 
+                           by.x="code.commune", 
+                           by.y="COM", 
+                           all.y=FALSE)
+
+summary(Secteur2013_INSEE)
+
+# Création des classes de population communale
+Secteur2013_INSEE$classPop <- cut(Secteur2013_INSEE$P12_POP, 
+                                  breaks = c(0, 200, 400, 800, 1600, 3200, 6400, max(DonneeINSEE_RP2013_Communes$P12_POP))) 
+2.1 - Analyse graphique des variables et de leurs relations
+Nous pouvons à présent réaliser un premier diagnostique visuel de la distribution des classes de population communale par secteurs psychatriques. Le diagramme en mosaïque permet de représenter la répartition des individus entre deux variables catégorielles.
+
+A l’aide des différents paramètres graphiques, vous donnerez un titre explicite à votre diagramme, en changerez les couleurs et les noms d’axes horizontaux et verticaux. Vous n’oublierez pas de préciser le nombre de communes concernées. Quel est le secteur psychatrique qui contient le plus grand nombre de communes? Les communes les plus peuplées?
+
+# Création du graphique
+mosaicplot(Secteur2013_INSEE$Secteur.de.Psy.Générale ~ Secteur2013_INSEE$classPop)
+2.2 - Test d’indépendance du Chi-2
+L’interprétation du graphique ne nous permet cependant pas d’affirmer que certains secteurs psychatriques contiennent un nombre significativement plus ou moins important que les autres de communes appartenant à une classe de population particulière.
+
+Il nous faut donc mesurer le degré d’association ou d’indépendance entre les modalités de ces deux variables. On réalise pour cela un test dit du Chi-2.
+
+Le test du Chi-2 permet de comparer la distribution des individus au sein des classes de population et des secteurs psychatriques à une distribution théorique qui serait seulement fonction de la taille de ces classes : on parle d’équirépartition.
+
+Représentons la distribution des communes en fonction de ces deux variables catégorielles sous la forme d’un tableau de contingence, et calculons les effectifs marginaux et leur fréquence.
+
+Quelle est le pourcentage des communes appartenant au secteur G06? Quel est le pourcentage de communes ayant entre 200 et 400 habitants?
+
+# Création du tableau de contingence
+tabSecPop <- table(Secteur2013_INSEE$Secteur.de.Psy.Générale, Secteur2013_INSEE$classPop)
+
+# Calcul des effectifs marginaux
+margin.table(tabSecPop, 1)
+margin.table(tabSecPop, 2)
+
+# Calcul des fréquences marginales
+margin.table(tabSecPop, 1) / nrow(Secteur2013_INSEE) * 100
+margin.table(tabSecPop, 2) / nrow(Secteur2013_INSEE) * 100
+Si les classes de population communale sont réparties uniformément entre les secteurs psychatriques, alors l’effectif de case du tableau sera égal au produit de leurs fréquences marginales appliqué à l’effectif total.
+
+Par exemple, le nombre de communes ayant entre 200 et 400 habitants et appartenant au secteur G06 devrait être de :
+
+# Calcul de l'effectif théorique
+43.51/100 * 29.22/100 * 308
+Cette valeur théorique est-elle plus ou moins importante que la valeur observée?
+
+Afin de savoir si la distribution observée (pour l’ensemble des croisements de modalités de variables) est significativement différente de la distribution théorique d’équirépartition, on construit dans un premier temps un indicateur d’écart appelé “distance du Chi-2”.
+
+Si l’on note T l’effectif théorique et O l’effectif observé, alors la distance du Chi-2 D² se définit comme suit :
+
+
+
+Dans R, la fonction chisq.test() permet de calculer cette distance. Elle fournit également le résultat du test de significativité statistique qui compare la valeur de la ditance du Chi-2 à sa valeur critique (valeur maximale autorisée en fonction du nombre de degrés de liberté et du risque d’erreur accepté).
+
+Ce résultat est donné sous la forme d’une probabilité p de faire une erreur en rejetant l’hypothèse nulle selon laquelle la distribution théorique n’est pas significativement différente de la distribution observée (autrement dit, D² n’est pas significativement supérieure à la valeur théorique donnée par la table du Chi-2).
+
+Peut-on rejeter l’hypothèse nulle selon laquelle les classes de population communale se répartissent équitablement entre les secteurs psychatriques? L’avertissement donné par R sur l’approximation du Chi-2 indique que certains croisements de modalités contiennent un nombre trop faible d’individus. Comment peut-on palier à ce problème?
+
+# Réalisation du test du Chi-2
+chisq.test(Secteur2013_INSEE$Secteur.de.Psy.Générale, Secteur2013_INSEE$classPop)
+3 - Analyses descriptives de la relation entre une variable qualitative et une variable quantitative
+Nous souhaitons désormais savoir si les communes abritant une part relativement élevée ou basse de plus de 65 ans se répartissent de façon homogène selon les secteurs psychatriques.
+
+Pour cela, nous allons procéder à une analyse de la variance (ANOVA), c’est-à-dire que nous comparerons les proportions moyennes de plus de 65 ans des différents secteurs.
+
+Nous devons dans un premier temps rapporter le nombre de 65 ans et plus aux populations des communes, puis analyser la distribution de cette nouvelle variable. Une première condition à la réalisation d’une analyse de la variance est en effet que la variable quantitative soit distribuée selon une loi normale (les valeurs se concentrent et se distribuent symétriquement autour de la moyenne).
+
+Quelle commune abrite la part la plus faible de plus de 65 ans? La plus élevée? La distribution semble-t-elle suivre une loi normale?
+
+# Aggrégation des variables 65-79 ans et 80 ans et plus
+Secteur2013_INSEE$plus65 <- Secteur2013_INSEE$P12_POP6579 + Secteur2013_INSEE$P12_POP80P
+
+# Création de la variable mesurant la part de 65 ans et plus par commune (en %)
+Secteur2013_INSEE$sharePlus65 <- Secteur2013_INSEE$plus65 / Secteur2013_INSEE$P12_POP * 100
+
+# Résumé statistique de la distribution
+summary(Secteur2013_INSEE$sharePlus65)
+
+# Représentation graphique de la distribution
+hist(Secteur2013_INSEE$sharePlus65, 
+     xlab="Nombre de communes", 
+     ylab="Part des plus de 65 ans", 
+     main="Répartition des populations âgées dans les communes")
+On cherche également à savoir combien de communes se retrouvent dans chaque secteur. Il n’est en effet pas utile de réaliser des analyses de répartition poussées dans le cas de secteurs qui ne contiendraient qu’un tout petit nombre de communes.
+
+# Analyse du nombre de communes par secteurs
+table(Secteur2013_INSEE$Secteur.de.Psy.Générale)
+
+# Retrait des secteurs comprenant moins de 5 communes
+largeSecteur2013_INSEE <- Secteur2013_INSEE[-c(which(Secteur2013_INSEE$Secteur.de.Psy.Générale == "G 04"),
+                                               which(Secteur2013_INSEE$Secteur.de.Psy.Générale == "G 09"),
+                                               which(Secteur2013_INSEE$Secteur.de.Psy.Générale == "intersectoriel")), ]
+2.1 - Analyse graphique des variables et de leurs relations
+L’analyse graphique de la distribution des communes par secteurs en fonction de leur part de plus de 65 ans offre un premier aperçu de la relation unissant les deux variables.
+
+Les graphiques en boîte à moustache (boxplot) sont appropriés dans ce type de cas. En effet, ils représentent l’étendue de la distribution, une ou plusieurs valeurs centrales (ici nous nous intéressons à sa valeur moyenne) et des paramètres de dispersion (ici nous nous intéressons à l’écart-type).
+
+Cette analyse graphique est importante, car elle va notamment nous permettre de déterminer si la réalisation de l’ANOVA est possible ou non. En effet, une seconde condition de l’analyse de la variance est que les variances soient homogènes.
+
+Notons que dans le cas contraire, il existe des tests non-paramétriques qui permettent d’étudier la répartition d’une variable quantitative entre des modalités d’une même variable catégorielle.
+
+Dans quel secteur se trouve la commune avec la part de plus de 65 ans la plus élevée? La plus faible? Quel secteur montre le profil moyen le plus bas? Le plus haut? La variance intra-classe vous paraît-elle comparable d’un secteur à l’autre?
+
+# Chargement de la librairie ggplot2 qui permet de réaliser des graphiques avancés
+library(ggplot2)
+
+# Chargement de la librairie reshape qui permet des manipulations d'objets avancées
+library(reshape)
+
+# Réalisation du graphique en boîte à moustaches représentant moyenne et écart-type
+# (Attention : la fonction boxplot() proposée dans la base de R représente la médiane et les quartiles! Nous devons donc construire notre propre boîte à moustaches)
+
+myboxplot <- cast(Secteur.de.Psy.Générale ~ ., 
+                  value = "sharePlus65", 
+                  data = largeSecteur2013_INSEE, 
+                  fun = c(min, max, sd, mean))
+
+ggplot(myboxplot, aes(x = factor(Secteur.de.Psy.Générale))) + 
+  geom_boxplot(aes(lower = mean - sd, 
+                   upper = mean + sd, 
+                   middle = mean, 
+                   ymin = min, 
+                   ymax = max), 
+               stat = "identity") +
+  labs(title = "Profils démographiques (étendue, moyenne, +/- 1 écart-type)", 
+       x = "Secteurs psychatriques", 
+       y = "Part des plus de 65 ans (en %)")
+2.2 - Test d’analyse de la variance (ANOVA) à un facteur
+Nous souhaitons maintenant savoir si la répartition des communes en fonction de la part des plus de 65 ans dans leur population totale est homogène entre secteurs psychatriques.
+
+Pour cela, nous allons tester la validité de l’hypothèse selon laquelle la part moyenne de plus de 65 ans est identique entre les différents secteurs par le biais d’une ANOVA.
+
+Pour tester la significativité statistique des différences entre les moyennes, il faut en fait comparer les variances.
+
+L’ANOVA permet de savoir si la variance totale (mesurée pour l’ensemble des communes) est principalement le fait de la variance intra-groupe (au sein des secteurs) ou bien de la variance intergroupe (entre secteurs).
+
+Plusieurs solutions existent sous R pour réaliser une ANOVA. Nous allons utiliser dans le cadre de cet exercice la fonction aov().
+
+Quel est le degré de liberté (Df) associé au facteur? A combien s’élève la variance totale (Sum Sq)? Quelle est la valeur observée de la statistique du test de Fisher (F value)? Quelle est la probabilité (Pr(>F)) que cette valeur dépasse la valeur du test estimée? Peut-on rejeter, pour un seuil de confiance à 95%, l’hypothèse nulle d’égalité des moyennes (probabilité critique Pr(>F) < 0.05) et considérer qu’il y a au moins un secteur psychatrique dont les communes abritent une part significativement plus faible/élevée de plus de 65 ans que les autres?
+
+# Réalisation de l'anova
+aovSect65plus <- aov(sharePlus65 ~ Secteur.de.Psy.Générale, data = Secteur2013_INSEE)
+
+# Résultats du test
+summary(aovSect65plus)

@@ -68,16 +68,23 @@ attr(school$PUPILSES, "labels")
 ```
 
 
+```{r}
+# Bônus: usando a função do print_labels() do pacote haven para mostrar os labels.
+print_labels(school$PUPILSEX)
+```
+
 <div id="exercise">
 **Exercício 3**: Crie uma variável **PUPILSEX2** que seja uma cópia da variável **PUPILSEX**. Para tornar a interpretação dos resultados a seguir mais intuitiva, você precisará recodificar a variável criada para *fator*, atribuíndo também os seguintes labels: c("Feminino", "Masculino"). 
 </div>
 
 ```{r}
+# school$PUPILSEX <- labelled(school$PUPILSEX, labels=c(Feminino=0, Masculino=1))
+
 school <- transform(school, 
                     PUPILSEX2 = factor(PUPILSEX, levels=c(0,1),
                             labels=c("Feminino", "Masculino")))
                   
-levels(school$PUPILSEX2)
+levels(school$PUPILSEX2); table(school$PUPILSEX)
 ```
 
 

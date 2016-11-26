@@ -1,3 +1,18 @@
+---
+title: ""
+author: "Daniel Marcelino"
+date: "`r sub(' 0', ' ', format(Sys.Date(), format='%B %d, %Y'))`"
+email: "dmarcelino@live.com"
+#runtime: shiny
+output:
+  ioslides_presentation:
+    css: https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css
+    logo: https://github.com/danielmarcelino/SciencesPo/raw/master/inst/doc/SciencesPo_R_logo.png
+    highlight: pygments
+    transition: slower
+  beamer_presentation: default
+#bibliography: main.bib
+---
 
 
 
@@ -23,23 +38,165 @@ dataset = read.spss(db, to.data.frame=TRUE)
 ```
 
 
-# general syntax is:
-# d[  rows , columns ]
 
-# rows and columns should be
-# numeric vectors of r/c numbers
-# character vectors r/c names
-# logical vectors (if TRUE corresponding r/c is selected)
-# nothing - omitting a coordinate includes all values
+### Standard graphics in R
 
-d[ 1, 1 ]
-d[ 1, ]
-d[ , 1]
-d[ c(1,3,6) , c(2,3) ]
-d[ c(1,3,5), c("in5a", "in5i") ]
+#### Single-variable plots
 
-d$in5a == 1000
-d[ d$in5a==1000 , c(1,2) ]
+Let's continue with the `birthwt` data from the `MASS` library.
+
+Here are some basic single-variable plots.
+
+```{r, fig.height = 7, fig.align='center'}
+par(mfrow = c(2,2)) # Display plots in a single 2 x 2 figure 
+plot(birthwt$mother.age)
+plot(birthwt$mother.weight)
+plot(birthwt$mother.smokes)
+plot(birthwt$birthwt.grams)
+```
+
+Note that the result of calling `plot(x, ...)` varies depending on what `x` is.  
+    - When `x` is *numeric*, you get a plot showing the value of `x` at every index.  
+    - When `x` is a *factor*, you get a bar plot of counts for every level
+
+
+Let's add more information to the smoking bar plot, and also change the color by setting the `col` option.
+
+```{r, fig.height=5, fig.width=5, fig.align='center'}
+plot(birthwt$mother.smokes, main = "Mothers Who Smoked In Pregnancy", 
+     xlab = "Smoking during pregnancy", 
+     ylab = "Count of Mothers",
+     col = 'lightblue')
+```
+
+#### Plots with several variables
+
+If we call `plot(x,y,...)` with `x` a factor and `y` numeric, R will produce boxplots of `y` at every level of `x`.
+
+```{r, fig.height=5, fig.width=5, fig.align='center'}
+with(birthwt, plot(mother.smokes, birthwt.grams, 
+                   main = "Birth Weight by Smoking Status", 
+                   xlab = "Smoking during pregnancy", 
+                   ylab = "Birth weight (grams)"))
+```
+
+Variables like `physician.visits` and `previous prem.labor` are low counts and not factors, but it may still be interesting to look at boxplots of birth weight at each count.  Here are the `physician.visits` boxplots.  
+
+```{r, fig.align='center'}
+with(birthwt, plot(as.factor(physician.visits), birthwt.grams,
+                   main = "Birth Weight by # of Physician Visits", 
+                   xlab = "# of Physician Visits", 
+                   ylab = "Birth weight (grams)",
+                   col = 'lightblue'))
+```
+
+When both `x` and `y` are numeric, you get a scatterplot.
+
+```{r, fig.height=6, fig.width=6, fig.align='center'}
+with(birthwt, plot(mother.age, birthwt.grams, 
+                   main = "Birth Weight by Mother's Age", 
+                   xlab = "Mother's Age (Years)", 
+                   ylab = "Birth Weight (Grams)"))
+```
+
+That's a little boring and doesn't look very nice.  Let's see what graphics options are available to us.
+
+```{r, fig.height=6, fig.width=6, fig.align='center'}
+with(birthwt, plot(mother.age, birthwt.grams, 
+                   main = "Birth Weight by Mother's Age", 
+                   xlab = "Mother's Age (Years)", 
+                   ylab = "Birth Weight (Grams)",
+                   pch = 19, # plot solid point
+                   cex = 0.7, # shrink the points by a factor of 0.7
+                   col = 'steelblue', # change color to steel blue
+     ))
+```
+
+Now that we have seen some of the basic plotting options, let's look at how we can construct a scatterplot overlaying points from two groups.
+
+We'll also add a legend to explain what the different colors mean.
+
+```{r, fig.height=6, fig.width=6, fig.align='center'}
+with(birthwt, plot (mother.age, birthwt.grams, 
+                    main="Birth Weight by Mother's Age", 
+                    xlab="Mother's Age (Years)", 
+                    ylab="Birth Weight (Grams)",
+                    col=mother.smokes,
+                    pch = 19,
+                    cex = 0.7))
+
+legend("bottomright", c("Non-smoker","Smoker"), col=c(1,2), pch=19)
+```
+
+#### A note on color choice
+
+What does `col=mother.smokes` do?  Why does it color the points red and black?
+
+First, observe that when we look at the numeric indicator of `mother.smokes`, we see that `no` is coded as 1, and `yes` is coded as 2.
+
+```{r}
+birthwt$mother.smokes
+as.numeric(birthwt$mother.smokes)
+```
+
+Here's what the 8 default colors are:
+
+```{r}
+plot(rep(1, 8), pch=15, cex=5, col=1:8)
+```
+
+`col=1` is black, and `col=2` is red, which is why `col=mother.smokes` produced black and red points.
+
+The default color palette isn't color-blind friendly, so I prefer to use the following.
+
+```{r}
+cbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+
+plot(rep(1, length(cbPalette)), pch=15, cex=5, col=cbPalette)
+```
+
+#### Back to scatterplots
+
+A lot of the time your reports get printed in black and white.  To make sure that your plots still convey the same information, you can use different plotting characters in addition to different colors.  
+
+We'll take this one step at a time by creating a vector of plotting character indicators and another vector of colors.  Both will be based on the value of `mother.smokes`
+
+```{r, fig.height=6, fig.width=6, fig.align='center'}
+points.base <- c(16, 17) # 16: circle, 17: triangle
+cols.base <- cbPalette[2:3] # blue and orange points
+point.symbols <- points.base[birthwt$mother.smokes] 
+point.cols <- cols.base[birthwt$mother.smokes]
+with(birthwt, plot(mother.age, birthwt.grams, 
+                   main="Birth Weight by Mother's Age", 
+                   xlab="Mother's Age (Years)", 
+                   ylab="Birth Weight (Grams)",
+                   col=point.cols,
+                   pch=point.symbols))
+legend("bottomright", c("Nonsmoker","Smoker"), col=cols.base, pch=points.base)
+
+# Let's add a horizontal line at the 2500g cutoff
+# Below 2500g, newborns are considered to be underweight
+# lty = 3 indicates a dashed line (line type)
+# lwd = 3 indicates a line width of 3 (default is 1)
+abline(h = 2500, lty = 3, lwd = 3)
+```
+
+#### Next time: ggplot2
+
+```{r, fig.height=5, fig.width=6, fig.align='center'}
+library(ggplot2)
+ggplot(birthwt, aes(x=mother.age, y=birthwt.grams, shape=mother.smokes, color=mother.smokes)) + 
+  geom_point() + # Adds points (scatterplot)
+  geom_smooth(method = "lm") + # Adds regression lines
+  ylab("Birth Weight (grams)") + # Changes y-axis label
+  xlab("Mother's Age (years)") + # Changes x-axis label
+  ggtitle("Birth Weight by Mother's Age") # Changes plot title
+```
+
+`ggplot2` graphics are more visually appealing, and make a lot of common statistical plotting tasks much easier.  In this example, calling `geom_smooth(method = "lm")` adds the linear regression lines for the non-smoker and smother groups, and also overlays translucent confidence bands around the regression lines. 
+
+
+
 
 
 #============================================================================ 
@@ -113,3 +270,286 @@ m <- with(pgss, c(mean(hincomepc), median(hincomepc)))
 m
 abline(v=m, col=c("blue", "red"))
 legend("topright", legend=c("mean", "median"), lty=1, col=c("blue", "red"))
+
+
+
+## 
+```{r}
+data(titanic)
+library(vcd)
+mosaic(
+~ SEX + SURVIVED,
+data = titanic, 
+main = "Mosaic plot for Titanic data: Sex vs. Survival",
+shade = TRUE,
+split_vertical = TRUE,
+labeling_args = list(
+set_varnames = c(
+Survived = "Survived?")
+  )
+)
+```
+
+
+```{r}
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point(aes(color = class)) +
+  geom_smooth(se = FALSE, method = "loess") +
+  labs(
+    title = "Fuel efficiency generally decreases with engine size",
+    subtitle = "Two seaters (sports cars) are an exception because of their light weight",
+    caption = "Data from fueleconomy.gov"
+  )
+```
+
+
+```{r}
+ggplot(diamonds, aes(carat, price)) + 
+  geom_hex(bins = 20) + 
+  facet_wrap(~cut_number(depth, 6))
+```
+
+
+```{r}
+ggplot(mpg, aes(displ, hwy)) + 
+  geom_point() + 
+  facet_wrap(~class)
+```
+
+```{r}
+ggplot(mpg, aes(displ, hwy)) + 
+  geom_point() + 
+  scale_x_continuous(position = "top") + 
+  scale_y_continuous(position = "right")
+
+```
+
+```{r}
+ggplot(mpg, aes(displ, hwy)) + 
+  geom_point() + 
+  scale_y_continuous(
+    "mpg (US)", 
+    sec.axis = sec_axis(~ . * 1.20, name = "mpg (UK)")
+  )
+```
+
+
+```{r}
+ggplot(mpg, aes(displ, hwy)) + 
+  geom_point() + 
+  facet_wrap(~ drv, strip.position = "bottom") + 
+  theme(
+    strip.placement = "outside",
+    strip.background = element_blank(),
+    strip.text = element_text(face = "bold")
+  ) +
+  xlab(NULL)
+```
+
+
+```{r}
+ggplot(mpg, aes(displ, hwy, shape = drv, colour = fl)) + 
+  geom_point() + 
+  theme(
+    legend.justification = "top", 
+    legend.box.margin = margin(3, 3, 3, 3, "mm"), 
+    legend.box.background = element_rect(colour = "grey50")
+  )
+```
+
+```{r}
+avg_price <- diamonds %>% 
+  group_by(cut, color) %>% 
+  summarise(price = mean(price)) %>% 
+  ungroup() %>% 
+  mutate(price_rel = price - mean(price))
+
+ggplot(avg_price) + 
+  geom_col(aes(x = cut, y = price, fill = color))
+```
+
+
+
+```{r}
+ggplot(avg_price) + 
+  geom_col(aes(x = cut, y = price_rel, fill = color))
+```
+
+
+```{r}
+ggplot(avg_price) + 
+  geom_col(aes(x = cut, y = price, fill = fct_rev(color)))
+```
+
+
+
+# Analisando Dados Ordinais no R
+
+- Dados ordinais são frequentemente associados à ordem, podemos dizer que um valor é maior que outro, mas não a distância entre um ponto e outro.
+
+- Due to the ordinal nature of the data we cannot use parametric techniques to analyse Likert type data; Analysis
+of variance techniques include:
+- Mann Whitney test
+- Kruskal Wallis test
+-Regression techniques include:
+Ordered logistic regression or;
+Multinomial logistic regression.
+Alternatively collapse the levels of the Dependent variable into two levels and run binary logistic regression.
+
+
+Do Males and Females answer di erently?
+Imagine we were interested in statistically testing if there
+were a signi cant di erence between the answering tendancies of Males and Females.  Unocially we may conclude
+from the barplot below that Males seem to have a higher tendancy to
+Strongly Disagree
+with the ascertion made,
+Females seem to have a higher tendancy to
+Strongly Agree
+with the ascertion made.  Using a
+Mann-Whitney (as we only have two groups M and F)
+we can oficially" test for a di erence in scoring tendancy
+
+
+barplot(table(dat$sex,dat$Answer),beside=T,
+       cex.names=0.7,legend.text=c("Female","Male"),
+         args.legend=list(x=12,y=25,cex=0.8),
+         col=c("pink","light blue"))
+         
+         
+Mann-Whitney test.
+To officially" test for a di erence in scoring tendancies between Males and Females we
+use a
+Mann-Whitney
+(This is the same as a two-sample wilcoxon test).
+
+wilcox.test(score~sex,data=dat)
+
+
+From the Mann-Whitney test we get a p-value of 0.04353, hence we can reject the null hypothesis
+That Males and
+Females  have  the  same  scoring  tendancy
+at the 5% level.  This is aslo evident from the bar chart which indicates
+far more Females answer with
+Strongly Agree
+, and far more MAles answer with
+Strongly Disagree.
+
+
+
+Do scoring tendancies di er by dregee level?
+If we were interested in statistically testing if there were
+a  signi cant  di erence  between  the  scoring  tendancies  of  people  with  di erent  post-school  degree  cheivements.
+Unocially  we  may  conclude  from  the  barplot  that  there  is  seemilgly  no  di erence  in  the  scoring  tendancies  of
+people  having  achieved  either  one  of  the  listed  degrees.   Using  a
+Kruskal-Wallis
+we  can \ocially" test  for  a
+di erence.
+> barplot(table(dat$degree,dat$Answer),
++         beside=T,args.legend=list(cex=0.5),
++         cex.names=0.7,legend.text=c("Bachelors",
+
+"Masters","PhD","None","Other"))
+
+Kruskal-Wallis  Test.
+To \ocially" test for a di erence in scoring tendancies of people with di erent post-
+school degree cheivements we use a
+Kruskal-Wallis Test
+.
+> kruskal.test(Answer~degree,data=dat)
+
+The  Kruskal-Wallis  test  gives  us  a  p-vale  of  0.1116,  hence  we  have  no  evidence  to  reject  our  null  hypothesis.
+We  are  likely  therefore  to  believe  that  there  is  no  di erence  in  scoring  tendancy  between  people  with  di erent
+post-school lvels of education.
+
+
+One-Way ANOVA.
+One way of treating this type of data if we there is a \normally" distributed continious
+independent variable is to  ip the variables around.  Hence, to "ocially" test for a di erence in means between the
+income
+of people scoring di erently we use a
+One-way ANOVA
+(as the samples are independent)
+.
+> anova(lm(income~Answer,data=dat))
+
+
+The ANOVA gives us a p-value of 0.1239, hece we have no evidence to reject our null-hypothesis.  We are therefore
+likely  to  believe  that  there  is  no  di erence  in  the  average  income  of  people  who  score  in  each  of  the   ve
+Likert
+categories.
+
+Chi-Square  test.
+The  Chi-Square  test  can  be  used  if  we  combine  the  data  into
+nominal
+categories,  this
+compares  the  observed  numbers  in  each  category  with  those  expected
+(i.e.   equal  proportions)
+,  we  asses  if  any
+observed discrepancies
+(from our theory of equal proportions)
+can be reasonably put down to chance.
+The numbers in each
+nominal
+category
+(as described above)
+are shown below;
+> table(dat$nominal,dat$sex)
+
+table(dat$nominal,dat$degree)
+
+Output  from  each  Chi-square  test  is  shown  below.   Initially  we  test  if  there  is  a  signi cant  di erence  between
+the  expected  frequencies  and  the  observed  frequencies  between  the  speci ed
+(nominal)
+scoring  categories  of  the
+sexes.  The second Chi-squared test tests if there is a signi cant di erence between the expected frequencies and
+the  observed  frequencies  between  the  speci ed
+(nominal)
+scoring  categories  of  people  with  di erent  post-school
+education levels.
+> chisq.test(table(dat$nominal,dat$sex))
+
+chisq.test(table(dat$nominal,dat$degree))
+
+he  rst Chi-squared test gives us a p-value of
+<
+0.001, hence we have a signi cant result at the 1% level allowing us
+to reject the null hypothesis
+(of equal proportions)
+.  We would therefore believe that there are unequal proportions of
+Males and Females scoring in each of the three
+(nominal)
+categories.  The second Chi-squared test gives us a p-value
+of
+<
+0.002,  hence we have a signi cant result at the 2% level allowing us to reject the null hypothesis
+(of  equal
+proportions)
+.  We would therefore believe that there are unequal proportions of people with di erent post-school
+education levels scoring in each of the three
+(nominal)
+categories.
+
+
+
+
+
+
+
+
+
+
+-----
+
+library(AER)
+library(lmtest)
+data("CollegeDistance")
+cd.d<-CollegeDistance
+simple.ed.1s<- lm(education ~ distance,data=cd.d)
+cd.d$ed.pred<- predict(simple.ed.1s)
+simple.ed.2s<- lm(wage ~ urban + gender + ethnicity + unemp + ed.pred ,     data=cd.d)
+simple.comp<- encomptest(wage ~ urban + gender + ethnicity + unemp + ed.pred , wage ~ urban + gender + ethnicity + unemp + education , data=cd.d)
+1s.ftest<- encomptest(education ~ tuition + gender + ethnicity + urban ,     education ~ distance , data=cd.d)
+
+library(arm)
+coefplot(lm(wage ~ urban + gender + ethnicity + unemp + education,data=cd.d),vertical=FALSE,var.las=1,varnames=c("Education","Unemp","Hispanic","Af-am","Female","Urban","Education"))
+coefplot(simple.ed.2s ,     vertical=FALSE,var.las=1,varnames=c("Education","Unemp","Hispanic","Af-am","Female","Urban","Education"))

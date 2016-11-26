@@ -1,11 +1,3 @@
-
-# compiles all .Rmd files in _R directory into .md files in Pages directory,
-# if the input file is older than the output file.
-# this script is by David Robinson, from here:
-# https://github.com/dgrtwo/dgrtwo.github.com/blob/master/_scripts/knitpages.R
-
-# run ./knitpages.R to update all knitr files that need to be updated.
-
 KnitPost <- function(input, outfile, figsfolder, cachefolder, base.url="/") {
         # this function is a modified version of an example here:
         # http://jfisher-usgs.github.com/r/2012/07/03/knitr-jekyll/
@@ -38,7 +30,7 @@ knit_folder <- function(infolder, outfolder, figsfolder, cachefolder) {
         }
 }
 
-08-06-2016-yet-the-worst-olympic-chart.Rmd
+# 08-06-2016-yet-the-worst-olympic-chart.Rmd
 # setwd("/Users/daniel/danielmarcelino.github.io")
-knit_folder("_R", "_posts", "figs/", "_caches/")
+knit_folder("_R", "_posts", "img/", "_caches/")
 #knit_folder("_R/drafts", "_drafts", "figs/drafts/")

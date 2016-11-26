@@ -3,13 +3,14 @@ title: "Manipulando dados, listas, funções e comandos if-else"
 author: "Daniel Marcelino"
 date: "`r sub(' 0', ' ', format(Sys.Date(), format='%B %d, %Y'))`"
 email: "dmarcelino@live.com"
-output: 
+#runtime: shiny
+output:
   ioslides_presentation:
     css: https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css
     logo: https://github.com/danielmarcelino/SciencesPo/raw/master/inst/doc/SciencesPo_R_logo.png
     highlight: pygments
     transition: slower
-    beamer_presentation: default
+  beamer_presentation: default
 #bibliography: main.bib
 ---
 
