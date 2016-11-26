@@ -68,7 +68,7 @@ The HHI is calculated by taking the voting share of each party in the electorate
 
 $$HHI = \sum_{i=1}^N s_i^2$$
 
-For now, I'll be using *dplyr* to estimate the effective number of parties by year and region, but the **SciencesPo** package has a function named *politicalDiversity* that can calculate several indices used in political science studies.
+For now, I'll be using *dplyr* to estimate the effective number of parties by year and region, but the **SciencesPo** package has a function named *politicalDiversity* that can calculate several indices used by political science scholars, which I’ll be addressing in future posts. 
 
 
 {% highlight r %}
