@@ -25,7 +25,7 @@ comments: true
 
 The data come from The American National Election Studies (ANES).
 The [ANES](http://www.electionstudies.org/) is a survey that covers voting behavior, public opinion, and political participation. Many other countries have their own version of this survey, for instance see [here](http://ellisp.github.io/blog/2016/09/18/nzes1). 
-While the primary mission of these studies is to answer questions about voting behavior, the wealth of variables collected amongst voters means that we can use these data to answer other questions too. If you would like to know about the other variables contained in the ANES questionaires, you may want to read its [codebook](http://www.electionstudies.org/studypages/anes_timeseries_cdf/anes_timeseries_cdf_codebook_var.pdf). You may also be interested in a [post](http://www.asdfree.com/2013/11/analyze-american-national-election.html) by Anthony Damico on this topic.
+While the primary mission of these studies is to answer questions about voting behavior, the wealth of variables collected amongst voters means that we can use these data to answer other questions too. If you would like to know about the other variables contained in the ANES questionnaires, you may want to read its [codebook](http://www.electionstudies.org/studypages/anes_timeseries_cdf/anes_timeseries_cdf_codebook_var.pdf). You may also be interested in a [post](http://www.asdfree.com/2013/11/analyze-american-national-election.html) by Anthony Damico on this topic.
 
 There are many ways you can import the version of data I've made. For example, you download it. Then read it.
 
@@ -120,6 +120,7 @@ gg
 <img src="/img/11-26-2016-effective-number-of-parties/plot-1-1.png" title="center" alt="center" style="display: block; margin: auto;" />
 
 The index takes into consideration the relative size distribution of the parties (actually, declared partisanship) in an electorate. It approaches 1 when the distribution of preferences in a region is concentrated around only one party. Conversely, the index increases when the number of parties favored in the region increases.
-The analysis suggests a highly concentrated political market in-the-electorate in the south states, around 1 and a half party in the 50s, but then regressing towards the national mean (invHHI = 2.349) after the 60s.
+The analysis suggests a highly concentrated political market in-the-electorate in the South states, around 1 and a half party in the 50s, but then regressing towards the national mean (invHHI = 2.349) after the 60s.
+It’s true that majority plurality (single ballot) electoral systems tend to have a low number of effective parties compared to majority second ballot systems and to proportional representation systems. With an average count of effective parties in-the-electorate around 2, there is not much room for a third political force to emerge; and this seems to be quite consolidated among regions.
 
 `#reproducible`
