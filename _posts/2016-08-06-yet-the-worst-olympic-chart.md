@@ -10,7 +10,7 @@ output:
 share: true
 category: blog
 tags: [R, rstats, Viz]
-excerpt: "The Olympic Games are back in high style in Rio."
+excerpt: "The Olympics barely began but we already have the worst chart winner."
 published: true
 status: published
 comments: true
