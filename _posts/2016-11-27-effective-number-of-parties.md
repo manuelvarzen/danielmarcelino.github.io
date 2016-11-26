@@ -1,4 +1,5 @@
 ---
+layout: post
 title: "The Effective Number of Parties in the Electorate by Year and Region"
 author: "Daniel Marcelino (@dmarcelinobr)"
 date: "November 27, 2016"

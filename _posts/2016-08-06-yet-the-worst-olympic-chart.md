@@ -1,4 +1,5 @@
 ---
+layout: post
 title: "Yet the Worst Olympic Chart"
 author: "Daniel Marcelino (@dmarcelinobr)"
 date: "August 6, 2016"
