@@ -9,6 +9,10 @@ output:
 share: true
 category: blog
 tags: [R, rstats, Viz]
+excerpt: "Using the American National Election Studies, compute the Effective Number of Parties in the electorate across regions and years/waves. "
+published: true
+status: published
+comments: true
 ---
 
 
