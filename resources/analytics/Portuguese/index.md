@@ -11,6 +11,7 @@ Descriptive statistics
 - [Estatísticas Descritivas](/resources/analytics/Portuguese/R--aula-04.html)
 - [Gráficos Básicos](/resources/analytics/Portuguese/R--aula-05.html)
 - [Gráficos Avançados](/resources/analytics/Portuguese/R--aula-06.html)
+- [Combinar Data Frames](/resources/analytics/Portuguese/R--aula-12.html)
 - [Tabelas Cruzadas](/resources/analytics/Portuguese/R--aula-07.html)
 - [Regressão Linear](/resources/analytics/Portuguese/R--aula-08.html)
 - 

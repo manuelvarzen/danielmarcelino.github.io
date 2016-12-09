@@ -1,0 +1,275 @@
+---
+title: "Manipulando Dados: Combinando Base de Dados"
+author: "Daniel Marcelino"
+date: "`r sub(' 0', ' ', format(Sys.Date(), format='%B %d, %Y'))`"
+email: "dmarcelino@live.com"
+#runtime: shiny
+output:
+  ioslides_presentation:
+    css: https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css
+    logo: https://github.com/danielmarcelino/SciencesPo/raw/master/inst/doc/SciencesPo_R_logo.png
+    highlight: pygments
+    transition: slower
+  beamer_presentation: default
+#bibliography: main.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Agenda
+
+- Combinar base de dados e observações:
+  - Função `rbind()` para juntar linhas;
+  - Função `cbind()` para juntar colunas;
+  - Função `merge()`  do R base;
+  - Funções do pacote `dplyr`.
+
+
+## Dados de exemplos
+
+```{r}
+(A <- data.frame(x = 0:3, y = 3:0, w = c("A","B", NA,"D")))
+```
+
+```{r}
+(B <- data.frame(x = 4:6, y = -2:0, w = c(NA,"B","C")))
+```
+
+----
+
+```{r}
+(C <- data.frame(z = 101:107))
+```
+
+## Combinando dados (linhas) com os mesmos atributos
+- Retorna todas as linhas de **A** e **B**, quando **A** e **B** têm as mesmas colunas.
+
+```{r}
+AB <- rbind(A, B); print(AB)
+```
+
+
+## Combinando dados (colunas) com o mesmo número de linhas
+- Retorna a combinação das colunas de **AB** e **C**, quando **AB** e **C** tem o mesmo número de linhas.
+
+```{r}
+ABC <- cbind(AB, C); print(ABC)
+```
+
+
+## Erros recorrentes 
+```{r}
+dim(A); dim(B)
+```
+
+
+```{r, eval=FALSE}
+> cbind(A, B)
+Error in data.frame(..., check.names = FALSE) : 
+  arguments imply differing number of rows: 4, 3
+```
+
+----
+
+```{r}
+dim(AB); dim(C)
+```
+
+```{r, eval=FALSE}
+
+> rbind(AB, C)
+Error in match.names(clabs, names(xi)) : 
+  nomes não correspondem aos nomes anteriores
+```
+
+## Dados de exemplos
+
+```{r}
+df1 = data.frame(Id = c(1:6), 
+                 Partido = c(rep("PT", 3), 
+                             rep("PSDB", 3)))
+print(df1) 
+```
+
+
+----
+
+
+```{r}
+df2 = data.frame(Id = c(1, 2, 4, 6, 7), 
+                 Estado = c(rep("Rio de Janeiro", 2),
+                            rep("São Paulo", 2), "Brasília"))
+
+print(df2) 
+```
+
+
+## Combinação natural (inner join) 
+
+- Retorna todas as linhas de *df1* onde há valores correspondentes em *df2*, mantendo as colunas de *df1* e *df2*.
+
+<div class="centered">
+![Inner join](Only-matching-observations.png)
+</div>
+
+----
+
+```{r}
+# Usando a função do R base `merge`
+# Uma vez que os dois data frames têm uma mesma chave (id):
+  
+merge(df1, df2, by = "Id")
+```
+
+
+## Combinação exterior à esquerda (left outer)
+- Retorna todas as linhas de **df1**, e todas as colunas de **df1** e **df2**. Para isso, utilizamos o parâmetro `all.x = TRUE`. Casos não correspondentes em **df2** apresentarão valores`NA` nas colunas deste objeto.  
+
+<div class="centered">
+
+![left outer join](All-matching-obs-and-non-matching-from-A.png)
+</div>
+
+
+----
+
+```{r}
+merge(df1, df2, by = "Id", all.x=TRUE)
+```
+
+
+## Combinação exterior à direita (right outer)
+- Retorna todas as linhas de **df2**, e todas as colunas de **df2** e **df1**. Para isso, utilizamos o parâmetro `all.y = TRUE`. Da mesma forma que no exemplo anterior, casos não correspondentes em **df1** apresentarão valores`NA` nas colunas deste objeto.  
+
+<div class="centered">
+![right outer join](All-matching-obs-and-non-matching-from-B.png)
+</div>
+
+
+----
+
+```{r}
+merge(df1, df2, by = "Id", all.y=TRUE)
+```
+
+
+## Combinação completa (full join)
+- Retorna todas as linhas de **df1** onde há valores correspondentes em **df2**, e todas as colunas de **df1** e **df2**. Para isso,  utilizamos o parâmetro `all = TRUE`.
+
+<div class="centered">
+![full inner join](All-observations.png)
+</div>
+
+
+----
+
+```{r}
+merge(df1, df2, by = "Id", all=TRUE)
+```
+
+
+## Usando as funções do pacote *dplyr*
+
+```{r, warning=FALSE, message=FALSE}
+library(dplyr)
+
+```
+
+## Combinação natural (inner join) 
+- Retorna todas as linhas de **df1** onde há valores correspondentes em **df2**, mantendo as colunas de **df1** e **df2**.
+
+<div class="centered">
+![Inner join](Only-matching-observations.png)
+</div>
+
+----
+
+```{r}
+
+inner_join(df1, df2,  by = "Id")
+```
+
+
+## Combinação exterior à esquerda (left outer)
+- Retorna todas as linhas de *df1*, e todas as colunas de *df1* e *df2*. Os casos não correspondentes em **df2** apresentarão valores`NA` nas colunas deste objeto.  
+
+
+
+<div class="centered">
+![left outer join](All-matching-obs-and-non-matching-from-A.png)
+</div>
+
+----
+
+```{r}
+left_join(df1, df2,  by = "Id")
+```
+
+
+## Combinação exterior à direita (right outer)
+- Retorna todas as linhas de *df2*, e todas as colunas de *df2* e *df1*. Os casos não correspondentes em **df1** apresentarão valores`NA` nas colunas deste objeto.  
+
+
+<div class="centered">
+![right outer join](All-matching-obs-and-non-matching-from-B.png)
+</div>
+
+----
+
+```{r}
+right_join(df1, df2,  by = "Id")
+```
+
+
+## Alternando a posição dos objetos
+- Mesmo resultado que `right_join(df1, df2)`, mas com as colunas em posições diferentes.
+
+```{r}
+left_join(df2, df1,  by = "Id")
+```
+
+
+## Combinação completa (full join)
+- Retorna todas as linhas de *df1* onde há valores correspondentes em *df2*, e todas as colunas de *df1* e *df2*.
+
+<div class="centered">
+![full join](All-observations.png)
+</div>
+
+----
+
+```{r}
+full_join(df1, df2,  by = "Id")
+```
+
+## Anti combinação (anti join)
+
+- Retorna todas as linhas de *df1* onde não há valores correspondentes em *df2*, mas mantendo apenas colunas de *df1*.
+
+<div class="centered">
+![anti join](Only-nonmatching-from-A-and-B.png)
+</div>
+
+----
+
+
+```{r}
+anti_join(df1, df2, by = "Id")
+```
+
+## Semi combinação (semi join) 
+
+- Retorna todas as linhas de *df1* onde há valores correspondentes em *df2*, mas mantendo apenas colunas de *df1*.
+
+<div class="centered">
+![semi join](Only-nonmatching-from-A.png)
+</div>
+
+----
+
+```{r}
+semi_join(df1, df2,  by = "Id")
+```
