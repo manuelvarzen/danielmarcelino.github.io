@@ -9,14 +9,14 @@ output:
 share: true
 category: blog
 tags: [R, rstats]
-excerpt: “With Telegram, the force of R can always be with me, where I have data.”
+excerpt: With Telegram, the force of R can always be with me, where I have data.
 published: true
 status: published
 comments: true
 ---
 
 
-With my Telegram account connected to teleR, the force of R can always be with me, where I have data. The following is a screenshot of my mobile:
+With my Telegram account connected to `@TeleR`, the force of R can always be with me, where I have data. The following is a screenshot of my mobile:
 
 
 <img src="/img/2017-01-02-may-the-force-of-r-be-with-you-always/screenshot.png" title="center" alt="center" style="display: block; margin: auto;" />
