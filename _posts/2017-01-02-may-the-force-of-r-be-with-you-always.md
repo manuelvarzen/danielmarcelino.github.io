@@ -9,7 +9,7 @@ output:
 share: true
 category: blog
 tags: [R, rstats]
-excerpt: “With Telegram, the force of R can always be with me, where I have data."
+excerpt: “With Telegram, the force of R can always be with me, where I have data.”
 published: true
 status: published
 comments: true
