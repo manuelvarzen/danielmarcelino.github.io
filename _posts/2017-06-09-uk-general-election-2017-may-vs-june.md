@@ -16,10 +16,11 @@ status: published
 comments: true
 ---
 
+Pundits have been asking themselves over the last days how did Theresa  May’s gamble fail? Although the Conservative party received 42% of the vote, Labour received 40%, and all the other parties received 18% between them. The Tories lost their parliamentary majority in an election they purposively called when they were told they were 20 points ahead in the polls. What went wrong this time (again)?
 
-Pundits have been asking themselves over the last days how did Theresa  May’s gamble fail? The Conservative party in UK just lost their parliamentary majority in an election they purposively called when they were told they were 20 points ahead in the polls. What went wrong this time (again)?
+Two year ago, in the previous general election, Conservative beat Labour by 37%-30%. And the time before, the Conservatives beat Labour by 36%-29% of the vote.
 
-The polls were certainly off (again), and the higher turnout seems to have favored the Labour party. But the inconvenient true, however, it that the Conservatives would have at least 20 fewer seats, so taking them well below the required majority, if Labour, Lib Dem, and SNP voters had coordinated. This conclusion comes from the preliminary analysis below.
+The polls were certainly off, and the higher turnout seems to have favored the Labour party this time. But the inconvenient conclusion from my preliminary analysis is that the Conservatives would have received at least 20 fewer seats, so taking them well below the required majority, if Labour, Lib Dem, and SNP voters had coordinated.
 
 This is not voters' fault, however. It is very difficult to communicate with all voters supporting several different parties to get them to adopt a strategy. In fact, this is a known failure of [First-past-the-post](https://en.wikipedia.org/wiki/First-past-the-post_voting) voting systems. [Other voting systems](https://en.wikipedia.org/wiki/Instant-runoff_voting) would accomplish the strategic outcome automatically, but perhaps would impose new concerns as well.
 
