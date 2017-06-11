@@ -16,6 +16,8 @@ status: published
 comments: true
 ---
 
+<img src="/img/2017/electionresults.png" title="center" alt="center" style="display: block; margin: auto;" />
+
 Pundits have been asking themselves over the last days how did Theresa  May’s gamble fail? Although the Conservative party received 42% of the vote, Labour received 40%, and all the other parties received 18% between them. The Tories lost their parliamentary majority in an election they purposively called when they were told they were 20 points ahead in the polls. What went wrong this time (again)?
 
 Two year ago, in the previous general election, Conservative beat Labour by 37%-30%. And the time before, the Conservatives beat Labour by 36%-29% of the vote.
