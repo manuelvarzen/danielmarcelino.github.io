@@ -19,7 +19,7 @@ Uruguayan voters are about to give give *Frente Amplio* a third mandate this Nov
 
 As the picture suggests, the posterior densities are quite apart from each other and their confidence regions narrow, meaning that we have less uncertainty about the results under that area.
 
-![FA]({{ site.url }}/img/blog/2014/FAwinnability.png)
+<img src="/img/blog/2014/FAwinnability.png" title="center" alt="center" style="display: block; margin: auto;" />
 
 
 
