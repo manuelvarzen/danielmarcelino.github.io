@@ -71,7 +71,9 @@ sum(Lab.margin > 1000)
 Which seats are these?
 
 {% highlight r %}
-print(Lab[which(Lab.margin > 1000), c("Constituency", "Con", "UKIP", "Lab")], row.names = FALSE)
+print(Lab[which(Lab.margin > 1000),
+	c("Constituency", "Con", "UKIP", "Lab")], 
+		row.names = FALSE)
 
              Constituency   Con UKIP   Lab
            Leicester East 35116    0 12668
@@ -108,7 +110,9 @@ sum(Con.margin > 1000)
 Which seats are these?
 
 {% highlight r %}
-print(Con[which(Con.margin > 1000), c("Constituency", "Lab", "Lib", "SNP", "Con")], row.names = FALSE)
+print(Con[which(Con.margin > 1000), 
+	c("Constituency", "Lab", "Lib", "SNP", "Con")],
+		row.names = FALSE)
 
                     Constituency   Lab  Lib   SNP   Con
                         Broxtowe 25120  2247     0 25983
