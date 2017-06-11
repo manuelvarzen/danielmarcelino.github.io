@@ -30,7 +30,7 @@ This is not voters' fault, however. It is very difficult to communicate with all
 The data were collected from *The Economist’s Infographics* following the steps put forward by [Thiemo Fetzer](http://freigeist.devmag.net/r/1002-uk-2017-general-election-results-data.html), and further stored as a CSV file. I didn’t upload it anywhere, but I’d be happy to share it with you if really needed, just send me an e-mail. 
  
 
-#### Load the data
+##### Load the data:
 {% highlight r %}	
 library(dplyr)
 
