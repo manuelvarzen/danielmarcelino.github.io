@@ -1,8 +1,8 @@
 ---
 layout: post
-title: “UK General Election 2017: May vs June"
+title: "UK General Election 2017: May vs June"
 author: "Daniel Marcelino (@dmarcelinobr)"
-date: “June 09, 2017”
+date: "June 09, 2017"
 output:
  html_document: 
    keep_md: yes
@@ -10,7 +10,7 @@ output:
 share: true
 category: blog
 tags: [R, rstats, Viz, Elections]
-excerpt: “Pundits have been asking themselves over the last days how did Theresa May’s gamble fail? I would say it could have been even worse.“
+excerpt: "Pundits have been asking themselves over the last days how did Theresa May's gamble fail? I would say it could have been even worse."
 published: true
 status: published
 comments: true
@@ -21,7 +21,7 @@ Pundits have been asking themselves over the last days how did Theresa  May’s 
 
 The polls were certainly off (again), and the higher turnout seems to have favored the Labour party. But the inconvenient true, however, it that the Conservatives would have at least 20 fewer seats, so taking them well below the required majority, if Labour, Lib Dem, and SNP voters had coordinated. This conclusion comes from the preliminary analysis below.
 
-This is not voters’ fault, however. It is very difficult to communicate with all voters supporting several different parties to get them to adopt a strategy. In fact, this is a known failure of [First-past-the-post](https://en.wikipedia.org/wiki/First-past-the-post_voting) voting systems. [Other voting systems](https://en.wikipedia.org/wiki/Instant-runoff_voting) would accomplish the strategic outcome automatically, but perhaps would impose new concerns as well.
+This is not voters' fault, however. It is very difficult to communicate with all voters supporting several different parties to get them to adopt a strategy. In fact, this is a known failure of [First-past-the-post](https://en.wikipedia.org/wiki/First-past-the-post_voting) voting systems. [Other voting systems](https://en.wikipedia.org/wiki/Instant-runoff_voting) would accomplish the strategic outcome automatically, but perhaps would impose new concerns as well.
 
 ## The data
 The data were collected from *The Economist’s Infographics* following the steps put forward by [Thiemo Fetzer](http://freigeist.devmag.net/r/1002-uk-2017-general-election-results-data.html), and further stored as a CSV file. I didn’t upload it anywhere, but I’d be happy to share it with you if really needed, just send me an e-mail. 
