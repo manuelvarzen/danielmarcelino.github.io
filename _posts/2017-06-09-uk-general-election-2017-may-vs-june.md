@@ -32,7 +32,7 @@ The data were collected from *The Economist’s Infographics* following the step
 {% highlight r %}	
 library(dplyr)
 
-data <- read.csv(“UK2017.csv", skip = 1, header=T, stringsAsFactors = F)
+data <- read.csv("UK2017.csv", skip = 1, header=T, stringsAsFactors = F)
 
 data[,7:15] <- lapply(data[,7:15],function(x){as.numeric(gsub(",", "", x))})
 
@@ -108,7 +108,7 @@ sum(Con.margin > 1000)
 Which seats are these?
 
 {% highlight r %}
-print(Con[which(Con.margin > 1000), c("Constituency", "Lab", "Lib”, "SNP", "Con")], row.names = FALSE)
+print(Con[which(Con.margin > 1000), c("Constituency", "Lab", "Lib", "SNP", "Con")], row.names = FALSE)
 
                     Constituency   Lab  Lib   SNP   Con
                         Broxtowe 25120  2247     0 25983
