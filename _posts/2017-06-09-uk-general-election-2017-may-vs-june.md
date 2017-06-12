@@ -89,7 +89,7 @@ print(Lab[which(Lab.margin > 1000),
         Sheffield, Heeley 26524 1977 12696
 {% endhighlight %}
 
-## Conservatives weakest seats
+## Conservatives' weakest seats
 
 So, among seats won by Conservatives, how many might Lab + Lib Dem + SNP have won if their voters had coordinated? The number of 52 seats is surprisingly high. 
 
