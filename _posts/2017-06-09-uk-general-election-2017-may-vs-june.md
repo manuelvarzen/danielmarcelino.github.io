@@ -34,7 +34,7 @@ The data were collected from *The Economist’s Infographics* following the step
 {% highlight r %}	
 library(dplyr)
 
-data <- read.csv("UK2017.csv", skip = 1, header=T, stringsAsFactors = F)
+data <- read.csv("UK2017.csv", header=T, stringsAsFactors = F)
 
 data[,7:15] <- lapply(data[,7:15],function(x){as.numeric(gsub(",", "", x))})
 
